@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en" data-language="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FitRoster Pro Privacy Policy for App Store release and public product use.">
+  <meta name="theme-color" content="#101010">
+  <link rel="icon" href="assets/start-silver-fitroster.png" type="image/png">
+  <title>FitRoster Pro | Privacy Policy</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700;800&display=swap");
+
+    :root {
+      --black: #0b0b0d;
+      --ink: #141414;
+      --muted: #66707b;
+      --line: #dce1e7;
+      --paper: #f5f5f2;
+      --white: #ffffff;
+      --gold: #c59b4b;
+      --gold-deep: #9f742b;
+      --silver: #d8dde3;
+      --shadow: 0 32px 100px rgba(7, 8, 10, 0.18);
+      --tight: "Barlow Condensed", "Barlow", ui-sans-serif, system-ui, sans-serif;
+      --body: "Barlow", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color-scheme: light;
+      font-family: var(--body);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 16% 4%, rgba(197, 155, 75, 0.20), transparent 28%),
+        radial-gradient(circle at 86% 10%, rgba(216, 221, 227, 0.38), transparent 26%),
+        linear-gradient(90deg, rgba(11, 11, 13, 0.055) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(11, 11, 13, 0.055) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, auto, 56px 56px, 56px 56px, auto;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    .shell {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 18px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      width: min(1080px, calc(100% - 36px));
+      margin: 18px auto 0;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 24px;
+      color: #fff;
+      background: rgba(11, 11, 13, 0.84);
+      box-shadow: 0 22px 62px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(22px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      outline-offset: 5px;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 14px 34px rgba(216, 221, 227, 0.18);
+    }
+
+    .brand-name {
+      font-family: var(--tight);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .back-link {
+      justify-self: center;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+      font-weight: 800;
+      outline-offset: 7px;
+      transition: color 180ms ease-out;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      color: #fff;
+    }
+
+    .language-switch {
+      display: inline-flex;
+      align-items: center;
+      min-width: 156px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .language-switch select {
+      width: 100%;
+      min-height: 32px;
+      padding: 0 34px 0 14px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      background: transparent;
+      font: 800 12px / 1 var(--body);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      transition: color 180ms ease-out, background-color 180ms ease-out, box-shadow 180ms ease-out;
+    }
+
+    .language-switch select:hover,
+    .language-switch select:focus-visible {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .language-switch select option {
+      color: var(--black);
+      background: #fff;
+    }
+
+    .language-switch::after {
+      width: 8px;
+      height: 8px;
+      margin-left: -26px;
+      border-right: 2px solid rgba(255, 255, 255, 0.78);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.78);
+      content: "";
+      pointer-events: none;
+      transform: rotate(45deg) translateY(-2px);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .hero {
+      padding: 92px 0 50px;
+    }
+
+    .privacy-panel {
+      padding: 44px;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(197, 155, 75, 0.13), transparent 38%),
+        #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .kicker {
+      color: var(--gold-deep);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    h1,
+    h2 {
+      font-family: var(--tight);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin-top: 16px;
+      font-size: 72px;
+      line-height: 0.96;
+      overflow-wrap: anywhere;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(245, 245, 242, 0.72);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .content {
+      display: grid;
+      gap: 16px;
+      padding: 22px 0 92px;
+    }
+
+    .policy-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 20px 58px rgba(11, 11, 13, 0.08);
+    }
+
+    .policy-card h2 {
+      font-size: 34px;
+      line-height: 1.04;
+    }
+
+    .policy-card p,
+    .policy-card li {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.68;
+      font-weight: 600;
+    }
+
+    .policy-card p {
+      margin-top: 14px;
+    }
+
+    .policy-card ul {
+      margin: 16px 0 0;
+      padding-left: 20px;
+    }
+
+    .policy-card a {
+      color: var(--gold-deep);
+      font-weight: 800;
+      outline-offset: 5px;
+    }
+
+    footer {
+      padding: 34px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      background: #fff;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-links a {
+      color: var(--gold-deep);
+      outline-offset: 6px;
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(100% - 28px, 1080px);
+      }
+
+      .topbar {
+        top: 10px;
+        width: calc(100% - 20px);
+        grid-template-columns: auto auto;
+        padding: 8px;
+      }
+
+      .brand img {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+      }
+
+      .brand-name,
+      .back-link {
+        display: none;
+      }
+
+      .language-switch {
+        min-width: 148px;
+      }
+
+      .hero {
+        padding: 58px 0 34px;
+      }
+
+      .privacy-panel,
+      .policy-card {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 50px;
+      }
+
+      .lead {
+        font-size: 18px;
+      }
+
+      .policy-card h2 {
+        font-size: 30px;
+      }
+
+      .footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Primary navigation" data-i18n-attr="aria-label:navAria">
+    <a class="brand" href="index.html" aria-label="FitRoster Pro home" data-i18n-attr="aria-label:brandAria">
+      <img src="assets/fitroster-brand-icon.webp" width="256" height="256" alt="" aria-hidden="true">
+      <span class="brand-name">FitRoster Pro</span>
+    </a>
+    <a class="back-link" href="index.html" data-i18n="backToProduct">Back to product page</a>
+    <div class="language-switch" aria-label="Language" data-i18n-attr="aria-label:languageLabel">
+      <label class="sr-only" for="language-select" data-i18n="languageLabel">Language</label>
+      <select id="language-select" data-language-select aria-label="Language" data-i18n-attr="aria-label:languageLabel"></select>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell privacy-panel">
+        <p class="kicker" data-i18n="kicker">Privacy Policy</p>
+        <h1 data-i18n="title">FitRoster Pro Privacy Policy</h1>
+        <p class="lead" data-i18n="lead">FitRoster Pro is designed as a training log and coach-trainee planning workspace. This policy explains what data the app handles and how it is used.</p>
+        <div class="meta-row" aria-label="Policy metadata" data-i18n-attr="aria-label:metaAria">
+          <span class="pill" data-i18n="effectiveDate">Effective date: July 4, 2026</span>
+          <span class="pill" data-i18n="noTracking">No advertising or cross-app tracking</span>
+          <span class="pill" data-i18n="contactPill">Contact: fox3nova@gmail.com</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell content" aria-label="Privacy Policy" data-i18n-attr="aria-label:policyAria">
+      <article class="policy-card">
+        <h2 data-i18n="summaryTitle">Summary</h2>
+        <p data-i18n="summaryCopy">FitRoster Pro does not sell personal information, does not display advertising, and does not use third-party analytics or tracking SDKs. Your training, health, media, voice, and AI feature data is used only to provide app features you choose to use, such as workout planning, records, analysis, coach-trainee collaboration, Apple Health integration, sync, backup, and optional AI assistance.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="collectTitle">Information the app may store</h2>
+        <p data-i18n="collectIntro">Depending on how you use FitRoster Pro, the app may store these categories of information on your device and, when enabled, through Apple iCloud services:</p>
+        <ul>
+          <li data-i18n="collectProfile">Profile and settings information, such as nickname, birth year, gender, body weight, units, language, and role preferences.</li>
+          <li data-i18n="collectTraining">Training content, such as workout menus, exercises, sets, reps, load, training records, notes, goals, and calendar history.</li>
+          <li data-i18n="collectBody">Body and progress information, such as body weight, body-composition records, InBody-style measurements, progress goals, and body signals you choose to enter or import.</li>
+          <li data-i18n="collectHealth">Apple Health data you authorize, such as body weight read from Apple Health and completed workout summaries written to Apple Health.</li>
+          <li data-i18n="collectCoach">Coach-trainee collaboration data, such as invite codes, linked coach or trainee display names, assigned plans, shared schedules, and submitted progress.</li>
+          <li data-i18n="collectMedia">Photos and videos you choose to import, attach, scan, recognize, export, or save, such as exercise photos, InBody report images, workout video attachments, and chart images.</li>
+          <li data-i18n="collectAI">Optional AI feature inputs, such as selected images, training focus, session history, body signals, coach feedback context, generated drafts, provider choices, model settings, and your saved provider API key.</li>
+          <li data-i18n="collectVoice">Audio and speech transcription content when you choose voice input for coach feedback questions.</li>
+          <li data-i18n="collectBackup">Backup files and exported FitRoster Pro data when you choose to create or restore a backup.</li>
+          <li data-i18n="collectContact">Messages you send to the support email address, including your email address and the content of your message.</li>
+        </ul>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="useTitle">How information is used</h2>
+        <p data-i18n="useIntro">FitRoster Pro uses app data only to operate the training features you choose to use:</p>
+        <ul>
+          <li data-i18n="usePlan">Create and manage workout plans, session records, and training history.</li>
+          <li data-i18n="useAnalysis">Show training analysis, goals, progress, and body-composition context.</li>
+          <li data-i18n="useCoach">Support coach-trainee plan delivery, review, and submitted training progress when collaboration features are enabled.</li>
+          <li data-i18n="useHealth">Read body weight from Apple Health and write completed workout summaries to Apple Health after you grant permission.</li>
+          <li data-i18n="useAI">Generate optional AI-assisted exercise recognition, InBody recognition, workout drafts, and coach feedback drafts through the provider you choose.</li>
+          <li data-i18n="useVoice">Turn microphone input into editable text for coach feedback questions when you choose voice input.</li>
+          <li data-i18n="useSync">Sync and restore data through Apple iCloud services when you enable iCloud sync or backup workflows.</li>
+          <li data-i18n="useSupport">Respond to support requests you send by email.</li>
+        </ul>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="icloudTitle">iCloud, CloudKit, and backups</h2>
+        <p data-i18n="icloudCopy">FitRoster Pro may use Apple iCloud, CloudKit, and iCloud Drive to sync app data, share coach-trainee information, and store backup files when you use those features. This data is handled through Apple services associated with your Apple ID and is subject to Apple's privacy and security practices. FitRoster Pro does not operate a separate server for selling or advertising with your training data.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="healthTitle">Apple Health and HealthKit</h2>
+        <p data-i18n="healthCopy">FitRoster Pro uses Apple Health only after you grant HealthKit permission. The app may read body weight from Apple Health and may write completed workout summaries to Apple Health. Disconnecting Apple Health in FitRoster Pro stops FitRoster Pro reading and writing on that device; system-level permission can be managed in Apple Health or iOS Settings.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="cameraTitle">Camera, photos, and videos</h2>
+        <p data-i18n="cameraCopy">If you use coach invite QR code scanning, exercise photos, equipment recognition, InBody report import, workout video attachments, chart export, or Save to Photos, FitRoster Pro may request camera or photo-library access. Camera access is used only for the action you choose. Photos or videos are stored only when you attach, import, export, or save them, and are not used for advertising tracking.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="voiceTitle">Microphone and speech recognition</h2>
+        <p data-i18n="voiceCopy">If you choose voice input for coach feedback questions, FitRoster Pro may request microphone and speech recognition access. Audio is used to create editable text for that feature. Speech recognition may be processed by Apple speech recognition services depending on iOS settings and availability.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="aiTitle">Optional AI features</h2>
+        <p data-i18n="aiCopy">If you choose AI exercise recognition, InBody report recognition, AI workout drafts, or AI coach feedback drafts, FitRoster Pro sends the selected image or relevant training context to the AI provider you choose in the app, such as OpenAI, Google Gemini, Anthropic Claude, or xAI Grok, using the API key you saved for that provider. These features are optional. FitRoster Pro does not use AI inputs for advertising or tracking, and recognition results or generated drafts remain reviewable before you save or apply them.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="sharingTitle">Sharing and third parties</h2>
+        <p data-i18n="sharingCopy">FitRoster Pro does not sell your personal information. The app does not include advertising SDKs or third-party analytics SDKs. Data may be shared only when you choose to use Apple iCloud services, Apple Health, coach-trainee collaboration, optional AI providers, speech recognition, backup/export features, or when required by law.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="retentionTitle">Data retention and deletion</h2>
+        <p data-i18n="retentionCopy">Your FitRoster Pro data remains available until you delete it in the app, remove the app and its data, delete related iCloud data, or delete backup files you created. If you contact support, support emails are retained only as needed to respond and maintain support records.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="childrenTitle">Children</h2>
+        <p data-i18n="childrenCopy">FitRoster Pro is intended for general training and coaching use and is not directed to children under 13. If a minor uses FitRoster Pro, a parent, guardian, coach, or responsible adult should supervise the use of training and body-related information.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="changesTitle">Changes to this policy</h2>
+        <p data-i18n="changesCopy">This policy may be updated when FitRoster Pro features, sync behavior, or release requirements change. The effective date at the top of the page will be updated when material changes are made.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2 data-i18n="contactTitle">Contact</h2>
+        <p><span data-i18n="contactCopy">For privacy questions or data requests, contact FitRoster Pro at</span> <a href="mailto:fox3nova@gmail.com">fox3nova@gmail.com</a>.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <span data-i18n="footerCopy">FitRoster Pro Privacy Policy. Built for App Store release requirements.</span>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="footerProduct">Product page</a>
+        <a href="support.html" data-i18n="footerSupport">Support</a>
+        <a href="mailto:fox3nova@gmail.com" data-i18n="footerContact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site-i18n.js?v=20260704-policy"></script>
+  <script>
+    const translations = {
+      en: {
+        metaTitle: "FitRoster Pro | Privacy Policy",
+        metaDescription: "FitRoster Pro Privacy Policy for App Store release and public product use.",
+        navAria: "Primary navigation",
+        brandAria: "FitRoster Pro home",
+        languageLabel: "Language",
+        backToProduct: "Back to product page",
+        kicker: "Privacy Policy",
+        title: "FitRoster Pro Privacy Policy",
+        lead: "FitRoster Pro is designed as a training log and coach-trainee planning workspace. This policy explains what data the app handles and how it is used.",
+        metaAria: "Policy metadata",
+        effectiveDate: "Effective date: July 4, 2026",
+        noTracking: "No advertising or cross-app tracking",
+        contactPill: "Contact: fox3nova@gmail.com",
+        policyAria: "Privacy Policy",
+        summaryTitle: "Summary",
+        summaryCopy: "FitRoster Pro does not sell personal information, does not display advertising, and does not use third-party analytics or tracking SDKs. Your training, health, media, voice, and AI feature data is used only to provide app features you choose to use, such as workout planning, records, analysis, coach-trainee collaboration, Apple Health integration, sync, backup, and optional AI assistance.",
+        collectTitle: "Information the app may store",
+        collectIntro: "Depending on how you use FitRoster Pro, the app may store these categories of information on your device and, when enabled, through Apple iCloud services:",
+        collectProfile: "Profile and settings information, such as nickname, birth year, gender, body weight, units, language, and role preferences.",
+        collectTraining: "Training content, such as workout menus, exercises, sets, reps, load, training records, notes, goals, and calendar history.",
+        collectBody: "Body and progress information, such as body weight, body-composition records, InBody-style measurements, progress goals, and body signals you choose to enter or import.",
+        collectHealth: "Apple Health data you authorize, such as body weight read from Apple Health and completed workout summaries written to Apple Health.",
+        collectCoach: "Coach-trainee collaboration data, such as invite codes, linked coach or trainee display names, assigned plans, shared schedules, and submitted progress.",
+        collectMedia: "Photos and videos you choose to import, attach, scan, recognize, export, or save, such as exercise photos, InBody report images, workout video attachments, and chart images.",
+        collectAI: "Optional AI feature inputs, such as selected images, training focus, session history, body signals, coach feedback context, generated drafts, provider choices, model settings, and your saved provider API key.",
+        collectVoice: "Audio and speech transcription content when you choose voice input for coach feedback questions.",
+        collectBackup: "Backup files and exported FitRoster Pro data when you choose to create or restore a backup.",
+        collectContact: "Messages you send to the support email address, including your email address and the content of your message.",
+        useTitle: "How information is used",
+        useIntro: "FitRoster Pro uses app data only to operate the training features you choose to use:",
+        usePlan: "Create and manage workout plans, session records, and training history.",
+        useAnalysis: "Show training analysis, goals, progress, and body-composition context.",
+        useCoach: "Support coach-trainee plan delivery, review, and submitted training progress when collaboration features are enabled.",
+        useHealth: "Read body weight from Apple Health and write completed workout summaries to Apple Health after you grant permission.",
+        useAI: "Generate optional AI-assisted exercise recognition, InBody recognition, workout drafts, and coach feedback drafts through the provider you choose.",
+        useVoice: "Turn microphone input into editable text for coach feedback questions when you choose voice input.",
+        useSync: "Sync and restore data through Apple iCloud services when you enable iCloud sync or backup workflows.",
+        useSupport: "Respond to support requests you send by email.",
+        icloudTitle: "iCloud, CloudKit, and backups",
+        icloudCopy: "FitRoster Pro may use Apple iCloud, CloudKit, and iCloud Drive to sync app data, share coach-trainee information, and store backup files when you use those features. This data is handled through Apple services associated with your Apple ID and is subject to Apple's privacy and security practices. FitRoster Pro does not operate a separate server for selling or advertising with your training data.",
+        healthTitle: "Apple Health and HealthKit",
+        healthCopy: "FitRoster Pro uses Apple Health only after you grant HealthKit permission. The app may read body weight from Apple Health and may write completed workout summaries to Apple Health. Disconnecting Apple Health in FitRoster Pro stops FitRoster Pro reading and writing on that device; system-level permission can be managed in Apple Health or iOS Settings.",
+        cameraTitle: "Camera, photos, and videos",
+        cameraCopy: "If you use coach invite QR code scanning, exercise photos, equipment recognition, InBody report import, workout video attachments, chart export, or Save to Photos, FitRoster Pro may request camera or photo-library access. Camera access is used only for the action you choose. Photos or videos are stored only when you attach, import, export, or save them, and are not used for advertising tracking.",
+        voiceTitle: "Microphone and speech recognition",
+        voiceCopy: "If you choose voice input for coach feedback questions, FitRoster Pro may request microphone and speech recognition access. Audio is used to create editable text for that feature. Speech recognition may be processed by Apple speech recognition services depending on iOS settings and availability.",
+        aiTitle: "Optional AI features",
+        aiCopy: "If you choose AI exercise recognition, InBody report recognition, AI workout drafts, or AI coach feedback drafts, FitRoster Pro sends the selected image or relevant training context to the AI provider you choose in the app, such as OpenAI, Google Gemini, Anthropic Claude, or xAI Grok, using the API key you saved for that provider. These features are optional. FitRoster Pro does not use AI inputs for advertising or tracking, and recognition results or generated drafts remain reviewable before you save or apply them.",
+        sharingTitle: "Sharing and third parties",
+        sharingCopy: "FitRoster Pro does not sell your personal information. The app does not include advertising SDKs or third-party analytics SDKs. Data may be shared only when you choose to use Apple iCloud services, Apple Health, coach-trainee collaboration, optional AI providers, speech recognition, backup/export features, or when required by law.",
+        retentionTitle: "Data retention and deletion",
+        retentionCopy: "Your FitRoster Pro data remains available until you delete it in the app, remove the app and its data, delete related iCloud data, or delete backup files you created. If you contact support, support emails are retained only as needed to respond and maintain support records.",
+        childrenTitle: "Children",
+        childrenCopy: "FitRoster Pro is intended for general training and coaching use and is not directed to children under 13. If a minor uses FitRoster Pro, a parent, guardian, coach, or responsible adult should supervise the use of training and body-related information.",
+        changesTitle: "Changes to this policy",
+        changesCopy: "This policy may be updated when FitRoster Pro features, sync behavior, or release requirements change. The effective date at the top of the page will be updated when material changes are made.",
+        contactTitle: "Contact",
+        contactCopy: "For privacy questions or data requests, contact FitRoster Pro at",
+        footerCopy: "FitRoster Pro Privacy Policy. Built for App Store release requirements.",
+        footerProduct: "Product page",
+        footerSupport: "Support",
+        footerContact: "Contact"
+      },
+      "zh-Hans": {
+        metaTitle: "FitRoster Pro | 隐私权政策",
+        metaDescription: "FitRoster Pro 隐私权政策，用于 App Store 发布与公开产品页面。",
+        navAria: "主导航",
+        brandAria: "FitRoster Pro 首页",
+        languageLabel: "语言",
+        backToProduct: "回到产品页面",
+        kicker: "隐私权政策",
+        title: "FitRoster Pro 隐私权政策",
+        lead: "FitRoster Pro 是训练记录与教练学员课表规划工具。本政策说明 app 会处理哪些资料，以及这些资料如何被使用。",
+        metaAria: "政策资讯",
+        effectiveDate: "生效日期：2026 年 7 月 4 日",
+        noTracking: "无广告或跨 app 追踪",
+        contactPill: "联系：fox3nova@gmail.com",
+        policyAria: "隐私权政策",
+        summaryTitle: "摘要",
+        summaryCopy: "FitRoster Pro 不出售个人资料、不显示广告，也不使用第三方分析或追踪 SDK。你的训练、健康、媒体、语音与 AI 功能资料，只用于提供你选择使用的功能，例如课表规划、训练记录、分析、教练学员协作、Apple 健康整合、同步、备份与选用 AI 辅助。",
+        collectTitle: "App 可能储存的资料",
+        collectIntro: "依照你使用 FitRoster Pro 的方式，app 可能在你的装置上储存以下资料，并在你启用时透过 Apple iCloud 服务处理：",
+        collectProfile: "个人资料与设定，例如昵称、出生年份、性别、体重、单位、语言与角色偏好。",
+        collectTraining: "训练内容，例如训练课表、动作、组数、次数、重量、训练记录、备注、目标与日历历史。",
+        collectBody: "身体与进度资料，例如你选择输入或导入的体重、身体组成记录、InBody 类量测、进度目标与身体讯号。",
+        collectHealth: "你授权的 Apple 健康资料，例如从 Apple 健康读取体重，以及写入 Apple 健康的已完成训练摘要。",
+        collectCoach: "教练学员协作资料，例如邀请码、已连结的教练或学员显示名称、指定课表、共享日程与提交的进度。",
+        collectMedia: "你选择导入、附加、扫描、识别、导出或储存的照片与影片，例如动作照片、InBody 报告图片、训练影片附件与图表图片。",
+        collectAI: "选用 AI 功能输入，例如所选图片、训练重点、训练历史、身体讯号、教练反馈脉络、产生的草稿、服务选择、模型设定，以及你储存的服务 API key。",
+        collectVoice: "当你选择用语音输入教练反馈问题时产生的音讯与语音转文字内容。",
+        collectBackup: "当你选择建立或还原备份时产生的备份文件与导出的 FitRoster Pro 资料。",
+        collectContact: "你发送到支援信箱的讯息，包括你的电子邮件地址与讯息内容。",
+        useTitle: "资料如何使用",
+        useIntro: "FitRoster Pro 只会使用 app 资料来运作你选择使用的训练功能：",
+        usePlan: "建立和管理训练计划、训练记录与训练历史。",
+        useAnalysis: "显示训练分析、目标、进度与身体组成背景。",
+        useCoach: "在启用协作功能时，支援教练学员课表发送、检查与训练进度提交。",
+        useHealth: "在你授权后，从 Apple 健康读取体重，并将已完成训练摘要写入 Apple 健康。",
+        useAI: "透过你选择的服务，产生选用 AI 辅助的动作识别、InBody 识别、课表草稿与教练反馈草稿。",
+        useVoice: "当你选择语音输入时，将麦克风输入转换成可编辑的教练反馈问题文字。",
+        useSync: "当你启用 iCloud 同步或备份流程时，透过 Apple iCloud 服务同步与还原资料。",
+        useSupport: "回应你透过电子邮件发送的支援请求。",
+        icloudTitle: "iCloud、CloudKit 与备份",
+        icloudCopy: "当你使用相关功能时，FitRoster Pro 可能使用 Apple iCloud、CloudKit 与 iCloud Drive 来同步 app 资料、共享教练学员资讯，以及储存备份文件。这些资料透过与你 Apple ID 关联的 Apple 服务处理，并适用 Apple 的隐私与安全机制。FitRoster Pro 不经营独立服务器来出售你的训练资料或用于广告。",
+        healthTitle: "Apple 健康与 HealthKit",
+        healthCopy: "FitRoster Pro 只会在你授权 HealthKit 后使用 Apple 健康。App 可能从 Apple 健康读取体重，也可能将已完成训练摘要写入 Apple 健康。在 FitRoster Pro 中断开 Apple 健康会停止此装置上的 FitRoster Pro 读写；系统层级权限可在 Apple 健康或 iOS 设置中管理。",
+        cameraTitle: "相机、照片与影片",
+        cameraCopy: "如果你使用教练邀请 QR code 扫描、动作照片、器材识别、InBody 报告导入、训练影片附件、图表导出或存到照片，FitRoster Pro 可能请求相机或照片图库权限。相机只用于你选择的动作。照片或影片只会在你附加、导入、导出或储存时保存，不会用于广告追踪。",
+        voiceTitle: "麦克风与语音识别",
+        voiceCopy: "如果你选择用语音输入教练反馈问题，FitRoster Pro 可能请求麦克风与语音识别权限。音讯只用于为该功能建立可编辑文字。语音识别可能会依照 iOS 设定与可用性由 Apple 语音识别服务处理。",
+        aiTitle: "选用 AI 功能",
+        aiCopy: "如果你选择使用 AI 动作识别、InBody 报告识别、AI 课表草稿或 AI 教练反馈草稿，FitRoster Pro 会使用你为该服务储存的 API key，将所选图片或相关训练脉络传送给你在 app 内选择的 AI 服务，例如 OpenAI、Google Gemini、Anthropic Claude 或 xAI Grok。这些功能都是选用功能。FitRoster Pro 不会将 AI 输入用于广告或追踪，识别结果与生成草稿会先保留为可检查内容，再由你决定是否储存或套用。",
+        sharingTitle: "分享与第三方",
+        sharingCopy: "FitRoster Pro 不出售你的个人资料。App 不包含广告 SDK 或第三方分析 SDK。只有当你选择使用 Apple iCloud 服务、Apple 健康、教练学员协作、选用 AI 服务、语音识别、备份/导出功能，或法律要求时，资料才可能被共享。",
+        retentionTitle: "资料保留与删除",
+        retentionCopy: "你的 FitRoster Pro 资料会保留到你在 app 内删除、移除 app 与其资料、删除相关 iCloud 资料，或删除你建立的备份文件为止。如果你联系支援，支援邮件仅会在回应与维护支援记录所需期间保留。",
+        childrenTitle: "儿童",
+        childrenCopy: "FitRoster Pro 用于一般训练与教练用途，并非面向 13 岁以下儿童。如果未成年人使用 FitRoster Pro，父母、监护人、教练或负责成人应监督训练与身体相关资料的使用。",
+        changesTitle: "政策变更",
+        changesCopy: "当 FitRoster Pro 功能、同步行为或发布要求改变时，本政策可能更新。若有重大变更，页面顶部的生效日期会同步更新。",
+        contactTitle: "联系",
+        contactCopy: "如有隐私问题或资料请求，请联系 FitRoster Pro：",
+        footerCopy: "FitRoster Pro 隐私权政策。用于 App Store 发布要求。",
+        footerProduct: "产品页面",
+        footerSupport: "支援",
+        footerContact: "联系"
+      },
+      "zh-Hant": {
+        metaTitle: "FitRoster Pro | 隱私權政策",
+        metaDescription: "FitRoster Pro 隱私權政策，用於 App Store 發布與公開產品頁面。",
+        navAria: "主導覽",
+        brandAria: "FitRoster Pro 首頁",
+        languageLabel: "語言",
+        backToProduct: "回到產品頁面",
+        kicker: "隱私權政策",
+        title: "FitRoster Pro 隱私權政策",
+        lead: "FitRoster Pro 是訓練紀錄與教練學員課表規劃工具。本政策說明 app 會處理哪些資料，以及這些資料如何被使用。",
+        metaAria: "政策資訊",
+        effectiveDate: "生效日期：2026 年 7 月 4 日",
+        noTracking: "無廣告或跨 app 追蹤",
+        contactPill: "聯絡：fox3nova@gmail.com",
+        policyAria: "隱私權政策",
+        summaryTitle: "摘要",
+        summaryCopy: "FitRoster Pro 不出售個人資料、不顯示廣告，也不使用第三方分析或追蹤 SDK。你的訓練、健康、媒體、語音與 AI 功能資料，只用於提供你選擇使用的功能，例如課表規劃、訓練紀錄、分析、教練學員協作、Apple 健康整合、同步、備份與選用 AI 輔助。",
+        collectTitle: "App 可能儲存的資料",
+        collectIntro: "依照你使用 FitRoster Pro 的方式，app 可能在你的裝置上儲存以下資料，並在你啟用時透過 Apple iCloud 服務處理：",
+        collectProfile: "個人資料與設定，例如暱稱、出生年份、性別、體重、單位、語言與角色偏好。",
+        collectTraining: "訓練內容，例如訓練課表、動作、組數、次數、重量、訓練紀錄、備註、目標與日曆歷史。",
+        collectBody: "身體與進度資料，例如你選擇輸入或匯入的體重、身體組成紀錄、InBody 類量測、進度目標與身體訊號。",
+        collectHealth: "你授權的 Apple 健康資料，例如從 Apple 健康讀取體重，以及寫入 Apple 健康的已完成訓練摘要。",
+        collectCoach: "教練學員協作資料，例如邀請碼、已連結的教練或學員顯示名稱、指定課表、共享日程與提交的進度。",
+        collectMedia: "你選擇匯入、附加、掃描、辨識、匯出或儲存的照片與影片，例如動作照片、InBody 報告圖片、訓練影片附件與圖表圖片。",
+        collectAI: "選用 AI 功能輸入，例如所選圖片、訓練重點、訓練歷史、身體訊號、教練回饋脈絡、產生的草稿、服務選擇、模型設定，以及你儲存的服務 API key。",
+        collectVoice: "當你選擇用語音輸入教練回饋問題時產生的音訊與語音轉文字內容。",
+        collectBackup: "當你選擇建立或還原備份時產生的備份檔案與匯出的 FitRoster Pro 資料。",
+        collectContact: "你寄送到支援信箱的訊息，包括你的電子郵件地址與訊息內容。",
+        useTitle: "資料如何使用",
+        useIntro: "FitRoster Pro 只會使用 app 資料來運作你選擇使用的訓練功能：",
+        usePlan: "建立和管理訓練計畫、訓練紀錄與訓練歷史。",
+        useAnalysis: "顯示訓練分析、目標、進度與身體組成背景。",
+        useCoach: "在啟用協作功能時，支援教練學員課表發送、檢查與訓練進度提交。",
+        useHealth: "在你授權後，從 Apple 健康讀取體重，並將已完成訓練摘要寫入 Apple 健康。",
+        useAI: "透過你選擇的服務，產生選用 AI 輔助的動作辨識、InBody 辨識、課表草稿與教練回饋草稿。",
+        useVoice: "當你選擇語音輸入時，將麥克風輸入轉換成可編輯的教練回饋問題文字。",
+        useSync: "當你啟用 iCloud 同步或備份流程時，透過 Apple iCloud 服務同步與還原資料。",
+        useSupport: "回應你透過電子郵件寄送的支援請求。",
+        icloudTitle: "iCloud、CloudKit 與備份",
+        icloudCopy: "當你使用相關功能時，FitRoster Pro 可能使用 Apple iCloud、CloudKit 與 iCloud Drive 來同步 app 資料、共享教練學員資訊，以及儲存備份檔案。這些資料透過與你 Apple ID 關聯的 Apple 服務處理，並適用 Apple 的隱私與安全機制。FitRoster Pro 不經營獨立伺服器來出售你的訓練資料或用於廣告。",
+        healthTitle: "Apple 健康與 HealthKit",
+        healthCopy: "FitRoster Pro 只會在你授權 HealthKit 後使用 Apple 健康。App 可能從 Apple 健康讀取體重，也可能將已完成訓練摘要寫入 Apple 健康。在 FitRoster Pro 中斷開 Apple 健康會停止此裝置上的 FitRoster Pro 讀寫；系統層級權限可在 Apple 健康或 iOS 設定中管理。",
+        cameraTitle: "相機、照片與影片",
+        cameraCopy: "如果你使用教練邀請 QR code 掃描、動作照片、器材辨識、InBody 報告匯入、訓練影片附件、圖表匯出或存到照片，FitRoster Pro 可能請求相機或照片圖庫權限。相機只用於你選擇的動作。照片或影片只會在你附加、匯入、匯出或儲存時保存，不會用於廣告追蹤。",
+        voiceTitle: "麥克風與語音辨識",
+        voiceCopy: "如果你選擇用語音輸入教練回饋問題，FitRoster Pro 可能請求麥克風與語音辨識權限。音訊只用於為該功能建立可編輯文字。語音辨識可能會依照 iOS 設定與可用性由 Apple 語音辨識服務處理。",
+        aiTitle: "選用 AI 功能",
+        aiCopy: "如果你選擇使用 AI 動作辨識、InBody 報告辨識、AI 課表草稿或 AI 教練回饋草稿，FitRoster Pro 會使用你為該服務儲存的 API key，將所選圖片或相關訓練脈絡傳送給你在 app 內選擇的 AI 服務，例如 OpenAI、Google Gemini、Anthropic Claude 或 xAI Grok。這些功能都是選用功能。FitRoster Pro 不會將 AI 輸入用於廣告或追蹤，辨識結果與生成草稿會先保留為可檢查內容，再由你決定是否儲存或套用。",
+        sharingTitle: "分享與第三方",
+        sharingCopy: "FitRoster Pro 不出售你的個人資料。App 不包含廣告 SDK 或第三方分析 SDK。只有當你選擇使用 Apple iCloud 服務、Apple 健康、教練學員協作、選用 AI 服務、語音辨識、備份/匯出功能，或法律要求時，資料才可能被共享。",
+        retentionTitle: "資料保留與刪除",
+        retentionCopy: "你的 FitRoster Pro 資料會保留到你在 app 內刪除、移除 app 與其資料、刪除相關 iCloud 資料，或刪除你建立的備份檔案為止。如果你聯絡支援，支援郵件僅會在回應與維護支援紀錄所需期間保留。",
+        childrenTitle: "兒童",
+        childrenCopy: "FitRoster Pro 用於一般訓練與教練用途，並非面向 13 歲以下兒童。如果未成年人使用 FitRoster Pro，父母、監護人、教練或負責成人應監督訓練與身體相關資料的使用。",
+        changesTitle: "政策變更",
+        changesCopy: "當 FitRoster Pro 功能、同步行為或發布要求改變時，本政策可能更新。若有重大變更，頁面頂部的生效日期會同步更新。",
+        contactTitle: "聯絡",
+        contactCopy: "如有隱私問題或資料請求，請聯絡 FitRoster Pro：",
+        footerCopy: "FitRoster Pro 隱私權政策。用於 App Store 發布要求。",
+        footerProduct: "產品頁面",
+        footerSupport: "支援",
+        footerContact: "聯絡"
+      }
+    };
+
+    window.FITROSTER_SITE_I18N.extend("privacy", translations);
+
+    const supportedLanguages = Object.keys(translations);
+    const metaDescription = document.querySelector('meta[name="description"]');
+
+    function preferredLanguage() {
+      return window.FITROSTER_SITE_I18N.preferredLanguage(supportedLanguages);
+    }
+
+    function valueFor(dictionary, key) {
+      return dictionary[key] || translations.en[key] || "";
+    }
+
+    function setLanguage(language) {
+      const activeLanguage = supportedLanguages.includes(language) ? language : "en";
+      const dictionary = translations[activeLanguage];
+
+      document.documentElement.lang = activeLanguage;
+      document.documentElement.dataset.language = activeLanguage;
+      document.title = valueFor(dictionary, "metaTitle");
+      metaDescription.setAttribute("content", valueFor(dictionary, "metaDescription"));
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        element.textContent = valueFor(dictionary, element.dataset.i18n);
+      });
+
+      document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
+        element.dataset.i18nAttr.split(";").forEach((pair) => {
+          const [attribute, key] = pair.split(":");
+          if (attribute && key) {
+            element.setAttribute(attribute, valueFor(dictionary, key));
+          }
+        });
+      });
+
+      window.FITROSTER_SITE_I18N.updateLanguageSelect(activeLanguage);
+
+      localStorage.setItem("fitroster.marketing.language", activeLanguage);
+    }
+
+    window.FITROSTER_SITE_I18N.mountLanguageSelect(supportedLanguages, setLanguage);
+
+    setLanguage(preferredLanguage());
+  </script>
+</body>
+</html>

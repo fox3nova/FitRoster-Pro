@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">FitRoster muscle map overlay regions</title>
+  <desc id="desc">Transparent data-layer regions aligned to MuscleMapBase. Regions are for hit testing and training highlights; the PNG base provides the anatomical detail.</desc>
+  <defs>
+    <style>
+      .region {
+        fill: rgba(0, 122, 255, 0.28);
+        stroke: rgba(0, 122, 255, 0.75);
+        stroke-width: 3;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+
+  <g id="side_regions" data-view="side">
+    <polygon id="side_neck" class="region" data-muscle="neck" data-name-en="Neck" data-name-zh-Hant="頸部" points="254,104 297,112 308,178 260,182"/>
+    <polygon id="side_traps" class="region" data-muscle="traps" data-name-en="Trapezius" data-name-zh-Hant="斜方肌" points="242,174 335,218 348,252 248,221"/>
+    <polygon id="side_side_delts" class="region" data-muscle="side_delts" data-name-en="Lateral deltoid" data-name-zh-Hant="側三角肌" points="220,215 300,210 322,286 240,307"/>
+    <polygon id="side_front_delts" class="region" data-muscle="front_delts" data-name-en="Anterior deltoid" data-name-zh-Hant="前三角肌" points="304,216 356,248 354,318 318,294"/>
+    <polygon id="side_rear_delts" class="region" data-muscle="rear_delts" data-name-en="Rear deltoid" data-name-zh-Hant="後三角肌" points="196,234 229,213 238,294 205,319"/>
+    <polygon id="side_chest" class="region" data-muscle="chest" data-name-en="Pectorals" data-name-zh-Hant="胸部" points="335,260 399,274 414,373 346,371"/>
+    <polygon id="side_lats" class="region" data-muscle="lats" data-name-en="Latissimus dorsi" data-name-zh-Hant="背闊肌" points="228,310 320,310 346,495 234,458"/>
+    <polygon id="side_biceps" class="region" data-muscle="biceps" data-name-en="Biceps" data-name-zh-Hant="二頭肌" points="292,311 346,329 341,463 286,451"/>
+    <polygon id="side_triceps" class="region" data-muscle="triceps" data-name-en="Triceps" data-name-zh-Hant="三頭肌" points="210,314 275,311 271,481 213,441"/>
+    <polygon id="side_forearms" class="region" data-muscle="forearms" data-name-en="Forearms" data-name-zh-Hant="前臂" points="206,454 292,466 306,590 223,579"/>
+    <polygon id="side_abs" class="region" data-muscle="abs" data-name-en="Rectus abdominis" data-name-zh-Hant="腹直肌" points="367,371 425,372 427,514 356,510"/>
+    <polygon id="side_obliques" class="region" data-muscle="obliques" data-name-en="Obliques" data-name-zh-Hant="腹斜肌" points="317,368 365,381 356,538 300,507"/>
+    <polygon id="side_lower_back" class="region" data-muscle="lower_back" data-name-en="Lower back" data-name-zh-Hant="下背" points="236,449 310,485 300,586 222,553"/>
+    <polygon id="side_glutes" class="region" data-muscle="glutes" data-name-en="Glutes" data-name-zh-Hant="臀肌" points="223,552 362,552 386,674 235,671"/>
+    <polygon id="side_hip_abductors" class="region" data-muscle="hip_abductors" data-name-en="Hip abductors" data-name-zh-Hant="髖外展肌" points="236,650 317,666 293,837 223,802"/>
+    <polygon id="side_hip_adductors" class="region" data-muscle="hip_adductors" data-name-en="Hip adductors" data-name-zh-Hant="髖內收肌" points="321,663 365,673 358,872 314,831"/>
+    <polygon id="side_quads" class="region" data-muscle="quads" data-name-en="Quadriceps" data-name-zh-Hant="股四頭肌" points="303,646 405,642 383,856 306,871"/>
+    <polygon id="side_hamstrings" class="region" data-muscle="hamstrings" data-name-en="Hamstrings" data-name-zh-Hant="腿後肌群" points="209,656 297,666 306,868 222,859"/>
+    <polygon id="side_calves" class="region" data-muscle="calves" data-name-en="Calves" data-name-zh-Hant="小腿" points="237,818 343,831 332,1010 224,1000"/>
+  </g>
+
+  <g id="front_regions" data-view="front">
+    <polygon id="front_neck" class="region" data-muscle="neck" data-name-en="Neck" data-name-zh-Hant="頸部" points="728,106 808,107 824,202 710,202"/>
+    <g id="front_front_delts" data-muscle="front_delts" data-name-en="Anterior deltoid" data-name-zh-Hant="前三角肌">
+      <polygon id="front_front_delts_left" class="region" points="598,224 691,206 703,304 617,335"/>
+      <polygon id="front_front_delts_right" class="region" points="834,206 929,225 911,336 824,304"/>
+    </g>
+    <g id="front_side_delts" data-muscle="side_delts" data-name-en="Lateral deltoid" data-name-zh-Hant="側三角肌">
+      <polygon id="front_side_delts_left" class="region" points="561,235 620,224 613,346 545,331"/>
+      <polygon id="front_side_delts_right" class="region" points="916,224 976,236 990,332 921,346"/>
+    </g>
+    <g id="front_chest" data-muscle="chest" data-name-en="Pectorals" data-name-zh-Hant="胸部">
+      <polygon id="front_chest_left" class="region" points="646,224 764,211 758,363 646,362"/>
+      <polygon id="front_chest_right" class="region" points="772,211 890,225 892,363 777,363"/>
+    </g>
+    <g id="front_biceps" data-muscle="biceps" data-name-en="Biceps" data-name-zh-Hant="二頭肌">
+      <polygon id="front_biceps_left" class="region" points="539,330 615,334 602,492 524,486"/>
+      <polygon id="front_biceps_right" class="region" points="922,334 998,331 1012,486 934,492"/>
+    </g>
+    <g id="front_forearms" data-muscle="forearms" data-name-en="Forearms" data-name-zh-Hant="前臂">
+      <polygon id="front_forearms_left" class="region" points="518,488 600,492 581,632 499,615"/>
+      <polygon id="front_forearms_right" class="region" points="936,492 1018,488 1037,615 955,632"/>
+    </g>
+    <polygon id="front_abs" class="region" data-muscle="abs" data-name-en="Rectus abdominis" data-name-zh-Hant="腹直肌" points="690,363 846,363 854,595 678,595"/>
+    <g id="front_obliques" data-muscle="obliques" data-name-en="Obliques" data-name-zh-Hant="腹斜肌">
+      <polygon id="front_obliques_left" class="region" points="626,366 692,377 684,594 613,562"/>
+      <polygon id="front_obliques_right" class="region" points="845,377 909,366 923,562 853,594"/>
+    </g>
+    <g id="front_hip_abductors" data-muscle="hip_abductors" data-name-en="Hip abductors" data-name-zh-Hant="髖外展肌">
+      <polygon id="front_hip_abductors_left" class="region" points="626,592 706,610 690,800 618,760"/>
+      <polygon id="front_hip_abductors_right" class="region" points="830,610 910,592 918,760 846,800"/>
+    </g>
+    <g id="front_hip_adductors" data-muscle="hip_adductors" data-name-en="Hip adductors" data-name-zh-Hant="髖內收肌">
+      <polygon id="front_hip_adductors_left" class="region" points="716,606 763,612 758,856 704,780"/>
+      <polygon id="front_hip_adductors_right" class="region" points="773,612 820,606 832,780 778,856"/>
+    </g>
+    <g id="front_quads" data-muscle="quads" data-name-en="Quadriceps" data-name-zh-Hant="股四頭肌">
+      <polygon id="front_quads_left" class="region" points="620,642 744,618 746,862 633,880"/>
+      <polygon id="front_quads_right" class="region" points="792,618 917,642 902,880 789,862"/>
+    </g>
+  </g>
+
+  <g id="back_regions" data-view="back">
+    <polygon id="back_neck" class="region" data-muscle="neck" data-name-en="Neck" data-name-zh-Hant="頸部" points="1188,103 1270,103 1286,203 1172,203"/>
+    <polygon id="back_traps" class="region" data-muscle="traps" data-name-en="Trapezius" data-name-zh-Hant="斜方肌" points="1098,188 1229,123 1360,188 1305,362 1153,362"/>
+    <g id="back_rear_delts" data-muscle="rear_delts" data-name-en="Rear deltoid" data-name-zh-Hant="後三角肌">
+      <polygon id="back_rear_delts_left" class="region" points="1038,229 1142,207 1161,307 1056,343"/>
+      <polygon id="back_rear_delts_right" class="region" points="1318,207 1422,229 1404,343 1299,307"/>
+    </g>
+    <g id="back_side_delts" data-muscle="side_delts" data-name-en="Lateral deltoid" data-name-zh-Hant="側三角肌">
+      <polygon id="back_side_delts_left" class="region" points="1008,243 1059,232 1052,351 990,333"/>
+      <polygon id="back_side_delts_right" class="region" points="1401,232 1452,243 1470,333 1408,351"/>
+    </g>
+    <g id="back_upper_back" data-muscle="upper_back" data-name-en="Upper back" data-name-zh-Hant="上背">
+      <polygon id="back_upper_back_left" class="region" points="1093,238 1228,197 1224,395 1095,367"/>
+      <polygon id="back_upper_back_right" class="region" points="1232,197 1367,238 1365,367 1236,395"/>
+    </g>
+    <g id="back_lats" data-muscle="lats" data-name-en="Latissimus dorsi" data-name-zh-Hant="背闊肌">
+      <polygon id="back_lats_left" class="region" points="1054,319 1156,355 1167,564 1043,506"/>
+      <polygon id="back_lats_right" class="region" points="1300,355 1402,319 1413,506 1289,564"/>
+    </g>
+    <g id="back_triceps" data-muscle="triceps" data-name-en="Triceps" data-name-zh-Hant="三頭肌">
+      <polygon id="back_triceps_left" class="region" points="986,335 1058,345 1044,508 973,497"/>
+      <polygon id="back_triceps_right" class="region" points="1402,345 1474,335 1487,497 1416,508"/>
+    </g>
+    <g id="back_forearms" data-muscle="forearms" data-name-en="Forearms" data-name-zh-Hant="前臂">
+      <polygon id="back_forearms_left" class="region" points="974,501 1045,512 1027,632 953,620"/>
+      <polygon id="back_forearms_right" class="region" points="1415,512 1486,501 1507,620 1433,632"/>
+    </g>
+    <polygon id="back_lower_back" class="region" data-muscle="lower_back" data-name-en="Lower back" data-name-zh-Hant="下背" points="1164,391 1294,391 1314,572 1144,572"/>
+    <g id="back_glutes" data-muscle="glutes" data-name-en="Glutes" data-name-zh-Hant="臀肌">
+      <polygon id="back_glutes_left" class="region" points="1112,559 1227,568 1220,704 1101,681"/>
+      <polygon id="back_glutes_right" class="region" points="1232,568 1347,559 1358,681 1239,704"/>
+    </g>
+    <g id="back_hamstrings" data-muscle="hamstrings" data-name-en="Hamstrings" data-name-zh-Hant="腿後肌群">
+      <polygon id="back_hamstrings_left" class="region" points="1108,682 1220,700 1207,886 1097,875"/>
+      <polygon id="back_hamstrings_right" class="region" points="1238,700 1350,682 1361,875 1251,886"/>
+    </g>
+    <g id="back_calves" data-muscle="calves" data-name-en="Calves" data-name-zh-Hant="小腿">
+      <polygon id="back_calves_left" class="region" points="1115,835 1213,850 1205,1006 1109,994"/>
+      <polygon id="back_calves_right" class="region" points="1245,850 1343,835 1349,994 1253,1006"/>
+    </g>
+  </g>
+</svg>

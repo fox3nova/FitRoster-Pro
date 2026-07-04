@@ -1,0 +1,2029 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FitRoster Pro is a complete iOS training workspace for coaches and trainees, with editable exercises, coach-trainee collaboration, analysis, HealthKit support, AI-assisted workflows, backup, and no subscription.">
+  <title>FitRoster Pro | Training Workspace for Coaches and Trainees</title>
+  <link rel="icon" href="assets/start-silver-fitroster.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-soft: #fbfbfd;
+      --ink: #1d1d1f;
+      --muted: #5f6368;
+      --quiet: #86868b;
+      --line: rgba(29, 29, 31, 0.12);
+      --blue: #0071e3;
+      --blue-dark: #0057b8;
+      --green: #2f7d4e;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+      --radius: 24px;
+      --shell: min(1180px, calc(100vw - 40px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    select,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: 16px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      transform: translateY(-180%);
+      transition: transform 180ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 245, 247, 0.82);
+      border-bottom: 1px solid rgba(29, 29, 31, 0.08);
+      backdrop-filter: saturate(180%) blur(24px);
+    }
+
+    .nav {
+      width: var(--shell);
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 12px 6px 7px;
+      border: 1px solid rgba(29, 29, 31, 0.10);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .brand:hover,
+    .brand:focus-visible {
+      border-color: rgba(0, 113, 227, 0.28);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 10px 28px rgba(0, 113, 227, 0.12);
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      object-fit: cover;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: #3d3d42;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      cursor: pointer;
+      transition: color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .language-field {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .language-field select {
+      min-width: 134px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--ink);
+      font: inherit;
+      padding: 0 32px 0 13px;
+      cursor: pointer;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 15px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: background 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+      white-space: nowrap;
+    }
+
+    .button.primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(0, 113, 227, 0.22);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus-visible {
+      background: var(--blue-dark);
+      box-shadow: 0 12px 28px rgba(0, 87, 184, 0.24);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--blue);
+      border-color: rgba(0, 113, 227, 0.28);
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus-visible {
+      border-color: rgba(0, 113, 227, 0.56);
+      background: #fff;
+    }
+
+    .shell {
+      width: var(--shell);
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      padding: 118px 0 56px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(440px, 1.08fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-brand-lockup {
+      width: min(430px, 100%);
+      margin-bottom: 26px;
+    }
+
+    .hero-brand-lockup img {
+      width: 100%;
+      border: 1px solid rgba(29, 29, 31, 0.10);
+      border-radius: 28px;
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.14);
+      object-fit: cover;
+    }
+
+    .kicker {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 740;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: clamp(56px, 7vw, 96px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .hero-statement {
+      margin-bottom: 18px;
+      max-width: 620px;
+      font-size: clamp(27px, 3.4vw, 47px);
+      line-height: 1.08;
+      font-weight: 740;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.45;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 30px 0;
+    }
+
+    .value-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 700px;
+    }
+
+    .value {
+      min-height: 112px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .value strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .value span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 620px;
+    }
+
+    .device {
+      position: absolute;
+      overflow: hidden;
+      background: #111;
+      box-shadow: var(--shadow);
+    }
+
+    .device img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .device.tablet {
+      right: 0;
+      top: 18px;
+      width: min(73%, 520px);
+      aspect-ratio: 719 / 960;
+      border: 10px solid #151515;
+      border-radius: 30px;
+    }
+
+    .device.phone {
+      left: 12px;
+      bottom: 0;
+      width: min(38%, 245px);
+      aspect-ratio: 351 / 760;
+      border: 8px solid #151515;
+      border-radius: 34px;
+    }
+
+    .device-label {
+      position: absolute;
+      left: 28px;
+      bottom: 28px;
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 9px 24px rgba(0, 0, 0, 0.14);
+      backdrop-filter: blur(12px);
+    }
+
+    .section {
+      padding: 82px 0;
+    }
+
+    .section.surface {
+      background: var(--surface);
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-head.center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.55;
+    }
+
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .shot {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface-soft);
+    }
+
+    .shot-media {
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      padding: 24px 22px 0;
+      background: #f0f2f5;
+    }
+
+    .shot-media img {
+      width: min(78%, 240px);
+      max-height: 430px;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .shot-media.tablet img {
+      width: min(92%, 430px);
+      max-height: 430px;
+      border-radius: 22px 22px 0 0;
+    }
+
+    .shot-body {
+      padding: 24px;
+    }
+
+    .shot-body h3,
+    .feature h3,
+    .timeline-item h3,
+    .analysis-point h3 {
+      margin-bottom: 8px;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .shot-body p,
+    .feature p,
+    .timeline-item p,
+    .analysis-point p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      min-height: 230px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--surface);
+    }
+
+    .feature-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 32px;
+      border-radius: 50%;
+      background: #eef6ff;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: 0.76fr 1.24fr;
+      gap: 44px;
+      align-items: start;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .step-index {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    .analysis-visual {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: #f0f2f5;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.09);
+    }
+
+    .analysis-visual img {
+      width: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .analysis-points {
+      display: grid;
+      gap: 14px;
+    }
+
+    .analysis-point {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+    }
+
+    .guide-band {
+      padding: 70px;
+      border-radius: 30px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .guide-band .kicker {
+      color: #8fd6ff;
+    }
+
+    .guide-band h2 {
+      max-width: 820px;
+    }
+
+    .guide-band p {
+      max-width: 760px;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .guide-band .button.secondary {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.34);
+    }
+
+    .guide-band .button.secondary:hover,
+    .guide-band .button.secondary:focus-visible {
+      border-color: rgba(255, 255, 255, 0.72);
+    }
+
+    footer {
+      padding: 32px 0 44px;
+      color: var(--quiet);
+      font-size: 13px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--blue);
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(0, 113, 227, 0.42);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      :root {
+        --shell: min(100vw - 28px, 720px);
+      }
+
+      .nav {
+        min-height: auto;
+        padding: 14px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-actions {
+        margin-left: auto;
+      }
+
+      .hero {
+        padding-top: 104px;
+      }
+
+      .hero-grid,
+      .workflow,
+      .analysis-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 560px;
+      }
+
+      .device.tablet {
+        width: min(78%, 520px);
+      }
+
+      .device.phone {
+        width: min(37%, 220px);
+      }
+
+      .value-row,
+      .shot-grid,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shot {
+        grid-template-columns: minmax(220px, 0.72fr) 1fr;
+        grid-template-rows: auto;
+      }
+
+      .shot-media {
+        min-height: 320px;
+      }
+
+      .guide-band {
+        padding: 44px 28px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --shell: min(100vw - 24px, 420px);
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      .brand {
+        padding: 5px;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .language-field span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+      }
+
+      .language-field select {
+        min-width: 126px;
+      }
+
+      .hero {
+        padding-top: 132px;
+      }
+
+      h1 {
+        font-size: clamp(50px, 17vw, 72px);
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .value {
+        min-height: auto;
+      }
+
+      .hero-visual {
+        min-height: 470px;
+      }
+
+      .device.tablet {
+        width: min(78%, 360px);
+        border-width: 7px;
+        border-radius: 24px;
+      }
+
+      .device.phone {
+        left: 0;
+        width: min(43%, 165px);
+        border-width: 6px;
+        border-radius: 28px;
+      }
+
+      .device-label {
+        left: 16px;
+        bottom: 18px;
+      }
+
+      .section {
+        padding: 58px 0;
+      }
+
+      .shot {
+        grid-template-columns: 1fr;
+      }
+
+      .shot-media {
+        min-height: 310px;
+      }
+
+      .feature {
+        min-height: auto;
+      }
+
+      .timeline-item {
+        grid-template-columns: 40px 1fr;
+        gap: 14px;
+        padding: 16px;
+      }
+
+      .step-index {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+      }
+
+      .footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+  <header class="topbar">
+    <nav class="nav" aria-label="Main navigation" data-i18n-attr="aria-label:navAria">
+      <a class="brand" href="index.html" aria-label="FitRoster Pro home" data-i18n-attr="aria-label:brandAria">
+        <img src="assets/fitroster-brand-icon.webp" width="256" height="256" alt="">
+        <span>FitRoster Pro</span>
+      </a>
+      <div class="nav-links">
+        <a href="#screens" data-i18n="navScreens">Screens</a>
+        <a href="#features" data-i18n="navFeatures">Features</a>
+        <a href="#v2" data-i18n="navV2">Pro</a>
+        <a href="#workflow" data-i18n="navWorkflow">Workflow</a>
+        <a href="guide.html" data-i18n="navGuide">Guide</a>
+        <a href="support.html" data-i18n="navSupport">Support</a>
+      </div>
+      <div class="nav-actions">
+        <label class="language-field">
+          <span data-i18n="languageLabel">Language</span>
+          <select data-language-select aria-label="Language" data-i18n-attr="aria-label:languageLabel"></select>
+        </label>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <div class="hero-brand-lockup" aria-hidden="true">
+            <img src="assets/fitroster-wordmark.webp" width="920" height="614" alt="">
+          </div>
+          <p class="kicker" data-i18n="heroKicker">iOS training workspace</p>
+          <h1 data-i18n="heroTitle">FitRoster Pro</h1>
+          <p class="hero-statement" data-i18n="heroStatement">Plan training, coach athletes, and understand progress in one clean app.</p>
+          <p class="lead" data-i18n="heroCopy">FitRoster Pro brings editable exercise names, custom routines, trainee schedules, coach delivery, training records, and practical analysis into a focused Apple-style workspace.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="guide.html" data-i18n="heroPrimary">Open usage guide</a>
+            <a class="button secondary" href="#screens" data-i18n="heroSecondary">View app screens</a>
+          </div>
+          <div class="value-row" aria-label="Product highlights" data-i18n-attr="aria-label:valueAria">
+            <div class="value">
+              <strong data-i18n="valueCustomTitle">Custom exercises</strong>
+              <span data-i18n="valueCustomCopy">Rename built-in movements or create your own training catalog.</span>
+            </div>
+            <div class="value">
+              <strong data-i18n="valueCoachTitle">Coach + trainee</strong>
+              <span data-i18n="valueCoachCopy">Assign plans, review submissions, and keep training context together.</span>
+            </div>
+            <div class="value">
+              <strong data-i18n="valueAnalysisTitle">Records + analysis</strong>
+              <span data-i18n="valueAnalysisCopy">Read sessions, calendars, goals, and muscle distribution at a glance.</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="FitRoster Pro screenshots" data-i18n-attr="aria-label:heroVisualAria">
+          <figure class="device tablet">
+            <img src="assets/marketing/en/hero-ipad.jpg" width="719" height="960" alt="FitRoster Pro coach schedule on iPad" data-marketing-img="hero-ipad" data-i18n-attr="alt:heroIpadAlt">
+          </figure>
+          <figure class="device phone">
+            <img src="assets/marketing/en/hero-phone.jpg" width="351" height="760" alt="FitRoster Pro training template on iPhone" data-marketing-img="hero-phone" data-i18n-attr="alt:heroPhoneAlt">
+          </figure>
+          <span class="device-label" data-i18n="deviceLabel">Localized app screenshots</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="screens" class="section surface" aria-labelledby="screens-title">
+      <div class="shell">
+        <div class="section-head center">
+          <p class="kicker" data-i18n="screensKicker">Real product screens</p>
+          <h2 id="screens-title" data-i18n="screensTitle">Show the system with training data, not empty mockups.</h2>
+          <p class="section-copy" data-i18n="screensCopy">The page uses compact screenshots generated from the app capture set, with matching images for every supported site language.</p>
+        </div>
+        <div class="shot-grid">
+          <article class="shot">
+            <div class="shot-media">
+              <img src="assets/marketing/en/training-menu.jpg" width="351" height="760" alt="FitRoster Pro trainee training menu screen" data-marketing-img="training-menu" data-i18n-attr="alt:shotTrainingAlt">
+            </div>
+            <div class="shot-body">
+              <h3 data-i18n="shotTrainingTitle">Flexible training menus</h3>
+              <p data-i18n="shotTrainingCopy">Use built-in exercises, rename movements freely, or build a custom catalog for your coaching language.</p>
+            </div>
+          </article>
+          <article class="shot">
+            <div class="shot-media">
+              <img src="assets/marketing/en/records-calendar.jpg" width="351" height="760" alt="FitRoster Pro records calendar screen" data-marketing-img="records-calendar" data-i18n-attr="alt:shotRecordsAlt">
+            </div>
+            <div class="shot-body">
+              <h3 data-i18n="shotRecordsTitle">Session history</h3>
+              <p data-i18n="shotRecordsCopy">Review completed training by date, role, and plan so progress stays connected to the work that created it.</p>
+            </div>
+          </article>
+          <article class="shot">
+            <div class="shot-media tablet">
+              <img src="assets/marketing/en/coach-plans.jpg" width="719" height="960" alt="FitRoster Pro coach plan overview on iPad" data-marketing-img="coach-plans" data-i18n-attr="alt:shotCoachAlt">
+            </div>
+            <div class="shot-body">
+              <h3 data-i18n="shotCoachTitle">Coach planning</h3>
+              <p data-i18n="shotCoachCopy">Plan templates, distribute sessions, and read trainee context from a layout designed for repeated professional use.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section" aria-labelledby="features-title">
+      <div class="shell">
+        <div class="section-head">
+          <p class="kicker" data-i18n="featuresKicker">Core capabilities</p>
+          <h2 id="features-title" data-i18n="featuresTitle">Built around the way training is actually managed.</h2>
+          <p class="section-copy" data-i18n="featuresCopy">FitRoster Pro is a practical performance tool: fast to update, clear to review, and structured enough for coach-trainee work.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <span class="feature-number">01</span>
+            <h3 data-i18n="featureNamesTitle">Rename anything</h3>
+            <p data-i18n="featureNamesCopy">Built-in exercise names follow the app language, while your custom names and coaching terms stay exactly as entered.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">02</span>
+            <h3 data-i18n="featureCustomTitle">Create your own catalog</h3>
+            <p data-i18n="featureCustomCopy">Add movements, organize menus, and turn recurring training ideas into reusable routines.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">03</span>
+            <h3 data-i18n="featureCoachTitle">Coach interactions</h3>
+            <p data-i18n="featureCoachCopy">Send plans, receive trainee submissions, and keep review work attached to the right session.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">04</span>
+            <h3 data-i18n="featureAnalysisTitle">Readable analysis</h3>
+            <p data-i18n="featureAnalysisCopy">Use volume, calendar records, goals, body entries, and muscle distribution to explain what changed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="v2" class="section" aria-labelledby="v2-title">
+      <div class="shell">
+        <div class="section-head">
+          <p class="kicker" data-i18n="v2Kicker">FitRoster Pro</p>
+          <h2 id="v2-title" data-i18n="v2Title">FitRoster Pro: a complete training operations workspace beyond V1.</h2>
+          <p class="section-copy" data-i18n="v2Copy">Compared with the V1 basic training log, FitRoster Pro adds coach-trainee collaboration, iPad-ready planning, muscle and body-composition analysis, Apple Health support, optional AI-assisted workflows, backup, and multilingual help. One-time purchase, no subscription. Coaches and trainees can use the complete app.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <span class="feature-number">01</span>
+            <h3 data-i18n="v2PurchaseTitle">Complete app after purchase</h3>
+            <p data-i18n="v2PurchaseCopy">No subscription and no later paid unlocks for the core experience: the coach and trainee workflows are available in the same app.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">02</span>
+            <h3 data-i18n="v2CoachTitle">Built for coach-trainee work</h3>
+            <p data-i18n="v2CoachCopy">Assign plans, receive submitted sessions, review schedules, and keep trainee context attached to the right training history.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">03</span>
+            <h3 data-i18n="v2DataTitle">Richer progress signals</h3>
+            <p data-i18n="v2DataCopy">Use goals, body-composition records, muscle distribution, Apple Health body weight, and completed workout summaries to make training decisions easier to explain.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">04</span>
+            <h3 data-i18n="v2AssistTitle">Smarter setup and review</h3>
+            <p data-i18n="v2AssistCopy">Optional AI tools can help recognize exercises or InBody reports and draft training plans or coach feedback when you provide your own provider API key.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="section surface" aria-labelledby="workflow-title">
+      <div class="shell workflow">
+        <div>
+          <p class="kicker" data-i18n="workflowKicker">Training workflow</p>
+          <h2 id="workflow-title" data-i18n="workflowTitle">From plan to review without losing context.</h2>
+          <p class="section-copy" data-i18n="workflowCopy">The product story is simple: prepare training, record the work, review outcomes, then coach the next decision.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="step-index">1</span>
+            <div>
+              <h3 data-i18n="workflowPlanTitle">Plan</h3>
+              <p data-i18n="workflowPlanCopy">Build templates, customize exercise names, and prepare sessions for yourself or a trainee.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="step-index">2</span>
+            <div>
+              <h3 data-i18n="workflowTrainTitle">Train</h3>
+              <p data-i18n="workflowTrainCopy">Record sets, reps, load, notes, and completed sessions with a layout made for repeated use.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="step-index">3</span>
+            <div>
+              <h3 data-i18n="workflowReviewTitle">Review</h3>
+              <p data-i18n="workflowReviewCopy">Use calendars, records, goals, and analysis to understand what the training is producing.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="step-index">4</span>
+            <div>
+              <h3 data-i18n="workflowCoachTitle">Coach</h3>
+              <p data-i18n="workflowCoachCopy">Deliver the next plan and keep trainee feedback tied to the actual training history.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="analysis-title">
+      <div class="shell analysis-grid">
+        <div class="analysis-visual">
+          <img src="assets/marketing/en/analysis-focus.jpg" width="1100" height="824" alt="FitRoster Pro muscle distribution analysis screen" data-marketing-img="analysis-focus" data-i18n-attr="alt:analysisAlt">
+        </div>
+        <div>
+          <p class="kicker" data-i18n="analysisKicker">Analysis</p>
+          <h2 id="analysis-title" data-i18n="analysisTitle">Make progress explainable.</h2>
+          <p class="section-copy" data-i18n="analysisCopy">FitRoster Pro analysis is meant to support coaching decisions, not bury users in decorative charts.</p>
+          <div class="analysis-points">
+            <article class="analysis-point">
+              <h3 data-i18n="analysisVolumeTitle">Training load and records</h3>
+              <p data-i18n="analysisVolumeCopy">Connect completed sessions to measurable work across time.</p>
+            </article>
+            <article class="analysis-point">
+              <h3 data-i18n="analysisMuscleTitle">Muscle distribution</h3>
+              <p data-i18n="analysisMuscleCopy">Explain balance, focus, and neglected areas with a clear visual summary.</p>
+            </article>
+            <article class="analysis-point">
+              <h3 data-i18n="analysisCoachTitle">Coach interpretation</h3>
+              <p data-i18n="analysisCoachCopy">Turn the data into the next plan, not just another report.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="guide-title">
+      <div class="shell">
+        <div class="guide-band">
+          <p class="kicker" data-i18n="guideKicker">Usage guide</p>
+          <h2 id="guide-title" data-i18n="guideTitle">A multilingual HTML guide is part of the live site.</h2>
+          <p class="section-copy" data-i18n="guideCopy">The guide covers setup, editable exercise names, custom exercises, coach-trainee workflows, records, analysis, backup, and settings with localized screenshots.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="guide.html" data-i18n="guidePrimary">Open guide</a>
+            <a class="button secondary" href="support.html" data-i18n="guideSecondary">Support page</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <span data-i18n="footerCopy">FitRoster Pro public marketing page for the iOS app.</span>
+      <div class="footer-links">
+        <a href="guide.html" data-i18n="footerGuide">Guide</a>
+        <a href="support.html" data-i18n="footerSupport">Support</a>
+        <a href="privacy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+        <a href="mailto:fox3nova@gmail.com" data-i18n="footerContact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site-i18n.js?v=20260704-policy"></script>
+  <script>
+    const baseCopy = {
+      metaTitle: "FitRoster Pro | Training Workspace for Coaches and Trainees",
+      metaDescription: "FitRoster Pro is a complete iOS training workspace for coaches and trainees, with editable exercises, coach-trainee collaboration, analysis, HealthKit support, AI-assisted workflows, backup, and no subscription.",
+      skipLink: "Skip to content",
+      navAria: "Main navigation",
+      brandAria: "FitRoster Pro home",
+      languageLabel: "Language",
+      navScreens: "Screens",
+      navFeatures: "Features",
+      navV2: "Pro",
+      navWorkflow: "Workflow",
+      navGuide: "Guide",
+      navSupport: "Support",
+      heroKicker: "iOS training workspace",
+      heroTitle: "FitRoster Pro",
+      heroStatement: "Plan training, coach athletes, and understand progress in one clean app.",
+      heroCopy: "FitRoster Pro brings editable exercise names, custom routines, trainee schedules, coach delivery, training records, and practical analysis into a focused Apple-style workspace.",
+      heroPrimary: "Open usage guide",
+      heroSecondary: "View app screens",
+      valueAria: "Product highlights",
+      valueCustomTitle: "Custom exercises",
+      valueCustomCopy: "Rename built-in movements or create your own training catalog.",
+      valueCoachTitle: "Coach + trainee",
+      valueCoachCopy: "Assign plans, review submissions, and keep training context together.",
+      valueAnalysisTitle: "Records + analysis",
+      valueAnalysisCopy: "Read sessions, calendars, goals, and muscle distribution at a glance.",
+      heroVisualAria: "FitRoster Pro screenshots",
+      heroIpadAlt: "FitRoster Pro coach schedule on iPad",
+      heroPhoneAlt: "FitRoster Pro training template on iPhone",
+      deviceLabel: "Localized app screenshots",
+      screensKicker: "Real product screens",
+      screensTitle: "Show the system with training data, not empty mockups.",
+      screensCopy: "The page uses compact screenshots generated from the app capture set, with matching images for every supported site language.",
+      shotTrainingAlt: "FitRoster Pro trainee training menu screen",
+      shotTrainingTitle: "Flexible training menus",
+      shotTrainingCopy: "Use built-in exercises, rename movements freely, or build a custom catalog for your coaching language.",
+      shotRecordsAlt: "FitRoster Pro records calendar screen",
+      shotRecordsTitle: "Session history",
+      shotRecordsCopy: "Review completed training by date, role, and plan so progress stays connected to the work that created it.",
+      shotCoachAlt: "FitRoster Pro coach plan overview on iPad",
+      shotCoachTitle: "Coach planning",
+      shotCoachCopy: "Plan templates, distribute sessions, and read trainee context from a layout designed for repeated professional use.",
+      featuresKicker: "Core capabilities",
+      featuresTitle: "Built around the way training is actually managed.",
+      featuresCopy: "FitRoster Pro is a practical performance tool: fast to update, clear to review, and structured enough for coach-trainee work.",
+      featureNamesTitle: "Rename anything",
+      featureNamesCopy: "Built-in exercise names follow the app language, while your custom names and coaching terms stay exactly as entered.",
+      featureCustomTitle: "Create your own catalog",
+      featureCustomCopy: "Add movements, organize menus, and turn recurring training ideas into reusable routines.",
+      featureCoachTitle: "Coach interactions",
+      featureCoachCopy: "Send plans, receive trainee submissions, and keep review work attached to the right session.",
+      featureAnalysisTitle: "Readable analysis",
+      featureAnalysisCopy: "Use volume, calendar records, goals, body entries, and muscle distribution to explain what changed.",
+      v2Kicker: "FitRoster Pro",
+      v2Title: "FitRoster Pro: a complete training operations workspace beyond V1.",
+      v2Copy: "Compared with the V1 basic training log, FitRoster Pro adds coach-trainee collaboration, iPad-ready planning, muscle and body-composition analysis, Apple Health support, optional AI-assisted workflows, backup, and multilingual help. One-time purchase, no subscription. Coaches and trainees can use the complete app.",
+      v2PurchaseTitle: "Complete app after purchase",
+      v2PurchaseCopy: "No subscription and no later paid unlocks for the core experience: the coach and trainee workflows are available in the same app.",
+      v2CoachTitle: "Built for coach-trainee work",
+      v2CoachCopy: "Assign plans, receive submitted sessions, review schedules, and keep trainee context attached to the right training history.",
+      v2DataTitle: "Richer progress signals",
+      v2DataCopy: "Use goals, body-composition records, muscle distribution, Apple Health body weight, and completed workout summaries to make training decisions easier to explain.",
+      v2AssistTitle: "Smarter setup and review",
+      v2AssistCopy: "Optional AI tools can help recognize exercises or InBody reports and draft training plans or coach feedback when you provide your own provider API key.",
+      workflowKicker: "Training workflow",
+      workflowTitle: "From plan to review without losing context.",
+      workflowCopy: "The product story is simple: prepare training, record the work, review outcomes, then coach the next decision.",
+      workflowPlanTitle: "Plan",
+      workflowPlanCopy: "Build templates, customize exercise names, and prepare sessions for yourself or a trainee.",
+      workflowTrainTitle: "Train",
+      workflowTrainCopy: "Record sets, reps, load, notes, and completed sessions with a layout made for repeated use.",
+      workflowReviewTitle: "Review",
+      workflowReviewCopy: "Use calendars, records, goals, and analysis to understand what the training is producing.",
+      workflowCoachTitle: "Coach",
+      workflowCoachCopy: "Deliver the next plan and keep trainee feedback tied to the actual training history.",
+      analysisAlt: "FitRoster Pro muscle distribution analysis screen",
+      analysisKicker: "Analysis",
+      analysisTitle: "Make progress explainable.",
+      analysisCopy: "FitRoster Pro analysis is meant to support coaching decisions, not bury users in decorative charts.",
+      analysisVolumeTitle: "Training load and records",
+      analysisVolumeCopy: "Connect completed sessions to measurable work across time.",
+      analysisMuscleTitle: "Muscle distribution",
+      analysisMuscleCopy: "Explain balance, focus, and neglected areas with a clear visual summary.",
+      analysisCoachTitle: "Coach interpretation",
+      analysisCoachCopy: "Turn the data into the next plan, not just another report.",
+      guideKicker: "Usage guide",
+      guideTitle: "A multilingual HTML guide is part of the live site.",
+      guideCopy: "The guide covers setup, editable exercise names, custom exercises, coach-trainee workflows, records, analysis, backup, and settings with localized screenshots.",
+      guidePrimary: "Open guide",
+      guideSecondary: "Support page",
+      footerCopy: "FitRoster Pro public marketing page for the iOS app.",
+      footerGuide: "Guide",
+      footerSupport: "Support",
+      footerPrivacy: "Privacy Policy",
+      footerContact: "Contact",
+      mailSubject: "FitRoster Pro information",
+      mailBody: "Hi, I would like to learn more about FitRoster Pro."
+    };
+
+    const translations = {
+      en: baseCopy,
+      "zh-Hant": {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | 教練與學員的訓練工作區",
+        metaDescription: "FitRoster Pro 是完整 iOS 訓練工作區，提供可自由更改動作名稱、教練學員協作、分析、Apple Health、AI 輔助流程、備份，且無訂閱。",
+        skipLink: "跳到內容",
+        navAria: "主導覽",
+        brandAria: "FitRoster Pro 首頁",
+        languageLabel: "語言",
+        navScreens: "畫面",
+        navFeatures: "功能",
+        navV2: "Pro",
+        navWorkflow: "流程",
+        navGuide: "說明",
+        navSupport: "支援",
+        heroKicker: "iOS 訓練工作區",
+        heroStatement: "規劃訓練、指導學員，並用清楚畫面理解進步。",
+        heroCopy: "FitRoster Pro 將可編輯動作名稱、自建課表、學員排程、教練派課、訓練紀錄與實用分析整合成專注、乾淨的 Apple 風格工作區。",
+        heroPrimary: "開啟使用說明",
+        heroSecondary: "查看 app 畫面",
+        valueAria: "產品重點",
+        valueCustomTitle: "自訂動作",
+        valueCustomCopy: "可自由改名內建動作，也能建立自己的訓練項目庫。",
+        valueCoachTitle: "教練 + 學員",
+        valueCoachCopy: "派送計畫、檢視回傳，並保留完整訓練脈絡。",
+        valueAnalysisTitle: "紀錄 + 分析",
+        valueAnalysisCopy: "快速理解課表、行事曆、目標與肌群分佈。",
+        heroVisualAria: "FitRoster Pro 截圖",
+        heroIpadAlt: "FitRoster Pro iPad 教練排程畫面",
+        heroPhoneAlt: "FitRoster Pro iPhone 訓練模板畫面",
+        deviceLabel: "在地化 app 截圖",
+        screensKicker: "真實產品畫面",
+        screensTitle: "用有訓練資料的畫面呈現系統，而不是空白示意圖。",
+        screensCopy: "頁面使用從 app 截圖流程產出的輕量圖片，並替每個支援語系載入對應畫面。",
+        shotTrainingAlt: "FitRoster Pro 學員訓練選單畫面",
+        shotTrainingTitle: "彈性的訓練選單",
+        shotTrainingCopy: "使用內建動作、自由改名，或建立符合教練語言的自訂項目庫。",
+        shotRecordsAlt: "FitRoster Pro 訓練紀錄行事曆畫面",
+        shotRecordsTitle: "訓練歷史",
+        shotRecordsCopy: "依日期、角色與計畫檢視完成紀錄，讓進步與實際訓練保持連結。",
+        shotCoachAlt: "FitRoster Pro iPad 教練計畫總覽",
+        shotCoachTitle: "教練規劃",
+        shotCoachCopy: "建立模板、派送課表，並在適合重複工作的版面中閱讀學員脈絡。",
+        featuresKicker: "核心能力",
+        featuresTitle: "依照實際訓練管理方式設計。",
+        featuresCopy: "FitRoster Pro 是務實的表現工具：更新要快、閱讀要清楚，也要足以支援教練與學員協作。",
+        featureNamesTitle: "名稱可自由調整",
+        featureNamesCopy: "內建動作會跟隨 app 語言，你輸入的自訂名稱與教練術語則完整保留。",
+        featureCustomTitle: "建立自己的項目庫",
+        featureCustomCopy: "新增動作、整理選單，並把重複訓練想法變成可再用的課表。",
+        featureCoachTitle: "教練學員互動",
+        featureCoachCopy: "派課、接收學員回傳，並把檢視工作綁回正確訓練紀錄。",
+        featureAnalysisTitle: "易讀的分析",
+        featureAnalysisCopy: "用訓練量、行事曆紀錄、目標、身體資料與肌群分佈解釋變化。",
+        v2Kicker: "FitRoster Pro",
+        v2Title: "FitRoster Pro 不只是 V1 的外觀更新，而是完整訓練工作區。",
+        v2Copy: "相較於 V1 的基礎訓練紀錄，FitRoster Pro 強化教練學員協作、iPad 規劃、肌群與身體組成分析、Apple Health、AI 輔助與備份流程。一次買斷，無訂閱。教練與學員都可完整使用。",
+        v2PurchaseTitle: "購買後就是完整 app",
+        v2PurchaseCopy: "核心體驗沒有訂閱，也沒有後續付費解鎖；教練與學員流程都在同一個 app 中完整提供。",
+        v2CoachTitle: "為教練學員協作設計",
+        v2CoachCopy: "派送課表、接收完成紀錄、檢視排程，並把學員脈絡保留在正確訓練歷史上。",
+        v2DataTitle: "更完整的進度訊號",
+        v2DataCopy: "結合目標、身體組成紀錄、肌群分佈、Apple Health 體重與完成訓練摘要，讓訓練決策更容易說明。",
+        v2AssistTitle: "更聰明的建立與檢視",
+        v2AssistCopy: "選用 AI 工具可協助辨識動作或 InBody 報告，也能在你提供自己的服務 API key 後草擬課表與教練回饋。",
+        workflowKicker: "訓練流程",
+        workflowTitle: "從規劃到檢視，不讓脈絡斷掉。",
+        workflowCopy: "產品敘事很單純：準備訓練、紀錄完成內容、檢視結果，然後做出下一個教練決策。",
+        workflowPlanTitle: "規劃",
+        workflowPlanCopy: "建立模板、調整動作名稱，並替自己或學員準備課表。",
+        workflowTrainTitle: "訓練",
+        workflowTrainCopy: "紀錄組數、次數、重量、備註與完成課表，版面適合反覆使用。",
+        workflowReviewTitle: "檢視",
+        workflowReviewCopy: "用行事曆、紀錄、目標與分析理解訓練產生的結果。",
+        workflowCoachTitle: "指導",
+        workflowCoachCopy: "派送下一份計畫，讓學員回饋留在實際訓練歷史旁邊。",
+        analysisAlt: "FitRoster Pro 肌群分佈分析畫面",
+        analysisKicker: "分析",
+        analysisTitle: "讓進步變得可以說明。",
+        analysisCopy: "FitRoster Pro 的分析用來支援教練決策，而不是堆滿裝飾性的圖表。",
+        analysisVolumeTitle: "訓練量與紀錄",
+        analysisVolumeCopy: "把完成課表連到一段時間內可衡量的訓練工作。",
+        analysisMuscleTitle: "肌群分佈",
+        analysisMuscleCopy: "用清楚視覺摘要說明訓練平衡、重點與缺口。",
+        analysisCoachTitle: "教練解讀",
+        analysisCoachCopy: "把資料轉成下一份計畫，而不是只產出另一張報表。",
+        guideKicker: "使用說明",
+        guideTitle: "多語 HTML 使用說明已整合在上線網站中。",
+        guideCopy: "使用說明涵蓋設定、可編輯動作名稱、自訂動作、教練學員流程、紀錄、分析、備份與設定，並使用在地化截圖。",
+        guidePrimary: "開啟說明",
+        guideSecondary: "支援頁",
+        footerCopy: "FitRoster Pro iOS app 公開行銷頁。",
+        footerGuide: "使用說明",
+        footerSupport: "支援",
+        footerPrivacy: "隱私權政策",
+        footerContact: "聯絡",
+        mailSubject: "FitRoster Pro 資訊",
+        mailBody: "你好，我想了解 FitRoster Pro。"
+      },
+      "zh-Hans": {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | 教练与学员的训练工作区",
+        metaDescription: "FitRoster Pro 是完整 iOS 训练工作区，提供可自由更改动作名称、教练学员协作、分析、Apple Health、AI 辅助流程、备份，且无订阅。",
+        skipLink: "跳到内容",
+        navAria: "主导航",
+        brandAria: "FitRoster Pro 首页",
+        languageLabel: "语言",
+        navScreens: "画面",
+        navFeatures: "功能",
+        navV2: "Pro",
+        navWorkflow: "流程",
+        navGuide: "说明",
+        navSupport: "支援",
+        heroKicker: "iOS 训练工作区",
+        heroStatement: "规划训练、指导学员，并用清楚画面理解进步。",
+        heroCopy: "FitRoster Pro 将可编辑动作名称、自建课表、学员排程、教练派课、训练记录与实用分析整合成专注、干净的 Apple 风格工作区。",
+        heroPrimary: "打开使用说明",
+        heroSecondary: "查看 app 画面",
+        valueAria: "产品重点",
+        valueCustomTitle: "自定义动作",
+        valueCustomCopy: "可自由改名内建动作，也能建立自己的训练项目库。",
+        valueCoachTitle: "教练 + 学员",
+        valueCoachCopy: "派送计划、查看回传，并保留完整训练脉络。",
+        valueAnalysisTitle: "记录 + 分析",
+        valueAnalysisCopy: "快速理解课表、日历、目标与肌群分布。",
+        heroVisualAria: "FitRoster Pro 截图",
+        heroIpadAlt: "FitRoster Pro iPad 教练排程画面",
+        heroPhoneAlt: "FitRoster Pro iPhone 训练模板画面",
+        deviceLabel: "本地化 app 截图",
+        screensKicker: "真实产品画面",
+        screensTitle: "用有训练资料的画面呈现系统，而不是空白示意图。",
+        screensCopy: "页面使用从 app 截图流程产出的轻量图片，并为每个支持语系载入对应画面。",
+        shotTrainingAlt: "FitRoster Pro 学员训练菜单画面",
+        shotTrainingTitle: "弹性的训练菜单",
+        shotTrainingCopy: "使用内建动作、自由改名，或建立符合教练语言的自定义项目库。",
+        shotRecordsAlt: "FitRoster Pro 训练记录日历画面",
+        shotRecordsTitle: "训练历史",
+        shotRecordsCopy: "按日期、角色与计划查看完成记录，让进步与实际训练保持连接。",
+        shotCoachAlt: "FitRoster Pro iPad 教练计划总览",
+        shotCoachTitle: "教练规划",
+        shotCoachCopy: "建立模板、派送课表，并在适合重复工作的版面中阅读学员脉络。",
+        featuresKicker: "核心能力",
+        featuresTitle: "按照实际训练管理方式设计。",
+        featuresCopy: "FitRoster Pro 是务实的表现工具：更新要快、阅读要清楚，也要足以支持教练与学员协作。",
+        featureNamesTitle: "名称可自由调整",
+        featureNamesCopy: "内建动作会跟随 app 语言，你输入的自定义名称与教练术语则完整保留。",
+        featureCustomTitle: "建立自己的项目库",
+        featureCustomCopy: "新增动作、整理菜单，并把重复训练想法变成可再用的课表。",
+        featureCoachTitle: "教练学员互动",
+        featureCoachCopy: "派课、接收学员回传，并把查看工作绑定到正确训练记录。",
+        featureAnalysisTitle: "易读的分析",
+        featureAnalysisCopy: "用训练量、日历记录、目标、身体资料与肌群分布解释变化。",
+        v2Kicker: "FitRoster Pro",
+        v2Title: "FitRoster Pro 不只是 V1 的外观更新，而是完整训练工作区。",
+        v2Copy: "相较于 V1 的基础训练记录，FitRoster Pro 强化教练学员协作、iPad 规划、肌群与身体组成分析、Apple Health、AI 辅助与备份流程。一次买断，无订阅。教练与学员都可完整使用。",
+        v2PurchaseTitle: "购买后就是完整 app",
+        v2PurchaseCopy: "核心体验没有订阅，也没有后续付费解锁；教练与学员流程都在同一个 app 中完整提供。",
+        v2CoachTitle: "为教练学员协作设计",
+        v2CoachCopy: "派送课表、接收完成记录、查看排程，并把学员脉络保留在正确训练历史上。",
+        v2DataTitle: "更完整的进度信号",
+        v2DataCopy: "结合目标、身体组成记录、肌群分布、Apple Health 体重与完成训练摘要，让训练决策更容易说明。",
+        v2AssistTitle: "更聪明的建立与查看",
+        v2AssistCopy: "选用 AI 工具可协助识别动作或 InBody 报告，也能在你提供自己的服务 API key 后草拟课表与教练反馈。",
+        workflowKicker: "训练流程",
+        workflowTitle: "从规划到查看，不让脉络断掉。",
+        workflowCopy: "产品叙事很简单：准备训练、记录完成内容、查看结果，然后做出下一步教练决策。",
+        workflowPlanTitle: "规划",
+        workflowPlanCopy: "建立模板、调整动作名称，并为自己或学员准备课表。",
+        workflowTrainTitle: "训练",
+        workflowTrainCopy: "记录组数、次数、重量、备注与完成课表，版面适合反复使用。",
+        workflowReviewTitle: "查看",
+        workflowReviewCopy: "用日历、记录、目标与分析理解训练产生的结果。",
+        workflowCoachTitle: "指导",
+        workflowCoachCopy: "派送下一份计划，让学员反馈留在实际训练历史旁边。",
+        analysisAlt: "FitRoster Pro 肌群分布分析画面",
+        analysisKicker: "分析",
+        analysisTitle: "让进步变得可以说明。",
+        analysisCopy: "FitRoster Pro 的分析用来支持教练决策，而不是堆满装饰性的图表。",
+        analysisVolumeTitle: "训练量与记录",
+        analysisVolumeCopy: "把完成课表连接到一段时间内可衡量的训练工作。",
+        analysisMuscleTitle: "肌群分布",
+        analysisMuscleCopy: "用清楚视觉摘要说明训练平衡、重点与缺口。",
+        analysisCoachTitle: "教练解读",
+        analysisCoachCopy: "把资料转成下一份计划，而不是只产出另一张报表。",
+        guideKicker: "使用说明",
+        guideTitle: "多语言 HTML 使用说明已整合在上线网站中。",
+        guideCopy: "使用说明涵盖设置、可编辑动作名称、自定义动作、教练学员流程、记录、分析、备份与设置，并使用本地化截图。",
+        guidePrimary: "打开说明",
+        guideSecondary: "支援页",
+        footerCopy: "FitRoster Pro iOS app 公开营销页。",
+        footerGuide: "使用说明",
+        footerSupport: "支援",
+        footerPrivacy: "隐私权政策",
+        footerContact: "联系",
+        mailSubject: "FitRoster Pro 信息",
+        mailBody: "你好，我想了解 FitRoster Pro。"
+      },
+      ja: {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | コーチと受講者のトレーニングワークスペース",
+        metaDescription: "FitRoster Proは、編集可能な種目名、独自メニュー、コーチと受講者の連携、記録、分析、バックアップを備えたiOSトレーニングワークスペースです。",
+        skipLink: "本文へ移動",
+        languageLabel: "言語",
+        navScreens: "画面",
+        navFeatures: "機能",
+        navWorkflow: "流れ",
+        navGuide: "ガイド",
+        navSupport: "サポート",
+        heroKicker: "iOSトレーニングワークスペース",
+        heroStatement: "計画、コーチング、進捗理解を一つの整ったアプリで。",
+        heroCopy: "FitRoster Proは、編集可能な種目名、独自ルーティン、受講者スケジュール、コーチ配信、記録、実用的な分析をAppleらしい集中した画面にまとめます。",
+        heroPrimary: "使用ガイドを開く",
+        heroSecondary: "アプリ画面を見る",
+        valueCustomTitle: "独自種目",
+        valueCustomCopy: "内蔵種目の名称変更や独自カタログの作成ができます。",
+        valueCoachTitle: "コーチ + 受講者",
+        valueCoachCopy: "計画を割り当て、提出を確認し、文脈を保ちます。",
+        valueAnalysisTitle: "記録 + 分析",
+        valueAnalysisCopy: "セッション、カレンダー、目標、筋群分布を素早く把握できます。",
+        deviceLabel: "ローカライズ済みアプリ画面",
+        screensKicker: "実際の製品画面",
+        screensTitle: "空のモックではなく、トレーニングデータのある画面で伝える。",
+        screensCopy: "対応する各サイト言語に合わせて、軽量化したアプリ画面を読み込みます。",
+        shotTrainingTitle: "柔軟なトレーニングメニュー",
+        shotTrainingCopy: "内蔵種目、自由な名称変更、コーチ独自の言葉に合わせたカタログに対応します。",
+        shotRecordsTitle: "セッション履歴",
+        shotRecordsCopy: "完了したトレーニングを日付、役割、計画と結び付けて確認できます。",
+        shotCoachTitle: "コーチ計画",
+        shotCoachCopy: "テンプレート作成、配信、受講者文脈の確認を繰り返しやすい画面で扱えます。",
+        featuresKicker: "主要機能",
+        featuresTitle: "実際のトレーニング管理に合わせて設計。",
+        featuresCopy: "FitRoster Proは、速く更新でき、読みやすく、コーチと受講者の作業にも対応する実用的なツールです。",
+        featureNamesTitle: "名称を自由に調整",
+        featureNamesCopy: "内蔵種目はアプリ言語に従い、入力した独自名称はそのまま維持されます。",
+        featureCustomTitle: "独自カタログを作成",
+        featureCustomCopy: "種目を追加し、メニューを整理し、繰り返すトレーニングを再利用できます。",
+        featureCoachTitle: "コーチ連携",
+        featureCoachCopy: "計画の送信、提出の受信、レビューを正しいセッションへ結び付けます。",
+        featureAnalysisTitle: "読みやすい分析",
+        featureAnalysisCopy: "ボリューム、記録、目標、身体データ、筋群分布で変化を説明できます。",
+        workflowKicker: "トレーニングの流れ",
+        workflowTitle: "計画から確認まで文脈を保つ。",
+        workflowCopy: "準備し、記録し、結果を確認し、次のコーチング判断につなげます。",
+        workflowPlanTitle: "計画",
+        workflowPlanCopy: "テンプレートを作り、種目名を調整し、自分や受講者のセッションを準備します。",
+        workflowTrainTitle: "実施",
+        workflowTrainCopy: "セット、回数、重量、メモ、完了セッションを繰り返し入力しやすく記録します。",
+        workflowReviewTitle: "確認",
+        workflowReviewCopy: "カレンダー、記録、目標、分析でトレーニング結果を読み取ります。",
+        workflowCoachTitle: "指導",
+        workflowCoachCopy: "次の計画を届け、受講者の反応を実際の履歴に結び付けます。",
+        analysisKicker: "分析",
+        analysisTitle: "進捗を説明できる形に。",
+        analysisCopy: "FitRoster Proの分析は、装飾ではなくコーチング判断を支えるためのものです。",
+        analysisVolumeTitle: "トレーニング量と記録",
+        analysisVolumeCopy: "完了したセッションを時間軸上の測定できる作業へ結び付けます。",
+        analysisMuscleTitle: "筋群分布",
+        analysisMuscleCopy: "バランス、重点、見落としやすい部位を明確な視覚要約で説明します。",
+        analysisCoachTitle: "コーチの解釈",
+        analysisCoachCopy: "データを次の計画につなげ、単なるレポートで終わらせません。",
+        guideKicker: "使用ガイド",
+        guideTitle: "多言語HTMLガイドを公開サイトに統合。",
+        guideCopy: "設定、編集可能な種目名、独自種目、コーチと受講者の流れ、記録、分析、バックアップ、設定をローカライズ済み画面で説明します。",
+        guidePrimary: "ガイドを開く",
+        guideSecondary: "サポートページ",
+        footerCopy: "FitRoster Pro iOSアプリの公開マーケティングページ。",
+        footerGuide: "ガイド",
+        footerSupport: "サポート",
+        footerPrivacy: "プライバシーポリシー",
+        footerContact: "連絡先"
+      },
+      ko: {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | 코치와 회원을 위한 트레이닝 워크스페이스",
+        metaDescription: "FitRoster Pro는 운동명 편집, 사용자 운동, 코치-회원 협업, 기록, 분석, 백업을 제공하는 iOS 트레이닝 워크스페이스입니다.",
+        skipLink: "본문으로 이동",
+        languageLabel: "언어",
+        navScreens: "화면",
+        navFeatures: "기능",
+        navWorkflow: "흐름",
+        navGuide: "가이드",
+        navSupport: "지원",
+        heroKicker: "iOS 트레이닝 워크스페이스",
+        heroStatement: "훈련 계획, 코칭, 진행 이해를 하나의 깔끔한 앱에서.",
+        heroCopy: "FitRoster Pro는 편집 가능한 운동명, 사용자 루틴, 회원 일정, 코치 전달, 훈련 기록, 실용적인 분석을 Apple 스타일의 집중된 작업 공간에 담습니다.",
+        heroPrimary: "사용 가이드 열기",
+        heroSecondary: "앱 화면 보기",
+        valueCustomTitle: "사용자 운동",
+        valueCustomCopy: "기본 운동 이름을 바꾸거나 자신만의 훈련 카탈로그를 만들 수 있습니다.",
+        valueCoachTitle: "코치 + 회원",
+        valueCoachCopy: "계획 배정, 제출 검토, 훈련 맥락을 함께 유지합니다.",
+        valueAnalysisTitle: "기록 + 분석",
+        valueAnalysisCopy: "세션, 캘린더, 목표, 근육 분포를 빠르게 파악합니다.",
+        deviceLabel: "현지화된 앱 스크린샷",
+        screensKicker: "실제 제품 화면",
+        screensTitle: "빈 목업이 아니라 훈련 데이터가 있는 화면으로 보여줍니다.",
+        screensCopy: "지원되는 각 사이트 언어에 맞춰 가벼운 앱 화면을 불러옵니다.",
+        shotTrainingTitle: "유연한 훈련 메뉴",
+        shotTrainingCopy: "기본 운동, 자유로운 이름 변경, 코치 언어에 맞춘 사용자 카탈로그를 지원합니다.",
+        shotRecordsTitle: "세션 기록",
+        shotRecordsCopy: "완료한 훈련을 날짜, 역할, 계획과 연결해 확인합니다.",
+        shotCoachTitle: "코치 계획",
+        shotCoachCopy: "템플릿 작성, 세션 전달, 회원 맥락 확인을 반복 사용에 맞춘 화면에서 처리합니다.",
+        featuresKicker: "핵심 기능",
+        featuresTitle: "실제 훈련 관리 방식에 맞춰 설계했습니다.",
+        featuresCopy: "FitRoster Pro는 빠르게 업데이트하고 명확히 검토하며 코치-회원 업무까지 지원하는 실용 도구입니다.",
+        featureNamesTitle: "이름 자유 편집",
+        featureNamesCopy: "기본 운동명은 앱 언어를 따르고 사용자가 입력한 이름은 그대로 유지됩니다.",
+        featureCustomTitle: "자신만의 카탈로그",
+        featureCustomCopy: "운동을 추가하고 메뉴를 정리해 반복 훈련을 재사용 가능한 루틴으로 만듭니다.",
+        featureCoachTitle: "코치 상호작용",
+        featureCoachCopy: "계획 전송, 회원 제출 수신, 검토를 올바른 세션에 연결합니다.",
+        featureAnalysisTitle: "읽기 쉬운 분석",
+        featureAnalysisCopy: "볼륨, 캘린더 기록, 목표, 신체 입력, 근육 분포로 변화를 설명합니다.",
+        workflowKicker: "훈련 흐름",
+        workflowTitle: "계획부터 검토까지 맥락을 잃지 않습니다.",
+        workflowCopy: "훈련을 준비하고, 기록하고, 결과를 검토한 뒤 다음 코칭 결정을 만듭니다.",
+        workflowPlanTitle: "계획",
+        workflowPlanCopy: "템플릿을 만들고 운동명을 조정해 자신이나 회원의 세션을 준비합니다.",
+        workflowTrainTitle: "훈련",
+        workflowTrainCopy: "세트, 횟수, 중량, 메모, 완료 세션을 반복 입력에 맞게 기록합니다.",
+        workflowReviewTitle: "검토",
+        workflowReviewCopy: "캘린더, 기록, 목표, 분석으로 훈련 결과를 이해합니다.",
+        workflowCoachTitle: "코칭",
+        workflowCoachCopy: "다음 계획을 전달하고 회원 피드백을 실제 훈련 기록과 연결합니다.",
+        analysisKicker: "분석",
+        analysisTitle: "진행 상황을 설명할 수 있게.",
+        analysisCopy: "FitRoster Pro 분석은 장식용 차트가 아니라 코칭 결정을 돕기 위한 것입니다.",
+        analysisVolumeTitle: "훈련량과 기록",
+        analysisVolumeCopy: "완료한 세션을 시간에 따른 측정 가능한 작업과 연결합니다.",
+        analysisMuscleTitle: "근육 분포",
+        analysisMuscleCopy: "균형, 집중 부위, 부족한 영역을 명확한 시각 요약으로 설명합니다.",
+        analysisCoachTitle: "코치 해석",
+        analysisCoachCopy: "데이터를 다음 계획으로 전환하고 단순 보고서에 머물지 않게 합니다.",
+        guideKicker: "사용 가이드",
+        guideTitle: "다국어 HTML 가이드가 공개 사이트에 포함되어 있습니다.",
+        guideCopy: "설정, 편집 가능한 운동명, 사용자 운동, 코치-회원 흐름, 기록, 분석, 백업, 설정을 현지화된 화면과 함께 설명합니다.",
+        guidePrimary: "가이드 열기",
+        guideSecondary: "지원 페이지",
+        footerCopy: "FitRoster Pro iOS 앱 공개 마케팅 페이지.",
+        footerGuide: "가이드",
+        footerSupport: "지원",
+        footerPrivacy: "개인정보 처리방침",
+        footerContact: "연락처"
+      },
+      th: {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | พื้นที่ทำงานฝึกซ้อมสำหรับโค้ชและผู้ฝึก",
+        metaDescription: "FitRoster Pro เป็นพื้นที่ทำงานฝึกซ้อมบน iOS สำหรับชื่อท่าที่แก้ไขได้ ท่าสร้างเอง โค้ชและผู้ฝึก บันทึก วิเคราะห์ และสำรองข้อมูล",
+        skipLink: "ไปที่เนื้อหา",
+        languageLabel: "ภาษา",
+        navScreens: "หน้าจอ",
+        navFeatures: "ฟีเจอร์",
+        navWorkflow: "เวิร์กโฟลว์",
+        navGuide: "คู่มือ",
+        navSupport: "สนับสนุน",
+        heroKicker: "พื้นที่ทำงานฝึกซ้อม iOS",
+        heroStatement: "วางแผน ฝึกสอน และเข้าใจความก้าวหน้าในแอปที่สะอาดตา",
+        heroCopy: "FitRoster Pro รวมชื่อท่าที่แก้ไขได้ รูทีนสร้างเอง ตารางผู้ฝึก การส่งแผนโดยโค้ช บันทึก และการวิเคราะห์ที่ใช้งานจริงไว้ในพื้นที่แบบ Apple",
+        heroPrimary: "เปิดคู่มือ",
+        heroSecondary: "ดูหน้าจอแอป",
+        valueCustomTitle: "ท่าสร้างเอง",
+        valueCustomCopy: "เปลี่ยนชื่อท่าในระบบหรือสร้างคลังท่าฝึกของคุณเอง",
+        valueCoachTitle: "โค้ช + ผู้ฝึก",
+        valueCoachCopy: "มอบหมายแผน ตรวจงานส่ง และเก็บบริบทการฝึกไว้ด้วยกัน",
+        valueAnalysisTitle: "บันทึก + วิเคราะห์",
+        valueAnalysisCopy: "ดูเซสชัน ปฏิทิน เป้าหมาย และสัดส่วนกล้ามเนื้อได้รวดเร็ว",
+        deviceLabel: "ภาพหน้าจอแอปตามภาษา",
+        screensKicker: "หน้าจอผลิตภัณฑ์จริง",
+        screensTitle: "ใช้หน้าจอที่มีข้อมูลการฝึก ไม่ใช่ภาพตัวอย่างว่างเปล่า",
+        screensCopy: "หน้านี้ใช้ภาพหน้าจอขนาดเล็กจากแอปและโหลดภาพให้ตรงกับภาษาที่รองรับ",
+        shotTrainingTitle: "เมนูฝึกซ้อมที่ยืดหยุ่น",
+        shotTrainingCopy: "ใช้ท่าในระบบ เปลี่ยนชื่อได้อิสระ หรือสร้างคลังท่าตามภาษาการสอนของคุณ",
+        shotRecordsTitle: "ประวัติเซสชัน",
+        shotRecordsCopy: "ดูการฝึกที่เสร็จแล้วตามวันที่ บทบาท และแผน เพื่อเชื่อมความก้าวหน้ากับงานจริง",
+        shotCoachTitle: "การวางแผนของโค้ช",
+        shotCoachCopy: "สร้างเทมเพลต ส่งเซสชัน และอ่านบริบทผู้ฝึกในหน้าจอที่เหมาะกับการใช้ซ้ำ",
+        featuresKicker: "ความสามารถหลัก",
+        featuresTitle: "ออกแบบตามวิธีจัดการการฝึกจริง",
+        featuresCopy: "FitRoster Pro เป็นเครื่องมือที่อัปเดตเร็ว อ่านง่าย และรองรับงานโค้ชกับผู้ฝึก",
+        featureNamesTitle: "เปลี่ยนชื่อได้อิสระ",
+        featureNamesCopy: "ชื่อท่าในระบบตามภาษาแอป ส่วนชื่อที่คุณป้อนเองจะคงเดิม",
+        featureCustomTitle: "สร้างคลังของคุณเอง",
+        featureCustomCopy: "เพิ่มท่า จัดเมนู และเปลี่ยนไอเดียฝึกซ้ำให้เป็นรูทีนใช้ใหม่ได้",
+        featureCoachTitle: "การโต้ตอบโค้ช",
+        featureCoachCopy: "ส่งแผน รับงานส่ง และผูกการตรวจไว้กับเซสชันที่ถูกต้อง",
+        featureAnalysisTitle: "วิเคราะห์อ่านง่าย",
+        featureAnalysisCopy: "ใช้ปริมาณการฝึก บันทึก เป้าหมาย ข้อมูลร่างกาย และสัดส่วนกล้ามเนื้ออธิบายการเปลี่ยนแปลง",
+        workflowKicker: "เวิร์กโฟลว์การฝึก",
+        workflowTitle: "จากแผนถึงการทบทวนโดยไม่เสียบริบท",
+        workflowCopy: "เตรียมการฝึก บันทึกงาน ตรวจผลลัพธ์ แล้วตัดสินใจการฝึกต่อไป",
+        workflowPlanTitle: "วางแผน",
+        workflowPlanCopy: "สร้างเทมเพลต ปรับชื่อท่า และเตรียมเซสชันสำหรับตัวเองหรือผู้ฝึก",
+        workflowTrainTitle: "ฝึก",
+        workflowTrainCopy: "บันทึกเซต จำนวนครั้ง น้ำหนัก โน้ต และเซสชันที่เสร็จแล้วในหน้าจอที่ใช้ซ้ำได้ง่าย",
+        workflowReviewTitle: "ทบทวน",
+        workflowReviewCopy: "ใช้ปฏิทิน บันทึก เป้าหมาย และการวิเคราะห์เพื่อเข้าใจผลลัพธ์ของการฝึก",
+        workflowCoachTitle: "โค้ช",
+        workflowCoachCopy: "ส่งแผนถัดไปและเชื่อมความคิดเห็นของผู้ฝึกกับประวัติการฝึกจริง",
+        analysisKicker: "วิเคราะห์",
+        analysisTitle: "ทำให้ความก้าวหน้าอธิบายได้",
+        analysisCopy: "การวิเคราะห์ของ FitRoster Pro ช่วยการตัดสินใจของโค้ช ไม่ใช่กราฟตกแต่ง",
+        analysisVolumeTitle: "ปริมาณการฝึกและบันทึก",
+        analysisVolumeCopy: "เชื่อมเซสชันที่ทำเสร็จกับงานฝึกที่วัดได้ตามช่วงเวลา",
+        analysisMuscleTitle: "สัดส่วนกล้ามเนื้อ",
+        analysisMuscleCopy: "อธิบายความสมดุล จุดเน้น และส่วนที่ขาดด้วยภาพสรุปที่อ่านง่าย",
+        analysisCoachTitle: "การตีความของโค้ช",
+        analysisCoachCopy: "เปลี่ยนข้อมูลให้เป็นแผนถัดไป ไม่ใช่เพียงรายงานอีกชุด",
+        guideKicker: "คู่มือ",
+        guideTitle: "คู่มือ HTML หลายภาษาอยู่ในเว็บไซต์นี้",
+        guideCopy: "คู่มืออธิบายการตั้งค่า ชื่อท่าที่แก้ไขได้ ท่าสร้างเอง เวิร์กโฟลว์โค้ชและผู้ฝึก บันทึก วิเคราะห์ สำรองข้อมูล และการตั้งค่า พร้อมภาพตามภาษา",
+        guidePrimary: "เปิดคู่มือ",
+        guideSecondary: "หน้าสนับสนุน",
+        footerCopy: "หน้าแนะนำ FitRoster Pro สำหรับแอป iOS",
+        footerGuide: "คู่มือ",
+        footerSupport: "สนับสนุน",
+        footerPrivacy: "นโยบายความเป็นส่วนตัว",
+        footerContact: "ติดต่อ"
+      },
+      ms: {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | Ruang Latihan untuk Jurulatih dan Pelatih",
+        metaDescription: "FitRoster Pro ialah ruang latihan iOS dengan nama senaman boleh edit, senaman tersuai, aliran jurulatih-pelatih, rekod, analisis dan sandaran.",
+        skipLink: "Langkau ke kandungan",
+        languageLabel: "Bahasa",
+        navScreens: "Skrin",
+        navFeatures: "Ciri",
+        navWorkflow: "Aliran",
+        navGuide: "Panduan",
+        navSupport: "Sokongan",
+        heroKicker: "Ruang latihan iOS",
+        heroStatement: "Rancang latihan, bimbing pelatih dan fahami kemajuan dalam satu app yang kemas.",
+        heroCopy: "FitRoster Pro menggabungkan nama senaman boleh edit, rutin tersuai, jadual pelatih, penghantaran pelan jurulatih, rekod dan analisis praktikal dalam ruang gaya Apple.",
+        heroPrimary: "Buka panduan",
+        heroSecondary: "Lihat skrin app",
+        valueCustomTitle: "Senaman tersuai",
+        valueCustomCopy: "Namakan semula senaman terbina atau cipta katalog latihan sendiri.",
+        valueCoachTitle: "Jurulatih + pelatih",
+        valueCoachCopy: "Tetapkan pelan, semak hantaran dan simpan konteks latihan bersama.",
+        valueAnalysisTitle: "Rekod + analisis",
+        valueAnalysisCopy: "Baca sesi, kalendar, matlamat dan agihan otot dengan cepat.",
+        deviceLabel: "Tangkapan skrin app setempat",
+        screensKicker: "Skrin produk sebenar",
+        screensTitle: "Tunjukkan sistem dengan data latihan, bukan mokap kosong.",
+        screensCopy: "Halaman ini menggunakan tangkapan skrin ringan daripada app dengan imej sepadan untuk setiap bahasa.",
+        shotTrainingTitle: "Menu latihan fleksibel",
+        shotTrainingCopy: "Gunakan senaman terbina, ubah nama bebas atau bina katalog mengikut bahasa jurulatih.",
+        shotRecordsTitle: "Sejarah sesi",
+        shotRecordsCopy: "Semak latihan siap mengikut tarikh, peranan dan pelan supaya kemajuan kekal berkonteks.",
+        shotCoachTitle: "Perancangan jurulatih",
+        shotCoachCopy: "Bina templat, hantar sesi dan baca konteks pelatih dalam paparan untuk penggunaan berulang.",
+        featuresKicker: "Keupayaan utama",
+        featuresTitle: "Direka mengikut cara latihan sebenar diurus.",
+        featuresCopy: "FitRoster Pro ialah alat prestasi praktikal: pantas dikemas kini, jelas disemak dan sesuai untuk kerja jurulatih-pelatih.",
+        featureNamesTitle: "Nama bebas diubah",
+        featureNamesCopy: "Nama senaman terbina ikut bahasa app, manakala nama tersuai kekal seperti dimasukkan.",
+        featureCustomTitle: "Cipta katalog sendiri",
+        featureCustomCopy: "Tambah gerakan, susun menu dan jadikan idea latihan berulang sebagai rutin boleh guna semula.",
+        featureCoachTitle: "Interaksi jurulatih",
+        featureCoachCopy: "Hantar pelan, terima hantaran pelatih dan pautkan semakan kepada sesi yang tepat.",
+        featureAnalysisTitle: "Analisis mudah dibaca",
+        featureAnalysisCopy: "Gunakan volum, rekod kalendar, matlamat, data badan dan agihan otot untuk menerangkan perubahan.",
+        workflowKicker: "Aliran latihan",
+        workflowTitle: "Daripada pelan kepada semakan tanpa hilang konteks.",
+        workflowCopy: "Sediakan latihan, rekod kerja, semak hasil dan bimbing keputusan seterusnya.",
+        workflowPlanTitle: "Rancang",
+        workflowPlanCopy: "Bina templat, laras nama senaman dan sediakan sesi untuk diri sendiri atau pelatih.",
+        workflowTrainTitle: "Latih",
+        workflowTrainCopy: "Rekod set, ulangan, beban, nota dan sesi siap dalam susun atur untuk penggunaan berulang.",
+        workflowReviewTitle: "Semak",
+        workflowReviewCopy: "Gunakan kalendar, rekod, matlamat dan analisis untuk memahami hasil latihan.",
+        workflowCoachTitle: "Bimbing",
+        workflowCoachCopy: "Hantar pelan seterusnya dan pautkan maklum balas pelatih kepada sejarah latihan sebenar.",
+        analysisKicker: "Analisis",
+        analysisTitle: "Jadikan kemajuan boleh diterangkan.",
+        analysisCopy: "Analisis FitRoster Pro menyokong keputusan jurulatih, bukan sekadar carta hiasan.",
+        analysisVolumeTitle: "Beban latihan dan rekod",
+        analysisVolumeCopy: "Hubungkan sesi siap kepada kerja terukur merentas masa.",
+        analysisMuscleTitle: "Agihan otot",
+        analysisMuscleCopy: "Terangkan keseimbangan, fokus dan kawasan yang kurang diberi perhatian dengan ringkasan visual jelas.",
+        analysisCoachTitle: "Tafsiran jurulatih",
+        analysisCoachCopy: "Tukar data menjadi pelan seterusnya, bukan sekadar laporan lain.",
+        guideKicker: "Panduan",
+        guideTitle: "Panduan HTML berbilang bahasa tersedia dalam laman ini.",
+        guideCopy: "Panduan meliputi tetapan, nama senaman boleh edit, senaman tersuai, aliran jurulatih-pelatih, rekod, analisis, sandaran dan tetapan dengan skrin setempat.",
+        guidePrimary: "Buka panduan",
+        guideSecondary: "Halaman sokongan",
+        footerCopy: "Halaman pemasaran awam FitRoster Pro untuk app iOS.",
+        footerGuide: "Panduan",
+        footerSupport: "Sokongan",
+        footerPrivacy: "Dasar Privasi",
+        footerContact: "Hubungi"
+      },
+      ru: {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | Тренировочное рабочее пространство для тренеров и учеников",
+        metaDescription: "FitRoster Pro для iOS: редактируемые названия упражнений, собственные движения, работа тренера и ученика, записи, анализ и резервные копии.",
+        skipLink: "Перейти к содержимому",
+        languageLabel: "Язык",
+        navScreens: "Экраны",
+        navFeatures: "Функции",
+        navWorkflow: "Процесс",
+        navGuide: "Руководство",
+        navSupport: "Поддержка",
+        heroKicker: "Тренировочное пространство iOS",
+        heroStatement: "Планируйте тренировки, ведите учеников и понимайте прогресс в одном аккуратном приложении.",
+        heroCopy: "FitRoster Pro объединяет редактируемые названия упражнений, собственные программы, расписания учеников, отправку планов тренером, записи и практичный анализ в чистом интерфейсе Apple.",
+        heroPrimary: "Открыть руководство",
+        heroSecondary: "Посмотреть экраны",
+        valueCustomTitle: "Свои упражнения",
+        valueCustomCopy: "Переименовывайте встроенные движения или создавайте собственный каталог.",
+        valueCoachTitle: "Тренер + ученик",
+        valueCoachCopy: "Назначайте планы, проверяйте отправки и сохраняйте контекст тренировок.",
+        valueAnalysisTitle: "Записи + анализ",
+        valueAnalysisCopy: "Смотрите занятия, календарь, цели и распределение мышц.",
+        deviceLabel: "Локализованные экраны приложения",
+        screensKicker: "Реальные экраны продукта",
+        screensTitle: "Показывайте систему с тренировочными данными, а не пустыми макетами.",
+        screensCopy: "Страница использует легкие снимки приложения с изображениями для каждого поддерживаемого языка.",
+        shotTrainingTitle: "Гибкие меню тренировок",
+        shotTrainingCopy: "Используйте встроенные упражнения, свободно меняйте названия или создавайте каталог под язык тренера.",
+        shotRecordsTitle: "История занятий",
+        shotRecordsCopy: "Просматривайте выполненные тренировки по дате, роли и плану, сохраняя связь прогресса с работой.",
+        shotCoachTitle: "Планирование тренера",
+        shotCoachCopy: "Создавайте шаблоны, отправляйте занятия и читайте контекст ученика в интерфейсе для повторной работы.",
+        featuresKicker: "Основные возможности",
+        featuresTitle: "Создано под реальное управление тренировками.",
+        featuresCopy: "FitRoster Pro быстро обновлять, легко читать и достаточно структурирован для работы тренера с учениками.",
+        featureNamesTitle: "Названия можно менять",
+        featureNamesCopy: "Встроенные названия следуют языку приложения, а ваши собственные остаются без изменений.",
+        featureCustomTitle: "Создайте свой каталог",
+        featureCustomCopy: "Добавляйте движения, организуйте меню и превращайте повторяющиеся идеи в многоразовые программы.",
+        featureCoachTitle: "Взаимодействие тренера",
+        featureCoachCopy: "Отправляйте планы, получайте отправки учеников и связывайте проверку с нужным занятием.",
+        featureAnalysisTitle: "Понятный анализ",
+        featureAnalysisCopy: "Используйте объем, календарь, цели, данные тела и мышцы для объяснения изменений.",
+        workflowKicker: "Процесс тренировки",
+        workflowTitle: "От плана до проверки без потери контекста.",
+        workflowCopy: "Подготовьте тренировку, запишите работу, оцените результат и примите следующее тренерское решение.",
+        workflowPlanTitle: "План",
+        workflowPlanCopy: "Создавайте шаблоны, меняйте названия упражнений и готовьте занятия для себя или ученика.",
+        workflowTrainTitle: "Тренировка",
+        workflowTrainCopy: "Записывайте подходы, повторы, вес, заметки и выполненные занятия в интерфейсе для регулярной работы.",
+        workflowReviewTitle: "Проверка",
+        workflowReviewCopy: "Используйте календарь, записи, цели и анализ, чтобы понять результат тренировок.",
+        workflowCoachTitle: "Коучинг",
+        workflowCoachCopy: "Отправляйте следующий план и связывайте обратную связь ученика с реальной историей тренировок.",
+        analysisKicker: "Анализ",
+        analysisTitle: "Сделайте прогресс объяснимым.",
+        analysisCopy: "Анализ FitRoster Pro поддерживает тренерские решения, а не добавляет декоративные графики.",
+        analysisVolumeTitle: "Нагрузка и записи",
+        analysisVolumeCopy: "Связывайте выполненные занятия с измеримой работой во времени.",
+        analysisMuscleTitle: "Распределение мышц",
+        analysisMuscleCopy: "Объясняйте баланс, фокус и слабые зоны с помощью понятной визуальной сводки.",
+        analysisCoachTitle: "Интерпретация тренера",
+        analysisCoachCopy: "Превращайте данные в следующий план, а не просто в новый отчет.",
+        guideKicker: "Руководство",
+        guideTitle: "Многоязычное HTML-руководство входит в сайт.",
+        guideCopy: "Руководство описывает настройку, редактируемые названия, свои упражнения, процесс тренера и ученика, записи, анализ, резервные копии и настройки с локализованными экранами.",
+        guidePrimary: "Открыть руководство",
+        guideSecondary: "Страница поддержки",
+        footerCopy: "Публичная маркетинговая страница FitRoster Pro для iOS.",
+        footerGuide: "Руководство",
+        footerSupport: "Поддержка",
+        footerPrivacy: "Политика конфиденциальности",
+        footerContact: "Контакт"
+      },
+      de: {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | Trainingsarbeitsplatz für Coaches und Athleten",
+        metaDescription: "FitRoster Pro ist ein iOS-Trainingsarbeitsplatz mit editierbaren Übungsnamen, eigenen Übungen, Coach-Athlet-Workflows, Aufzeichnungen, Analyse und Backup.",
+        skipLink: "Zum Inhalt springen",
+        languageLabel: "Sprache",
+        navScreens: "Screens",
+        navFeatures: "Funktionen",
+        navWorkflow: "Ablauf",
+        navGuide: "Guide",
+        navSupport: "Support",
+        heroKicker: "iOS Trainingsarbeitsplatz",
+        heroStatement: "Training planen, Athleten coachen und Fortschritt in einer klaren App verstehen.",
+        heroCopy: "FitRoster Pro verbindet editierbare Übungsnamen, eigene Routinen, Athletenpläne, Coach-Zuweisungen, Trainingsaufzeichnungen und praktische Analyse in einer fokussierten Apple-Oberfläche.",
+        heroPrimary: "Guide öffnen",
+        heroSecondary: "App-Screens ansehen",
+        valueCustomTitle: "Eigene Übungen",
+        valueCustomCopy: "Benennen Sie Übungen um oder erstellen Sie Ihren eigenen Trainingskatalog.",
+        valueCoachTitle: "Coach + Athlet",
+        valueCoachCopy: "Pläne zuweisen, Rückmeldungen prüfen und Kontext zusammenhalten.",
+        valueAnalysisTitle: "Aufzeichnung + Analyse",
+        valueAnalysisCopy: "Sessions, Kalender, Ziele und Muskelverteilung schnell erfassen.",
+        deviceLabel: "Lokalisierte App-Screens",
+        screensKicker: "Echte Produktscreens",
+        screensTitle: "Das System mit Trainingsdaten zeigen, nicht mit leeren Mockups.",
+        screensCopy: "Die Seite nutzt kompakte App-Screens und lädt passende Bilder für jede unterstützte Sprache.",
+        shotTrainingTitle: "Flexible Trainingsmenüs",
+        shotTrainingCopy: "Nutzen Sie eingebaute Übungen, freie Namen oder einen Katalog in Ihrer Coaching-Sprache.",
+        shotRecordsTitle: "Session-Historie",
+        shotRecordsCopy: "Prüfen Sie absolvierte Trainings nach Datum, Rolle und Plan.",
+        shotCoachTitle: "Coach-Planung",
+        shotCoachCopy: "Templates erstellen, Sessions verteilen und Athletenkontext in einer Oberfläche für wiederholte Arbeit lesen.",
+        featuresKicker: "Kernfunktionen",
+        featuresTitle: "Für echtes Trainingsmanagement gebaut.",
+        featuresCopy: "FitRoster Pro ist schnell zu aktualisieren, klar zu lesen und strukturiert genug für Coach-Athlet-Arbeit.",
+        featureNamesTitle: "Alles umbenennen",
+        featureNamesCopy: "Eingebaute Übungsnamen folgen der App-Sprache, eigene Namen bleiben exakt erhalten.",
+        featureCustomTitle: "Eigenen Katalog erstellen",
+        featureCustomCopy: "Übungen hinzufügen, Menüs ordnen und wiederkehrende Ideen als Routinen nutzen.",
+        featureCoachTitle: "Coach-Interaktionen",
+        featureCoachCopy: "Pläne senden, Rückmeldungen empfangen und Reviews der richtigen Session zuordnen.",
+        featureAnalysisTitle: "Lesbare Analyse",
+        featureAnalysisCopy: "Volumen, Kalender, Ziele, Körperdaten und Muskelverteilung erklären Veränderungen.",
+        workflowKicker: "Trainingsablauf",
+        workflowTitle: "Vom Plan zur Prüfung ohne Kontextverlust.",
+        workflowCopy: "Training vorbereiten, Arbeit erfassen, Ergebnisse prüfen und die nächste Coaching-Entscheidung treffen.",
+        workflowPlanTitle: "Planen",
+        workflowPlanCopy: "Templates bauen, Übungsnamen anpassen und Sessions für dich oder Athleten vorbereiten.",
+        workflowTrainTitle: "Trainieren",
+        workflowTrainCopy: "Sätze, Wiederholungen, Last, Notizen und absolvierte Sessions in einer wiederholbaren Oberfläche erfassen.",
+        workflowReviewTitle: "Prüfen",
+        workflowReviewCopy: "Kalender, Aufzeichnungen, Ziele und Analyse nutzen, um Trainingsergebnisse zu verstehen.",
+        workflowCoachTitle: "Coachen",
+        workflowCoachCopy: "Den nächsten Plan liefern und Athletenfeedback mit der echten Trainingshistorie verbinden.",
+        analysisKicker: "Analyse",
+        analysisTitle: "Fortschritt erklärbar machen.",
+        analysisCopy: "Die Analyse von FitRoster Pro unterstützt Coaching-Entscheidungen statt dekorative Charts zu liefern.",
+        analysisVolumeTitle: "Trainingslast und Aufzeichnungen",
+        analysisVolumeCopy: "Absolvierte Sessions mit messbarer Arbeit über Zeit verbinden.",
+        analysisMuscleTitle: "Muskelverteilung",
+        analysisMuscleCopy: "Balance, Fokus und vernachlässigte Bereiche mit einer klaren visuellen Zusammenfassung erklären.",
+        analysisCoachTitle: "Coach-Interpretation",
+        analysisCoachCopy: "Daten in den nächsten Plan übersetzen, statt nur einen weiteren Bericht zu liefern.",
+        guideKicker: "Guide",
+        guideTitle: "Ein mehrsprachiger HTML-Guide ist Teil der Website.",
+        guideCopy: "Der Guide behandelt Einrichtung, editierbare Übungsnamen, eigene Übungen, Coach-Athlet-Abläufe, Aufzeichnungen, Analyse, Backup und Einstellungen mit lokalisierten Screens.",
+        guidePrimary: "Guide öffnen",
+        guideSecondary: "Supportseite",
+        footerCopy: "Öffentliche Marketingseite der FitRoster Pro iOS-App.",
+        footerGuide: "Guide",
+        footerSupport: "Support",
+        footerPrivacy: "Datenschutz",
+        footerContact: "Kontakt"
+      },
+      fr: {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | Espace d'entraînement pour coachs et élèves",
+        metaDescription: "FitRoster Pro est un espace iOS pour noms d'exercices modifiables, exercices personnalisés, workflows coach-élève, suivi, analyse et sauvegarde.",
+        skipLink: "Aller au contenu",
+        languageLabel: "Langue",
+        navScreens: "Écrans",
+        navFeatures: "Fonctions",
+        navWorkflow: "Flux",
+        navGuide: "Guide",
+        navSupport: "Support",
+        heroKicker: "Espace d'entraînement iOS",
+        heroStatement: "Planifier, coacher et comprendre la progression dans une app claire.",
+        heroCopy: "FitRoster Pro rassemble noms d'exercices modifiables, routines personnalisées, planning élève, envoi coach, suivi et analyse pratique dans une interface Apple.",
+        heroPrimary: "Ouvrir le guide",
+        heroSecondary: "Voir les écrans",
+        valueCustomTitle: "Exercices personnalisés",
+        valueCustomCopy: "Renommez les mouvements intégrés ou créez votre propre catalogue.",
+        valueCoachTitle: "Coach + élève",
+        valueCoachCopy: "Assignez les plans, vérifiez les retours et gardez le contexte.",
+        valueAnalysisTitle: "Suivi + analyse",
+        valueAnalysisCopy: "Lisez séances, calendrier, objectifs et répartition musculaire.",
+        deviceLabel: "Captures app localisées",
+        screensKicker: "Écrans produit réels",
+        screensTitle: "Montrer le système avec des données d'entraînement, pas des écrans vides.",
+        screensCopy: "La page utilise des captures légères de l'app et charge l'image correspondant à chaque langue.",
+        shotTrainingTitle: "Menus d'entraînement flexibles",
+        shotTrainingCopy: "Utilisez les exercices intégrés, renommez librement ou créez un catalogue adapté à votre coaching.",
+        shotRecordsTitle: "Historique des séances",
+        shotRecordsCopy: "Reliez les entraînements terminés à la date, au rôle et au plan.",
+        shotCoachTitle: "Planification coach",
+        shotCoachCopy: "Créez des modèles, envoyez des séances et lisez le contexte élève dans une interface répétable.",
+        featuresKicker: "Capacités clés",
+        featuresTitle: "Conçu pour la vraie gestion d'entraînement.",
+        featuresCopy: "FitRoster Pro se met à jour vite, se lit clairement et structure le travail coach-élève.",
+        featureNamesTitle: "Renommer librement",
+        featureNamesCopy: "Les noms intégrés suivent la langue de l'app, vos noms personnalisés restent inchangés.",
+        featureCustomTitle: "Créer son catalogue",
+        featureCustomCopy: "Ajoutez des mouvements, organisez les menus et réutilisez vos idées.",
+        featureCoachTitle: "Interactions coach",
+        featureCoachCopy: "Envoyez les plans, recevez les retours et attachez les revues à la bonne séance.",
+        featureAnalysisTitle: "Analyse lisible",
+        featureAnalysisCopy: "Volume, calendrier, objectifs, données corporelles et muscles expliquent les changements.",
+        workflowKicker: "Flux d'entraînement",
+        workflowTitle: "Du plan à la revue sans perdre le contexte.",
+        workflowCopy: "Préparer, enregistrer, revoir les résultats, puis décider de la suite.",
+        workflowPlanTitle: "Planifier",
+        workflowPlanCopy: "Créer des modèles, ajuster les noms d'exercices et préparer les séances pour soi ou un élève.",
+        workflowTrainTitle: "S'entraîner",
+        workflowTrainCopy: "Enregistrer séries, répétitions, charge, notes et séances terminées dans une interface répétable.",
+        workflowReviewTitle: "Revoir",
+        workflowReviewCopy: "Utiliser calendrier, suivis, objectifs et analyse pour comprendre le résultat du travail.",
+        workflowCoachTitle: "Coacher",
+        workflowCoachCopy: "Envoyer le prochain plan et relier le retour élève à l'historique réel.",
+        analysisKicker: "Analyse",
+        analysisTitle: "Rendre la progression explicable.",
+        analysisCopy: "L'analyse FitRoster Pro soutient les décisions de coaching au lieu d'empiler des graphiques décoratifs.",
+        analysisVolumeTitle: "Charge et suivi",
+        analysisVolumeCopy: "Relier les séances terminées au travail mesurable dans le temps.",
+        analysisMuscleTitle: "Répartition musculaire",
+        analysisMuscleCopy: "Expliquer équilibre, focus et zones négligées avec un résumé visuel clair.",
+        analysisCoachTitle: "Interprétation coach",
+        analysisCoachCopy: "Transformer les données en prochain plan, pas en simple rapport.",
+        guideKicker: "Guide",
+        guideTitle: "Un guide HTML multilingue fait partie du site.",
+        guideCopy: "Le guide couvre configuration, noms modifiables, exercices personnalisés, flux coach-élève, suivi, analyse, sauvegarde et réglages avec captures localisées.",
+        guidePrimary: "Ouvrir le guide",
+        guideSecondary: "Page support",
+        footerCopy: "Page marketing publique de l'app iOS FitRoster Pro.",
+        footerGuide: "Guide",
+        footerSupport: "Support",
+        footerPrivacy: "Confidentialité",
+        footerContact: "Contact"
+      },
+      es: {
+        ...baseCopy,
+        metaTitle: "FitRoster Pro | Espacio de entrenamiento para entrenadores y alumnos",
+        metaDescription: "FitRoster Pro es un espacio iOS con nombres editables, ejercicios personalizados, flujos entrenador-alumno, registros, análisis y backup.",
+        skipLink: "Saltar al contenido",
+        languageLabel: "Idioma",
+        navScreens: "Pantallas",
+        navFeatures: "Funciones",
+        navWorkflow: "Flujo",
+        navGuide: "Guía",
+        navSupport: "Soporte",
+        heroKicker: "Espacio de entrenamiento iOS",
+        heroStatement: "Planifica, entrena y entiende el progreso en una app clara.",
+        heroCopy: "FitRoster Pro une nombres de ejercicios editables, rutinas propias, horarios de alumnos, entrega de planes, registros y análisis práctico en una interfaz estilo Apple.",
+        heroPrimary: "Abrir guía",
+        heroSecondary: "Ver pantallas",
+        valueCustomTitle: "Ejercicios personalizados",
+        valueCustomCopy: "Cambia nombres integrados o crea tu propio catálogo.",
+        valueCoachTitle: "Entrenador + alumno",
+        valueCoachCopy: "Asigna planes, revisa entregas y conserva el contexto.",
+        valueAnalysisTitle: "Registros + análisis",
+        valueAnalysisCopy: "Lee sesiones, calendario, objetivos y distribución muscular.",
+        deviceLabel: "Capturas localizadas",
+        screensKicker: "Pantallas reales",
+        screensTitle: "Muestra el sistema con datos de entrenamiento, no con mockups vacíos.",
+        screensCopy: "La página usa capturas ligeras de la app y carga imágenes para cada idioma compatible.",
+        shotTrainingTitle: "Menús flexibles",
+        shotTrainingCopy: "Usa ejercicios integrados, renombra libremente o crea un catálogo con tu lenguaje de entrenamiento.",
+        shotRecordsTitle: "Historial de sesiones",
+        shotRecordsCopy: "Relaciona entrenamientos completados con fecha, rol y plan.",
+        shotCoachTitle: "Planificación del entrenador",
+        shotCoachCopy: "Crea plantillas, distribuye sesiones y lee el contexto del alumno en una interfaz repetible.",
+        featuresKicker: "Capacidades clave",
+        featuresTitle: "Diseñado para la gestión real del entrenamiento.",
+        featuresCopy: "FitRoster Pro se actualiza rápido, se revisa con claridad y estructura el trabajo entrenador-alumno.",
+        featureNamesTitle: "Renombra libremente",
+        featureNamesCopy: "Los nombres integrados siguen el idioma de la app y los nombres propios quedan intactos.",
+        featureCustomTitle: "Crea tu catálogo",
+        featureCustomCopy: "Añade movimientos, organiza menús y reutiliza rutinas.",
+        featureCoachTitle: "Interacción entrenador",
+        featureCoachCopy: "Envía planes, recibe entregas y vincula la revisión a la sesión correcta.",
+        featureAnalysisTitle: "Análisis legible",
+        featureAnalysisCopy: "Volumen, calendario, objetivos, datos corporales y músculos explican los cambios.",
+        workflowKicker: "Flujo de entrenamiento",
+        workflowTitle: "Del plan a la revisión sin perder contexto.",
+        workflowCopy: "Prepara, registra, revisa resultados y decide el siguiente paso.",
+        workflowPlanTitle: "Planificar",
+        workflowPlanCopy: "Crea plantillas, ajusta nombres de ejercicios y prepara sesiones para ti o para un alumno.",
+        workflowTrainTitle: "Entrenar",
+        workflowTrainCopy: "Registra series, repeticiones, carga, notas y sesiones completadas en una interfaz para uso repetido.",
+        workflowReviewTitle: "Revisar",
+        workflowReviewCopy: "Usa calendario, registros, objetivos y análisis para entender qué produjo el entrenamiento.",
+        workflowCoachTitle: "Coachear",
+        workflowCoachCopy: "Entrega el siguiente plan y vincula el feedback del alumno con el historial real.",
+        analysisKicker: "Análisis",
+        analysisTitle: "Haz que el progreso sea explicable.",
+        analysisCopy: "El análisis de FitRoster Pro apoya decisiones de coaching, no gráficos decorativos.",
+        analysisVolumeTitle: "Carga y registros",
+        analysisVolumeCopy: "Conecta sesiones completadas con trabajo medible a lo largo del tiempo.",
+        analysisMuscleTitle: "Distribución muscular",
+        analysisMuscleCopy: "Explica equilibrio, foco y zonas descuidadas con un resumen visual claro.",
+        analysisCoachTitle: "Interpretación del entrenador",
+        analysisCoachCopy: "Convierte los datos en el siguiente plan, no solo en otro informe.",
+        guideKicker: "Guía",
+        guideTitle: "La guía HTML multilingüe forma parte del sitio.",
+        guideCopy: "La guía cubre configuración, nombres editables, ejercicios propios, flujos entrenador-alumno, registros, análisis, backup y ajustes con capturas localizadas.",
+        guidePrimary: "Abrir guía",
+        guideSecondary: "Soporte",
+        footerCopy: "Página pública de marketing de la app iOS FitRoster Pro.",
+        footerGuide: "Guía",
+        footerSupport: "Soporte",
+        footerPrivacy: "Privacidad",
+        footerContact: "Contacto"
+      }
+    };
+
+    const supportedLanguages = Object.keys(translations);
+    const metaDescription = document.querySelector('meta[name="description"]');
+    const titleElement = document.querySelector("title");
+    const imageLocales = new Set(["en", "zh-Hans", "zh-Hant", "ja", "ko", "th", "ms", "ru", "de", "fr", "es"]);
+
+    function localizedCopy(language) {
+      return translations[language] || translations.en;
+    }
+
+    function imageLocale(language) {
+      return imageLocales.has(language) ? language : "en";
+    }
+
+    function updateMarketingImages(language) {
+      const locale = imageLocale(language);
+      document.querySelectorAll("[data-marketing-img]").forEach((image) => {
+        const name = image.getAttribute("data-marketing-img");
+        image.src = `assets/marketing/${locale}/${name}.jpg`;
+      });
+    }
+
+    function applyLanguage(language) {
+      const copy = localizedCopy(language);
+      document.documentElement.lang = language;
+      titleElement.textContent = copy.metaTitle;
+      metaDescription.setAttribute("content", copy.metaDescription);
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (copy[key]) {
+          element.textContent = copy[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
+        const mappings = element.getAttribute("data-i18n-attr").split(",");
+        mappings.forEach((mapping) => {
+          const parts = mapping.split(":");
+          const attribute = parts[0] && parts[0].trim();
+          const key = parts[1] && parts[1].trim();
+          if (attribute && key && copy[key]) {
+            element.setAttribute(attribute, copy[key]);
+          }
+        });
+      });
+
+      document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+        const href = new URL(link.href);
+        href.searchParams.set("subject", copy.mailSubject);
+        href.searchParams.set("body", copy.mailBody);
+        link.href = href.toString();
+      });
+
+      updateMarketingImages(language);
+      window.FITROSTER_SITE_I18N.updateLanguageSelect(language);
+      localStorage.setItem("fitroster.marketing.language", language);
+    }
+
+    window.FITROSTER_SITE_I18N.mountLanguageSelect(supportedLanguages, applyLanguage);
+    applyLanguage(window.FITROSTER_SITE_I18N.preferredLanguage(supportedLanguages));
+  </script>
+</body>
+</html>

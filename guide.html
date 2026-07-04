@@ -1,0 +1,2047 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Complete FitRoster Pro usage tutorial for setup, editable exercises, training plans, session logging, coach-trainee workflows, records, analysis, sync, backup, and settings.">
+  <title>FitRoster Pro | Complete Usage Tutorial</title>
+  <link rel="icon" href="assets/start-silver-fitroster.png" type="image/png">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-soft: #fbfbfd;
+      --ink: #1d1d1f;
+      --muted: #5f6368;
+      --quiet: #86868b;
+      --line: rgba(29, 29, 31, 0.12);
+      --blue: #0071e3;
+      --blue-soft: #eaf4ff;
+      --green: #2f7d4e;
+      --orange: #f26b1d;
+      --shadow: 0 18px 52px rgba(0, 0, 0, 0.10);
+      --radius: 24px;
+      --shell: min(1180px, calc(100vw - 40px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+      line-height: 1.55;
+      letter-spacing: 0;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    select,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(0, 113, 227, 0.42);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: 16px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      transform: translateY(-180%);
+      transition: transform 180ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(245, 245, 247, 0.82);
+      border-bottom: 1px solid rgba(29, 29, 31, 0.08);
+      backdrop-filter: saturate(180%) blur(24px);
+    }
+
+    .nav {
+      width: var(--shell);
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 12px 6px 7px;
+      border: 1px solid rgba(29, 29, 31, 0.10);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      font-size: 18px;
+      font-weight: 760;
+      white-space: nowrap;
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .brand:hover,
+    .brand:focus-visible {
+      border-color: rgba(0, 113, 227, 0.28);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 10px 28px rgba(0, 113, 227, 0.12);
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      object-fit: cover;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: #3d3d42;
+      font-size: 14px;
+      font-weight: 560;
+    }
+
+    .nav-links a {
+      cursor: pointer;
+      transition: color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--blue);
+    }
+
+    .language-field {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .language-field select {
+      min-width: 134px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--ink);
+      font: inherit;
+      padding: 0 32px 0 13px;
+      cursor: pointer;
+    }
+
+    .shell {
+      width: var(--shell);
+      margin: 0 auto;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: var(--blue);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+      white-space: nowrap;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      background: #0057b8;
+      box-shadow: 0 10px 26px rgba(0, 113, 227, 0.22);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--blue);
+      border-color: rgba(0, 113, 227, 0.28);
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus-visible {
+      background: #fff;
+      border-color: rgba(0, 113, 227, 0.56);
+      box-shadow: none;
+    }
+
+    .hero {
+      padding: 72px 0 48px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(430px, 1.08fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .kicker {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      font-size: clamp(48px, 6vw, 82px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.5;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 760px;
+    }
+
+    .hero-point {
+      min-height: 104px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero-point strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-point span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 0.76fr 1fr;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .screen-device {
+      overflow: hidden;
+      border: 8px solid #151515;
+      background: #111;
+      box-shadow: var(--shadow);
+    }
+
+    .screen-device.phone {
+      border-radius: 34px;
+      aspect-ratio: 351 / 760;
+    }
+
+    .screen-device.tablet {
+      border-radius: 30px;
+      aspect-ratio: 719 / 960;
+    }
+
+    .screen-device img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .guide-overview {
+      padding: 0 0 72px;
+    }
+
+    .overview-panel {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 88px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(18px);
+    }
+
+    .toc h2 {
+      margin-bottom: 14px;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .toc-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .toc-list a {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 7px 10px;
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: background 160ms ease, color 160ms ease;
+    }
+
+    .toc-list a:hover,
+    .toc-list a:focus-visible {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .toc-index {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: #f0f2f5;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .manual {
+      display: grid;
+      gap: 22px;
+    }
+
+    .manual-section {
+      scroll-margin-top: 88px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .manual-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+      gap: 28px;
+      align-items: center;
+      padding: 34px;
+      background: linear-gradient(180deg, #fff 0%, #fbfbfd 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .manual-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      margin-bottom: 14px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .manual-head h2 {
+      margin-bottom: 12px;
+      font-size: clamp(30px, 4.2vw, 52px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .manual-head p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.58;
+    }
+
+    .guide-figure {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #eef1f5;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.11);
+    }
+
+    .guide-figure.phone {
+      justify-self: center;
+      width: min(100%, 230px);
+      aspect-ratio: 351 / 760;
+      border: 7px solid #151515;
+      border-radius: 30px;
+    }
+
+    .guide-figure.tablet {
+      width: 100%;
+      aspect-ratio: 719 / 960;
+      border: 8px solid #151515;
+      border-radius: 30px;
+    }
+
+    .guide-figure.shared {
+      width: 100%;
+      border-radius: 24px;
+      border: 1px solid rgba(29, 29, 31, 0.08);
+    }
+
+    .guide-figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .manual-body {
+      padding: 32px 34px 36px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface-soft);
+    }
+
+    .step-card header {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 13px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .step-card h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .step-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .section-note {
+      margin-top: 16px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--blue);
+      border-radius: 18px;
+      background: #f5faff;
+    }
+
+    .section-note strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .section-note p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .faq-section {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .faq-head {
+      padding: 34px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .faq-head h2 {
+      margin-bottom: 10px;
+      font-size: clamp(30px, 4.2vw, 50px);
+      line-height: 1.04;
+    }
+
+    .faq-head p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 0;
+      padding: 12px 28px 28px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-item:last-child {
+      border-bottom: 0;
+    }
+
+    .faq-item summary {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 760;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::before {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .faq-item[open] summary::before {
+      content: "-";
+    }
+
+    .faq-item p {
+      margin: 0 0 18px 42px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .final-cta {
+      margin-top: 22px;
+      padding: 46px;
+      border-radius: 30px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .final-cta p {
+      max-width: 760px;
+      margin-bottom: 24px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 17px;
+    }
+
+    .final-cta .button.secondary {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.34);
+    }
+
+    footer {
+      padding: 34px 0 44px;
+      color: var(--quiet);
+      font-size: 13px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--blue);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .overview-panel,
+      .manual-head {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+      }
+
+      .toc-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .manual-head {
+        gap: 24px;
+      }
+
+      .guide-figure.phone {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --shell: min(100vw - 24px, 430px);
+      }
+
+      .nav {
+        min-height: auto;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      .brand {
+        padding: 5px;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .language-field span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+      }
+
+      .language-field select {
+        min-width: 126px;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+
+      .hero-actions,
+      .hero-points,
+      .hero-visual,
+      .steps-grid,
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-visual {
+        gap: 12px;
+      }
+
+      .screen-device.phone {
+        width: min(68%, 220px);
+      }
+
+      .screen-device.tablet {
+        width: min(86%, 320px);
+        justify-self: end;
+      }
+
+      .manual-head,
+      .manual-body,
+      .faq-head {
+        padding: 24px;
+      }
+
+      .faq-list {
+        padding: 8px 20px 22px;
+      }
+
+      .faq-item p {
+        margin-left: 0;
+      }
+
+      .final-cta {
+        padding: 30px 24px;
+      }
+
+      .footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+  <header class="topbar">
+    <nav class="nav" aria-label="Guide navigation" data-i18n-attr="aria-label:navAria">
+      <a class="brand" href="index.html" aria-label="FitRoster Pro home" data-i18n-attr="aria-label:brandAria">
+        <img src="assets/fitroster-brand-icon.webp" width="256" height="256" alt="">
+        <span>FitRoster Pro</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" data-i18n="navProduct">Product</a>
+        <a href="#manual" data-i18n="navManual">Tutorial</a>
+        <a href="#faq" data-i18n="navFaq">FAQ</a>
+        <a href="support.html" data-i18n="navSupport">Support</a>
+      </div>
+      <label class="language-field">
+        <span data-i18n="languageLabel">Language</span>
+        <select data-language-select aria-label="Language" data-i18n-attr="aria-label:languageLabel"></select>
+      </label>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="kicker" data-i18n="heroKicker">Complete FitRoster Pro tutorial</p>
+          <h1 data-i18n="heroTitle">Usage Tutorial</h1>
+          <p class="hero-copy" data-i18n="heroCopy">A complete guide for setting up FitRoster Pro, editing exercise names, building reusable plans, logging sessions, using coach-trainee workflows, reading records and analysis, and protecting your data.</p>
+          <div class="hero-actions">
+            <a class="button" href="#manual" data-i18n="heroPrimary">Start the tutorial</a>
+            <a class="button secondary" href="index.html" data-i18n="heroSecondary">Back to product page</a>
+          </div>
+          <div class="hero-points" aria-label="Tutorial highlights" data-i18n-attr="aria-label:heroPointsAria">
+            <div class="hero-point">
+              <strong data-i18n="heroPointPlanTitle">Plan</strong>
+              <span data-i18n="heroPointPlanCopy">Create menus, templates, custom exercises, and reusable routines.</span>
+            </div>
+            <div class="hero-point">
+              <strong data-i18n="heroPointCoachTitle">Coach</strong>
+              <span data-i18n="heroPointCoachCopy">Send plans, receive trainee progress, and review training context.</span>
+            </div>
+            <div class="hero-point">
+              <strong data-i18n="heroPointReviewTitle">Review</strong>
+              <span data-i18n="heroPointReviewCopy">Use records, goals, body data, and muscle distribution for decisions.</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="FitRoster Pro tutorial screenshots" data-i18n-attr="aria-label:heroVisualAria">
+          <figure class="screen-device phone">
+            <img data-guide-img="coach-settings" src="assets/guide-tutorial/en/coach-settings.jpg" width="351" height="760" alt="FitRoster Pro profile and settings screen" data-i18n-attr="alt:altSettings">
+          </figure>
+          <figure class="screen-device tablet">
+            <img data-guide-img="ipad-coach-training" src="assets/guide-tutorial/en/ipad-coach-training.jpg" width="719" height="960" alt="FitRoster Pro training plan screen on iPad" data-i18n-attr="alt:altPlans">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="manual" class="guide-overview" aria-labelledby="manual-title">
+      <div class="shell overview-panel">
+        <aside class="toc" aria-labelledby="manual-title">
+          <h2 id="manual-title" data-i18n="tocTitle">Tutorial sections</h2>
+          <nav class="toc-list" data-guide-nav aria-label="Tutorial section list" data-i18n-attr="aria-label:tocAria"></nav>
+        </aside>
+        <div class="manual" data-guide-content></div>
+      </div>
+    </section>
+
+    <section id="faq" class="shell faq-section" aria-labelledby="faq-title">
+      <div class="faq-head">
+        <p class="kicker" data-i18n="faqKicker">FAQ</p>
+        <h2 id="faq-title" data-i18n="faqTitle">Detailed support questions.</h2>
+        <p data-i18n="faqIntro">Use these answers when something looks different from the screenshots or when sync, records, or custom exercise names need clarification.</p>
+      </div>
+      <div class="faq-list" data-faq-list></div>
+    </section>
+
+    <section class="shell final-cta">
+      <p class="kicker" data-i18n="ctaKicker">Support</p>
+      <h2 data-i18n="ctaTitle">Need more help?</h2>
+      <p data-i18n="ctaCopy">Use the support page if you need help with iCloud sync, coach-trainee sharing, backup files, app language, or a specific screen in FitRoster Pro.</p>
+      <div class="hero-actions">
+        <a class="button" href="support.html" data-i18n="ctaPrimary">Open support</a>
+        <a class="button secondary" href="privacy.html" data-i18n="ctaSecondary">Privacy Policy</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <span data-i18n="footerCopy">FitRoster Pro complete usage tutorial.</span>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="footerProduct">Product</a>
+        <a href="support.html" data-i18n="footerSupport">Support</a>
+        <a href="privacy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site-i18n.js?v=20260621-lang"></script>
+  <script>
+    const baseChapters = {
+      setup: {
+        image: "coach-settings",
+        device: "phone",
+        shared: false,
+        nav: "Setup",
+        label: "01 Setup",
+        title: "Set up your profile, language, units, and startup role.",
+        intro: "Start by making FitRoster Pro match the way you train or coach. Profile details, units, bodyweight context, language, and startup role affect the screens you see and the numbers shown in records and analysis.",
+        steps: [
+          ["Choose startup role", "Use Settings to decide whether FitRoster Pro opens in coach mode or trainee mode. Coaches usually start in Coach Mode; individual users can keep Trainee Mode as the default."],
+          ["Enter body context", "Set nickname, birth year, gender, bodyweight, and unit preferences. Bodyweight can support future bodyweight-load calculations and analysis context."],
+          ["Set language", "The website and app support the FitRoster Pro language set. Built-in exercise names follow the current app language, while names you type yourself remain unchanged."],
+          ["Check support entries", "Keep Support, Privacy, diagnostics, export, and restore access in Settings so you can recover data or report issues with enough context."]
+        ],
+        noteTitle: "Recommended first check",
+        note: "After changing language or startup role, leave Settings and reopen FitRoster Pro once. Confirm the active role, tab labels, and built-in exercise names are showing the way you expect."
+      },
+      exercises: {
+        image: "trainee-training",
+        device: "phone",
+        shared: false,
+        nav: "Exercises",
+        label: "02 Exercises",
+        title: "Control your training vocabulary with editable and custom exercises.",
+        intro: "FitRoster Pro is built for real gyms and coaching language. You can keep built-in movements, rename them for your gym, or create your own exercise entries when the catalog does not match your method.",
+        steps: [
+          ["Use built-in names", "Built-in exercise names are localized. When the app language changes, built-in names follow the selected language."],
+          ["Rename for your gym", "If a machine, cable station, or coaching cue has a specific name, rename the row so trainees see the terms you use in practice."],
+          ["Create custom exercises", "Create a custom exercise when the movement is not in the built-in catalog. Custom names stay exactly as entered across language switches."],
+          ["Keep records clean", "Use clear exercise names before logging sessions. This makes records, calendar review, and analysis easier to interpret later."]
+        ],
+        noteTitle: "Naming rule",
+        note: "Use built-in exercises when you want automatic localization. Use custom names when the exact wording is part of your coaching or gym workflow."
+      },
+      plans: {
+        image: "ipad-coach-training",
+        device: "tablet",
+        shared: false,
+        nav: "Plans",
+        label: "03 Plans",
+        title: "Build reusable training menus instead of rewriting every session.",
+        intro: "Training menus are reusable structures. Use templates for repeated blocks, free training for flexible work, and coach-assigned plans when a trainee needs a specific session.",
+        steps: [
+          ["Start from a template", "Use existing templates for common training structures, then duplicate or adjust them instead of creating each plan from scratch."],
+          ["Organize the session", "Group exercises in the order you want them performed. Keep warm-up, main lifts, accessory work, and conditioning easy to scan."],
+          ["Adjust per trainee", "Coaches can adapt a shared menu for a trainee by changing exercise names, notes, or planned work before sending it."],
+          ["Separate plan from record", "A planned item is not a completed record. FitRoster Pro keeps untouched planned items out of session history so records reflect actual work."]
+        ],
+        noteTitle: "Coach workflow",
+        note: "Create a stable base template first. Then duplicate it for each trainee or training block so the original remains reusable."
+      },
+      logging: {
+        image: "coach-training",
+        device: "phone",
+        shared: false,
+        nav: "Logging",
+        label: "04 Logging",
+        title: "Record only the work that actually happened.",
+        intro: "During training, FitRoster Pro focuses on set-level logging. Enter load, reps, completion state, and notes where needed. Planned items that were not trained should stay out of the final record.",
+        steps: [
+          ["Add set details", "Enter each working set with the reps and load you performed. Add or remove rows when the session changes."],
+          ["Use bodyweight context", "For bodyweight or assisted work, keep bodyweight context accurate so the record stays meaningful."],
+          ["Mark completion intentionally", "Complete only the items that were trained. This keeps training history reliable and avoids inflating volume."],
+          ["Review before saving", "Check exercise names, loads, reps, and notes before finishing the session, especially when returning progress to a coach."]
+        ],
+        noteTitle: "Record quality",
+        note: "A clean record is better than a complete-looking record. Leave skipped exercises untrained when they were not performed."
+      },
+      coaching: {
+        image: "ipad-coach-records",
+        device: "tablet",
+        shared: false,
+        nav: "Coach flow",
+        label: "05 Coach",
+        title: "Use coach mode to send plans and review trainee progress.",
+        intro: "Coach mode connects planning, trainee schedules, returned sessions, goals, and review work. The key is to keep each decision tied to the plan and the completed session that caused it.",
+        steps: [
+          ["Prepare the plan", "Build or choose a training menu, then adjust the exercises, order, and notes for the trainee."],
+          ["Send the assignment", "Send the plan snapshot to the trainee. The trainee trains from their own copy so your template stays reusable."],
+          ["Review returned work", "Use coach records and schedule views to inspect completed sessions, missed work, and notes."],
+          ["Adjust the next block", "Use the returned record plus goals, body data, and analysis before changing the next plan."]
+        ],
+        noteTitle: "Coach interpretation",
+        note: "Avoid judging a trainee from one session alone. Compare the returned work with calendar consistency, goals, and recent body context."
+      },
+      trainee: {
+        image: "trainee-records",
+        device: "phone",
+        shared: false,
+        nav: "Trainee flow",
+        label: "06 Trainee",
+        title: "Train from the received plan and return progress with context.",
+        intro: "Trainee mode is the daily training surface. It keeps coach-assigned plans, local records, calendar history, and analysis readable without mixing them into the coach workspace.",
+        steps: [
+          ["Accept a plan", "When a coach sends a plan, accept it into your local schedule before training from it."],
+          ["Train from your copy", "Your local copy can record the actual work performed without changing the coach's reusable template."],
+          ["Return completed progress", "After training, return the completed session so the coach can review the work in context."],
+          ["Check your calendar", "Use Records to confirm what was completed and to avoid losing track of missed or adjusted sessions."]
+        ],
+        noteTitle: "Trainee responsibility",
+        note: "If a session changes during training, record what actually happened. The returned result is more useful when it reflects reality."
+      },
+      records: {
+        image: "ipad-trainee-records",
+        device: "tablet",
+        shared: false,
+        nav: "Records",
+        label: "07 Records",
+        title: "Use the calendar to understand training consistency.",
+        intro: "Records are the source of truth for completed sessions. Use the calendar to inspect days, weeks, months, and ranges, then open specific sessions for exercise-level detail.",
+        steps: [
+          ["Scan the calendar", "Use month and week views to see training density, coach assignments, and completed work."],
+          ["Open a date", "Tap a training day to review the sessions completed on that date and check the plan context."],
+          ["Read only completed work", "FitRoster Pro records only the exercises and sets that were completed, keeping skipped planned items out of history."],
+          ["Use records before analysis", "When analysis looks unusual, check the calendar first. A missed week or changed plan often explains the signal."]
+        ],
+        noteTitle: "Reliable history",
+        note: "The calendar is most useful when session logging stays honest. Do not mark planned exercises complete just to make a plan look finished."
+      },
+      analysis: {
+        image: "analysis-muscle",
+        device: "shared",
+        shared: false,
+        nav: "Analysis",
+        label: "08 Analysis",
+        title: "Read progress signals before changing the next plan.",
+        intro: "Analysis combines training time, sets, sessions, body data, goals, and muscle distribution. It should explain what changed and help decide what to train next.",
+        steps: [
+          ["Choose a time range", "Start with the range that matches the question: one day for a session, thirty days for a block, or longer for trend review."],
+          ["Compare training load", "Use time, sets, session count, and calendar consistency together instead of judging one number alone."],
+          ["Inspect muscle distribution", "Use the muscle map to see trained and under-trained areas. Untrained areas should recede visually so imbalance is easier to notice."],
+          ["Connect goals and body data", "Use goals and InBody context as supporting signals. They should guide the next plan, not replace coaching judgment."]
+        ],
+        noteTitle: "Analysis principle",
+        note: "Good analysis answers a training question. Decide whether you are checking consistency, intensity, muscle balance, body trend, or goal progress before reading the numbers."
+      },
+      data: {
+        image: "trainee-settings",
+        device: "phone",
+        shared: false,
+        nav: "Sync + backup",
+        label: "09 Data",
+        title: "Protect your training data with sync, export, and restore habits.",
+        intro: "FitRoster Pro can use iCloud and backup/export files depending on the workflow you choose. Treat backup as part of training management, especially before changing devices or testing coach-trainee sync.",
+        steps: [
+          ["Use iCloud where needed", "Coach-trainee sharing and cross-device workflows depend on iCloud availability and the same Apple ID/iCloud status expected by the feature."],
+          ["Export backups", "Create FitRoster Pro backup/export files before major changes, device migration, or troubleshooting."],
+          ["Restore carefully", "Restore only from files you trust. Confirm role, records, menus, and coach-trainee state after restoring."],
+          ["Copy diagnostics for support", "When sync fails, include app version, device, iOS version, role, and whether the issue involves plan push, returned sessions, or backup files."]
+        ],
+        noteTitle: "Before troubleshooting",
+        note: "Write down the role on each device, the trainee or coach involved, and the last action taken. This makes sync problems much easier to isolate."
+      },
+      settings: {
+        image: "ipad-coach-settings",
+        device: "tablet",
+        shared: false,
+        nav: "Settings",
+        label: "10 Settings",
+        title: "Keep preferences and support tools easy to find.",
+        intro: "Settings is where FitRoster Pro keeps app language, units, profile details, startup role, backup, diagnostics, support, privacy, and other system-level preferences.",
+        steps: [
+          ["Review profile changes", "If a value affects body metrics or analysis, change it intentionally and re-check related screens."],
+          ["Use language settings", "Switch language from Settings when you need built-in catalog names, tab labels, and website guide content to match."],
+          ["Keep support context", "Support requests are easier to solve when you provide the screen, role, app version, device model, and iOS version."],
+          ["Return to the guide", "Use this HTML guide when training someone else, setting up a new device, or explaining FitRoster Pro to a trainee."]
+        ],
+        noteTitle: "Professional setup",
+        note: "For coaches, confirm Settings before demonstrating the app to a trainee. Role, language, and profile context should be correct before you teach the workflow."
+      }
+    };
+
+    const baseFaq = [
+      ["Why do custom exercise names not translate?", "Custom names are treated as user-entered coaching language. FitRoster Pro keeps them exactly as typed so gym terminology and coach cues remain stable across language switches."],
+      ["Why is a planned exercise missing from records?", "Records show completed training, not every planned item. If an exercise was skipped or left untouched, it should not appear as completed history."],
+      ["What should a coach check before changing a trainee plan?", "Check the returned session, calendar consistency, goals, body context, and analysis range before changing the next block."],
+      ["What should I send with a sync support request?", "Send app version, device model, iOS version, role, affected coach or trainee, whether iCloud is enabled, and whether the issue is plan delivery, returned sessions, or backup files."]
+    ];
+
+    const translations = {
+      en: {
+        metaTitle: "FitRoster Pro | Complete Usage Tutorial",
+        metaDescription: "Complete FitRoster Pro usage tutorial for setup, editable exercises, training plans, session logging, coach-trainee workflows, records, analysis, sync, backup, and settings.",
+        skipLink: "Skip to content",
+        navAria: "Guide navigation",
+        brandAria: "FitRoster Pro home",
+        languageLabel: "Language",
+        navProduct: "Product",
+        navManual: "Tutorial",
+        navFaq: "FAQ",
+        navSupport: "Support",
+        heroKicker: "Complete FitRoster Pro tutorial",
+        heroTitle: "Usage Tutorial",
+        heroCopy: "A complete guide for setting up FitRoster Pro, editing exercise names, building reusable plans, logging sessions, using coach-trainee workflows, reading records and analysis, and protecting your data.",
+        heroPrimary: "Start the tutorial",
+        heroSecondary: "Back to product page",
+        heroPointsAria: "Tutorial highlights",
+        heroPointPlanTitle: "Plan",
+        heroPointPlanCopy: "Create menus, templates, custom exercises, and reusable routines.",
+        heroPointCoachTitle: "Coach",
+        heroPointCoachCopy: "Send plans, receive trainee progress, and review training context.",
+        heroPointReviewTitle: "Review",
+        heroPointReviewCopy: "Use records, goals, body data, and muscle distribution for decisions.",
+        heroVisualAria: "FitRoster Pro tutorial screenshots",
+        tocTitle: "Tutorial sections",
+        tocAria: "Tutorial section list",
+        noteLabel: "Practice note",
+        faqKicker: "FAQ",
+        faqTitle: "Detailed support questions.",
+        faqIntro: "Use these answers when something looks different from the screenshots or when sync, records, or custom exercise names need clarification.",
+        ctaKicker: "Support",
+        ctaTitle: "Need more help?",
+        ctaCopy: "Use the support page if you need help with iCloud sync, coach-trainee sharing, backup files, app language, or a specific screen in FitRoster Pro.",
+        ctaPrimary: "Open support",
+        ctaSecondary: "Privacy Policy",
+        footerCopy: "FitRoster Pro complete usage tutorial.",
+        footerProduct: "Product",
+        footerSupport: "Support",
+        footerPrivacy: "Privacy Policy",
+        altSettings: "FitRoster Pro settings and profile screen",
+        altPlans: "FitRoster Pro training plan screen",
+        chapters: baseChapters,
+        faq: baseFaq
+      },
+      "zh-Hant": {
+        metaTitle: "FitRoster Pro | 完整使用教學",
+        metaDescription: "FitRoster Pro 完整使用教學，涵蓋設定、可編輯動作、自訂動作、課表、訓練記錄、教練學員流程、紀錄、分析、同步、備份與設定。",
+        skipLink: "跳到內容",
+        navAria: "使用教學導覽",
+        brandAria: "FitRoster Pro 首頁",
+        languageLabel: "語言",
+        navProduct: "產品",
+        navManual: "教學",
+        navFaq: "FAQ",
+        navSupport: "支援",
+        heroKicker: "FitRoster Pro 完整使用教學",
+        heroTitle: "使用教學",
+        heroCopy: "這是一份完整教學，說明如何設定 FitRoster Pro、編輯動作名稱、建立可重複使用的課表、記錄訓練、使用教練學員流程、閱讀紀錄與分析，並保護你的資料。",
+        heroPrimary: "開始教學",
+        heroSecondary: "返回產品頁",
+        heroPointsAria: "教學重點",
+        heroPointPlanTitle: "規劃",
+        heroPointPlanCopy: "建立菜單、模板、自訂動作與可重複使用的訓練流程。",
+        heroPointCoachTitle: "指導",
+        heroPointCoachCopy: "派送課表、接收學員進度，並檢視訓練脈絡。",
+        heroPointReviewTitle: "複盤",
+        heroPointReviewCopy: "用紀錄、目標、身體資料與肌群分佈做決策。",
+        heroVisualAria: "FitRoster Pro 使用教學截圖",
+        tocTitle: "教學章節",
+        tocAria: "教學章節列表",
+        noteLabel: "實務提醒",
+        faqKicker: "FAQ",
+        faqTitle: "詳細支援問題。",
+        faqIntro: "當畫面與截圖不同，或同步、紀錄、自訂動作名稱需要釐清時，先查看這些答案。",
+        ctaKicker: "支援",
+        ctaTitle: "需要更多協助？",
+        ctaCopy: "如果你需要 iCloud 同步、教練學員分享、備份檔、app 語言或特定畫面的協助，請使用支援頁。",
+        ctaPrimary: "開啟支援",
+        ctaSecondary: "隱私權政策",
+        footerCopy: "FitRoster Pro 完整使用教學。",
+        footerProduct: "產品",
+        footerSupport: "支援",
+        footerPrivacy: "隱私權政策",
+        altSettings: "FitRoster Pro 設定與個人資料畫面",
+        altPlans: "FitRoster Pro 課表規劃畫面",
+        chapters: {
+          setup: { ...baseChapters.setup, nav: "設定", label: "01 設定", title: "設定個人資料、語言、單位與啟動角色。", intro: "先讓 FitRoster Pro 符合你的訓練或教練工作方式。個人資料、單位、體重背景、語言與啟動角色，會影響你看到的畫面與紀錄、分析中的數字。", steps: [["選擇啟動角色", "在設定中決定 FitRoster Pro 開啟時進入教練模式或學員模式。教練通常使用教練模式；個人訓練者可保留學員模式。"], ["輸入身體背景", "設定暱稱、出生年、性別、體重與單位。體重可作為自體重訓練與分析的背景。"], ["設定語言", "App 與網站支援 FitRoster Pro 語系。內建動作名稱會跟隨 app 語言，你輸入的自訂名稱則會原樣保留。"], ["檢查支援項目", "設定中保留支援、隱私、診斷、匯出與還原入口，方便恢復資料或回報問題。"]], noteTitle: "第一次檢查", note: "變更語言或啟動角色後，離開設定並重新開啟 FitRoster Pro 一次，確認角色、分頁與內建動作名稱都符合預期。" },
+          exercises: { ...baseChapters.exercises, nav: "動作", label: "02 動作", title: "用可編輯與自訂動作控制你的訓練語言。", intro: "FitRoster Pro 支援真實健身房與教練用語。你可以保留內建動作、改成健身房慣用名稱，或建立自己的動作。", steps: [["使用內建名稱", "內建動作名稱會在語言切換時跟著本地化。"], ["依健身房改名", "若器材、機台或教練提示有固定說法，可改名讓學員看到你實際使用的術語。"], ["建立自訂動作", "當內建目錄沒有符合的動作時，建立自訂動作。自訂名稱不會因語言切換而改變。"], ["保持紀錄清楚", "記錄訓練前先確認動作名稱清楚，之後看紀錄、行事曆與分析會更容易。"]], noteTitle: "名稱規則", note: "想要自動多語，使用內建動作；想保留教練術語或健身房標籤，使用自訂名稱。" },
+          plans: { ...baseChapters.plans, nav: "課表", label: "03 課表", title: "建立可重複使用的課表，而不是每次重寫。", intro: "訓練菜單是可重複使用的結構。固定週期用模板，彈性訓練用自由訓練，教練派課則用學員指定計畫。", steps: [["從模板開始", "先用既有模板建立常見結構，再複製或調整，不必每次從零開始。"], ["整理訓練順序", "依暖身、主項、輔助與體能的順序排列，讓訓練時容易掃讀。"], ["依學員調整", "教練可在派送前替特定學員調整動作、備註與安排。"], ["分開計畫與紀錄", "預排項目不是完成紀錄。未訓練的項目不會進入歷史，紀錄才會反映實際訓練。"]], noteTitle: "教練做法", note: "先建立穩定的基礎模板，再複製給不同學員或週期，原始模板才會保持可重用。" },
+          logging: { ...baseChapters.logging, nav: "記錄", label: "04 記錄", title: "只記錄實際完成的訓練。", intro: "訓練時 FitRoster Pro 以每組紀錄為核心。輸入重量、次數、完成狀態與必要備註，沒有訓練的預排項目不要寫進完成紀錄。", steps: [["加入每組內容", "每個工作組輸入實際次數與重量；訓練改變時可增減組數。"], ["保持體重背景", "自體重或輔助訓練需要準確的體重背景，紀錄才有意義。"], ["有意識地完成", "只完成實際有做的項目，避免訓練量被不實放大。"], ["儲存前檢查", "完成前確認動作名稱、重量、次數與備註，尤其是要回傳給教練的課表。"]], noteTitle: "紀錄品質", note: "乾淨的紀錄比看起來完整的紀錄更重要。跳過的動作就保持未訓練。" },
+          coaching: { ...baseChapters.coaching, nav: "教練", label: "05 教練", title: "用教練模式派課並檢視學員進度。", intro: "教練模式把規劃、學員排程、回傳訓練、目標與複盤工作串在一起。重點是每個決策都能回到原本的課表與完成紀錄。", steps: [["準備課表", "建立或選擇訓練菜單，依學員調整動作、順序與備註。"], ["派送課表", "將課表快照送給學員。學員用自己的副本訓練，你的模板仍可重複使用。"], ["檢視回傳", "用教練紀錄與排程查看完成課表、未完成項目與備註。"], ["調整下一週期", "結合回傳紀錄、目標、身體資料與分析，再修改下一份計畫。"]], noteTitle: "教練解讀", note: "不要只看單次訓練就判斷學員。請一起比較行事曆一致性、目標與近期身體背景。" },
+          trainee: { ...baseChapters.trainee, nav: "學員", label: "06 學員", title: "從收到的課表訓練，並帶著脈絡回傳進度。", intro: "學員模式是日常訓練介面。它讓教練指定課表、本機紀錄、行事曆與分析保持清楚，不會混進教練工作區。", steps: [["接受課表", "教練派送課表後，先接受到自己的本機排程再開始訓練。"], ["使用本機副本", "你的副本會記錄實際完成內容，不會改動教練的可重用模板。"], ["回傳完成進度", "訓練後回傳完成課表，讓教練可依脈絡複盤。"], ["查看行事曆", "用紀錄確認哪些日期完成訓練，避免漏掉缺席或調整過的課。"]], noteTitle: "學員責任", note: "訓練中若內容改變，請記錄真實發生的內容。真實回傳對教練最有幫助。" },
+          records: { ...baseChapters.records, nav: "紀錄", label: "07 紀錄", title: "用行事曆理解訓練一致性。", intro: "紀錄是完成訓練的事實來源。用行事曆查看日、週、月與區間，再進入特定日期看動作層級細節。", steps: [["掃讀行事曆", "用月與週視圖查看訓練密度、教練安排與完成內容。"], ["開啟日期", "點選訓練日查看當天完成課表與原本計畫脈絡。"], ["只讀完成內容", "FitRoster Pro 只記錄實際完成的動作與組數，跳過的預排項目不會混入歷史。"], ["先看紀錄再看分析", "分析看起來異常時，先檢查行事曆；缺席週或臨時改課常常就是原因。"]], noteTitle: "可靠歷史", note: "行事曆的價值來自誠實記錄。不要為了讓課表看起來完成而把未訓練項目打勾。" },
+          analysis: { ...baseChapters.analysis, nav: "分析", label: "08 分析", title: "修改下一份課表前，先讀懂進步訊號。", intro: "分析整合訓練時間、組數、課次、身體資料、目標與肌群分佈。它應該解釋變化，並協助決定下一步要訓練什麼。", steps: [["選擇時間範圍", "依問題選擇範圍：單日看一堂課，30 天看週期，更長時間看趨勢。"], ["比較訓練量", "一起看時間、組數、課次與行事曆一致性，不要只看單一數字。"], ["檢查肌群分佈", "用肌群圖查看已訓練與不足區域；未訓練區域應退後，失衡才容易被看見。"], ["連結目標與身體資料", "目標與 InBody 是輔助訊號，用來引導下一份計畫，而不是取代教練判斷。"]], noteTitle: "分析原則", note: "好的分析要回答一個訓練問題。先決定你要看一致性、強度、肌群平衡、身體趨勢或目標進度。" },
+          data: { ...baseChapters.data, nav: "同步備份", label: "09 資料", title: "用同步、匯出與還原習慣保護訓練資料。", intro: "FitRoster Pro 可依工作流程使用 iCloud 與備份/匯出檔。尤其在換裝置或測試教練學員同步前，請把備份視為訓練管理的一部分。", steps: [["需要時使用 iCloud", "教練學員分享與跨裝置流程需要 iCloud 狀態正常，並符合該功能預期的 Apple ID/iCloud 條件。"], ["匯出備份", "重大變更、換裝置或排查問題前，建立 FitRoster Pro 備份/匯出檔。"], ["謹慎還原", "只從可信任的檔案還原。還原後確認角色、紀錄、菜單與教練學員狀態。"], ["複製診斷給支援", "同步失敗時，提供 app 版本、裝置、iOS、角色，以及問題是派課、回傳或備份。"]], noteTitle: "排查前", note: "先寫下每台裝置的角色、相關教練或學員、最後執行的動作，會讓同步問題容易定位。" },
+          settings: { ...baseChapters.settings, nav: "設定", label: "10 設定", title: "讓偏好與支援工具維持容易找到。", intro: "設定集中管理 app 語言、單位、個人資料、啟動角色、備份、診斷、支援、隱私與其他系統偏好。", steps: [["檢查個人資料變更", "會影響身體指標或分析的值，請有意識地修改並回頭檢查相關畫面。"], ["使用語言設定", "需要內建目錄名稱、分頁與網站說明一致時，從設定切換語言。"], ["保留支援脈絡", "回報問題時提供畫面、角色、app 版本、裝置型號與 iOS 版本，會更容易處理。"], ["回到教學", "訓練他人、設定新裝置或向學員說明 FitRoster Pro 時，都可以回來查看這份 HTML 教學。"]], noteTitle: "專業設定", note: "教練示範給學員前，先確認設定中的角色、語言與個人資料都正確。" }
+        },
+        faq: [
+          ["為什麼自訂動作名稱不會翻譯？", "自訂名稱被視為你輸入的教練語言。FitRoster Pro 會原樣保留，讓健身房術語與教練提示不會因語言切換而改變。"],
+          ["為什麼預排動作沒有出現在紀錄裡？", "紀錄顯示完成訓練，不是每個預排項目。跳過或未輸入的動作不應該進入完成歷史。"],
+          ["教練修改學員課表前要看什麼？", "先看回傳課表、行事曆一致性、目標、身體背景與分析區間，再修改下一個週期。"],
+          ["同步問題要提供什麼？", "請提供 app 版本、裝置型號、iOS 版本、角色、相關教練或學員、iCloud 狀態，以及問題是派課、回傳或備份。"]
+        ]
+      },
+      "zh-Hans": {
+        metaTitle: "FitRoster Pro | 完整使用教学",
+        metaDescription: "FitRoster Pro 完整使用教学，涵盖设置、可编辑动作、自定义动作、课表、训练记录、教练学员流程、记录、分析、同步、备份与设置。",
+        skipLink: "跳到内容",
+        navAria: "使用教学导航",
+        brandAria: "FitRoster Pro 首页",
+        languageLabel: "语言",
+        navProduct: "产品",
+        navManual: "教学",
+        navFaq: "FAQ",
+        navSupport: "支援",
+        heroKicker: "FitRoster Pro 完整使用教学",
+        heroTitle: "使用教学",
+        heroCopy: "这是一份完整教学，说明如何设置 FitRoster Pro、编辑动作名称、建立可重复使用的课表、记录训练、使用教练学员流程、阅读记录与分析，并保护你的资料。",
+        heroPrimary: "开始教学",
+        heroSecondary: "返回产品页",
+        heroPointsAria: "教学重点",
+        heroPointPlanTitle: "规划",
+        heroPointPlanCopy: "建立菜单、模板、自定义动作与可重复使用的训练流程。",
+        heroPointCoachTitle: "指导",
+        heroPointCoachCopy: "派送课表、接收学员进度，并查看训练脉络。",
+        heroPointReviewTitle: "复盘",
+        heroPointReviewCopy: "用记录、目标、身体资料与肌群分布做决策。",
+        heroVisualAria: "FitRoster Pro 使用教学截图",
+        tocTitle: "教学章节",
+        tocAria: "教学章节列表",
+        noteLabel: "实务提醒",
+        faqKicker: "FAQ",
+        faqTitle: "详细支援问题。",
+        faqIntro: "当画面与截图不同，或同步、记录、自定义动作名称需要澄清时，先查看这些答案。",
+        ctaKicker: "支援",
+        ctaTitle: "需要更多协助？",
+        ctaCopy: "如果你需要 iCloud 同步、教练学员分享、备份文件、app 语言或特定画面的协助，请使用支援页。",
+        ctaPrimary: "打开支援",
+        ctaSecondary: "隐私权政策",
+        footerCopy: "FitRoster Pro 完整使用教学。",
+        footerProduct: "产品",
+        footerSupport: "支援",
+        footerPrivacy: "隐私权政策",
+        altSettings: "FitRoster Pro 设置与个人资料画面",
+        altPlans: "FitRoster Pro 课表规划画面",
+        chapters: {},
+        faq: []
+      },
+      ja: {
+        metaTitle: "FitRoster Pro | 完全使用チュートリアル",
+        metaDescription: "FitRoster Proの設定、編集可能な種目名、独自種目、計画、記録、コーチと受講者、分析、同期、バックアップ、設定を説明する完全ガイド。",
+        skipLink: "本文へ移動",
+        navAria: "ガイドナビゲーション",
+        brandAria: "FitRoster Proホーム",
+        languageLabel: "言語",
+        navProduct: "製品",
+        navManual: "チュートリアル",
+        navFaq: "FAQ",
+        navSupport: "サポート",
+        heroKicker: "FitRoster Pro完全チュートリアル",
+        heroTitle: "使用チュートリアル",
+        heroCopy: "設定、種目名の編集、再利用できる計画、セッション記録、コーチと受講者の流れ、記録と分析、データ保護までを説明します。",
+        heroPrimary: "チュートリアルを開始",
+        heroSecondary: "製品ページへ戻る",
+        heroPointsAria: "チュートリアルの要点",
+        heroPointPlanTitle: "計画",
+        heroPointPlanCopy: "メニュー、テンプレート、独自種目、再利用ルーティンを作成します。",
+        heroPointCoachTitle: "コーチ",
+        heroPointCoachCopy: "計画を送り、受講者の進捗を受け取り、文脈を確認します。",
+        heroPointReviewTitle: "確認",
+        heroPointReviewCopy: "記録、目標、身体データ、筋群分布を判断に使います。",
+        heroVisualAria: "FitRoster Proチュートリアル画面",
+        tocTitle: "チュートリアル章",
+        tocAria: "チュートリアル章リスト",
+        noteLabel: "実務メモ",
+        faqKicker: "FAQ",
+        faqTitle: "詳しいサポート質問。",
+        faqIntro: "画面がスクリーンショットと違う場合や、同期、記録、独自種目名について確認したい場合に使います。",
+        ctaKicker: "サポート",
+        ctaTitle: "さらにヘルプが必要ですか？",
+        ctaCopy: "iCloud同期、コーチと受講者の共有、バックアップ、言語、特定画面についてはサポートページを使用してください。",
+        ctaPrimary: "サポートを開く",
+        ctaSecondary: "プライバシーポリシー",
+        footerCopy: "FitRoster Pro完全使用チュートリアル。",
+        footerProduct: "製品",
+        footerSupport: "サポート",
+        footerPrivacy: "プライバシーポリシー",
+        altSettings: "FitRoster Pro設定とプロフィール画面",
+        altPlans: "FitRoster Proトレーニング計画画面",
+        chapters: {},
+        faq: []
+      },
+      ko: {
+        metaTitle: "FitRoster Pro | 전체 사용 튜토리얼",
+        metaDescription: "FitRoster Pro 설정, 운동명 편집, 사용자 운동, 계획, 기록, 코치-회원 흐름, 분석, 동기화, 백업, 설정을 설명하는 전체 가이드.",
+        skipLink: "본문으로 이동",
+        navAria: "가이드 탐색",
+        brandAria: "FitRoster Pro 홈",
+        languageLabel: "언어",
+        navProduct: "제품",
+        navManual: "튜토리얼",
+        navFaq: "FAQ",
+        navSupport: "지원",
+        heroKicker: "FitRoster Pro 전체 튜토리얼",
+        heroTitle: "사용 튜토리얼",
+        heroCopy: "설정, 운동명 편집, 재사용 계획, 세션 기록, 코치-회원 흐름, 기록과 분석, 데이터 보호까지 설명합니다.",
+        heroPrimary: "튜토리얼 시작",
+        heroSecondary: "제품 페이지로",
+        heroPointsAria: "튜토리얼 핵심",
+        heroPointPlanTitle: "계획",
+        heroPointPlanCopy: "메뉴, 템플릿, 사용자 운동, 재사용 루틴을 만듭니다.",
+        heroPointCoachTitle: "코치",
+        heroPointCoachCopy: "계획을 보내고 회원 진행을 받아 훈련 맥락을 검토합니다.",
+        heroPointReviewTitle: "검토",
+        heroPointReviewCopy: "기록, 목표, 신체 데이터, 근육 분포를 의사결정에 사용합니다.",
+        heroVisualAria: "FitRoster Pro 튜토리얼 스크린샷",
+        tocTitle: "튜토리얼 섹션",
+        tocAria: "튜토리얼 섹션 목록",
+        noteLabel: "실무 메모",
+        faqKicker: "FAQ",
+        faqTitle: "상세 지원 질문.",
+        faqIntro: "화면이 스크린샷과 다르거나 동기화, 기록, 사용자 운동명이 궁금할 때 확인하세요.",
+        ctaKicker: "지원",
+        ctaTitle: "도움이 더 필요한가요?",
+        ctaCopy: "iCloud 동기화, 코치-회원 공유, 백업 파일, 앱 언어 또는 특정 화면 지원은 지원 페이지를 이용하세요.",
+        ctaPrimary: "지원 열기",
+        ctaSecondary: "개인정보 처리방침",
+        footerCopy: "FitRoster Pro 전체 사용 튜토리얼.",
+        footerProduct: "제품",
+        footerSupport: "지원",
+        footerPrivacy: "개인정보 처리방침",
+        altSettings: "FitRoster Pro 설정 및 프로필 화면",
+        altPlans: "FitRoster Pro 훈련 계획 화면",
+        chapters: {},
+        faq: []
+      },
+      th: {
+        metaTitle: "FitRoster Pro | คู่มือการใช้งานฉบับสมบูรณ์",
+        metaDescription: "คู่มือ FitRoster Pro สำหรับการตั้งค่า ชื่อท่าที่แก้ไขได้ ท่าสร้างเอง แผน การบันทึก โค้ชและผู้ฝึก วิเคราะห์ ซิงค์ สำรองข้อมูล และการตั้งค่า",
+        skipLink: "ไปที่เนื้อหา",
+        navAria: "นำทางคู่มือ",
+        brandAria: "หน้าแรก FitRoster Pro",
+        languageLabel: "ภาษา",
+        navProduct: "ผลิตภัณฑ์",
+        navManual: "คู่มือ",
+        navFaq: "FAQ",
+        navSupport: "สนับสนุน",
+        heroKicker: "คู่มือ FitRoster Pro ฉบับสมบูรณ์",
+        heroTitle: "คู่มือการใช้งาน",
+        heroCopy: "อธิบายการตั้งค่า การแก้ชื่อท่า แผนที่ใช้ซ้ำ การบันทึก โค้ชและผู้ฝึก การอ่านบันทึกและวิเคราะห์ รวมถึงการปกป้องข้อมูล",
+        heroPrimary: "เริ่มคู่มือ",
+        heroSecondary: "กลับหน้าผลิตภัณฑ์",
+        heroPointsAria: "จุดเด่นของคู่มือ",
+        heroPointPlanTitle: "วางแผน",
+        heroPointPlanCopy: "สร้างเมนู เทมเพลต ท่าสร้างเอง และรูทีนที่ใช้ซ้ำได้",
+        heroPointCoachTitle: "โค้ช",
+        heroPointCoachCopy: "ส่งแผน รับความคืบหน้าผู้ฝึก และตรวจบริบทการฝึก",
+        heroPointReviewTitle: "ทบทวน",
+        heroPointReviewCopy: "ใช้บันทึก เป้าหมาย ข้อมูลร่างกาย และสัดส่วนกล้ามเนื้อเพื่อการตัดสินใจ",
+        heroVisualAria: "ภาพหน้าจอคู่มือ FitRoster Pro",
+        tocTitle: "หัวข้อคู่มือ",
+        tocAria: "รายการหัวข้อคู่มือ",
+        noteLabel: "หมายเหตุการใช้งาน",
+        faqKicker: "FAQ",
+        faqTitle: "คำถามสนับสนุนแบบละเอียด",
+        faqIntro: "ใช้เมื่อหน้าจอแตกต่างจากภาพ หรือเมื่อต้องอธิบายซิงค์ บันทึก หรือชื่อท่าสร้างเอง",
+        ctaKicker: "สนับสนุน",
+        ctaTitle: "ต้องการความช่วยเหลือเพิ่ม?",
+        ctaCopy: "ใช้หน้าสนับสนุนสำหรับ iCloud sync การแชร์โค้ชและผู้ฝึก ไฟล์สำรอง ภาษาแอป หรือหน้าจอเฉพาะ",
+        ctaPrimary: "เปิดสนับสนุน",
+        ctaSecondary: "นโยบายความเป็นส่วนตัว",
+        footerCopy: "คู่มือการใช้งาน FitRoster Pro ฉบับสมบูรณ์",
+        footerProduct: "ผลิตภัณฑ์",
+        footerSupport: "สนับสนุน",
+        footerPrivacy: "นโยบายความเป็นส่วนตัว",
+        altSettings: "หน้าตั้งค่าและโปรไฟล์ FitRoster Pro",
+        altPlans: "หน้าแผนการฝึก FitRoster Pro",
+        chapters: {},
+        faq: []
+      },
+      ms: {
+        metaTitle: "FitRoster Pro | Tutorial Penggunaan Lengkap",
+        metaDescription: "Tutorial FitRoster Pro untuk tetapan, nama senaman boleh edit, senaman tersuai, pelan, rekod, jurulatih-pelatih, analisis, sync, sandaran dan tetapan.",
+        skipLink: "Langkau ke kandungan",
+        navAria: "Navigasi panduan",
+        brandAria: "Laman utama FitRoster Pro",
+        languageLabel: "Bahasa",
+        navProduct: "Produk",
+        navManual: "Tutorial",
+        navFaq: "FAQ",
+        navSupport: "Sokongan",
+        heroKicker: "Tutorial FitRoster Pro lengkap",
+        heroTitle: "Tutorial Penggunaan",
+        heroCopy: "Panduan lengkap untuk tetapan, nama senaman, pelan guna semula, rekod sesi, aliran jurulatih-pelatih, analisis dan perlindungan data.",
+        heroPrimary: "Mula tutorial",
+        heroSecondary: "Kembali ke produk",
+        heroPointsAria: "Sorotan tutorial",
+        heroPointPlanTitle: "Rancang",
+        heroPointPlanCopy: "Cipta menu, templat, senaman tersuai dan rutin guna semula.",
+        heroPointCoachTitle: "Bimbing",
+        heroPointCoachCopy: "Hantar pelan, terima kemajuan pelatih dan semak konteks latihan.",
+        heroPointReviewTitle: "Semak",
+        heroPointReviewCopy: "Gunakan rekod, matlamat, data badan dan agihan otot untuk keputusan.",
+        heroVisualAria: "Tangkapan skrin tutorial FitRoster Pro",
+        tocTitle: "Bahagian tutorial",
+        tocAria: "Senarai bahagian tutorial",
+        noteLabel: "Nota amalan",
+        faqKicker: "FAQ",
+        faqTitle: "Soalan sokongan terperinci.",
+        faqIntro: "Gunakan jawapan ini apabila skrin berbeza daripada gambar atau apabila sync, rekod, atau nama senaman tersuai perlu dijelaskan.",
+        ctaKicker: "Sokongan",
+        ctaTitle: "Perlu bantuan lagi?",
+        ctaCopy: "Gunakan halaman sokongan untuk iCloud sync, perkongsian jurulatih-pelatih, fail sandaran, bahasa app atau skrin tertentu.",
+        ctaPrimary: "Buka sokongan",
+        ctaSecondary: "Dasar Privasi",
+        footerCopy: "Tutorial penggunaan FitRoster Pro lengkap.",
+        footerProduct: "Produk",
+        footerSupport: "Sokongan",
+        footerPrivacy: "Dasar Privasi",
+        altSettings: "Skrin tetapan dan profil FitRoster Pro",
+        altPlans: "Skrin pelan latihan FitRoster Pro",
+        chapters: {},
+        faq: []
+      },
+      ru: {
+        metaTitle: "FitRoster Pro | Полное руководство",
+        metaDescription: "Полное руководство FitRoster Pro: настройка, редактируемые упражнения, свои упражнения, планы, записи, тренер и ученик, анализ, синхронизация, резервные копии и параметры.",
+        skipLink: "Перейти к содержимому",
+        navAria: "Навигация руководства",
+        brandAria: "Главная FitRoster Pro",
+        languageLabel: "Язык",
+        navProduct: "Продукт",
+        navManual: "Руководство",
+        navFaq: "FAQ",
+        navSupport: "Поддержка",
+        heroKicker: "Полное руководство FitRoster Pro",
+        heroTitle: "Руководство",
+        heroCopy: "Полное объяснение настройки, названий упражнений, планов, записей, работы тренера и ученика, анализа и защиты данных.",
+        heroPrimary: "Начать руководство",
+        heroSecondary: "Назад к продукту",
+        heroPointsAria: "Основные темы",
+        heroPointPlanTitle: "План",
+        heroPointPlanCopy: "Создавайте меню, шаблоны, свои упражнения и повторяемые программы.",
+        heroPointCoachTitle: "Тренер",
+        heroPointCoachCopy: "Отправляйте планы, получайте прогресс ученика и проверяйте контекст.",
+        heroPointReviewTitle: "Проверка",
+        heroPointReviewCopy: "Используйте записи, цели, данные тела и мышцы для решений.",
+        heroVisualAria: "Скриншоты руководства FitRoster Pro",
+        tocTitle: "Разделы руководства",
+        tocAria: "Список разделов руководства",
+        noteLabel: "Практическая заметка",
+        faqKicker: "FAQ",
+        faqTitle: "Подробные вопросы поддержки.",
+        faqIntro: "Используйте эти ответы, если экран отличается от скриншотов или нужно объяснить синхронизацию, записи или свои названия.",
+        ctaKicker: "Поддержка",
+        ctaTitle: "Нужна дополнительная помощь?",
+        ctaCopy: "Используйте страницу поддержки для iCloud, работы тренера и ученика, резервных копий, языка приложения или конкретного экрана.",
+        ctaPrimary: "Открыть поддержку",
+        ctaSecondary: "Политика конфиденциальности",
+        footerCopy: "Полное руководство FitRoster Pro.",
+        footerProduct: "Продукт",
+        footerSupport: "Поддержка",
+        footerPrivacy: "Политика конфиденциальности",
+        altSettings: "Экран настроек и профиля FitRoster Pro",
+        altPlans: "Экран тренировочного плана FitRoster Pro",
+        chapters: {},
+        faq: []
+      },
+      de: {
+        metaTitle: "FitRoster Pro | Vollständiges Nutzungstutorial",
+        metaDescription: "Vollständiges FitRoster Pro-Tutorial für Einrichtung, editierbare Übungen, eigene Übungen, Pläne, Protokollierung, Coach-Athlet-Abläufe, Analyse, Sync, Backup und Einstellungen.",
+        skipLink: "Zum Inhalt springen",
+        navAria: "Guide-Navigation",
+        brandAria: "FitRoster Pro Startseite",
+        languageLabel: "Sprache",
+        navProduct: "Produkt",
+        navManual: "Tutorial",
+        navFaq: "FAQ",
+        navSupport: "Support",
+        heroKicker: "Vollständiges FitRoster Pro-Tutorial",
+        heroTitle: "Nutzungstutorial",
+        heroCopy: "Ein vollständiger Guide für Einrichtung, Übungsnamen, wiederverwendbare Pläne, Session-Logging, Coach-Athlet-Abläufe, Aufzeichnungen, Analyse und Datensicherung.",
+        heroPrimary: "Tutorial starten",
+        heroSecondary: "Zur Produktseite",
+        heroPointsAria: "Tutorial-Highlights",
+        heroPointPlanTitle: "Planen",
+        heroPointPlanCopy: "Menüs, Templates, eigene Übungen und wiederverwendbare Routinen erstellen.",
+        heroPointCoachTitle: "Coachen",
+        heroPointCoachCopy: "Pläne senden, Athletenfortschritt empfangen und Kontext prüfen.",
+        heroPointReviewTitle: "Prüfen",
+        heroPointReviewCopy: "Aufzeichnungen, Ziele, Körperdaten und Muskelverteilung nutzen.",
+        heroVisualAria: "FitRoster Pro Tutorial-Screenshots",
+        tocTitle: "Tutorial-Abschnitte",
+        tocAria: "Liste der Tutorial-Abschnitte",
+        noteLabel: "Praxisnotiz",
+        faqKicker: "FAQ",
+        faqTitle: "Detaillierte Supportfragen.",
+        faqIntro: "Nutze diese Antworten, wenn ein Bildschirm anders aussieht oder Sync, Aufzeichnungen oder eigene Übungsnamen erklärt werden müssen.",
+        ctaKicker: "Support",
+        ctaTitle: "Weitere Hilfe nötig?",
+        ctaCopy: "Nutze die Supportseite für iCloud Sync, Coach-Athlet-Sharing, Backupdateien, App-Sprache oder einen bestimmten FitRoster Pro-Bildschirm.",
+        ctaPrimary: "Support öffnen",
+        ctaSecondary: "Datenschutz",
+        footerCopy: "Vollständiges FitRoster Pro Nutzungstutorial.",
+        footerProduct: "Produkt",
+        footerSupport: "Support",
+        footerPrivacy: "Datenschutz",
+        altSettings: "FitRoster Pro Einstellungen und Profil",
+        altPlans: "FitRoster Pro Trainingsplan",
+        chapters: {},
+        faq: []
+      },
+      fr: {
+        metaTitle: "FitRoster Pro | Tutoriel complet",
+        metaDescription: "Tutoriel complet FitRoster Pro pour configuration, exercices modifiables, exercices personnalisés, plans, suivi, coach-élève, analyse, synchronisation, sauvegarde et réglages.",
+        skipLink: "Aller au contenu",
+        navAria: "Navigation du guide",
+        brandAria: "Accueil FitRoster Pro",
+        languageLabel: "Langue",
+        navProduct: "Produit",
+        navManual: "Tutoriel",
+        navFaq: "FAQ",
+        navSupport: "Support",
+        heroKicker: "Tutoriel FitRoster Pro complet",
+        heroTitle: "Tutoriel d'utilisation",
+        heroCopy: "Guide complet pour configurer FitRoster Pro, modifier les noms d'exercices, créer des plans réutilisables, enregistrer les séances, utiliser le flux coach-élève, lire les suivis et protéger les données.",
+        heroPrimary: "Commencer",
+        heroSecondary: "Retour produit",
+        heroPointsAria: "Points clés du tutoriel",
+        heroPointPlanTitle: "Planifier",
+        heroPointPlanCopy: "Créer menus, modèles, exercices personnalisés et routines réutilisables.",
+        heroPointCoachTitle: "Coacher",
+        heroPointCoachCopy: "Envoyer les plans, recevoir la progression et relire le contexte.",
+        heroPointReviewTitle: "Revoir",
+        heroPointReviewCopy: "Utiliser suivis, objectifs, données corporelles et muscles pour décider.",
+        heroVisualAria: "Captures du tutoriel FitRoster Pro",
+        tocTitle: "Sections du tutoriel",
+        tocAria: "Liste des sections",
+        noteLabel: "Note pratique",
+        faqKicker: "FAQ",
+        faqTitle: "Questions support détaillées.",
+        faqIntro: "Utilisez ces réponses si un écran diffère des captures ou si la synchronisation, les suivis ou les noms personnalisés doivent être clarifiés.",
+        ctaKicker: "Support",
+        ctaTitle: "Besoin d'aide ?",
+        ctaCopy: "Utilisez la page support pour iCloud, partage coach-élève, sauvegardes, langue de l'app ou écran précis.",
+        ctaPrimary: "Ouvrir le support",
+        ctaSecondary: "Confidentialité",
+        footerCopy: "Tutoriel complet FitRoster Pro.",
+        footerProduct: "Produit",
+        footerSupport: "Support",
+        footerPrivacy: "Confidentialité",
+        altSettings: "Écran réglages et profil FitRoster Pro",
+        altPlans: "Écran plan d'entraînement FitRoster Pro",
+        chapters: {},
+        faq: []
+      },
+      es: {
+        metaTitle: "FitRoster Pro | Tutorial completo",
+        metaDescription: "Tutorial completo de FitRoster Pro para configuración, ejercicios editables, ejercicios personalizados, planes, registro, entrenador-alumno, análisis, sincronización, backup y ajustes.",
+        skipLink: "Saltar al contenido",
+        navAria: "Navegación de guía",
+        brandAria: "Inicio de FitRoster Pro",
+        languageLabel: "Idioma",
+        navProduct: "Producto",
+        navManual: "Tutorial",
+        navFaq: "FAQ",
+        navSupport: "Soporte",
+        heroKicker: "Tutorial completo de FitRoster Pro",
+        heroTitle: "Tutorial de uso",
+        heroCopy: "Guía completa para configurar FitRoster Pro, editar nombres, crear planes reutilizables, registrar sesiones, usar el flujo entrenador-alumno, leer registros y análisis, y proteger datos.",
+        heroPrimary: "Empezar tutorial",
+        heroSecondary: "Volver al producto",
+        heroPointsAria: "Puntos clave",
+        heroPointPlanTitle: "Planificar",
+        heroPointPlanCopy: "Crea menús, plantillas, ejercicios propios y rutinas reutilizables.",
+        heroPointCoachTitle: "Entrenar",
+        heroPointCoachCopy: "Envía planes, recibe progreso y revisa el contexto.",
+        heroPointReviewTitle: "Revisar",
+        heroPointReviewCopy: "Usa registros, objetivos, datos corporales y músculos para decidir.",
+        heroVisualAria: "Capturas del tutorial FitRoster Pro",
+        tocTitle: "Secciones",
+        tocAria: "Lista de secciones",
+        noteLabel: "Nota práctica",
+        faqKicker: "FAQ",
+        faqTitle: "Preguntas detalladas de soporte.",
+        faqIntro: "Usa estas respuestas si una pantalla difiere de las capturas o si necesitas aclarar sincronización, registros o nombres propios.",
+        ctaKicker: "Soporte",
+        ctaTitle: "¿Necesitas más ayuda?",
+        ctaCopy: "Usa la página de soporte para iCloud, compartir entrenador-alumno, backups, idioma de la app o una pantalla específica.",
+        ctaPrimary: "Abrir soporte",
+        ctaSecondary: "Privacidad",
+        footerCopy: "Tutorial completo de FitRoster Pro.",
+        footerProduct: "Producto",
+        footerSupport: "Soporte",
+        footerPrivacy: "Privacidad",
+        altSettings: "Pantalla de ajustes y perfil de FitRoster Pro",
+        altPlans: "Pantalla de plan de entrenamiento de FitRoster Pro",
+        chapters: {},
+        faq: []
+      }
+    };
+
+    function cloneChapters() {
+      return JSON.parse(JSON.stringify(baseChapters));
+    }
+
+    function localizeFromEnglish(language, sectionNames) {
+      const copy = translations[language];
+      copy.chapters = cloneChapters();
+      Object.entries(sectionNames).forEach(([id, values]) => {
+        copy.chapters[id].nav = values[0];
+        copy.chapters[id].label = values[1];
+        copy.chapters[id].title = values[2];
+        copy.chapters[id].intro = values[3];
+        copy.chapters[id].noteTitle = values[4];
+        copy.chapters[id].note = values[5];
+      });
+      copy.faq = baseFaq;
+    }
+
+    const hansPairs = [
+      ["肌群分佈", "肌群分布"], ["自訂", "自定义"], ["內建", "内建"], ["教練", "教练"],
+      ["學員", "学员"], ["訓練", "训练"], ["課表", "课表"], ["紀錄", "记录"],
+      ["記錄", "记录"], ["設定", "设置"], ["動作", "动作"], ["資料", "资料"],
+      ["備份", "备份"], ["匯出", "导出"], ["還原", "还原"], ["裝置", "设备"],
+      ["語言", "语言"], ["單位", "单位"], ["啟動", "启动"], ["角色", "角色"],
+      ["個人", "个人"], ["暱稱", "昵称"], ["性別", "性别"], ["體重", "体重"],
+      ["體能", "体能"], ["體", "体"], ["與", "与"], ["會", "会"], ["畫面", "画面"],
+      ["數字", "数字"], ["選擇", "选择"], ["開啟", "开启"], ["網站", "网站"],
+      ["支援", "支持"], ["跟隨", "跟随"], ["輸入", "输入"], ["檢查", "检查"],
+      ["項目", "项目"], ["隱私", "隐私"], ["診斷", "诊断"], ["恢復", "恢复"],
+      ["回報", "回报"], ["問題", "问题"], ["變更", "变更"], ["離開", "离开"],
+      ["預期", "预期"], ["真實", "真实"], ["機台", "机台"], ["說法", "说法"],
+      ["術語", "术语"], ["目錄", "目录"], ["切換", "切换"], ["之後", "之后"],
+      ["行事曆", "日历"], ["標籤", "标签"], ["重複", "重复"], ["結構", "结构"],
+      ["週期", "周期"], ["彈性", "弹性"], ["計畫", "计划"], ["開始", "开始"],
+      ["調整", "调整"], ["順序", "顺序"], ["輔助", "辅助"], ["掃讀", "扫读"],
+      ["備註", "备注"], ["分開", "分开"], ["歷史", "历史"], ["實際", "实际"],
+      ["穩定", "稳定"], ["儲存", "保存"], ["準確", "准确"], ["意義", "意义"],
+      ["乾淨", "干净"], ["跳過", "跳过"], ["規劃", "规划"], ["回傳", "回传"],
+      ["複盤", "复盘"], ["脈絡", "脉络"], ["點選", "点击"], ["異常", "异常"],
+      ["臨時", "临时"], ["訊號", "信号"], ["區域", "区域"], ["導", "导"],
+      ["判斷", "判断"], ["趨勢", "趋势"], ["進度", "进度"], ["決定", "决定"],
+      ["進入", "进入"], ["頁面", "页面"], ["關閉", "关闭"], ["瀏覽", "浏览"],
+      ["響應", "响应"], ["獨立", "独立"], ["檔", "文件"], ["條件", "条件"],
+      ["相關", "相关"], ["執行", "执行"], ["專業", "专业"], ["國", "国"],
+      ["穩", "稳"], ["複", "复"], ["視", "视"], ["讀", "读"], ["顯", "显"],
+      ["該", "该"], ["讓", "让"], ["這", "这"], ["為", "为"], ["時", "时"],
+      ["後", "后"], ["前", "前"], ["們", "们"], ["個", "个"], ["開", "开"],
+      ["關", "关"], ["報", "报"], ["點", "点"], ["據", "据"], ["護", "护"],
+      ["練", "练"], ["學", "学"], ["劃", "划"], ["錄", "录"], ["處", "处"],
+      ["質", "质"], ["態", "态"], ["務", "务"], ["實", "实"], ["與", "与"],
+      ["決", "决"], ["進", "进"], ["頁", "页"], ["應", "应"], ["獨", "独"],
+      ["覽", "览"], ["響", "响"]
+    ];
+
+    function toHansValue(value) {
+      if (Array.isArray(value)) {
+        return value.map(toHansValue);
+      }
+      if (value && typeof value === "object") {
+        return Object.fromEntries(Object.entries(value).map(([key, nested]) => [key, toHansValue(nested)]));
+      }
+      if (typeof value !== "string") {
+        return value;
+      }
+      return hansPairs.reduce((text, pair) => text.split(pair[0]).join(pair[1]), value);
+    }
+
+    translations["zh-Hans"].chapters = toHansValue(translations["zh-Hant"].chapters);
+    translations["zh-Hans"].faq = [
+      ["为什么自定义动作名称不会翻译？", "自定义名称被视为你输入的教练语言。FitRoster Pro 会原样保留，让健身房术语与教练提示不会因语言切换而改变。"],
+      ["为什么预排动作没有出现在记录里？", "记录显示完成训练，不是每个预排项目。跳过或未输入的动作不应该进入完成历史。"],
+      ["教练修改学员课表前要看什么？", "先看回传课表、日历一致性、目标、身体背景与分析区间，再修改下一个周期。"],
+      ["同步问题要提供什么？", "请提供 app 版本、装置型号、iOS 版本、角色、相关教练或学员、iCloud 状态，以及问题是派课、回传或备份。"]
+    ];
+
+    localizeFromEnglish("ja", {
+      setup: ["設定", "01 設定", "プロフィール、言語、単位、起動時の役割を設定します。", "FitRoster Proを自分のトレーニングやコーチングに合わせます。プロフィール、単位、体重、言語、役割は表示画面と分析に影響します。", "最初の確認", "言語や起動役割を変えた後は、FitRoster Proを開き直して表示を確認してください。"],
+      exercises: ["種目", "02 種目", "編集可能な種目名と独自種目でトレーニング用語を管理します。", "内蔵種目を使う、ジム用語に合わせて名前を変える、または独自種目を作成できます。", "名称ルール", "自動ローカライズが必要なら内蔵種目、固定したい用語なら独自名称を使います。"],
+      plans: ["計画", "03 計画", "毎回作り直さず、再利用できるトレーニングメニューを作ります。", "テンプレートは反復ブロックに、自由トレーニングは柔軟な作業に、コーチ計画は受講者向けに使います。", "コーチ向け", "安定した基本テンプレートを作り、受講者やブロックごとに複製します。"],
+      logging: ["記録", "04 記録", "実際に行ったトレーニングだけを記録します。", "セットごとに重量、回数、完了状態、必要なメモを入力します。行わなかった予定種目は完了履歴に入れません。", "記録品質", "見た目だけ完了した記録より、正確な記録を優先してください。"],
+      coaching: ["コーチ", "05 コーチ", "コーチモードで計画を送り、進捗を確認します。", "計画、受講者スケジュール、返却されたセッション、目標、レビューを同じ文脈で扱います。", "解釈", "一回のセッションだけで判断せず、継続性、目標、身体情報も一緒に確認します。"],
+      trainee: ["受講者", "06 受講者", "受け取った計画でトレーニングし、文脈付きで進捗を返します。", "受講者モードは日常の記録画面です。コーチ計画、本地記録、カレンダー、分析を分かりやすく保ちます。", "受講者の役割", "変更があった場合は実際に行った内容を記録してください。"],
+      records: ["記録", "07 記録", "カレンダーでトレーニングの一貫性を確認します。", "完了したセッションが履歴の真実です。日、週、月、範囲で確認します。", "信頼できる履歴", "カレンダーは正確な記録があってこそ有効です。"],
+      analysis: ["分析", "08 分析", "次の計画を変える前に進捗シグナルを読みます。", "時間、セット、セッション、身体データ、目標、筋群分布を合わせて変化を説明します。", "分析原則", "何を確認したいのかを決めてから数値を読みます。"],
+      data: ["同期とバックアップ", "09 データ", "同期、書き出し、復元でデータを守ります。", "iCloudとバックアップファイルは、デバイス移行やコーチ連携の前に重要です。", "トラブル前", "各デバイスの役割、対象者、最後の操作を記録してください。"],
+      settings: ["設定", "10 設定", "設定とサポートツールを見つけやすく保ちます。", "言語、単位、プロフィール、起動役割、バックアップ、診断、サポート、プライバシーを管理します。", "プロ設定", "受講者に見せる前に、役割、言語、プロフィールを確認してください。"]
+    });
+
+    localizeFromEnglish("ko", {
+      setup: ["설정", "01 설정", "프로필, 언어, 단위, 시작 역할을 설정합니다.", "FitRoster Pro를 훈련 또는 코칭 방식에 맞춥니다. 프로필, 단위, 체중, 언어, 역할은 화면과 분석에 영향을 줍니다.", "첫 확인", "언어나 시작 역할을 바꾼 뒤 앱을 다시 열어 표시를 확인하세요."],
+      exercises: ["운동", "02 운동", "편집 가능한 운동명과 사용자 운동으로 훈련 언어를 관리합니다.", "기본 운동을 쓰거나, 체육관 용어로 이름을 바꾸거나, 직접 운동을 만들 수 있습니다.", "이름 규칙", "자동 현지화가 필요하면 기본 운동, 고정 용어가 필요하면 사용자 이름을 사용하세요."],
+      plans: ["계획", "03 계획", "매번 다시 쓰지 말고 재사용 가능한 훈련 메뉴를 만듭니다.", "템플릿은 반복 블록에, 자유 훈련은 유연한 작업에, 코치 계획은 회원 지정 세션에 사용합니다.", "코치 방식", "안정적인 기본 템플릿을 만든 뒤 회원이나 주기별로 복제하세요."],
+      logging: ["기록", "04 기록", "실제로 수행한 훈련만 기록합니다.", "세트별 중량, 횟수, 완료 상태, 메모를 입력하고 하지 않은 계획 항목은 기록에 넣지 않습니다.", "기록 품질", "완성되어 보이는 기록보다 정확한 기록이 더 중요합니다."],
+      coaching: ["코치", "05 코치", "코치 모드로 계획을 보내고 회원 진행을 검토합니다.", "계획, 회원 일정, 반환 세션, 목표, 리뷰를 같은 맥락에서 다룹니다.", "코치 해석", "한 세션만 보지 말고 일정성, 목표, 신체 맥락을 함께 보세요."],
+      trainee: ["회원", "06 회원", "받은 계획으로 훈련하고 맥락과 함께 진행을 반환합니다.", "회원 모드는 매일 쓰는 훈련 화면입니다. 코치 계획, 로컬 기록, 캘린더, 분석을 분리해 둡니다.", "회원 책임", "훈련 중 변경되면 실제 수행한 내용을 기록하세요."],
+      records: ["기록", "07 기록", "캘린더로 훈련 일관성을 이해합니다.", "완료 세션이 기록의 기준입니다. 일, 주, 월, 범위로 확인하세요.", "신뢰 가능한 기록", "정직한 세션 기록이 있어야 캘린더가 의미 있습니다."],
+      analysis: ["분석", "08 분석", "다음 계획을 바꾸기 전 진행 신호를 읽습니다.", "시간, 세트, 세션, 신체 데이터, 목표, 근육 분포를 함께 해석합니다.", "분석 원칙", "무엇을 확인하려는지 정한 뒤 숫자를 읽으세요."],
+      data: ["동기화+백업", "09 데이터", "동기화, 내보내기, 복원 습관으로 데이터를 보호합니다.", "기기 변경이나 코치-회원 동기화 전에는 백업을 훈련 관리의 일부로 보세요.", "문제 확인 전", "각 기기의 역할, 대상 코치/회원, 마지막 작업을 기록하세요."],
+      settings: ["설정", "10 설정", "환경설정과 지원 도구를 찾기 쉽게 유지합니다.", "언어, 단위, 프로필, 시작 역할, 백업, 진단, 지원, 개인정보 항목을 관리합니다.", "전문 설정", "회원에게 보여주기 전 역할, 언어, 프로필을 확인하세요."]
+    });
+
+    localizeFromEnglish("th", {
+      setup: ["ตั้งค่า", "01 ตั้งค่า", "ตั้งค่าโปรไฟล์ ภาษา หน่วย และบทบาทเริ่มต้น", "เริ่มจากทำให้ FitRoster Pro ตรงกับวิธีฝึกหรือโค้ชของคุณ ข้อมูลโปรไฟล์ หน่วย น้ำหนัก ภาษา และบทบาทมีผลต่อหน้าจอและการวิเคราะห์", "ตรวจครั้งแรก", "หลังเปลี่ยนภาษา หรือบทบาทเริ่มต้น ให้เปิด FitRoster Pro ใหม่และตรวจหน้าจออีกครั้ง"],
+      exercises: ["ท่า", "02 ท่า", "ควบคุมภาษาการฝึกด้วยชื่อท่าที่แก้ไขได้และท่าสร้างเอง", "ใช้ท่ามาตรฐาน เปลี่ยนชื่อตามยิม หรือสร้างท่าใหม่เมื่อแคตตาล็อกไม่ตรงกับวิธีของคุณ", "กฎชื่อ", "ใช้ท่ามาตรฐานเมื่อต้องการแปลอัตโนมัติ ใช้ชื่อสร้างเองเมื่อต้องการคงคำโค้ชไว้"],
+      plans: ["แผน", "03 แผน", "สร้างเมนูฝึกที่ใช้ซ้ำได้ ไม่ต้องเขียนใหม่ทุกครั้ง", "ใช้เทมเพลตสำหรับบล็อกซ้ำ ใช้ฝึกอิสระสำหรับความยืดหยุ่น และใช้แผนโค้ชสำหรับผู้ฝึกเฉพาะคน", "งานโค้ช", "สร้างเทมเพลตหลักก่อน แล้วคัดลอกให้แต่ละผู้ฝึกหรือแต่ละช่วง"],
+      logging: ["บันทึก", "04 บันทึก", "บันทึกเฉพาะงานที่เกิดขึ้นจริง", "บันทึกน้ำหนัก จำนวนครั้ง สถานะเสร็จ และโน้ตในแต่ละเซต รายการที่ไม่ได้ฝึกไม่ควรเข้าประวัติ", "คุณภาพบันทึก", "บันทึกที่ถูกต้องสำคัญกว่าบันทึกที่ดูครบ"],
+      coaching: ["โค้ช", "05 โค้ช", "ใช้โหมดโค้ชเพื่อส่งแผนและตรวจความคืบหน้า", "รวมการวางแผน ตารางผู้ฝึก เซสชันที่ส่งกลับ เป้าหมาย และการทบทวนไว้ในบริบทเดียวกัน", "การอ่านของโค้ช", "อย่าตัดสินจากเซสชันเดียว ให้ดูความสม่ำเสมอ เป้าหมาย และข้อมูลร่างกายด้วย"],
+      trainee: ["ผู้ฝึก", "06 ผู้ฝึก", "ฝึกจากแผนที่ได้รับและส่งความคืบหน้าพร้อมบริบท", "โหมดผู้ฝึกคือพื้นที่ฝึกประจำวัน แยกแผนจากโค้ช บันทึกท้องถิ่น ปฏิทิน และวิเคราะห์ให้ชัด", "หน้าที่ผู้ฝึก", "ถ้าแผนเปลี่ยนระหว่างฝึก ให้บันทึกสิ่งที่ทำจริง"],
+      records: ["บันทึก", "07 บันทึก", "ใช้ปฏิทินเพื่อเข้าใจความสม่ำเสมอ", "เซสชันที่เสร็จคือแหล่งข้อมูลจริง ตรวจตามวัน สัปดาห์ เดือน หรือช่วงเวลา", "ประวัติที่เชื่อถือได้", "ปฏิทินมีค่าก็ต่อเมื่อบันทึกจริงและไม่เติมรายการที่ไม่ได้ทำ"],
+      analysis: ["วิเคราะห์", "08 วิเคราะห์", "อ่านสัญญาณก่อนปรับแผนถัดไป", "รวมเวลา เซต จำนวนเซสชัน ข้อมูลร่างกาย เป้าหมาย และสัดส่วนกล้ามเนื้อเพื่ออธิบายการเปลี่ยนแปลง", "หลักการวิเคราะห์", "กำหนดคำถามก่อนอ่านตัวเลข"],
+      data: ["ซิงค์+สำรอง", "09 ข้อมูล", "ปกป้องข้อมูลด้วยซิงค์ ส่งออก และกู้คืน", "ใช้ iCloud และไฟล์สำรองเมื่อจำเป็น โดยเฉพาะก่อนย้ายอุปกรณ์หรือทดสอบโค้ชกับผู้ฝึก", "ก่อนแก้ปัญหา", "จดบทบาทของแต่ละอุปกรณ์ บุคคลที่เกี่ยวข้อง และการกระทำล่าสุด"],
+      settings: ["ตั้งค่า", "10 ตั้งค่า", "เก็บการตั้งค่าและเครื่องมือสนับสนุนให้หาได้ง่าย", "จัดการภาษา หน่วย โปรไฟล์ บทบาทเริ่มต้น สำรองข้อมูล วินิจฉัย สนับสนุน และความเป็นส่วนตัว", "ตั้งค่าแบบมืออาชีพ", "ก่อนสาธิตให้ผู้ฝึก ตรวจบทบาท ภาษา และโปรไฟล์ให้ถูกต้อง"]
+    });
+
+    localizeFromEnglish("ms", {
+      setup: ["Tetapan", "01 Tetapan", "Tetapkan profil, bahasa, unit dan peranan mula.", "Mulakan dengan menyesuaikan FitRoster Pro kepada cara latihan atau coaching anda. Profil, unit, berat badan, bahasa dan peranan mempengaruhi paparan serta analisis.", "Semakan pertama", "Selepas menukar bahasa atau peranan mula, buka semula FitRoster Pro dan semak paparan."],
+      exercises: ["Senaman", "02 Senaman", "Kawal bahasa latihan dengan nama boleh edit dan senaman tersuai.", "Gunakan senaman terbina, namakan semula mengikut istilah gim, atau cipta senaman sendiri.", "Peraturan nama", "Gunakan senaman terbina untuk lokalisasi automatik; gunakan nama tersuai untuk istilah tetap."],
+      plans: ["Pelan", "03 Pelan", "Bina menu latihan guna semula, bukan tulis semula setiap sesi.", "Templat sesuai untuk blok berulang, latihan bebas untuk fleksibiliti, dan pelan coach untuk sesi pelatih tertentu.", "Aliran coach", "Bina templat asas, kemudian salin untuk pelatih atau blok latihan."],
+      logging: ["Rekod", "04 Rekod", "Rekod hanya kerja yang benar-benar dilakukan.", "Masukkan beban, ulangan, status siap dan nota setiap set. Item yang tidak dilatih tidak perlu masuk sejarah.", "Kualiti rekod", "Rekod tepat lebih penting daripada rekod yang kelihatan lengkap."],
+      coaching: ["Coach", "05 Coach", "Gunakan mod coach untuk hantar pelan dan semak kemajuan.", "Gabungkan perancangan, jadual pelatih, sesi kembali, matlamat dan semakan dalam konteks yang sama.", "Tafsiran coach", "Jangan nilai satu sesi sahaja; semak konsistensi, matlamat dan konteks badan."],
+      trainee: ["Pelatih", "06 Pelatih", "Latih daripada pelan diterima dan pulangkan kemajuan dengan konteks.", "Mod pelatih ialah ruang latihan harian untuk pelan coach, rekod setempat, kalendar dan analisis.", "Tanggungjawab pelatih", "Jika sesi berubah semasa latihan, rekod perkara sebenar yang dibuat."],
+      records: ["Rekod", "07 Rekod", "Gunakan kalendar untuk memahami konsistensi.", "Sesi siap ialah sumber kebenaran. Semak mengikut hari, minggu, bulan atau julat.", "Sejarah boleh dipercayai", "Kalendar berguna apabila rekod sesi jujur."],
+      analysis: ["Analisis", "08 Analisis", "Baca isyarat kemajuan sebelum mengubah pelan seterusnya.", "Gabungkan masa, set, sesi, data badan, matlamat dan agihan otot untuk menerangkan perubahan.", "Prinsip analisis", "Tentukan soalan latihan sebelum membaca nombor."],
+      data: ["Sync+backup", "09 Data", "Lindungi data dengan sync, eksport dan restore.", "Gunakan iCloud dan fail backup bila perlu, terutama sebelum tukar peranti atau uji aliran coach-pelatih.", "Sebelum sokongan", "Catat peranan setiap peranti, orang terlibat dan tindakan terakhir."],
+      settings: ["Tetapan", "10 Tetapan", "Pastikan pilihan dan alat sokongan mudah dicari.", "Urus bahasa, unit, profil, peranan mula, backup, diagnostik, sokongan dan privasi.", "Tetapan profesional", "Sebelum demo kepada pelatih, semak peranan, bahasa dan profil."]
+    });
+
+    localizeFromEnglish("ru", {
+      setup: ["Настройка", "01 Настройка", "Настройте профиль, язык, единицы и стартовую роль.", "Сначала подстройте FitRoster Pro под тренировку или работу тренера. Профиль, единицы, вес, язык и роль влияют на экраны и анализ.", "Первая проверка", "После смены языка или роли откройте FitRoster Pro снова и проверьте отображение."],
+      exercises: ["Упражнения", "02 Упражнения", "Управляйте тренировочным языком через редактируемые и свои упражнения.", "Используйте встроенные упражнения, переименовывайте под зал или создавайте собственные движения.", "Правило имен", "Встроенные упражнения подходят для перевода, собственные имена сохраняют точную терминологию."],
+      plans: ["Планы", "03 Планы", "Создавайте повторяемые меню, а не пишите каждую тренировку заново.", "Шаблоны подходят для блоков, свободная тренировка для гибкости, а планы тренера для конкретного ученика.", "Работа тренера", "Сначала создайте базовый шаблон, затем копируйте его для ученика или блока."],
+      logging: ["Запись", "04 Запись", "Записывайте только реально выполненную работу.", "Вводите вес, повторы, статус и заметки по сетам. Невыполненные пункты не должны попадать в историю.", "Качество записи", "Точная запись важнее записи, которая просто выглядит полной."],
+      coaching: ["Тренер", "05 Тренер", "Используйте режим тренера для отправки планов и проверки прогресса.", "Планы, расписание ученика, возвращенные занятия, цели и обзор остаются в одном контексте.", "Интерпретация", "Не судите по одной тренировке; смотрите регулярность, цели и данные тела."],
+      trainee: ["Ученик", "06 Ученик", "Тренируйтесь по полученному плану и возвращайте прогресс с контекстом.", "Режим ученика хранит план тренера, локальные записи, календарь и анализ отдельно и понятно.", "Ответственность", "Если тренировка изменилась, записывайте то, что действительно произошло."],
+      records: ["Записи", "07 Записи", "Используйте календарь для понимания регулярности.", "Выполненные занятия являются источником правды. Смотрите дни, недели, месяцы и диапазоны.", "Надежная история", "Календарь полезен только при честной записи занятий."],
+      analysis: ["Анализ", "08 Анализ", "Читайте сигналы прогресса перед изменением следующего плана.", "Время, сеты, занятия, данные тела, цели и мышцы вместе объясняют изменения.", "Принцип анализа", "Сначала решите, какой тренировочный вопрос вы проверяете."],
+      data: ["Синхр.+копии", "09 Данные", "Защищайте данные через синхронизацию, экспорт и восстановление.", "Используйте iCloud и файлы копий перед миграцией устройства или проверкой связи тренер-ученик.", "Перед поддержкой", "Запишите роль каждого устройства, участника и последнее действие."],
+      settings: ["Параметры", "10 Параметры", "Держите настройки и инструменты поддержки под рукой.", "Управляйте языком, единицами, профилем, стартовой ролью, копиями, диагностикой, поддержкой и приватностью.", "Профессиональная настройка", "Перед демонстрацией ученику проверьте роль, язык и профиль."]
+    });
+
+    localizeFromEnglish("de", {
+      setup: ["Einrichtung", "01 Einrichtung", "Profil, Sprache, Einheiten und Startrolle einstellen.", "Passe FitRoster Pro zuerst an Training oder Coaching an. Profil, Einheiten, Körpergewicht, Sprache und Rolle beeinflussen Ansichten und Analyse.", "Erste Prüfung", "Nach Sprach- oder Rollenwechsel FitRoster Pro erneut öffnen und die Anzeige prüfen."],
+      exercises: ["Übungen", "02 Übungen", "Trainingssprache mit editierbaren und eigenen Übungen steuern.", "Nutze eingebaute Übungen, benenne sie für dein Studio um oder erstelle eigene Bewegungen.", "Namensregel", "Eingebaute Übungen für automatische Lokalisierung, eigene Namen für feste Coaching-Begriffe."],
+      plans: ["Pläne", "03 Pläne", "Wiederverwendbare Menüs bauen statt jede Session neu zu schreiben.", "Templates für Blöcke, freies Training für Flexibilität und Coach-Pläne für einzelne Athleten.", "Coach-Ablauf", "Erstelle zuerst ein stabiles Basistemplate und kopiere es für Athleten oder Blöcke."],
+      logging: ["Logging", "04 Logging", "Nur die tatsächlich geleistete Arbeit erfassen.", "Sätze mit Last, Wiederholungen, Status und Notizen erfassen. Nicht trainierte Planpunkte gehören nicht in die Historie.", "Aufzeichnungsqualität", "Eine genaue Aufzeichnung ist wichtiger als eine vollständig wirkende."],
+      coaching: ["Coach", "05 Coach", "Coach-Modus zum Senden von Plänen und Prüfen des Fortschritts nutzen.", "Planung, Athletenkalender, zurückgegebene Sessions, Ziele und Review bleiben verbunden.", "Interpretation", "Nicht nach einer Session urteilen; Konsistenz, Ziele und Körperkontext mitlesen."],
+      trainee: ["Athlet", "06 Athlet", "Vom erhaltenen Plan trainieren und Fortschritt mit Kontext zurückgeben.", "Der Athletenmodus trennt Coach-Pläne, lokale Records, Kalender und Analyse sauber.", "Verantwortung", "Wenn sich die Session ändert, erfasse was wirklich passiert ist."],
+      records: ["Records", "07 Records", "Kalender nutzen, um Trainingskonsistenz zu verstehen.", "Absolvierte Sessions sind die Wahrheit. Prüfe Tage, Wochen, Monate und Bereiche.", "Zuverlässige Historie", "Der Kalender ist nur mit ehrlichem Logging aussagekräftig."],
+      analysis: ["Analyse", "08 Analyse", "Fortschrittssignale lesen, bevor der nächste Plan geändert wird.", "Zeit, Sätze, Sessions, Körperdaten, Ziele und Muskelverteilung erklären Veränderungen zusammen.", "Analyseprinzip", "Lege zuerst fest, welche Trainingsfrage du beantworten willst."],
+      data: ["Sync+Backup", "09 Daten", "Trainingsdaten mit Sync, Export und Restore schützen.", "Nutze iCloud und Backupdateien besonders vor Gerätewechseln oder Coach-Athlet-Tests.", "Vor Support", "Notiere Rollen der Geräte, betroffene Person und letzte Aktion."],
+      settings: ["Einstellungen", "10 Einstellungen", "Präferenzen und Supportwerkzeuge leicht auffindbar halten.", "Sprache, Einheiten, Profil, Startrolle, Backup, Diagnostik, Support und Datenschutz verwalten.", "Professionelle Einrichtung", "Vor einer Demo für Athleten Rolle, Sprache und Profil prüfen."]
+    });
+
+    localizeFromEnglish("fr", {
+      setup: ["Configuration", "01 Configuration", "Configurer profil, langue, unités et rôle de démarrage.", "Adaptez d'abord FitRoster Pro à votre entraînement ou coaching. Profil, unités, poids, langue et rôle influencent les écrans et l'analyse.", "Première vérification", "Après changement de langue ou rôle, rouvrez FitRoster Pro et vérifiez l'affichage."],
+      exercises: ["Exercices", "02 Exercices", "Contrôler le vocabulaire avec exercices modifiables et personnalisés.", "Utilisez les exercices intégrés, renommez selon votre salle ou créez vos propres mouvements.", "Règle de nommage", "Les exercices intégrés se localisent; les noms personnalisés gardent vos termes."],
+      plans: ["Plans", "03 Plans", "Créer des menus réutilisables au lieu de repartir de zéro.", "Modèles pour blocs répétés, entraînement libre pour flexibilité, plans coach pour élèves précis.", "Flux coach", "Créez un modèle de base stable puis copiez-le pour chaque élève ou bloc."],
+      logging: ["Suivi", "04 Suivi", "Enregistrer uniquement le travail réellement effectué.", "Saisissez charge, répétitions, état et notes par série. Les éléments non faits ne vont pas dans l'historique.", "Qualité du suivi", "Un suivi exact vaut mieux qu'un suivi seulement complet en apparence."],
+      coaching: ["Coach", "05 Coach", "Utiliser le mode coach pour envoyer les plans et relire les progrès.", "Planification, calendrier élève, séances renvoyées, objectifs et revue restent liés.", "Interprétation", "Ne jugez pas une seule séance; regardez régularité, objectifs et contexte corporel."],
+      trainee: ["Élève", "06 Élève", "S'entraîner depuis le plan reçu et renvoyer la progression avec contexte.", "Le mode élève garde plans coach, suivis locaux, calendrier et analyse clairement séparés.", "Responsabilité", "Si la séance change, enregistrez ce qui a réellement été fait."],
+      records: ["Suivis", "07 Suivis", "Utiliser le calendrier pour comprendre la régularité.", "Les séances terminées sont la source de vérité. Vérifiez jours, semaines, mois et plages.", "Historique fiable", "Le calendrier n'est utile qu'avec un suivi honnête."],
+      analysis: ["Analyse", "08 Analyse", "Lire les signaux avant de changer le prochain plan.", "Temps, séries, séances, données corporelles, objectifs et muscles expliquent les changements ensemble.", "Principe d'analyse", "Définissez d'abord la question d'entraînement."],
+      data: ["Sync+backup", "09 Données", "Protéger les données avec sync, export et restauration.", "Utilisez iCloud et les fichiers de sauvegarde avant migration ou test coach-élève.", "Avant support", "Notez le rôle de chaque appareil, la personne concernée et la dernière action."],
+      settings: ["Réglages", "10 Réglages", "Garder préférences et outils support faciles à trouver.", "Gérez langue, unités, profil, rôle de démarrage, sauvegarde, diagnostics, support et confidentialité.", "Configuration pro", "Avant une démonstration élève, vérifiez rôle, langue et profil."]
+    });
+
+    localizeFromEnglish("es", {
+      setup: ["Configuración", "01 Configuración", "Configura perfil, idioma, unidades y rol inicial.", "Primero adapta FitRoster Pro a tu entrenamiento o coaching. Perfil, unidades, peso, idioma y rol afectan pantallas y análisis.", "Primera revisión", "Después de cambiar idioma o rol, vuelve a abrir FitRoster Pro y revisa la pantalla."],
+      exercises: ["Ejercicios", "02 Ejercicios", "Controla tu lenguaje con ejercicios editables y propios.", "Usa ejercicios integrados, cambia nombres según tu gimnasio o crea movimientos propios.", "Regla de nombres", "Usa integrados para localización automática y nombres propios para términos fijos."],
+      plans: ["Planes", "03 Planes", "Crea menús reutilizables en lugar de reescribir cada sesión.", "Plantillas para bloques repetidos, libre para flexibilidad y planes de entrenador para alumnos concretos.", "Flujo entrenador", "Crea una plantilla base estable y cópiala para cada alumno o bloque."],
+      logging: ["Registro", "04 Registro", "Registra solo el trabajo que ocurrió realmente.", "Introduce carga, repeticiones, estado y notas por serie. Lo no entrenado no entra al historial.", "Calidad del registro", "Un registro exacto importa más que uno que solo parece completo."],
+      coaching: ["Entrenador", "05 Entrenador", "Usa modo entrenador para enviar planes y revisar progreso.", "Planificación, calendario del alumno, sesiones devueltas, objetivos y revisión quedan conectados.", "Interpretación", "No juzgues por una sesión; mira consistencia, objetivos y contexto corporal."],
+      trainee: ["Alumno", "06 Alumno", "Entrena desde el plan recibido y devuelve progreso con contexto.", "El modo alumno separa planes del entrenador, registros locales, calendario y análisis.", "Responsabilidad", "Si la sesión cambia, registra lo que realmente ocurrió."],
+      records: ["Registros", "07 Registros", "Usa el calendario para entender consistencia.", "Las sesiones completadas son la verdad. Revisa días, semanas, meses y rangos.", "Historial fiable", "El calendario solo sirve si el registro es honesto."],
+      analysis: ["Análisis", "08 Análisis", "Lee señales antes de cambiar el siguiente plan.", "Tiempo, series, sesiones, cuerpo, objetivos y músculos explican cambios en conjunto.", "Principio de análisis", "Define primero qué pregunta de entrenamiento quieres responder."],
+      data: ["Sync+backup", "09 Datos", "Protege datos con sincronización, exportación y restauración.", "Usa iCloud y archivos de backup antes de migrar dispositivo o probar entrenador-alumno.", "Antes de soporte", "Anota el rol de cada dispositivo, persona afectada y última acción."],
+      settings: ["Ajustes", "10 Ajustes", "Mantén preferencias y soporte fáciles de encontrar.", "Gestiona idioma, unidades, perfil, rol inicial, backup, diagnóstico, soporte y privacidad.", "Configuración profesional", "Antes de una demo con alumnos, revisa rol, idioma y perfil."]
+    });
+
+    const localizedStepDetails = {
+      ja: {
+        setup: [["起動時の役割を選ぶ", "設定でFitRoster Proをコーチモードまたは受講者モードのどちらで開くか決めます。コーチは通常コーチモード、個人利用は受講者モードが扱いやすいです。"], ["身体情報を入力する", "ニックネーム、生年、性別、体重、単位を設定します。体重は自重種目や分析の背景情報として使いやすくなります。"], ["言語を設定する", "アプリとWebガイドはFitRoster Proの対応言語に合わせられます。内蔵種目名は言語に追従し、自分で入力した名前はそのまま残ります。"], ["サポート項目を確認する", "設定内のサポート、プライバシー、診断、書き出し、復元を把握しておくと、データ復旧や問い合わせ時に迷いません。"]],
+        exercises: [["内蔵種目を使う", "内蔵種目名は言語切替に合わせて表示されます。多言語の受講者に説明する動作は、まず内蔵種目を使うと安定します。"], ["ジム用語に合わせて名前を変える", "マシン名、ケーブル位置、コーチングキューに固定の呼び方がある場合は、行の名前を変えて現場の言葉に合わせます。"], ["独自種目を作る", "カタログにない動きは独自種目として作成します。独自名は言語を切り替えても変わらないため、専門用語や店舗名を守れます。"], ["記録を読みやすく保つ", "セッション前に種目名を整理しておくと、あとから記録、カレンダー、分析を読むときに理由を追いやすくなります。"]],
+        plans: [["テンプレートから始める", "よく使う構成はテンプレートから始め、複製して調整します。毎回ゼロからメニューを作らず、安定した基礎を保てます。"], ["セッションを整理する", "ウォームアップ、メイン、補助、コンディショニングの順に並べると、トレーニング中に迷わず確認できます。"], ["受講者ごとに調整する", "コーチは送信前に種目名、順序、メモ、予定内容を受講者に合わせて変えられます。"], ["計画と記録を分ける", "予定した項目は完了記録ではありません。行わなかった項目は履歴に入れず、記録を実際の作業に合わせます。"]],
+        logging: [["セット内容を追加する", "実施した各セットに重量と回数を入力します。セッション内容が変わったら、行やセット数を追加または削除します。"], ["体重情報を整える", "自重種目や補助ありの種目では、体重の背景情報が正確だと記録の意味が読み取りやすくなります。"], ["完了を意図して付ける", "実際に行った項目だけを完了にします。予定だけの項目を完了にすると、ボリュームや履歴が過大になります。"], ["保存前に見直す", "終了前に種目名、重量、回数、メモを確認します。コーチへ返すセッションでは特に重要です。"]],
+        coaching: [["計画を準備する", "トレーニングメニューを作成または選択し、受講者に合わせて種目、順序、メモを調整します。"], ["課題を送信する", "計画のスナップショットを受講者へ送ります。受講者は自分のコピーで記録するため、元のテンプレートは再利用できます。"], ["返却された内容を確認する", "コーチ記録とスケジュールで、完了したセッション、抜けた作業、メモを確認します。"], ["次のブロックを調整する", "返却記録、目標、身体データ、分析を合わせて見てから、次の計画を変更します。"]],
+        trainee: [["計画を受け入れる", "コーチから計画が届いたら、自分のローカルスケジュールに受け入れてからトレーニングします。"], ["自分のコピーで記録する", "受講者側のコピーは実際に行った内容を記録できます。コーチの再利用テンプレートは変更されません。"], ["完了進捗を返す", "トレーニング後に完了セッションを返すと、コーチは計画と実績を同じ文脈で確認できます。"], ["カレンダーを確認する", "記録画面で完了日、抜けた日、変更されたセッションを確認し、予定を見失わないようにします。"]],
+        records: [["カレンダーを俯瞰する", "月表示や週表示で、トレーニング密度、コーチ課題、完了した作業を確認します。"], ["日付を開く", "トレーニング日を開き、その日に完了したセッションと元の計画の文脈を確認します。"], ["完了した作業だけを読む", "FitRoster Proは完了した種目とセットを記録します。スキップした予定項目は履歴に混ぜません。"], ["分析前に記録を見る", "分析値が不自然な場合は、まずカレンダーを確認します。休んだ週や変更された計画が原因のことがあります。"]],
+        analysis: [["期間を選ぶ", "質問に合う期間を選びます。1日はセッション確認、30日はブロック確認、長期は傾向確認に向いています。"], ["トレーニング量を比較する", "時間、セット数、セッション数、カレンダー上の継続性を一緒に見ます。単一の数字だけで判断しません。"], ["筋群分布を確認する", "筋肉マップで鍛えた部位と不足している部位を確認します。未実施部位が控えめに見えることで偏りに気づきやすくなります。"], ["目標と身体データをつなげる", "目標とInBodyなどの身体情報は補助信号です。次の計画を考える材料にし、コーチ判断の代わりにはしません。"]],
+        data: [["必要な場所でiCloudを使う", "コーチと受講者の共有や複数デバイスの流れは、iCloudの状態とApple ID条件に依存します。"], ["バックアップを書き出す", "大きな変更、端末移行、同期確認の前にFitRoster Proのバックアップや書き出しファイルを作成します。"], ["慎重に復元する", "信頼できるファイルだけから復元します。復元後は役割、記録、メニュー、コーチ連携状態を確認します。"], ["サポート用の情報をそろえる", "同期問題では、アプリ版、端末、iOS、役割、問題が計画送信か返却かバックアップかを一緒に伝えます。"]],
+        settings: [["プロフィール変更を確認する", "身体指標や分析に影響する値は意図して変更し、関連画面を再確認します。"], ["言語設定を使う", "内蔵カタログ名、タブ名、Webガイドの言語を合わせたい場合は設定から言語を切り替えます。"], ["サポート文脈を残す", "問い合わせでは画面名、役割、アプリ版、端末モデル、iOS版を添えると解決しやすくなります。"], ["ガイドへ戻る", "新しい端末を設定する時、他の人に教える時、受講者へ説明する時にこのHTMLガイドを使います。"]]
+      },
+      ko: {
+        setup: [["시작 역할 선택", "설정에서 FitRoster Pro가 코치 모드 또는 회원 모드로 열릴지 정합니다. 코치는 보통 코치 모드, 개인 사용자는 회원 모드가 자연스럽습니다."], ["신체 정보 입력", "닉네임, 출생연도, 성별, 체중, 단위를 설정합니다. 체중은 맨몸 운동과 분석을 해석하는 배경 정보가 됩니다."], ["언어 설정", "앱과 웹 가이드는 FitRoster Pro 지원 언어에 맞출 수 있습니다. 기본 운동명은 앱 언어를 따르고 직접 입력한 이름은 그대로 유지됩니다."], ["지원 항목 확인", "지원, 개인정보, 진단, 내보내기, 복원 항목의 위치를 알아두면 데이터 복구나 문의 시 필요한 정보를 빠르게 찾을 수 있습니다."]],
+        exercises: [["기본 운동명 사용", "기본 운동명은 언어 전환에 맞춰 현지화됩니다. 여러 언어를 쓰는 회원에게 설명할 운동은 기본 운동을 우선 사용하세요."], ["체육관 용어로 이름 변경", "기구 이름, 케이블 위치, 코칭 큐에 고정 용어가 있다면 행 이름을 바꿔 실제 현장의 표현과 맞춥니다."], ["사용자 운동 만들기", "카탈로그에 없는 동작은 사용자 운동으로 만듭니다. 사용자 이름은 언어를 바꿔도 그대로 남아 코칭 용어를 지킬 수 있습니다."], ["기록을 깨끗하게 유지", "훈련을 기록하기 전에 운동명이 분명해야 이후 기록, 캘린더, 분석을 더 쉽게 해석할 수 있습니다."]],
+        plans: [["템플릿에서 시작", "자주 쓰는 구조는 템플릿에서 시작하고 복제해 조정합니다. 매 세션을 처음부터 만들 필요가 없습니다."], ["세션 순서 정리", "워밍업, 메인 리프트, 보조 운동, 컨디셔닝 순서로 묶으면 훈련 중 빠르게 확인할 수 있습니다."], ["회원별 조정", "코치는 발송 전에 운동명, 순서, 메모, 예정 작업을 특정 회원에 맞게 바꿀 수 있습니다."], ["계획과 기록 분리", "예정 항목은 완료 기록이 아닙니다. 수행하지 않은 항목은 세션 기록에 넣지 않아 실제 훈련만 남깁니다."]],
+        logging: [["세트 세부 정보 입력", "수행한 각 세트의 중량과 횟수를 입력합니다. 세션이 바뀌면 행과 세트 수를 추가하거나 줄입니다."], ["체중 배경 유지", "맨몸 또는 보조 운동에서는 체중 배경이 정확해야 기록의 의미가 더 분명해집니다."], ["완료 표시를 신중하게", "실제로 한 항목만 완료로 둡니다. 하지 않은 예정 항목을 완료하면 볼륨과 이력이 부풀려집니다."], ["저장 전 검토", "완료 전에 운동명, 중량, 횟수, 메모를 확인합니다. 코치에게 돌려줄 세션에서는 특히 중요합니다."]],
+        coaching: [["계획 준비", "훈련 메뉴를 만들거나 선택한 뒤 회원에 맞춰 운동, 순서, 메모를 조정합니다."], ["과제 보내기", "계획 스냅샷을 회원에게 보냅니다. 회원은 자신의 복사본으로 기록하므로 코치 템플릿은 재사용할 수 있습니다."], ["반환 기록 검토", "코치 기록과 일정 화면에서 완료 세션, 빠진 작업, 메모를 확인합니다."], ["다음 블록 조정", "반환 기록, 목표, 신체 데이터, 분석을 함께 본 뒤 다음 계획을 수정합니다."]],
+        trainee: [["계획 수락", "코치가 보낸 계획을 로컬 일정에 수락한 뒤 그 계획으로 훈련을 시작합니다."], ["내 복사본으로 훈련", "회원 복사본은 실제 수행 내용을 기록할 수 있고 코치의 재사용 템플릿은 바꾸지 않습니다."], ["완료 진행 반환", "훈련 후 완료 세션을 반환하면 코치가 계획과 실제 결과를 같은 맥락에서 검토할 수 있습니다."], ["캘린더 확인", "기록 화면에서 완료일, 빠진 세션, 조정된 훈련을 확인해 일정을 놓치지 않습니다."]],
+        records: [["캘린더 스캔", "월간과 주간 화면에서 훈련 밀도, 코치 과제, 완료된 작업을 확인합니다."], ["날짜 열기", "훈련일을 열어 그날 완료한 세션과 원래 계획 맥락을 확인합니다."], ["완료 작업만 읽기", "FitRoster Pro는 완료한 운동과 세트만 기록합니다. 건너뛴 예정 항목은 이력에 섞지 않습니다."], ["분석 전 기록 확인", "분석이 이상해 보이면 먼저 캘린더를 봅니다. 쉬었던 주나 변경된 계획이 원인일 수 있습니다."]],
+        analysis: [["기간 선택", "질문에 맞는 기간을 고릅니다. 하루는 세션, 30일은 블록, 장기간은 추세 검토에 적합합니다."], ["훈련량 비교", "시간, 세트, 세션 수, 캘린더 일관성을 함께 봅니다. 숫자 하나만으로 판단하지 않습니다."], ["근육 분포 확인", "근육 지도로 많이 쓴 부위와 부족한 부위를 확인합니다. 훈련하지 않은 부위가 뒤로 물러나 보여 불균형을 찾기 쉽습니다."], ["목표와 신체 데이터 연결", "목표와 InBody 같은 신체 정보는 보조 신호입니다. 다음 계획을 안내하지만 코치 판단을 대체하지 않습니다."]],
+        data: [["필요한 곳에서 iCloud 사용", "코치-회원 공유와 여러 기기 흐름은 iCloud 상태와 Apple ID 조건에 영향을 받습니다."], ["백업 내보내기", "큰 변경, 기기 이동, 동기화 점검 전에는 FitRoster Pro 백업 또는 내보내기 파일을 만듭니다."], ["신중하게 복원", "신뢰하는 파일에서만 복원합니다. 복원 후 역할, 기록, 메뉴, 코치-회원 상태를 확인합니다."], ["지원용 정보 정리", "동기화 문제에는 앱 버전, 기기, iOS, 역할, 문제가 계획 발송인지 반환인지 백업인지 함께 전달합니다."]],
+        settings: [["프로필 변경 검토", "신체 지표나 분석에 영향을 주는 값은 의도적으로 바꾸고 관련 화면을 다시 확인합니다."], ["언어 설정 사용", "기본 카탈로그 이름, 탭 이름, 웹 가이드를 같은 언어로 맞추려면 설정에서 언어를 바꿉니다."], ["지원 맥락 보관", "문의할 때 화면, 역할, 앱 버전, 기기 모델, iOS 버전을 제공하면 문제를 더 빨리 좁힐 수 있습니다."], ["가이드로 돌아오기", "새 기기 설정, 다른 사람 교육, 회원에게 FitRoster Pro를 설명할 때 이 HTML 가이드를 다시 사용합니다."]]
+      },
+      th: {
+        setup: [["เลือกบทบาทเริ่มต้น", "ตั้งค่าว่า FitRoster Pro จะเปิดในโหมดโค้ชหรือโหมดผู้ฝึก โค้ชมักใช้โหมดโค้ช ส่วนผู้ใช้เดี่ยวใช้โหมดผู้ฝึกได้สะดวกกว่า"], ["ใส่ข้อมูลร่างกาย", "ตั้งชื่อเล่น ปีเกิด เพศ น้ำหนัก และหน่วย ข้อมูลน้ำหนักช่วยให้การอ่านท่าน้ำหนักตัวและการวิเคราะห์มีบริบท"], ["ตั้งค่าภาษา", "แอปและคู่มือเว็บรองรับชุดภาษาของ FitRoster Pro ชื่อท่ามาตรฐานจะเปลี่ยนตามภาษา ส่วนชื่อที่พิมพ์เองจะคงเดิม"], ["ตรวจรายการสนับสนุน", "จำตำแหน่งสนับสนุน ความเป็นส่วนตัว วินิจฉัย ส่งออก และกู้คืนไว้ เพื่อใช้เมื่อต้องกู้ข้อมูลหรือแจ้งปัญหา"]],
+        exercises: [["ใช้ชื่อท่ามาตรฐาน", "ชื่อท่ามาตรฐานจะถูกแปลตามภาษาที่เลือก เหมาะกับการสอนผู้ฝึกที่ใช้หลายภาษา"], ["เปลี่ยนชื่อตามยิม", "ถ้าเครื่อง สถานีเคเบิล หรือคำโค้ชมีชื่อเฉพาะ ให้เปลี่ยนชื่อแถวให้ตรงกับคำที่ใช้จริง"], ["สร้างท่าเอง", "เมื่อแคตตาล็อกไม่มีท่าที่ต้องการ ให้สร้างท่าเอง ชื่อนี้จะไม่เปลี่ยนเมื่อสลับภาษา"], ["ทำให้บันทึกอ่านง่าย", "ตั้งชื่อท่าให้ชัดก่อนบันทึกเซสชัน เพื่อให้การอ่านบันทึก ปฏิทิน และวิเคราะห์ภายหลังง่ายขึ้น"]],
+        plans: [["เริ่มจากเทมเพลต", "ใช้เทมเพลตสำหรับโครงสร้างที่ใช้บ่อย แล้วคัดลอกหรือปรับ ไม่ต้องสร้างทุกแผนจากศูนย์"], ["จัดลำดับเซสชัน", "เรียงวอร์มอัป ท่าหลัก ท่าเสริม และคอนดิชันนิ่งให้สแกนได้ง่ายระหว่างฝึก"], ["ปรับให้ผู้ฝึกแต่ละคน", "โค้ชสามารถแก้ชื่อท่า ลำดับ โน้ต และงานที่วางไว้ก่อนส่งให้ผู้ฝึก"], ["แยกแผนกับบันทึก", "รายการที่วางแผนไว้ยังไม่ใช่บันทึกที่เสร็จ รายการที่ไม่ได้ทำไม่ควรเข้าไปในประวัติ"]],
+        logging: [["ใส่รายละเอียดเซต", "บันทึกน้ำหนักและจำนวนครั้งของแต่ละเซตที่ทำจริง เพิ่มหรือลบแถวเมื่อเซสชันเปลี่ยน"], ["รักษาบริบทน้ำหนักตัว", "ท่าน้ำหนักตัวหรือท่าช่วยพยุงควรมีข้อมูลน้ำหนักที่ถูกต้อง เพื่อให้บันทึกมีความหมาย"], ["ทำเครื่องหมายเสร็จอย่างตั้งใจ", "เลือกเสร็จเฉพาะรายการที่ทำจริง เพื่อไม่ให้ปริมาณฝึกและประวัติสูงเกินจริง"], ["ตรวจทานก่อนบันทึก", "ก่อนจบเซสชัน ให้ตรวจชื่อท่า น้ำหนัก จำนวนครั้ง และโน้ต โดยเฉพาะเซสชันที่ต้องส่งกลับให้โค้ช"]],
+        coaching: [["เตรียมแผน", "สร้างหรือเลือกเมนูฝึก แล้วปรับท่า ลำดับ และโน้ตให้เหมาะกับผู้ฝึก"], ["ส่งงานฝึก", "ส่งสแนปชอตของแผนให้ผู้ฝึก ผู้ฝึกจะบันทึกจากสำเนาของตัวเอง ทำให้เทมเพลตของโค้ชยังใช้ซ้ำได้"], ["ตรวจงานที่ส่งกลับ", "ใช้หน้าบันทึกและตารางของโค้ชเพื่อตรวจเซสชันที่เสร็จ รายการที่ขาด และโน้ต"], ["ปรับบล็อกถัดไป", "ดูบันทึกที่ส่งกลับ เป้าหมาย ข้อมูลร่างกาย และวิเคราะห์ร่วมกันก่อนแก้แผนถัดไป"]],
+        trainee: [["รับแผน", "เมื่อโค้ชส่งแผน ให้รับเข้าตารางในเครื่องก่อนเริ่มฝึกจากแผนนั้น"], ["ฝึกจากสำเนาของคุณ", "สำเนาของผู้ฝึกใช้บันทึกสิ่งที่ทำจริง โดยไม่เปลี่ยนเทมเพลตที่โค้ชใช้ซ้ำ"], ["ส่งความคืบหน้าที่เสร็จ", "หลังฝึก ส่งเซสชันที่เสร็จกลับ เพื่อให้โค้ชตรวจงานพร้อมบริบท"], ["ตรวจปฏิทิน", "ใช้บันทึกเพื่อยืนยันวันที่ฝึกเสร็จ วันที่ขาด หรือเซสชันที่ถูกปรับ"]],
+        records: [["สแกนปฏิทิน", "ใช้มุมมองเดือนและสัปดาห์เพื่อดูความถี่ งานจากโค้ช และงานที่เสร็จ"], ["เปิดวันที่", "แตะวันฝึกเพื่อดูเซสชันที่เสร็จในวันนั้น และบริบทของแผนเดิม"], ["อ่านเฉพาะงานที่เสร็จ", "FitRoster Pro บันทึกเฉพาะท่าและเซตที่ทำจริง รายการวางแผนที่ข้ามจะไม่ปนในประวัติ"], ["ดูก่อนวิเคราะห์", "ถ้าวิเคราะห์ดูแปลก ให้ตรวจปฏิทินก่อน สัปดาห์ที่ขาดหรือแผนที่เปลี่ยนอาจเป็นสาเหตุ"]],
+        analysis: [["เลือกช่วงเวลา", "เลือกช่วงตามคำถาม หนึ่งวันสำหรับเซสชัน 30 วันสำหรับบล็อก และช่วงยาวสำหรับแนวโน้ม"], ["เปรียบเทียบปริมาณฝึก", "ดูเวลา เซต จำนวนเซสชัน และความสม่ำเสมอร่วมกัน อย่าตัดสินจากเลขเดียว"], ["ตรวจสัดส่วนกล้ามเนื้อ", "ใช้แผนที่กล้ามเนื้อเพื่อดูส่วนที่ฝึกและส่วนที่ยังขาด พื้นที่ที่ไม่ได้ฝึกควรถอยลงเพื่อเห็นความไม่สมดุล"], ["เชื่อมเป้าหมายกับข้อมูลร่างกาย", "เป้าหมายและข้อมูล InBody เป็นสัญญาณเสริม ใช้ชี้แผนถัดไป ไม่ใช่แทนการตัดสินของโค้ช"]],
+        data: [["ใช้ iCloud เมื่อจำเป็น", "การแชร์โค้ชกับผู้ฝึกและการใช้งานหลายอุปกรณ์ขึ้นกับสถานะ iCloud และเงื่อนไข Apple ID"], ["ส่งออกไฟล์สำรอง", "ก่อนเปลี่ยนใหญ่ ย้ายอุปกรณ์ หรือทดสอบซิงค์ ให้สร้างไฟล์สำรองหรือส่งออกของ FitRoster Pro"], ["กู้คืนอย่างระวัง", "กู้คืนจากไฟล์ที่เชื่อถือเท่านั้น แล้วตรวจบทบาท บันทึก เมนู และสถานะโค้ชกับผู้ฝึก"], ["เตรียมข้อมูลให้สนับสนุน", "เมื่อซิงค์มีปัญหา ให้ส่งเวอร์ชันแอป อุปกรณ์ iOS บทบาท และระบุว่าเป็นปัญหาส่งแผน ส่งกลับ หรือไฟล์สำรอง"]],
+        settings: [["ตรวจการเปลี่ยนโปรไฟล์", "ค่าที่มีผลต่อข้อมูลร่างกายหรือการวิเคราะห์ควรเปลี่ยนอย่างตั้งใจ แล้วกลับไปตรวจหน้าที่เกี่ยวข้อง"], ["ใช้การตั้งค่าภาษา", "หากต้องการให้ชื่อแคตตาล็อก แท็บ และคู่มือเว็บตรงกัน ให้เปลี่ยนภาษาใน Settings"], ["เก็บบริบทสนับสนุน", "แจ้งปัญหาพร้อมหน้าจอ บทบาท เวอร์ชันแอป รุ่นอุปกรณ์ และ iOS จะช่วยให้หาสาเหตุง่ายขึ้น"], ["กลับมาที่คู่มือ", "ใช้คู่มือ HTML นี้เมื่อตั้งค่าอุปกรณ์ใหม่ สอนผู้อื่น หรืออธิบาย FitRoster Pro ให้ผู้ฝึก"]]
+      },
+      ms: {
+        setup: [["Pilih peranan mula", "Dalam Settings, tetapkan sama ada FitRoster Pro dibuka dalam mod coach atau mod pelatih. Coach biasanya bermula di Coach Mode, pengguna individu boleh kekal di Trainee Mode."], ["Masukkan konteks badan", "Tetapkan nama panggilan, tahun lahir, jantina, berat badan dan unit. Berat badan membantu bacaan senaman berat badan dan konteks analisis."], ["Tetapkan bahasa", "App dan laman panduan menyokong bahasa FitRoster Pro. Nama senaman terbina mengikut bahasa app, manakala nama yang anda taip kekal sama."], ["Semak item sokongan", "Kenal pasti Support, Privacy, diagnostics, export dan restore supaya pemulihan data atau laporan isu ada konteks yang cukup."]],
+        exercises: [["Gunakan nama terbina", "Nama senaman terbina dilokalkan apabila bahasa bertukar. Gunakan ini apabila anda mahu istilah senaman ikut bahasa pengguna."], ["Namakan semula untuk gim", "Jika mesin, stesen kabel atau cue coach ada istilah khusus, namakan semula supaya pelatih melihat istilah yang digunakan di tempat latihan."], ["Cipta senaman tersuai", "Cipta senaman tersuai apabila gerakan tiada dalam katalog. Nama tersuai kekal tepat seperti ditaip walaupun bahasa berubah."], ["Pastikan rekod jelas", "Sahkan nama senaman sebelum merekod sesi supaya rekod, kalendar dan analisis kemudian lebih mudah difahami."]],
+        plans: [["Mula dengan templat", "Gunakan templat untuk struktur biasa, kemudian salin atau ubah. Ini mengelakkan anda membina setiap pelan dari kosong."], ["Susun sesi", "Letakkan warm-up, latihan utama, aksesori dan conditioning dalam urutan yang mudah discan."], ["Laraskan mengikut pelatih", "Coach boleh menukar nama senaman, susunan, nota dan kerja dirancang sebelum menghantar pelan."], ["Pisahkan pelan dan rekod", "Item yang dirancang bukan rekod siap. Item yang tidak dilatih tidak perlu masuk sejarah sesi."]],
+        logging: [["Tambah butiran set", "Masukkan ulangan dan beban setiap set yang dilakukan. Tambah atau buang baris apabila sesi berubah."], ["Kekalkan konteks berat badan", "Untuk senaman berat badan atau bantuan, berat badan yang tepat menjadikan rekod lebih bermakna."], ["Tanda siap dengan sengaja", "Tandakan siap hanya untuk item yang benar-benar dilatih supaya volume dan sejarah tidak terlebih kira."], ["Semak sebelum simpan", "Sebelum tamat, semak nama senaman, beban, ulangan dan nota, terutama jika sesi perlu dipulangkan kepada coach."]],
+        coaching: [["Sediakan pelan", "Bina atau pilih menu latihan, kemudian ubah senaman, susunan dan nota untuk pelatih tertentu."], ["Hantar tugasan", "Hantar snapshot pelan kepada pelatih. Pelatih berlatih daripada salinan sendiri, jadi templat coach kekal boleh digunakan semula."], ["Semak kerja kembali", "Gunakan rekod dan jadual coach untuk melihat sesi siap, item tertinggal dan nota."], ["Laraskan blok seterusnya", "Gabungkan rekod kembali, matlamat, data badan dan analisis sebelum menukar pelan seterusnya."]],
+        trainee: [["Terima pelan", "Apabila coach menghantar pelan, terima pelan ke jadual setempat sebelum berlatih."], ["Berlatih daripada salinan anda", "Salinan pelatih merekod kerja sebenar tanpa mengubah templat coach yang boleh digunakan semula."], ["Pulangkan kemajuan siap", "Selepas latihan, pulangkan sesi siap supaya coach boleh menyemak kerja dalam konteks."], ["Semak kalendar", "Gunakan Records untuk mengesahkan tarikh siap dan mengesan sesi yang terlepas atau diubah."]],
+        records: [["Imbas kalendar", "Gunakan paparan bulan dan minggu untuk melihat kepadatan latihan, tugasan coach dan kerja siap."], ["Buka tarikh", "Ketik hari latihan untuk melihat sesi yang siap pada tarikh itu dan konteks pelan asal."], ["Baca kerja siap sahaja", "FitRoster Pro merekod senaman dan set yang selesai. Item dirancang yang dilangkau tidak dicampur dalam sejarah."], ["Semak rekod sebelum analisis", "Jika analisis kelihatan pelik, semak kalendar dahulu. Minggu tertinggal atau pelan berubah sering menjelaskan isyarat."]],
+        analysis: [["Pilih julat masa", "Pilih julat mengikut soalan: satu hari untuk sesi, 30 hari untuk blok, atau lebih lama untuk trend."], ["Bandingkan beban latihan", "Baca masa, set, bilangan sesi dan konsistensi kalendar bersama, bukan satu nombor sahaja."], ["Periksa agihan otot", "Gunakan peta otot untuk melihat kawasan yang dilatih dan kurang dilatih. Kawasan tidak dilatih patut lebih senyap secara visual."], ["Sambungkan matlamat dan data badan", "Matlamat dan konteks InBody ialah isyarat sokongan untuk pelan seterusnya, bukan pengganti pertimbangan coach."]],
+        data: [["Gunakan iCloud bila perlu", "Perkongsian coach-pelatih dan aliran merentas peranti bergantung pada status iCloud dan syarat Apple ID."], ["Eksport backup", "Sebelum perubahan besar, migrasi peranti atau ujian sync, cipta fail backup atau export FitRoster Pro."], ["Restore dengan berhati-hati", "Pulihkan hanya daripada fail yang dipercayai. Selepas restore, semak peranan, rekod, menu dan status coach-pelatih."], ["Sediakan diagnostik untuk sokongan", "Untuk isu sync, sertakan versi app, peranti, iOS, peranan dan sama ada isu melibatkan hantar pelan, sesi kembali atau backup."]],
+        settings: [["Semak perubahan profil", "Nilai yang mempengaruhi metrik badan atau analisis perlu diubah dengan sengaja dan disemak semula pada skrin berkaitan."], ["Gunakan tetapan bahasa", "Tukar bahasa dari Settings apabila nama katalog terbina, tab dan panduan web perlu sepadan."], ["Simpan konteks sokongan", "Permintaan sokongan lebih mudah diselesaikan jika ada skrin, peranan, versi app, model peranti dan versi iOS."], ["Kembali ke panduan", "Gunakan panduan HTML ini semasa menetapkan peranti baru, melatih orang lain atau menerangkan FitRoster Pro kepada pelatih."]]
+      },
+      ru: {
+        setup: [["Выберите стартовую роль", "В настройках задайте, будет ли FitRoster Pro открываться в режиме тренера или ученика. Тренеру обычно удобен режим тренера, индивидуальному пользователю — режим ученика."], ["Введите данные тела", "Укажите никнейм, год рождения, пол, вес и единицы. Вес помогает читать упражнения с собственным весом и контекст анализа."], ["Настройте язык", "Приложение и веб-руководство поддерживают языки FitRoster Pro. Встроенные упражнения следуют языку приложения, а введенные вами названия остаются без изменений."], ["Проверьте разделы поддержки", "Запомните, где находятся поддержка, приватность, диагностика, экспорт и восстановление, чтобы быстрее восстановить данные или описать проблему."]],
+        exercises: [["Используйте встроенные названия", "Встроенные упражнения переводятся при смене языка. Это лучший вариант, когда названия должны быть понятны на разных языках."], ["Переименуйте под зал", "Если у тренажера, станции или тренерской подсказки есть свое название, измените строку так, чтобы ученик видел реальные термины зала."], ["Создайте свое упражнение", "Если движения нет в каталоге, создайте собственное упражнение. Такое имя сохраняется точно как введено при любой смене языка."], ["Держите записи чистыми", "Перед записью тренировки уточните названия упражнений. Так календарь, история и анализ будут легче читаться позже."]],
+        plans: [["Начните с шаблона", "Для повторяемых структур используйте шаблон, затем копируйте и корректируйте его. Не нужно создавать каждый план с нуля."], ["Упорядочьте занятие", "Разместите разминку, основные упражнения, вспомогательную работу и кондиционирование в понятном порядке."], ["Настройте под ученика", "Тренер может изменить упражнения, порядок, заметки и запланированную работу перед отправкой ученику."], ["Разделяйте план и запись", "Запланированный пункт еще не является выполненной записью. То, что не выполнялось, не должно попадать в историю."]],
+        logging: [["Добавьте данные сетов", "Записывайте вес и повторы каждого выполненного сета. Если занятие меняется, добавьте или удалите строки."], ["Сохраняйте контекст веса", "Для упражнений с собственным весом или ассистом точный вес делает запись понятнее."], ["Отмечайте выполнение осознанно", "Завершайте только реально выполненные пункты. Иначе объем и история будут завышены."], ["Проверьте перед сохранением", "Перед завершением проверьте названия, вес, повторы и заметки, особенно если занятие возвращается тренеру."]],
+        coaching: [["Подготовьте план", "Создайте или выберите тренировочное меню, затем настройте упражнения, порядок и заметки под ученика."], ["Отправьте задание", "Отправьте снимок плана ученику. Ученик записывает работу в своей копии, поэтому ваш шаблон остается многоразовым."], ["Проверьте возвращенную работу", "В записях и расписании тренера смотрите выполненные занятия, пропуски и заметки."], ["Настройте следующий блок", "Перед изменением следующего плана сопоставьте возвращенную запись, цели, данные тела и анализ."]],
+        trainee: [["Примите план", "Когда тренер отправляет план, примите его в локальное расписание перед началом тренировки."], ["Тренируйтесь в своей копии", "Копия ученика фиксирует фактическую работу и не меняет многоразовый шаблон тренера."], ["Верните выполненный прогресс", "После тренировки верните выполненное занятие, чтобы тренер видел работу в контексте плана."], ["Проверяйте календарь", "Используйте записи, чтобы подтвердить выполненные даты и не потерять пропуски или измененные занятия."]],
+        records: [["Просмотрите календарь", "В месяцах и неделях смотрите плотность тренировок, задания тренера и выполненную работу."], ["Откройте дату", "Выберите тренировочный день, чтобы увидеть выполненные занятия и контекст исходного плана."], ["Читайте только выполненную работу", "FitRoster Pro записывает только выполненные упражнения и сеты. Пропущенные плановые пункты не смешиваются с историей."], ["Сначала записи, потом анализ", "Если анализ выглядит странно, проверьте календарь. Пропущенная неделя или измененный план часто объясняют сигнал."]],
+        analysis: [["Выберите период", "Период должен отвечать вопросу: день для занятия, 30 дней для блока, более длинный срок для тренда."], ["Сравните нагрузку", "Смотрите время, сеты, число занятий и регулярность календаря вместе, а не один показатель отдельно."], ["Проверьте распределение мышц", "Карта мышц показывает тренированные и недотренированные зоны. Неработавшие зоны визуально уходят назад, чтобы дисбаланс был заметнее."], ["Свяжите цели и данные тела", "Цели и данные InBody являются вспомогательными сигналами. Они помогают следующему плану, но не заменяют решение тренера."]],
+        data: [["Используйте iCloud там, где нужно", "Обмен тренер-ученик и работа на разных устройствах зависят от iCloud и условий Apple ID."], ["Экспортируйте копии", "Перед крупными изменениями, миграцией устройства или проверкой синхронизации создайте backup/export FitRoster Pro."], ["Восстанавливайте осторожно", "Восстанавливайте только из доверенных файлов. После этого проверьте роль, записи, меню и состояние связи тренер-ученик."], ["Соберите данные для поддержки", "При проблемах синхронизации укажите версию приложения, устройство, iOS, роль и тип проблемы: отправка плана, возврат занятия или backup."]],
+        settings: [["Проверяйте изменения профиля", "Поля, влияющие на метрики тела или анализ, меняйте осознанно и проверяйте связанные экраны."], ["Используйте язык настроек", "Если названия каталога, вкладки и веб-руководство должны совпадать, переключите язык в настройках."], ["Сохраняйте контекст поддержки", "Для обращения полезны экран, роль, версия приложения, модель устройства и версия iOS."], ["Возвращайтесь к руководству", "Используйте это HTML-руководство при настройке нового устройства, обучении другого человека или объяснении FitRoster Pro ученику."]]
+      },
+      de: {
+        setup: [["Startrolle wählen", "Lege in den Einstellungen fest, ob FitRoster Pro im Coach-Modus oder Athletenmodus öffnet. Coaches starten meist im Coach-Modus, Einzelpersonen eher im Athletenmodus."], ["Körperkontext eingeben", "Setze Nickname, Geburtsjahr, Geschlecht, Körpergewicht und Einheiten. Das Gewicht hilft bei Körpergewichtsübungen und Analysekontext."], ["Sprache einstellen", "App und Webguide folgen den FitRoster Pro-Sprachen. Eingebaute Übungsnamen wechseln mit der App-Sprache, selbst getippte Namen bleiben unverändert."], ["Supporteinträge prüfen", "Merke dir Support, Datenschutz, Diagnose, Export und Wiederherstellung, damit Datenrettung oder Fehlermeldungen genug Kontext haben."]],
+        exercises: [["Eingebaute Namen nutzen", "Eingebaute Übungsnamen werden bei Sprachwechsel lokalisiert. Nutze sie, wenn Namen automatisch zur Sprache der Nutzer passen sollen."], ["Für dein Studio umbenennen", "Wenn Maschine, Kabelstation oder Coaching-Cue einen festen Namen hat, benenne die Zeile so um, dass Athleten deine reale Sprache sehen."], ["Eigene Übungen erstellen", "Fehlt eine Bewegung im Katalog, erstelle eine eigene Übung. Eigene Namen bleiben bei jeder Sprache genau so erhalten."], ["Records sauber halten", "Kläre Übungsnamen vor dem Logging. So bleiben Records, Kalender und Analyse später besser lesbar."]],
+        plans: [["Mit Template starten", "Nutze Templates für wiederkehrende Strukturen und passe Kopien an. So musst du nicht jede Session neu bauen."], ["Session ordnen", "Gruppiere Warm-up, Hauptlifts, Zubehör und Conditioning in einer gut scannbaren Reihenfolge."], ["Pro Athlet anpassen", "Coaches können Übungsnamen, Reihenfolge, Notizen und geplante Arbeit vor dem Senden auf den Athleten abstimmen."], ["Plan und Record trennen", "Ein geplanter Punkt ist kein abgeschlossener Record. Nicht trainierte Punkte gehören nicht in die Historie."]],
+        logging: [["Setdetails eintragen", "Erfasse Gewicht und Wiederholungen jedes tatsächlich absolvierten Sets. Passe Zeilen an, wenn sich die Session ändert."], ["Körpergewicht aktuell halten", "Bei Körpergewichts- oder assistierten Übungen macht ein korrekter Gewichtskontext den Record aussagekräftiger."], ["Abschluss bewusst markieren", "Markiere nur echte Arbeit als abgeschlossen. Sonst werden Volumen und Historie künstlich erhöht."], ["Vor dem Speichern prüfen", "Prüfe Übungsnamen, Gewicht, Wiederholungen und Notizen, besonders wenn die Session an einen Coach zurückgeht."]],
+        coaching: [["Plan vorbereiten", "Erstelle oder wähle ein Trainingsmenü und passe Übungen, Reihenfolge und Notizen für den Athleten an."], ["Aufgabe senden", "Sende einen Plan-Snapshot an den Athleten. Er trainiert aus seiner Kopie, dein Template bleibt wiederverwendbar."], ["Zurückgegebene Arbeit prüfen", "Nutze Coach-Records und Zeitplan, um abgeschlossene Sessions, fehlende Arbeit und Notizen zu prüfen."], ["Nächsten Block anpassen", "Vergleiche Rückgabe, Ziele, Körperdaten und Analyse, bevor du den nächsten Plan änderst."]],
+        trainee: [["Plan annehmen", "Wenn ein Coach einen Plan sendet, nimm ihn in deinen lokalen Zeitplan auf, bevor du daraus trainierst."], ["Aus deiner Kopie trainieren", "Deine Kopie erfasst die tatsächliche Arbeit, ohne das wiederverwendbare Coach-Template zu verändern."], ["Fortschritt zurückgeben", "Nach dem Training gibst du die abgeschlossene Session zurück, damit der Coach sie im Kontext prüfen kann."], ["Kalender prüfen", "Nutze Records, um abgeschlossene Tage, verpasste Arbeit und geänderte Sessions im Blick zu behalten."]],
+        records: [["Kalender scannen", "Monats- und Wochenansichten zeigen Trainingsdichte, Coach-Zuweisungen und erledigte Arbeit."], ["Datum öffnen", "Öffne einen Trainingstag, um die Sessions des Tages und den Plan-Kontext zu sehen."], ["Nur Erledigtes lesen", "FitRoster Pro zeichnet abgeschlossene Übungen und Sets auf. Übersprungene Planpunkte werden nicht in die Historie gemischt."], ["Vor Analyse Records prüfen", "Wenn Analyse ungewöhnlich wirkt, prüfe zuerst den Kalender. Eine verpasste Woche oder ein geänderter Plan erklärt oft das Signal."]],
+        analysis: [["Zeitraum wählen", "Wähle den Zeitraum passend zur Frage: ein Tag für eine Session, 30 Tage für einen Block, länger für Trends."], ["Trainingslast vergleichen", "Lies Zeit, Sets, Sessionzahl und Kalenderkonsistenz gemeinsam statt nur eine Kennzahl."], ["Muskelverteilung prüfen", "Die Muskelkarte zeigt trainierte und untertrainierte Bereiche. Nicht trainierte Bereiche treten zurück, damit Ungleichgewicht auffällt."], ["Ziele und Körperdaten verbinden", "Ziele und InBody-Kontext sind Hilfssignale. Sie leiten den nächsten Plan, ersetzen aber kein Coaching-Urteil."]],
+        data: [["iCloud gezielt nutzen", "Coach-Athlet-Sharing und Gerätewechsel hängen von iCloud-Status und Apple-ID-Bedingungen ab."], ["Backups exportieren", "Vor großen Änderungen, Gerätemigration oder Sync-Tests erstelle FitRoster Pro-Backup- oder Exportdateien."], ["Sorgfältig wiederherstellen", "Stelle nur aus vertrauenswürdigen Dateien wieder her. Danach Rolle, Records, Menüs und Coach-Athlet-Status prüfen."], ["Supportinfos sammeln", "Bei Sync-Problemen App-Version, Gerät, iOS, Rolle und Problemtyp nennen: Plansenden, Rückgabe oder Backup."]],
+        settings: [["Profiländerungen prüfen", "Werte, die Körpermetriken oder Analyse beeinflussen, bewusst ändern und betroffene Ansichten danach prüfen."], ["Spracheinstellungen nutzen", "Wenn Katalognamen, Tabs und Webguide zusammenpassen sollen, stelle die Sprache in Settings um."], ["Supportkontext behalten", "Support wird einfacher mit Bildschirm, Rolle, App-Version, Gerätemodell und iOS-Version."], ["Zum Guide zurückkehren", "Nutze diesen HTML-Guide beim Einrichten neuer Geräte, beim Schulen anderer oder beim Erklären von FitRoster Pro für Athleten."]]
+      },
+      fr: {
+        setup: [["Choisir le rôle de démarrage", "Dans Réglages, choisissez si FitRoster Pro s'ouvre en mode coach ou élève. Les coachs utilisent souvent le mode coach, les utilisateurs seuls le mode élève."], ["Saisir le contexte corporel", "Renseignez pseudo, année de naissance, sexe, poids et unités. Le poids aide à lire les exercices au poids du corps et l'analyse."], ["Définir la langue", "L'app et le guide Web suivent les langues FitRoster Pro. Les exercices intégrés changent avec la langue, les noms saisis restent identiques."], ["Vérifier les entrées support", "Gardez en tête Support, confidentialité, diagnostics, export et restauration pour récupérer des données ou signaler un problème avec contexte."]],
+        exercises: [["Utiliser les noms intégrés", "Les exercices intégrés sont localisés lors d'un changement de langue. Utilisez-les quand les noms doivent suivre la langue de l'utilisateur."], ["Renommer pour votre salle", "Si une machine, une station câble ou un cue de coaching a un nom précis, renommez la ligne pour refléter le terrain."], ["Créer des exercices personnalisés", "Créez un exercice personnalisé quand le catalogue ne contient pas le mouvement. Le nom reste exactement tel que saisi dans toutes les langues."], ["Garder des suivis propres", "Clarifiez les noms avant de suivre une séance. Les records, le calendrier et l'analyse seront plus faciles à lire ensuite."]],
+        plans: [["Partir d'un modèle", "Utilisez un modèle pour les structures fréquentes, puis dupliquez et ajustez. Vous évitez de reconstruire chaque séance."], ["Organiser la séance", "Classez échauffement, mouvements principaux, accessoires et conditioning dans un ordre facile à scanner."], ["Adapter par élève", "Le coach peut modifier noms, ordre, notes et travail prévu avant d'envoyer le plan."], ["Séparer plan et suivi", "Un élément prévu n'est pas un record terminé. Ce qui n'a pas été entraîné ne doit pas entrer dans l'historique."]],
+        logging: [["Ajouter les détails des séries", "Saisissez charge et répétitions de chaque série réalisée. Ajoutez ou retirez des lignes quand la séance change."], ["Conserver le contexte du poids", "Pour le poids du corps ou l'assistance, un poids correct rend le suivi plus interprétable."], ["Marquer terminé volontairement", "Ne terminez que les éléments réalisés. Sinon le volume et l'historique deviennent artificiellement élevés."], ["Relire avant d'enregistrer", "Avant de finir, vérifiez exercice, charge, répétitions et notes, surtout si la séance retourne au coach."]],
+        coaching: [["Préparer le plan", "Créez ou choisissez un menu d'entraînement, puis adaptez exercices, ordre et notes à l'élève."], ["Envoyer l'affectation", "Envoyez un snapshot du plan. L'élève travaille depuis sa copie et votre modèle reste réutilisable."], ["Relire le retour", "Utilisez records et planning coach pour voir séances terminées, travail manquant et notes."], ["Ajuster le bloc suivant", "Croisez retour, objectifs, données corporelles et analyse avant de modifier le prochain plan."]],
+        trainee: [["Accepter un plan", "Quand le coach envoie un plan, acceptez-le dans votre planning local avant de vous entraîner."], ["S'entraîner depuis sa copie", "La copie de l'élève enregistre le travail réel sans modifier le modèle réutilisable du coach."], ["Renvoyer la progression", "Après l'entraînement, renvoyez la séance terminée pour que le coach la relise avec le contexte."], ["Vérifier le calendrier", "Utilisez Records pour confirmer les dates terminées et repérer les séances manquées ou ajustées."]],
+        records: [["Scanner le calendrier", "Les vues mois et semaine montrent densité d'entraînement, affectations coach et travail terminé."], ["Ouvrir une date", "Touchez un jour d'entraînement pour lire les séances terminées et le contexte du plan."], ["Lire seulement le terminé", "FitRoster Pro enregistre les exercices et séries complétés. Les éléments prévus mais sautés ne se mélangent pas à l'historique."], ["Vérifier avant l'analyse", "Si l'analyse semble étrange, regardez d'abord le calendrier. Une semaine manquée ou un plan modifié l'explique souvent."]],
+        analysis: [["Choisir une période", "Choisissez selon la question: un jour pour une séance, 30 jours pour un bloc, plus long pour une tendance."], ["Comparer la charge", "Lisez temps, séries, nombre de séances et régularité du calendrier ensemble, pas un seul chiffre."], ["Inspecter les muscles", "La carte musculaire montre zones entraînées et sous-entraînées. Les zones non travaillées reculent visuellement pour révéler les déséquilibres."], ["Relier objectifs et données corporelles", "Objectifs et contexte InBody sont des signaux de soutien. Ils orientent le prochain plan sans remplacer le jugement coach."]],
+        data: [["Utiliser iCloud si nécessaire", "Le partage coach-élève et les flux multi-appareils dépendent de l'état iCloud et des conditions Apple ID."], ["Exporter des sauvegardes", "Avant changement majeur, migration ou test sync, créez un backup/export FitRoster Pro."], ["Restaurer prudemment", "Restaurez seulement depuis des fichiers fiables. Vérifiez ensuite rôle, records, menus et état coach-élève."], ["Préparer les infos support", "Pour un souci sync, donnez version app, appareil, iOS, rôle et type: envoi de plan, retour de séance ou backup."]],
+        settings: [["Relire les changements de profil", "Les valeurs qui influencent métriques corporelles ou analyse doivent être modifiées volontairement puis revérifiées."], ["Utiliser les réglages langue", "Changez la langue dans Réglages quand catalogue, onglets et guide Web doivent correspondre."], ["Garder le contexte support", "Un support efficace a besoin de l'écran, du rôle, de la version app, du modèle d'appareil et d'iOS."], ["Revenir au guide", "Utilisez ce guide HTML pour configurer un nouvel appareil, former quelqu'un ou expliquer FitRoster Pro à un élève."]]
+      },
+      es: {
+        setup: [["Elegir rol inicial", "En Ajustes decide si FitRoster Pro abre en modo entrenador o modo alumno. Los entrenadores suelen iniciar en modo entrenador; el uso individual puede quedarse en alumno."], ["Introducir contexto corporal", "Configura apodo, año de nacimiento, sexo, peso y unidades. El peso ayuda a interpretar ejercicios con peso corporal y análisis."], ["Configurar idioma", "La app y la guía web siguen los idiomas de FitRoster Pro. Los ejercicios integrados cambian con el idioma; los nombres escritos por ti se conservan."], ["Revisar entradas de soporte", "Ubica soporte, privacidad, diagnóstico, exportación y restauración para recuperar datos o informar problemas con contexto suficiente."]],
+        exercises: [["Usar nombres integrados", "Los nombres integrados se localizan al cambiar idioma. Úsalos cuando quieras que el catálogo siga el idioma del usuario."], ["Renombrar para tu gimnasio", "Si una máquina, estación o indicación del entrenador tiene nombre propio, cambia la fila para que el alumno vea los términos reales."], ["Crear ejercicios propios", "Cuando el catálogo no tenga el movimiento, crea un ejercicio propio. Ese nombre queda igual aunque cambie el idioma."], ["Mantener registros claros", "Ordena los nombres antes de registrar la sesión para que registros, calendario y análisis sean más fáciles de leer después."]],
+        plans: [["Empezar desde plantilla", "Usa plantillas para estructuras frecuentes y luego duplica o ajusta. Así no reconstruyes cada plan desde cero."], ["Organizar la sesión", "Agrupa calentamiento, principales, accesorios y acondicionamiento en un orden fácil de escanear."], ["Ajustar por alumno", "El entrenador puede adaptar ejercicios, orden, notas y trabajo previsto antes de enviar el plan."], ["Separar plan y registro", "Un elemento planificado no es un registro completado. Lo que no se entrenó no debe entrar al historial."]],
+        logging: [["Añadir detalles de series", "Introduce carga y repeticiones de cada serie realizada. Agrega o elimina filas cuando la sesión cambie."], ["Mantener contexto de peso", "En ejercicios de peso corporal o asistidos, un peso correcto hace que el registro sea más significativo."], ["Marcar completado con intención", "Completa solo lo que realmente se entrenó. Si no, el volumen y la historia quedan inflados."], ["Revisar antes de guardar", "Antes de finalizar, revisa ejercicio, carga, repeticiones y notas, sobre todo si la sesión vuelve al entrenador."]],
+        coaching: [["Preparar el plan", "Crea o elige un menú de entrenamiento y ajusta ejercicios, orden y notas para el alumno."], ["Enviar la asignación", "Envía una copia del plan al alumno. El alumno registra desde su copia y tu plantilla sigue reutilizable."], ["Revisar el trabajo devuelto", "Usa registros y calendario del entrenador para ver sesiones completadas, trabajo omitido y notas."], ["Ajustar el siguiente bloque", "Compara registro devuelto, objetivos, datos corporales y análisis antes de cambiar el próximo plan."]],
+        trainee: [["Aceptar un plan", "Cuando el entrenador envía un plan, acéptalo en tu calendario local antes de entrenar."], ["Entrenar desde tu copia", "Tu copia registra el trabajo real sin cambiar la plantilla reutilizable del entrenador."], ["Devolver progreso completado", "Después de entrenar, devuelve la sesión completada para que el entrenador revise con contexto."], ["Comprobar calendario", "Usa Registros para confirmar días completados y no perder sesiones omitidas o ajustadas."]],
+        records: [["Escanear el calendario", "Las vistas mensual y semanal muestran densidad de entrenamiento, asignaciones del entrenador y trabajo completado."], ["Abrir una fecha", "Toca un día de entrenamiento para revisar las sesiones completadas y el contexto del plan."], ["Leer solo trabajo completado", "FitRoster Pro registra ejercicios y series completadas. Los elementos planificados que se saltaron no se mezclan en el historial."], ["Mirar registros antes de análisis", "Si el análisis se ve raro, revisa primero el calendario. Una semana perdida o un plan cambiado suele explicar la señal."]],
+        analysis: [["Elegir rango", "Elige el rango según la pregunta: un día para sesión, 30 días para bloque, más tiempo para tendencia."], ["Comparar carga", "Lee tiempo, series, número de sesiones y consistencia del calendario juntos, no un número aislado."], ["Inspeccionar músculos", "El mapa muscular muestra zonas entrenadas y poco entrenadas. Las zonas sin trabajo retroceden visualmente para notar desequilibrios."], ["Conectar objetivos y cuerpo", "Objetivos e InBody son señales de apoyo. Orientan el siguiente plan sin reemplazar el juicio del entrenador."]],
+        data: [["Usar iCloud donde haga falta", "Compartir entrenador-alumno y flujos entre dispositivos dependen del estado de iCloud y las condiciones de Apple ID."], ["Exportar backups", "Antes de cambios grandes, migración o pruebas de sync, crea archivos backup/export de FitRoster Pro."], ["Restaurar con cuidado", "Restaura solo desde archivos confiables. Después revisa rol, registros, menús y estado entrenador-alumno."], ["Preparar datos de soporte", "Para problemas de sync, incluye versión de app, dispositivo, iOS, rol y si el problema es envío de plan, devolución o backup."]],
+        settings: [["Revisar cambios de perfil", "Los valores que afectan métricas corporales o análisis deben cambiarse con intención y revisarse en pantallas relacionadas."], ["Usar idioma de ajustes", "Cambia idioma en Ajustes cuando catálogo, pestañas y guía web deban coincidir."], ["Conservar contexto de soporte", "Un reporte es más claro con pantalla, rol, versión de app, modelo de dispositivo y versión de iOS."], ["Volver a la guía", "Usa esta guía HTML al configurar un dispositivo nuevo, enseñar a otra persona o explicar FitRoster Pro a un alumno."]]
+      }
+    };
+
+    const localizedFaqDetails = {
+      ja: [["独自種目名が翻訳されないのはなぜですか？", "独自名はユーザーが入力したコーチング用語として扱われます。ジムの呼び方や cue を守るため、言語を変えてもそのまま残ります。"], ["予定種目が記録に出ないのはなぜですか？", "記録は完了したトレーニングだけを表示します。スキップした、または入力していない予定項目は完了履歴に入りません。"], ["コーチが計画を変える前に見るべきものは？", "返却セッション、カレンダーの継続性、目標、身体背景、分析期間を確認してから次のブロックを変えます。"], ["同期サポートには何を送ればよいですか？", "アプリ版、端末、iOS、役割、対象のコーチまたは受講者、iCloud状態、問題が計画送信か返却かバックアップかを送ってください。"]],
+      ko: [["사용자 운동명이 번역되지 않는 이유는 무엇인가요?", "사용자 이름은 직접 입력한 코칭 용어로 처리됩니다. 체육관 용어와 코치 큐를 지키기 위해 언어가 바뀌어도 그대로 남습니다."], ["계획한 운동이 기록에 보이지 않는 이유는 무엇인가요?", "기록은 완료한 훈련만 보여줍니다. 건너뛰었거나 입력하지 않은 계획 항목은 완료 이력에 들어가지 않습니다."], ["코치가 다음 계획을 바꾸기 전에 무엇을 확인해야 하나요?", "반환 세션, 캘린더 일관성, 목표, 신체 배경, 분석 범위를 먼저 확인합니다."], ["동기화 지원 요청에는 무엇을 보내야 하나요?", "앱 버전, 기기, iOS, 역할, 관련 코치/회원, iCloud 상태, 문제가 계획 발송인지 반환인지 백업인지 보내세요."]],
+      th: [["ทำไมชื่อท่าสร้างเองไม่แปล?", "ชื่อสร้างเองถือเป็นภาษาที่ผู้ใช้ใส่เอง เพื่อรักษาคำของยิมหรือโค้ช จึงคงเดิมเมื่อเปลี่ยนภาษา"], ["ทำไมท่าที่วางแผนไว้ไม่อยู่ในบันทึก?", "บันทึกแสดงเฉพาะการฝึกที่เสร็จ รายการที่ข้ามหรือไม่ได้ใส่ข้อมูลไม่ควรเข้าเป็นประวัติที่เสร็จ"], ["โค้ชควรตรวจอะไรก่อนเปลี่ยนแผน?", "ตรวจเซสชันที่ส่งกลับ ความสม่ำเสมอในปฏิทิน เป้าหมาย ข้อมูลร่างกาย และช่วงวิเคราะห์ก่อนปรับบล็อกถัดไป"], ["ควรส่งอะไรเมื่อขอสนับสนุนเรื่องซิงค์?", "ส่งเวอร์ชันแอป อุปกรณ์ iOS บทบาท โค้ชหรือผู้ฝึกที่เกี่ยวข้อง สถานะ iCloud และบอกว่าเป็นปัญหาส่งแผน ส่งกลับ หรือไฟล์สำรอง"]],
+      ms: [["Mengapa nama senaman tersuai tidak diterjemah?", "Nama tersuai ialah bahasa coaching yang anda masukkan. FitRoster Pro mengekalkannya supaya istilah gim dan cue coach tidak berubah apabila bahasa bertukar."], ["Mengapa senaman dirancang tiada dalam rekod?", "Rekod menunjukkan latihan yang selesai, bukan semua item dirancang. Item yang dilangkau atau tidak diisi tidak masuk sejarah siap."], ["Apa yang coach perlu semak sebelum ubah pelan?", "Semak sesi kembali, konsistensi kalendar, matlamat, konteks badan dan julat analisis sebelum mengubah blok seterusnya."], ["Apa yang perlu dihantar untuk isu sync?", "Hantar versi app, peranti, iOS, peranan, coach atau pelatih terlibat, status iCloud dan sama ada isu hantar pelan, sesi kembali atau backup."]],
+      ru: [["Почему собственные названия упражнений не переводятся?", "Собственные названия считаются введенным тренерским языком. FitRoster Pro сохраняет их, чтобы термины зала и подсказки не менялись при смене языка."], ["Почему плановое упражнение не появилось в записях?", "Записи показывают выполненную тренировку, а не каждый пункт плана. Пропущенные или незаполненные пункты не входят в историю выполнения."], ["Что тренеру проверить перед изменением плана?", "Проверьте возвращенное занятие, регулярность календаря, цели, данные тела и период анализа перед изменением следующего блока."], ["Что отправить в поддержку по синхронизации?", "Отправьте версию приложения, устройство, iOS, роль, связанного тренера или ученика, состояние iCloud и тип проблемы: отправка, возврат или backup."]],
+      de: [["Warum werden eigene Übungsnamen nicht übersetzt?", "Eigene Namen gelten als von dir eingegebene Coaching-Sprache. FitRoster Pro behält sie, damit Studio-Begriffe und Cues bei Sprachwechsel stabil bleiben."], ["Warum fehlt eine geplante Übung in Records?", "Records zeigen abgeschlossenes Training, nicht jeden Planpunkt. Übersprungene oder leere Punkte gehören nicht in die abgeschlossene Historie."], ["Was prüft ein Coach vor Planänderungen?", "Zurückgegebene Session, Kalenderkonsistenz, Ziele, Körperkontext und Analysezeitraum prüfen, bevor der nächste Block geändert wird."], ["Was soll ich bei Sync-Support senden?", "App-Version, Gerät, iOS, Rolle, betroffener Coach oder Athlet, iCloud-Status und ob es um Plansenden, Rückgabe oder Backup geht."]],
+      fr: [["Pourquoi les exercices personnalisés ne se traduisent-ils pas ?", "Les noms personnalisés sont considérés comme votre langage de coaching. FitRoster Pro les conserve pour garder les termes de salle et cues stables."], ["Pourquoi un exercice prévu manque dans les suivis ?", "Les suivis montrent l'entraînement terminé, pas tous les éléments prévus. Ce qui a été sauté ou non rempli ne va pas dans l'historique terminé."], ["Que vérifier avant de changer un plan ?", "Regardez séance renvoyée, régularité calendrier, objectifs, contexte corporel et période d'analyse avant de modifier le bloc suivant."], ["Que fournir pour un problème de sync ?", "Version app, appareil, iOS, rôle, coach ou élève concerné, état iCloud et type de problème: envoi, retour ou backup."]],
+      es: [["¿Por qué no se traducen los ejercicios propios?", "Los nombres propios son lenguaje de coaching introducido por ti. FitRoster Pro los conserva para que términos de gimnasio e indicaciones no cambien al cambiar idioma."], ["¿Por qué falta un ejercicio planificado en registros?", "Los registros muestran entrenamiento completado, no cada elemento previsto. Lo omitido o sin datos no entra al historial completado."], ["¿Qué revisa un entrenador antes de cambiar el plan?", "Revisa sesión devuelta, consistencia del calendario, objetivos, contexto corporal y rango de análisis antes de modificar el siguiente bloque."], ["¿Qué envío para soporte de sincronización?", "Versión de app, dispositivo, iOS, rol, entrenador o alumno afectado, estado de iCloud y si el problema es envío de plan, devolución o backup."]]
+    };
+
+    Object.entries(localizedStepDetails).forEach(([language, chapters]) => {
+      Object.entries(chapters).forEach(([id, steps]) => {
+        translations[language].chapters[id].steps = steps;
+      });
+      translations[language].faq = localizedFaqDetails[language];
+    });
+
+    function escapeHTML(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function activeCopy(language) {
+      return translations[language] || translations.en;
+    }
+
+    function imagePath(language, imageName, shared) {
+      if (shared) {
+        return `assets/guide-tutorial/shared/${imageName}.jpg`;
+      }
+      return `assets/guide-tutorial/${language}/${imageName}.jpg`;
+    }
+
+    function renderNav(copy) {
+      const nav = document.querySelector("[data-guide-nav]");
+      nav.innerHTML = Object.entries(copy.chapters).map(([id, chapter], index) => `
+        <a href="#${escapeHTML(id)}">
+          <span class="toc-index">${String(index + 1).padStart(2, "0")}</span>
+          <span>${escapeHTML(chapter.nav)}</span>
+        </a>
+      `).join("");
+    }
+
+    function renderManual(copy, language) {
+      const manual = document.querySelector("[data-guide-content]");
+      manual.innerHTML = Object.entries(copy.chapters).map(([id, chapter]) => {
+        const figureClass = chapter.device === "tablet" ? "tablet" : chapter.device === "shared" ? "shared" : "phone";
+        const image = imagePath(language, chapter.image, chapter.shared);
+        return `
+          <section class="manual-section" id="${escapeHTML(id)}">
+            <div class="manual-head">
+              <div>
+                <span class="manual-label">${escapeHTML(chapter.label)}</span>
+                <h2>${escapeHTML(chapter.title)}</h2>
+                <p>${escapeHTML(chapter.intro)}</p>
+              </div>
+              <figure class="guide-figure ${figureClass}">
+                <img data-localized-image="${escapeHTML(chapter.image)}" data-shared="${chapter.shared ? "true" : "false"}" src="${escapeHTML(image)}" alt="${escapeHTML(chapter.title)}">
+              </figure>
+            </div>
+            <div class="manual-body">
+              <div class="steps-grid">
+                ${chapter.steps.map((step, index) => `
+                  <article class="step-card">
+                    <header>
+                      <span class="step-number">${String(index + 1).padStart(2, "0")}</span>
+                      <h3>${escapeHTML(step[0])}</h3>
+                    </header>
+                    <p>${escapeHTML(step[1])}</p>
+                  </article>
+                `).join("")}
+              </div>
+              <div class="section-note">
+                <strong>${escapeHTML(copy.noteLabel)}: ${escapeHTML(chapter.noteTitle)}</strong>
+                <p>${escapeHTML(chapter.note)}</p>
+              </div>
+            </div>
+          </section>
+        `;
+      }).join("");
+    }
+
+    function renderFaq(copy) {
+      const list = document.querySelector("[data-faq-list]");
+      list.innerHTML = copy.faq.map((item, index) => `
+        <details class="faq-item" ${index === 0 ? "open" : ""}>
+          <summary>${escapeHTML(item[0])}</summary>
+          <p>${escapeHTML(item[1])}</p>
+        </details>
+      `).join("");
+    }
+
+    function setLocalizedImages(language) {
+      const copy = activeCopy(language);
+      document.querySelectorAll("[data-guide-img]").forEach((image) => {
+        const name = image.getAttribute("data-guide-img");
+        image.src = imagePath(language, name, false);
+      });
+      document.querySelectorAll("[data-localized-image]").forEach((image) => {
+        const shared = image.getAttribute("data-shared") === "true";
+        const name = image.getAttribute("data-localized-image");
+        image.src = imagePath(language, name, shared);
+      });
+      document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
+        const mappings = element.getAttribute("data-i18n-attr").split(",");
+        mappings.forEach((mapping) => {
+          const parts = mapping.split(":");
+          const attribute = parts[0] && parts[0].trim();
+          const key = parts[1] && parts[1].trim();
+          if (attribute && key && copy[key]) {
+            element.setAttribute(attribute, copy[key]);
+          }
+        });
+      });
+    }
+
+    function applyLanguage(language) {
+      const copy = activeCopy(language);
+      document.documentElement.lang = language;
+      document.title = copy.metaTitle;
+      document.querySelector('meta[name="description"]').setAttribute("content", copy.metaDescription);
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (copy[key]) {
+          element.textContent = copy[key];
+        }
+      });
+      renderNav(copy);
+      renderManual(copy, language);
+      renderFaq(copy);
+      setLocalizedImages(language);
+      window.FITROSTER_SITE_I18N.updateLanguageSelect(language);
+      localStorage.setItem("fitroster.marketing.language", language);
+    }
+
+    document.addEventListener("error", (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLImageElement)) {
+        return;
+      }
+      if (target.dataset.fallbackApplied === "true") {
+        return;
+      }
+      const localizedName = target.getAttribute("data-guide-img") || target.getAttribute("data-localized-image");
+      const isShared = target.getAttribute("data-shared") === "true";
+      if (localizedName && !isShared) {
+        target.dataset.fallbackApplied = "true";
+        target.src = imagePath("en", localizedName, false);
+      }
+    }, true);
+
+    const supportedLanguages = Object.keys(translations);
+    window.FITROSTER_SITE_I18N.mountLanguageSelect(supportedLanguages, applyLanguage);
+    applyLanguage(window.FITROSTER_SITE_I18N.preferredLanguage(supportedLanguages));
+  </script>
+</body>
+</html>
