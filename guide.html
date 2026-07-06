@@ -1251,12 +1251,23 @@
       "身體組成數字會受到當天水份狀態影響，所以 FitRoster Pro 可用身體總水重校正骨骼肌重、脂肪重與體脂率的趨勢。計算只使用含總水重的有效資料，至少需要 10 筆；水份偏差超過 ±10% 的資料不列入計算；有效資料達 50 筆後會改用 50 筆移動平均。它不會改寫原始 InBody 紀錄，請把它當成趨勢判讀輔助，不是醫療診斷，也不是原始報告的替代品。"
     ];
 
+    const oneRepMaxFaqEn = [
+      "How does FitRoster Pro estimate 1RM and draw the curve?",
+      "Estimated 1RM is an estimate of the weight you might lift for one repetition, not a tested max. FitRoster Pro calculates it from a completed main set as weight x (1 + reps / 30). For each session, the history chart looks at main sets for that exercise, ignores warm-up and back-off sets, and uses the set with the highest estimated 1RM as that session's curve point. The chart can show either actual set weight or estimated 1RM, with ranges for the last 5, 10, 20, or all sessions. PR and New PR markers are based on these estimated-1RM curve points, so read them as trend signals rather than guarantees of a true one-rep maximum."
+    ];
+
+    const oneRepMaxFaqZhHant = [
+      "1RM 是怎麼推算，曲線圖又怎麼畫？",
+      "估算 1RM 是用訓練紀錄推算你可能完成 1 次的重量，不是實際測出的一次最大重量。FitRoster Pro 會用已完成主訓組的重量與次數計算：重量 × (1 + 次數 / 30)。每次訓練中，同一動作會只看主訓組，排除暖身組與降重組，並挑估算 1RM 最高的一組作為該次訓練在曲線上的點。曲線可切換顯示實際組重量或估算 1RM，範圍可看最近 5、10、20 次或全部紀錄；PR 與新 PR 標記也是根據這些估算 1RM 曲線點判斷，請把它當作進步趨勢訊號，而不是保證的真實 1RM。"
+    ];
+
     const baseFaq = [
       ["Why do custom exercise names not translate?", "Custom names are treated as user-entered coaching language. FitRoster Pro keeps them exactly as typed so gym terminology and coach cues remain stable across language switches."],
       ["Why is a planned exercise missing from records?", "Records show completed training, not every planned item. If an exercise was skipped or left untouched, it should not appear as completed history."],
       ["What should a coach check before changing a trainee plan?", "Check the returned session, calendar consistency, goals, body context, and analysis range before changing the next block."],
       ["What should I send with a sync support request?", "Send app version, device model, iOS version, role, affected coach or trainee, whether iCloud is enabled, and whether the issue is plan delivery, returned sessions, or backup files."],
       inBodyHydrationFaqEn,
+      oneRepMaxFaqEn,
       aiPricingFaqEn
     ];
 
@@ -1364,6 +1375,7 @@
           ["教練修改學員課表前要看什麼？", "先看回傳課表、行事曆一致性、目標、身體背景與分析區間，再修改下一個週期。"],
           ["同步問題要提供什麼？", "請提供 app 版本、裝置型號、iOS 版本、角色、相關教練或學員、iCloud 狀態，以及問題是派課、回傳或備份。"],
           inBodyHydrationFaqZhHant,
+          oneRepMaxFaqZhHant,
           aiPricingFaqZhHant
         ]
       },
@@ -1839,6 +1851,7 @@
       ["教练修改学员课表前要看什么？", "先看回传课表、日历一致性、目标、身体背景与分析区间，再修改下一个周期。"],
       ["同步问题要提供什么？", "请提供 app 版本、装置型号、iOS 版本、角色、相关教练或学员、iCloud 状态，以及问题是派课、回传或备份。"],
       toHansValue(inBodyHydrationFaqZhHant),
+      toHansValue(oneRepMaxFaqZhHant),
       toHansValue(aiPricingFaqZhHant)
     ];
 
@@ -2060,7 +2073,7 @@
       Object.entries(chapters).forEach(([id, steps]) => {
         translations[language].chapters[id].steps = steps;
       });
-      translations[language].faq = [...localizedFaqDetails[language], inBodyHydrationFaqEn, aiPricingFaqEn];
+      translations[language].faq = [...localizedFaqDetails[language], inBodyHydrationFaqEn, oneRepMaxFaqEn, aiPricingFaqEn];
     });
 
     function escapeHTML(value) {
