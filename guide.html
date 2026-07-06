@@ -1271,6 +1271,16 @@
       "FitRoster Pro 會保存每一個已完成組，所以暖身組與降重組仍會留在訓練紀錄裡，作為當次訓練脈絡。表現曲線、重量曲線、估算 1RM、PR 與新 PR 只使用主訓組，因為它們代表真正要比較的工作表現訊號。訓練量模式仍會統計暖身組、主訓組與降重組；肌群分佈也會依完成的非有氧組數估算，包含三種組別。準備正式重量時標記暖身組；代表當次主要表現目標時標記主訓組；較輕的後續補量或技術組標記降重組。更改組別角色會影響分析與曲線，不會讓該組從紀錄中消失。"
     ];
 
+    const muscleDistributionFaqEn = [
+      "How is muscle distribution weighted?",
+      "Muscle distribution is an estimated training-emphasis map, not a measurement of muscle size. FitRoster Pro builds the score from completed non-cardio sets in the selected range. For each exercise, every completed set adds full weight to its primary muscles, while secondary muscles contribute according to the Settings > Analysis secondary muscle weight option: 30% by default, or 20%, 10%, or 0%. Warm-up, main, and back-off sets are all included here because this view is a volume and balance signal; performance curves, estimated 1RM, PR, and New PR still use main sets only. Use the map to spot training balance and neglected areas, not as a medical or body-composition measurement."
+    ];
+
+    const muscleDistributionFaqZhHant = [
+      "肌肉分佈比重是怎麼算的？",
+      "肌肉分佈是訓練刺激比重的估算，不是肌肉大小或醫療量測。FitRoster Pro 會依選定區間內已完成的非有氧組數計分：每個動作的每一個已完成組，主要肌群以完整組數計入；次要肌群則依「設定 > 分析」中的「次要肌群比重」計入，預設 30%，也可改成 20%、10% 或 0%。暖身組、主訓組與降重組都會進入這個訓練量與平衡訊號；表現曲線、估算 1RM、PR 與新 PR 仍只看主訓組。請把它用來檢查訓練平衡與被忽略的區域，不要當成肌肉量或 InBody 量測。"
+    ];
+
     const baseFaq = [
       ["Why do custom exercise names not translate?", "Custom names are treated as user-entered coaching language. FitRoster Pro keeps them exactly as typed so gym terminology and coach cues remain stable across language switches."],
       ["Why is a planned exercise missing from records?", "Records show completed training, not every planned item. If an exercise was skipped or left untouched, it should not appear as completed history."],
@@ -1279,6 +1289,7 @@
       inBodyHydrationFaqEn,
       oneRepMaxFaqEn,
       setRoleImpactFaqEn,
+      muscleDistributionFaqEn,
       aiPricingFaqEn
     ];
 
@@ -1388,6 +1399,7 @@
           inBodyHydrationFaqZhHant,
           oneRepMaxFaqZhHant,
           setRoleImpactFaqZhHant,
+          muscleDistributionFaqZhHant,
           aiPricingFaqZhHant
         ]
       },
@@ -1865,6 +1877,7 @@
       toHansValue(inBodyHydrationFaqZhHant),
       toHansValue(oneRepMaxFaqZhHant),
       toHansValue(setRoleImpactFaqZhHant),
+      toHansValue(muscleDistributionFaqZhHant),
       toHansValue(aiPricingFaqZhHant)
     ];
 
@@ -2086,7 +2099,7 @@
       Object.entries(chapters).forEach(([id, steps]) => {
         translations[language].chapters[id].steps = steps;
       });
-      translations[language].faq = [...localizedFaqDetails[language], inBodyHydrationFaqEn, oneRepMaxFaqEn, setRoleImpactFaqEn, aiPricingFaqEn];
+      translations[language].faq = [...localizedFaqDetails[language], inBodyHydrationFaqEn, oneRepMaxFaqEn, setRoleImpactFaqEn, muscleDistributionFaqEn, aiPricingFaqEn];
     });
 
     function escapeHTML(value) {
