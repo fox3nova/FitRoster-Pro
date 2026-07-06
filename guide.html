@@ -1241,11 +1241,22 @@
       sources: aiPricingSources
     };
 
+    const inBodyHydrationFaqEn = [
+      "What does InBody water adjustment mean?",
+      "Body-composition readings can move with hydration, so FitRoster Pro can show water-adjusted trends for skeletal muscle mass, body fat mass, and body fat percentage. The calculation uses only records that include total body water, needs at least 10 valid records, excludes records outside ±10% water deviation, and switches to a 50-record moving average after 50 valid records. It does not overwrite original InBody records; use it as a trend-reading aid, not a medical diagnosis or replacement for the source report."
+    ];
+
+    const inBodyHydrationFaqZhHant = [
+      "InBody 水份校正是什麼？",
+      "身體組成數字會受到當天水份狀態影響，所以 FitRoster Pro 可用身體總水重校正骨骼肌重、脂肪重與體脂率的趨勢。計算只使用含總水重的有效資料，至少需要 10 筆；水份偏差超過 ±10% 的資料不列入計算；有效資料達 50 筆後會改用 50 筆移動平均。它不會改寫原始 InBody 紀錄，請把它當成趨勢判讀輔助，不是醫療診斷，也不是原始報告的替代品。"
+    ];
+
     const baseFaq = [
       ["Why do custom exercise names not translate?", "Custom names are treated as user-entered coaching language. FitRoster Pro keeps them exactly as typed so gym terminology and coach cues remain stable across language switches."],
       ["Why is a planned exercise missing from records?", "Records show completed training, not every planned item. If an exercise was skipped or left untouched, it should not appear as completed history."],
       ["What should a coach check before changing a trainee plan?", "Check the returned session, calendar consistency, goals, body context, and analysis range before changing the next block."],
       ["What should I send with a sync support request?", "Send app version, device model, iOS version, role, affected coach or trainee, whether iCloud is enabled, and whether the issue is plan delivery, returned sessions, or backup files."],
+      inBodyHydrationFaqEn,
       aiPricingFaqEn
     ];
 
@@ -1352,6 +1363,7 @@
           ["為什麼預排動作沒有出現在紀錄裡？", "紀錄顯示完成訓練，不是每個預排項目。跳過或未輸入的動作不應該進入完成歷史。"],
           ["教練修改學員課表前要看什麼？", "先看回傳課表、行事曆一致性、目標、身體背景與分析區間，再修改下一個週期。"],
           ["同步問題要提供什麼？", "請提供 app 版本、裝置型號、iOS 版本、角色、相關教練或學員、iCloud 狀態，以及問題是派課、回傳或備份。"],
+          inBodyHydrationFaqZhHant,
           aiPricingFaqZhHant
         ]
       },
@@ -1826,6 +1838,7 @@
       ["为什么预排动作没有出现在记录里？", "记录显示完成训练，不是每个预排项目。跳过或未输入的动作不应该进入完成历史。"],
       ["教练修改学员课表前要看什么？", "先看回传课表、日历一致性、目标、身体背景与分析区间，再修改下一个周期。"],
       ["同步问题要提供什么？", "请提供 app 版本、装置型号、iOS 版本、角色、相关教练或学员、iCloud 状态，以及问题是派课、回传或备份。"],
+      toHansValue(inBodyHydrationFaqZhHant),
       toHansValue(aiPricingFaqZhHant)
     ];
 
@@ -2047,7 +2060,7 @@
       Object.entries(chapters).forEach(([id, steps]) => {
         translations[language].chapters[id].steps = steps;
       });
-      translations[language].faq = [...localizedFaqDetails[language], aiPricingFaqEn];
+      translations[language].faq = [...localizedFaqDetails[language], inBodyHydrationFaqEn, aiPricingFaqEn];
     });
 
     function escapeHTML(value) {
