@@ -1261,6 +1261,16 @@
       "估算 1RM 是用訓練紀錄推算你可能完成 1 次的重量，不是實際測出的一次最大重量。FitRoster Pro 會用已完成主訓組的重量與次數計算：重量 × (1 + 次數 / 30)。每次訓練中，同一動作會只看主訓組，排除暖身組與降重組，並挑估算 1RM 最高的一組作為該次訓練在曲線上的點。曲線可切換顯示實際組重量或估算 1RM，範圍可看最近 5、10、20 次或全部紀錄；PR 與新 PR 標記也是根據這些估算 1RM 曲線點判斷，請把它當作進步趨勢訊號，而不是保證的真實 1RM。"
     ];
 
+    const setRoleImpactFaqEn = [
+      "How do warm-up, main, and back-off sets affect records, analysis, and curves?",
+      "FitRoster Pro saves every completed set in the workout record, so warm-up and back-off sets remain visible as session context. Performance curves, weight curves, estimated 1RM, PR, and New PR use main sets only because they are meant to represent the working performance signal. Volume mode still counts warm-up, main, and back-off sets, and muscle distribution is estimated from completed non-cardio sets across all three roles. Mark a set as warm-up when it prepares the lift, main when it should represent the real performance target, and back-off when it is lighter follow-up work; changing the role affects analysis and curves, not whether the set is saved."
+    ];
+
+    const setRoleImpactFaqZhHant = [
+      "暖身組、主訓組、降重組會怎麼影響紀錄、分析與曲線？",
+      "FitRoster Pro 會保存每一個已完成組，所以暖身組與降重組仍會留在訓練紀錄裡，作為當次訓練脈絡。表現曲線、重量曲線、估算 1RM、PR 與新 PR 只使用主訓組，因為它們代表真正要比較的工作表現訊號。訓練量模式仍會統計暖身組、主訓組與降重組；肌群分佈也會依完成的非有氧組數估算，包含三種組別。準備正式重量時標記暖身組；代表當次主要表現目標時標記主訓組；較輕的後續補量或技術組標記降重組。更改組別角色會影響分析與曲線，不會讓該組從紀錄中消失。"
+    ];
+
     const baseFaq = [
       ["Why do custom exercise names not translate?", "Custom names are treated as user-entered coaching language. FitRoster Pro keeps them exactly as typed so gym terminology and coach cues remain stable across language switches."],
       ["Why is a planned exercise missing from records?", "Records show completed training, not every planned item. If an exercise was skipped or left untouched, it should not appear as completed history."],
@@ -1268,6 +1278,7 @@
       ["What should I send with a sync support request?", "Send app version, device model, iOS version, role, affected coach or trainee, whether iCloud is enabled, and whether the issue is plan delivery, returned sessions, or backup files."],
       inBodyHydrationFaqEn,
       oneRepMaxFaqEn,
+      setRoleImpactFaqEn,
       aiPricingFaqEn
     ];
 
@@ -1376,6 +1387,7 @@
           ["同步問題要提供什麼？", "請提供 app 版本、裝置型號、iOS 版本、角色、相關教練或學員、iCloud 狀態，以及問題是派課、回傳或備份。"],
           inBodyHydrationFaqZhHant,
           oneRepMaxFaqZhHant,
+          setRoleImpactFaqZhHant,
           aiPricingFaqZhHant
         ]
       },
@@ -1852,6 +1864,7 @@
       ["同步问题要提供什么？", "请提供 app 版本、装置型号、iOS 版本、角色、相关教练或学员、iCloud 状态，以及问题是派课、回传或备份。"],
       toHansValue(inBodyHydrationFaqZhHant),
       toHansValue(oneRepMaxFaqZhHant),
+      toHansValue(setRoleImpactFaqZhHant),
       toHansValue(aiPricingFaqZhHant)
     ];
 
@@ -2073,7 +2086,7 @@
       Object.entries(chapters).forEach(([id, steps]) => {
         translations[language].chapters[id].steps = steps;
       });
-      translations[language].faq = [...localizedFaqDetails[language], inBodyHydrationFaqEn, oneRepMaxFaqEn, aiPricingFaqEn];
+      translations[language].faq = [...localizedFaqDetails[language], inBodyHydrationFaqEn, oneRepMaxFaqEn, setRoleImpactFaqEn, aiPricingFaqEn];
     });
 
     function escapeHTML(value) {
