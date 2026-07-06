@@ -575,10 +575,12 @@
     .faq-list {
       display: grid;
       gap: 0;
+      min-width: 0;
       padding: 12px 28px 28px;
     }
 
     .faq-item {
+      min-width: 0;
       border-bottom: 1px solid var(--line);
     }
 
@@ -624,6 +626,83 @@
       margin: 0 0 18px 42px;
       color: var(--muted);
       font-size: 15px;
+    }
+
+    .faq-body {
+      margin: 0 0 20px 42px;
+      width: calc(100% - 42px);
+      max-width: calc(100% - 42px);
+      box-sizing: border-box;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .faq-body p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .faq-body ul {
+      margin: 0 0 14px;
+      padding-left: 18px;
+    }
+
+    .faq-table-wrap {
+      margin: 14px 0;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .faq-price-table {
+      width: 100%;
+      min-width: 980px;
+      border-collapse: collapse;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .faq-price-table th,
+    .faq-price-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    .faq-price-table th {
+      background: #f7fbff;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .faq-price-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .faq-price-table .number {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .faq-price-sources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .faq-price-sources a {
+      color: var(--blue);
+      font-weight: 700;
     }
 
     .final-cta {
@@ -1095,11 +1174,79 @@
       }
     };
 
+    const aiPricingRows = [
+      ["OpenAI", "gpt-5.5", "5.00 / 30.00", "US$0.2270", "US$0.0360", "US$0.2730", "US$0.0620"],
+      ["OpenAI", "gpt-5.5-pro", "30.00 / 180.00", "US$1.3620", "US$0.2160", "US$1.6380", "US$0.3720"],
+      ["OpenAI", "gpt-5.4", "2.50 / 15.00", "US$0.1135", "US$0.0180", "US$0.1365", "US$0.0310"],
+      ["OpenAI", "gpt-5.4-mini", "0.75 / 4.50", "US$0.0340", "US$0.0054", "US$0.0410", "US$0.0093"],
+      ["OpenAI", "gpt-5.4-nano", "0.20 / 1.25", "US$0.0091", "US$0.0015", "US$0.0110", "US$0.0026"],
+      ["Google Gemini", "gemini-3.5-flash", "1.50 / 9.00", "US$0.0681", "US$0.0108", "US$0.0819", "US$0.0186"],
+      ["Google Gemini", "gemini-3.1-pro-preview", "2.00 / 12.00", "US$0.0908", "US$0.0144", "US$0.1092", "US$0.0248"],
+      ["Google Gemini", "gemini-2.5-pro", "1.25 / 10.00", "US$0.0590", "US$0.0107", "US$0.0723", "US$0.0190"],
+      ["Google Gemini", "gemini-2.5-flash", "0.30 / 2.50", "US$0.0143", "US$0.0027", "US$0.0175", "US$0.0047"],
+      ["Google Gemini", "gemini-3.1-flash-lite", "0.25 / 1.50", "US$0.0114", "US$0.0018", "US$0.0136", "US$0.0031"],
+      ["Anthropic Claude", "claude-fable-5", "10.00 / 50.00", "US$0.4450", "US$0.0650", "US$0.5300", "US$0.1100"],
+      ["Anthropic Claude", "claude-opus-4-8", "5.00 / 25.00", "US$0.2225", "US$0.0325", "US$0.2650", "US$0.0550"],
+      ["Anthropic Claude", "claude-sonnet-5 intro", "2.00 / 10.00", "US$0.0890", "US$0.0130", "US$0.1060", "US$0.0220"],
+      ["Anthropic Claude", "claude-haiku-4-5", "1.00 / 5.00", "US$0.0445", "US$0.0065", "US$0.0530", "US$0.0110"],
+      ["xAI Grok", "grok-4.3", "1.25 / 2.50", "US$0.0523", "US$0.0055", "US$0.0602", "US$0.0085"]
+    ];
+
+    const aiPricingSources = [
+      ["OpenAI pricing", "https://developers.openai.com/api/docs/pricing"],
+      ["Google Gemini pricing", "https://ai.google.dev/gemini-api/docs/pricing"],
+      ["Anthropic Claude pricing", "https://platform.claude.com/docs/en/about-claude/pricing"],
+      ["xAI Grok pricing", "https://x.ai/api"]
+    ];
+
+    const aiPricingFaqEn = {
+      question: "How much can AI API calls cost in FitRoster Pro?",
+      paragraphs: [
+        "FitRoster Pro uses your own provider API key only when you start an AI action. This table estimates pay-as-you-go token cost per call in USD, evaluated on 2026-07-06.",
+        "The estimates use FitRoster Pro's supported AI actions and suggested model IDs. Actual invoices vary by image size, catalog size, recent-session context, selected provider billing mode, cache/batch/priority settings, taxes, exchange rates, free tiers, and provider model changes."
+      ],
+      assumptions: [
+        "Exercise photo recognition: about 40,000 input tokens plus 900 output tokens. This is higher because the current built-in exercise catalog has 528 exercises and is sent for matching.",
+        "InBody report recognition: about 3,000 input tokens plus 700 output tokens.",
+        "AI workout draft: about 45,000 input tokens plus 1,600 output tokens because the exercise catalog and recent training context are included.",
+        "AI coach feedback draft: about 4,000 input tokens plus 1,400 output tokens.",
+        "Claude Sonnet 5 uses the introductory API price available on the evaluation date through 2026-08-31; the provider lists a higher standard price from 2026-09-01."
+      ],
+      table: {
+        headers: ["Provider", "Model", "Input / output per 1M tokens", "Exercise photo", "InBody report", "Workout draft", "Coach feedback"],
+        rows: aiPricingRows
+      },
+      sourcesLabel: "Official pricing sources",
+      sources: aiPricingSources
+    };
+
+    const aiPricingFaqZhHant = {
+      question: "FitRoster Pro 的 AI API 每次呼叫大約會花多少錢？",
+      paragraphs: [
+        "FitRoster Pro 只會在你主動啟動 AI 功能時，使用你自己儲存的服務 API key。下表以美元估算每次 API 呼叫的 pay-as-you-go token 成本，評估日期為 2026-07-06。",
+        "估算採用 FitRoster Pro 目前支援的 AI 功能與 app 內建議模型 ID。實際帳單會因圖片大小、動作目錄數量、近期訓練脈絡、服務商計費模式、cache/batch/priority 設定、稅金、匯率、免費額度與模型價格調整而不同。"
+      ],
+      assumptions: [
+        "動作照片辨識：約 40,000 input tokens + 900 output tokens。這項較高，因為目前內建動作目錄有 528 筆，會一起送出做比對。",
+        "InBody 報告辨識：約 3,000 input tokens + 700 output tokens。",
+        "AI 課表草稿：約 45,000 input tokens + 1,600 output tokens，因為會包含動作目錄與近期訓練脈絡。",
+        "AI 教練回饋草稿：約 4,000 input tokens + 1,400 output tokens。",
+        "Claude Sonnet 5 採用評估日適用、到 2026-08-31 的 API 入門價格；服務商公告 2026-09-01 起會改用較高的標準價格。"
+      ],
+      table: {
+        headers: ["服務商", "模型", "每 1M tokens input / output", "動作照片辨識", "InBody 報告辨識", "AI 課表草稿", "AI 教練回饋草稿"],
+        rows: aiPricingRows
+      },
+      sourcesLabel: "官方價格來源",
+      sources: aiPricingSources
+    };
+
     const baseFaq = [
       ["Why do custom exercise names not translate?", "Custom names are treated as user-entered coaching language. FitRoster Pro keeps them exactly as typed so gym terminology and coach cues remain stable across language switches."],
       ["Why is a planned exercise missing from records?", "Records show completed training, not every planned item. If an exercise was skipped or left untouched, it should not appear as completed history."],
       ["What should a coach check before changing a trainee plan?", "Check the returned session, calendar consistency, goals, body context, and analysis range before changing the next block."],
-      ["What should I send with a sync support request?", "Send app version, device model, iOS version, role, affected coach or trainee, whether iCloud is enabled, and whether the issue is plan delivery, returned sessions, or backup files."]
+      ["What should I send with a sync support request?", "Send app version, device model, iOS version, role, affected coach or trainee, whether iCloud is enabled, and whether the issue is plan delivery, returned sessions, or backup files."],
+      aiPricingFaqEn
     ];
 
     const translations = {
@@ -1204,7 +1351,8 @@
           ["為什麼自訂動作名稱不會翻譯？", "自訂名稱被視為你輸入的教練語言。FitRoster Pro 會原樣保留，讓健身房術語與教練提示不會因語言切換而改變。"],
           ["為什麼預排動作沒有出現在紀錄裡？", "紀錄顯示完成訓練，不是每個預排項目。跳過或未輸入的動作不應該進入完成歷史。"],
           ["教練修改學員課表前要看什麼？", "先看回傳課表、行事曆一致性、目標、身體背景與分析區間，再修改下一個週期。"],
-          ["同步問題要提供什麼？", "請提供 app 版本、裝置型號、iOS 版本、角色、相關教練或學員、iCloud 狀態，以及問題是派課、回傳或備份。"]
+          ["同步問題要提供什麼？", "請提供 app 版本、裝置型號、iOS 版本、角色、相關教練或學員、iCloud 狀態，以及問題是派課、回傳或備份。"],
+          aiPricingFaqZhHant
         ]
       },
       "zh-Hans": {
@@ -1677,7 +1825,8 @@
       ["为什么自定义动作名称不会翻译？", "自定义名称被视为你输入的教练语言。FitRoster Pro 会原样保留，让健身房术语与教练提示不会因语言切换而改变。"],
       ["为什么预排动作没有出现在记录里？", "记录显示完成训练，不是每个预排项目。跳过或未输入的动作不应该进入完成历史。"],
       ["教练修改学员课表前要看什么？", "先看回传课表、日历一致性、目标、身体背景与分析区间，再修改下一个周期。"],
-      ["同步问题要提供什么？", "请提供 app 版本、装置型号、iOS 版本、角色、相关教练或学员、iCloud 状态，以及问题是派课、回传或备份。"]
+      ["同步问题要提供什么？", "请提供 app 版本、装置型号、iOS 版本、角色、相关教练或学员、iCloud 状态，以及问题是派课、回传或备份。"],
+      toHansValue(aiPricingFaqZhHant)
     ];
 
     localizeFromEnglish("ja", {
@@ -1898,7 +2047,7 @@
       Object.entries(chapters).forEach(([id, steps]) => {
         translations[language].chapters[id].steps = steps;
       });
-      translations[language].faq = localizedFaqDetails[language];
+      translations[language].faq = [...localizedFaqDetails[language], aiPricingFaqEn];
     });
 
     function escapeHTML(value) {
@@ -1970,12 +2119,55 @@
       }).join("");
     }
 
+    function faqQuestion(item) {
+      return Array.isArray(item) ? item[0] : item.question;
+    }
+
+    function faqBodyHTML(item) {
+      if (Array.isArray(item)) {
+        return `<p>${escapeHTML(item[1])}</p>`;
+      }
+
+      const paragraphs = (item.paragraphs || [])
+        .map((paragraph) => `<p>${escapeHTML(paragraph)}</p>`)
+        .join("");
+      const assumptions = item.assumptions?.length
+        ? `<ul>${item.assumptions.map((assumption) => `<li>${escapeHTML(assumption)}</li>`).join("")}</ul>`
+        : "";
+      const table = item.table
+        ? `
+          <div class="faq-table-wrap" role="region" aria-label="${escapeHTML(item.question)}">
+            <table class="faq-price-table">
+              <thead>
+                <tr>${item.table.headers.map((header) => `<th>${escapeHTML(header)}</th>`).join("")}</tr>
+              </thead>
+              <tbody>
+                ${item.table.rows.map((row) => `
+                  <tr>${row.map((cell, cellIndex) => `<td class="${cellIndex >= 3 ? "number" : ""}">${escapeHTML(cell)}</td>`).join("")}</tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        `
+        : "";
+      const sources = item.sources?.length
+        ? `
+          <p><strong>${escapeHTML(item.sourcesLabel || "Sources")}</strong></p>
+          <div class="faq-price-sources">
+            ${item.sources.map((source) => `<a href="${escapeHTML(source[1])}" rel="noreferrer" target="_blank">${escapeHTML(source[0])}</a>`).join("")}
+          </div>
+        `
+        : "";
+
+      return `<div class="faq-body">${paragraphs}${assumptions}${table}${sources}</div>`;
+    }
+
     function renderFaq(copy) {
       const list = document.querySelector("[data-faq-list]");
       list.innerHTML = copy.faq.map((item, index) => `
         <details class="faq-item" ${index === 0 ? "open" : ""}>
-          <summary>${escapeHTML(item[0])}</summary>
-          <p>${escapeHTML(item[1])}</p>
+          <summary>${escapeHTML(faqQuestion(item))}</summary>
+          ${faqBodyHTML(item)}
         </details>
       `).join("");
     }
