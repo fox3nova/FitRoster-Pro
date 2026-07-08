@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Send FitRoster Pro exercise item feedback by email, including an exercise name and optional reference image.">
+  <title>FitRoster Pro | Exercise Feedback</title>
+  <link rel="icon" href="assets/start-silver-fitroster.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-soft: #fbfbfd;
+      --ink: #1d1d1f;
+      --muted: #62666d;
+      --quiet: #86868b;
+      --line: rgba(29, 29, 31, 0.12);
+      --blue: #0071e3;
+      --blue-dark: #0057b8;
+      --green: #2f7d4e;
+      --shadow: 0 22px 54px rgba(0, 0, 0, 0.12);
+      --radius: 22px;
+      --shell: min(1080px, calc(100vw - 40px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      min-height: 76px;
+      align-items: center;
+      gap: 18px;
+      justify-content: space-between;
+      padding: 0 max(20px, calc((100vw - 1080px) / 2));
+      border-bottom: 1px solid rgba(29, 29, 31, 0.08);
+      background: rgba(245, 245, 247, 0.86);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand,
+    .back-link,
+    .language-switch select,
+    .button {
+      min-height: 44px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+    }
+
+    .brand-name {
+      white-space: nowrap;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      color: var(--blue);
+    }
+
+    .language-switch select {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 650;
+      padding: 0 38px 0 16px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    .shell {
+      width: var(--shell);
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 82px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(380px, 1.08fr);
+      gap: 38px;
+      align-items: stretch;
+    }
+
+    .intro-panel,
+    .form-card,
+    .note-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .intro-panel {
+      padding: clamp(30px, 5vw, 52px);
+    }
+
+    .kicker {
+      margin: 0 0 14px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 760;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 650px;
+      margin-bottom: 26px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      min-height: 36px;
+      align-items: center;
+      border: 1px solid rgba(0, 113, 227, 0.22);
+      border-radius: 999px;
+      background: rgba(0, 113, 227, 0.08);
+      color: #074f9e;
+      font-size: 13px;
+      font-weight: 720;
+      padding: 0 14px;
+    }
+
+    .form-card {
+      padding: clamp(22px, 4vw, 34px);
+    }
+
+    .field {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      font-weight: 760;
+    }
+
+    .field span,
+    .helper,
+    .status {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface-soft);
+      color: var(--ink);
+      font: inherit;
+      font-size: 16px;
+      padding: 14px 16px;
+    }
+
+    input[type="text"]:focus,
+    input[type="file"]:focus,
+    textarea:focus {
+      border-color: rgba(0, 113, 227, 0.58);
+      outline: 3px solid rgba(0, 113, 227, 0.14);
+    }
+
+    textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    .upload-box {
+      display: grid;
+      gap: 14px;
+      border: 1px dashed rgba(0, 113, 227, 0.32);
+      border-radius: 18px;
+      background: rgba(0, 113, 227, 0.05);
+      padding: 16px;
+    }
+
+    .preview {
+      display: grid;
+      min-height: 180px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #f0f2f5;
+      color: var(--quiet);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .preview img {
+      width: 100%;
+      height: 100%;
+      max-height: 320px;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 760;
+      padding: 0 22px;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      background: var(--blue-dark);
+    }
+
+    .button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .status {
+      min-height: 22px;
+      margin: 14px 0 0;
+    }
+
+    .status[data-tone="error"] {
+      color: #b42318;
+    }
+
+    .status[data-tone="success"] {
+      color: var(--green);
+    }
+
+    .note-section {
+      padding: 14px 0 76px;
+    }
+
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-card {
+      min-height: 170px;
+      padding: 22px;
+      box-shadow: none;
+    }
+
+    .note-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .note-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(29, 29, 31, 0.1);
+      padding: 26px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-weight: 650;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--blue);
+    }
+
+    @media (max-width: 860px) {
+      :root {
+        --shell: min(100vw - 28px, 680px);
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 12px 18px;
+      }
+
+      .hero {
+        padding-top: 46px;
+      }
+
+      .hero-grid,
+      .note-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .back-link {
+        order: 3;
+        width: 100%;
+      }
+
+      .brand-name {
+        display: none;
+      }
+
+      .language-switch select {
+        max-width: 150px;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Feedback navigation" data-i18n-attr="aria-label:navAria">
+    <a class="brand" href="index.html" aria-label="FitRoster Pro home" data-i18n-attr="aria-label:brandAria">
+      <img src="assets/fitroster-brand-icon.webp" width="256" height="256" alt="">
+      <span class="brand-name">FitRoster Pro</span>
+    </a>
+    <a class="back-link" href="index.html" data-i18n="backToProduct">Back to product page</a>
+    <div class="language-switch" aria-label="Language" data-i18n-attr="aria-label:languageLabel">
+      <label class="sr-only" for="language-select" data-i18n="languageLabel">Language</label>
+      <select id="language-select" data-language-select aria-label="Language" data-i18n-attr="aria-label:languageLabel"></select>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="intro-panel">
+          <p class="kicker" data-i18n="kicker">Exercise feedback</p>
+          <h1 data-i18n="title">Suggest a new exercise item.</h1>
+          <p class="lead" data-i18n="lead">Send an exercise name and a reference image by email so it can be reviewed for the FitRoster Pro exercise catalog.</p>
+          <div class="meta-row" aria-label="Feedback details" data-i18n-attr="aria-label:metaAria">
+            <span class="pill" data-i18n="emailPill">Email delivery</span>
+            <span class="pill" data-i18n="imagePill">Image reference</span>
+            <span class="pill" data-i18n="privacyPill">No server upload</span>
+          </div>
+        </div>
+
+        <form class="form-card" id="feedback-form" novalidate>
+          <div class="field">
+            <label for="exercise-name" data-i18n="nameLabel">Exercise item name</label>
+            <span data-i18n="nameHint">Use the name you expect to see in the app.</span>
+            <input id="exercise-name" name="exerciseName" type="text" autocomplete="off" required data-i18n-attr="placeholder:namePlaceholder" placeholder="Example: Incline chest press">
+          </div>
+
+          <div class="field">
+            <label for="exercise-note" data-i18n="noteLabel">Notes</label>
+            <span data-i18n="noteHint">Optional equipment, muscle focus, or naming context.</span>
+            <textarea id="exercise-note" name="exerciseNote" data-i18n-attr="placeholder:notePlaceholder" placeholder="Optional details"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="exercise-image" data-i18n="imageLabel">Reference image</label>
+            <span data-i18n="imageHint">Choose an image from your device. The page will preview it but will not upload it.</span>
+            <div class="upload-box">
+              <input id="exercise-image" name="exerciseImage" type="file" accept="image/*">
+              <div class="preview" id="image-preview" aria-live="polite">
+                <span data-i18n="previewEmpty">No image selected</span>
+              </div>
+              <p class="helper" id="image-helper" data-i18n="imageHelper">After the email draft opens, attach the selected image manually before sending.</p>
+            </div>
+          </div>
+
+          <button class="button" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7.5 12 13l8-5.5M5 6h14a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span data-i18n="submitLabel">Open email draft</span>
+          </button>
+          <p class="status" id="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <div class="shell note-grid">
+        <article class="note-card">
+          <h3 data-i18n="noteOneTitle">Email first</h3>
+          <p data-i18n="noteOneCopy">Submitting opens your email app with the exercise name already filled in.</p>
+        </article>
+        <article class="note-card">
+          <h3 data-i18n="noteTwoTitle">Attach the image</h3>
+          <p data-i18n="noteTwoCopy">Browsers do not allow static pages to attach local files automatically, so attach the selected image before sending.</p>
+        </article>
+        <article class="note-card">
+          <h3 data-i18n="noteThreeTitle">Private by default</h3>
+          <p data-i18n="noteThreeCopy">The selected image stays on your device until you send it from your own email client.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <span data-i18n="footerCopy">FitRoster Pro exercise item feedback.</span>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="footerProduct">Product page</a>
+        <a href="support.html" data-i18n="footerSupport">Support</a>
+        <a href="privacy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+        <a href="mailto:fox3nova@gmail.com" data-i18n="footerContact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site-i18n.js?v=20260708-feedback"></script>
+  <script>
+    const translations = {
+      en: {
+        metaTitle: "FitRoster Pro | Exercise Feedback",
+        metaDescription: "Send FitRoster Pro exercise item feedback by email, including an exercise name and optional reference image.",
+        navAria: "Feedback navigation",
+        brandAria: "FitRoster Pro home",
+        languageLabel: "Language",
+        backToProduct: "Back to product page",
+        kicker: "Exercise feedback",
+        title: "Suggest a new exercise item.",
+        lead: "Send an exercise name and a reference image by email so it can be reviewed for the FitRoster Pro exercise catalog.",
+        metaAria: "Feedback details",
+        emailPill: "Email delivery",
+        imagePill: "Image reference",
+        privacyPill: "No server upload",
+        nameLabel: "Exercise item name",
+        nameHint: "Use the name you expect to see in the app.",
+        namePlaceholder: "Example: Incline chest press",
+        noteLabel: "Notes",
+        noteHint: "Optional equipment, muscle focus, or naming context.",
+        notePlaceholder: "Optional details",
+        imageLabel: "Reference image",
+        imageHint: "Choose an image from your device. The page will preview it but will not upload it.",
+        previewEmpty: "No image selected",
+        imageHelper: "After the email draft opens, attach the selected image manually before sending.",
+        submitLabel: "Open email draft",
+        statusNameRequired: "Enter an exercise item name before creating the email.",
+        statusEmailOpening: "Your email app should open. Attach the selected image before sending.",
+        statusNoImage: "Your email app should open. You can attach a reference image before sending.",
+        selectedPrefix: "Selected image",
+        noteOneTitle: "Email first",
+        noteOneCopy: "Submitting opens your email app with the exercise name already filled in.",
+        noteTwoTitle: "Attach the image",
+        noteTwoCopy: "Browsers do not allow static pages to attach local files automatically, so attach the selected image before sending.",
+        noteThreeTitle: "Private by default",
+        noteThreeCopy: "The selected image stays on your device until you send it from your own email client.",
+        footerCopy: "FitRoster Pro exercise item feedback.",
+        footerProduct: "Product page",
+        footerSupport: "Support",
+        footerPrivacy: "Privacy Policy",
+        footerContact: "Contact",
+        mailSubjectPrefix: "FitRoster Pro exercise item feedback",
+        mailGreeting: "Hi, I would like to suggest a new exercise item for FitRoster Pro.",
+        mailNameLabel: "Exercise item name",
+        mailNoteLabel: "Notes",
+        mailImageLabel: "Reference image",
+        mailImageSelected: "I selected an image on the feedback page and will attach it to this email.",
+        mailImageNone: "No reference image selected yet.",
+        mailSourceLabel: "Source page"
+      },
+      "zh-Hans": {
+        metaTitle: "FitRoster Pro | 新增运动项目回馈",
+        metaDescription: "通过 email 发送 FitRoster Pro 新增运动项目回馈，包含运动项目名称与参考图片。",
+        navAria: "回馈页面导航",
+        brandAria: "FitRoster Pro 首页",
+        languageLabel: "语言",
+        backToProduct: "返回产品页面",
+        kicker: "运动项目回馈",
+        title: "建议新增运动项目。",
+        lead: "通过 email 发送运动项目名称与参考图片，方便评估是否加入 FitRoster Pro 动作目录。",
+        metaAria: "回馈资讯",
+        emailPill: "Email 发送",
+        imagePill: "参考图片",
+        privacyPill: "不会上传到服务器",
+        nameLabel: "运动项目名称",
+        nameHint: "填写你希望在 app 中看到的名称。",
+        namePlaceholder: "例：上斜胸推",
+        noteLabel: "备注",
+        noteHint: "可填写器材、目标肌群或命名说明。",
+        notePlaceholder: "选填说明",
+        imageLabel: "参考图片",
+        imageHint: "从装置选择图片。页面只会预览，不会上传。",
+        previewEmpty: "尚未选择图片",
+        imageHelper: "Email 草稿打开后，请手动附上刚才选择的图片再寄出。",
+        submitLabel: "打开 email 草稿",
+        statusNameRequired: "请先输入运动项目名称。",
+        statusEmailOpening: "Email app 应该会打开。寄出前请附上刚才选择的图片。",
+        statusNoImage: "Email app 应该会打开。你可以在寄出前附上参考图片。",
+        selectedPrefix: "已选择图片",
+        noteOneTitle: "先建立 email",
+        noteOneCopy: "送出后会打开 email app，并先填入运动项目名称。",
+        noteTwoTitle: "手动附图",
+        noteTwoCopy: "浏览器不允许静态网页自动附加本机档案，所以寄出前请手动附上图片。",
+        noteThreeTitle: "预设保护隐私",
+        noteThreeCopy: "图片会留在你的装置上，直到你从自己的 email app 寄出。",
+        footerCopy: "FitRoster Pro 新增运动项目回馈。",
+        footerProduct: "产品页面",
+        footerSupport: "支援",
+        footerPrivacy: "隐私权政策",
+        footerContact: "联系",
+        mailSubjectPrefix: "FitRoster Pro 新增运动项目回馈",
+        mailGreeting: "你好，我想建议 FitRoster Pro 新增一个运动项目。",
+        mailNameLabel: "运动项目名称",
+        mailNoteLabel: "备注",
+        mailImageLabel: "参考图片",
+        mailImageSelected: "我已在回馈页面选择图片，并会手动附在这封 email。",
+        mailImageNone: "尚未选择参考图片。",
+        mailSourceLabel: "来源页面"
+      },
+      "zh-Hant": {
+        metaTitle: "FitRoster Pro | 新增運動項目回饋",
+        metaDescription: "透過 email 傳送 FitRoster Pro 新增運動項目回饋，包含運動項目名稱與參考圖片。",
+        navAria: "回饋頁面導覽",
+        brandAria: "FitRoster Pro 首頁",
+        languageLabel: "語言",
+        backToProduct: "返回產品頁面",
+        kicker: "運動項目回饋",
+        title: "建議新增運動項目。",
+        lead: "透過 email 傳送運動項目名稱與參考圖片，方便評估是否加入 FitRoster Pro 動作目錄。",
+        metaAria: "回饋資訊",
+        emailPill: "Email 傳送",
+        imagePill: "參考圖片",
+        privacyPill: "不會上傳到伺服器",
+        nameLabel: "運動項目名稱",
+        nameHint: "填寫你希望在 app 中看到的名稱。",
+        namePlaceholder: "例：上斜胸推",
+        noteLabel: "備註",
+        noteHint: "可填寫器材、目標肌群或命名說明。",
+        notePlaceholder: "選填說明",
+        imageLabel: "參考圖片",
+        imageHint: "從裝置選擇圖片。頁面只會預覽，不會上傳。",
+        previewEmpty: "尚未選擇圖片",
+        imageHelper: "Email 草稿開啟後，請手動附上剛才選擇的圖片再寄出。",
+        submitLabel: "開啟 email 草稿",
+        statusNameRequired: "請先輸入運動項目名稱。",
+        statusEmailOpening: "Email app 應該會開啟。寄出前請附上剛才選擇的圖片。",
+        statusNoImage: "Email app 應該會開啟。你可以在寄出前附上參考圖片。",
+        selectedPrefix: "已選擇圖片",
+        noteOneTitle: "先建立 email",
+        noteOneCopy: "送出後會開啟 email app，並先填入運動項目名稱。",
+        noteTwoTitle: "手動附圖",
+        noteTwoCopy: "瀏覽器不允許靜態網頁自動附加本機檔案，所以寄出前請手動附上圖片。",
+        noteThreeTitle: "預設保護隱私",
+        noteThreeCopy: "圖片會留在你的裝置上，直到你從自己的 email app 寄出。",
+        footerCopy: "FitRoster Pro 新增運動項目回饋。",
+        footerProduct: "產品頁面",
+        footerSupport: "支援",
+        footerPrivacy: "隱私權政策",
+        footerContact: "聯絡",
+        mailSubjectPrefix: "FitRoster Pro 新增運動項目回饋",
+        mailGreeting: "你好，我想建議 FitRoster Pro 新增一個運動項目。",
+        mailNameLabel: "運動項目名稱",
+        mailNoteLabel: "備註",
+        mailImageLabel: "參考圖片",
+        mailImageSelected: "我已在回饋頁面選擇圖片，並會手動附在這封 email。",
+        mailImageNone: "尚未選擇參考圖片。",
+        mailSourceLabel: "來源頁面"
+      }
+    };
+
+    const supportedLanguages = Object.keys(translations);
+    const metaDescription = document.querySelector('meta[name="description"]');
+    const form = document.getElementById("feedback-form");
+    const nameInput = document.getElementById("exercise-name");
+    const noteInput = document.getElementById("exercise-note");
+    const imageInput = document.getElementById("exercise-image");
+    const preview = document.getElementById("image-preview");
+    const status = document.getElementById("form-status");
+    let previewUrl = "";
+    let activeLanguage = "en";
+
+    function preferredLanguage() {
+      return window.FITROSTER_SITE_I18N.preferredLanguage(supportedLanguages);
+    }
+
+    function valueFor(dictionary, key) {
+      return dictionary[key] || translations.en[key] || "";
+    }
+
+    function formatSize(bytes) {
+      if (!bytes) {
+        return "0 KB";
+      }
+      const units = ["B", "KB", "MB"];
+      let value = bytes;
+      let unit = 0;
+      while (value >= 1024 && unit < units.length - 1) {
+        value /= 1024;
+        unit += 1;
+      }
+      return `${value.toFixed(unit === 0 ? 0 : 1)} ${units[unit]}`;
+    }
+
+    function setStatus(message, tone) {
+      status.textContent = message;
+      status.dataset.tone = tone || "";
+    }
+
+    function renderPreview(file) {
+      const dictionary = translations[activeLanguage] || translations.en;
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+        previewUrl = "";
+      }
+
+      preview.replaceChildren();
+      if (!file) {
+        const empty = document.createElement("span");
+        empty.textContent = valueFor(dictionary, "previewEmpty");
+        preview.appendChild(empty);
+        return;
+      }
+
+      previewUrl = URL.createObjectURL(file);
+      const image = document.createElement("img");
+      image.src = previewUrl;
+      image.alt = `${valueFor(dictionary, "selectedPrefix")}: ${file.name}`;
+      preview.appendChild(image);
+
+      setStatus(`${valueFor(dictionary, "selectedPrefix")}: ${file.name} (${formatSize(file.size)})`, "success");
+    }
+
+    function setLanguage(language) {
+      activeLanguage = supportedLanguages.includes(language) ? language : "en";
+      const dictionary = translations[activeLanguage];
+
+      document.documentElement.lang = activeLanguage;
+      document.title = valueFor(dictionary, "metaTitle");
+      metaDescription.setAttribute("content", valueFor(dictionary, "metaDescription"));
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        element.textContent = valueFor(dictionary, element.dataset.i18n);
+      });
+
+      document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
+        element.dataset.i18nAttr.split(";").forEach((pair) => {
+          const [attribute, key] = pair.split(":");
+          if (attribute && key) {
+            element.setAttribute(attribute, valueFor(dictionary, key));
+          }
+        });
+      });
+
+      window.FITROSTER_SITE_I18N.updateLanguageSelect(activeLanguage);
+      localStorage.setItem("fitroster.marketing.language", activeLanguage);
+
+      if (!imageInput.files.length) {
+        renderPreview(null);
+      }
+    }
+
+    imageInput.addEventListener("change", () => {
+      renderPreview(imageInput.files[0]);
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const dictionary = translations[activeLanguage] || translations.en;
+      const exerciseName = nameInput.value.trim();
+      const note = noteInput.value.trim();
+      const file = imageInput.files[0];
+
+      if (!exerciseName) {
+        setStatus(valueFor(dictionary, "statusNameRequired"), "error");
+        nameInput.focus();
+        return;
+      }
+
+      const lines = [
+        valueFor(dictionary, "mailGreeting"),
+        "",
+        `${valueFor(dictionary, "mailNameLabel")}:`,
+        exerciseName,
+        "",
+        `${valueFor(dictionary, "mailNoteLabel")}:`,
+        note || "-",
+        "",
+        `${valueFor(dictionary, "mailImageLabel")}:`,
+        file ? `${valueFor(dictionary, "mailImageSelected")} (${file.name}, ${formatSize(file.size)})` : valueFor(dictionary, "mailImageNone"),
+        "",
+        `${valueFor(dictionary, "mailSourceLabel")}:`,
+        "https://fox3nova.github.io/FitRoster-Pro/feedback.html"
+      ];
+      const subject = `${valueFor(dictionary, "mailSubjectPrefix")}: ${exerciseName}`;
+      const mailto = `mailto:fox3nova@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+
+      window.location.href = mailto;
+      setStatus(file ? valueFor(dictionary, "statusEmailOpening") : valueFor(dictionary, "statusNoImage"), "success");
+    });
+
+    window.FITROSTER_SITE_I18N.mountLanguageSelect(supportedLanguages, setLanguage);
+    setLanguage(preferredLanguage());
+  </script>
+</body>
+</html>

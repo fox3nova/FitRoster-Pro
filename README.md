@@ -6,6 +6,7 @@ Current structure:
 
 - `index.html` is a single static page with built-in copy for English, Simplified Chinese, Traditional Chinese, Japanese, Korean, Thai, Malay, Russian, German, French, and Spanish.
 - `guide.html` is the multilingual HTML usage guide subpage. It covers setup, editable exercise names, custom exercises, coach-trainee workflows, records, analysis, backup, and settings with language- and device-specific screenshot paths.
+- `feedback.html` is the public exercise item feedback page. It lets users enter a missing exercise name, select a reference image for preview, and open an email draft to `fox3nova@gmail.com`.
 - `support.html` is the public App Store support page with contact, FAQ, usage-guide, product, and privacy links in the same language set.
 - `privacy.html` is the public App Store privacy policy page with the same multilingual language structure.
 - `assets/site-i18n.js` provides shared language metadata, browser-language detection, manual language switching, and the added multilingual copy used by all three pages.
@@ -25,6 +26,7 @@ Deploy target:
 - Use `https://fox3nova.github.io/FitRoster-Pro/` as the App Store Connect Marketing URL after GitHub Pages finishes publishing.
 - Use `https://fox3nova.github.io/FitRoster-Pro/support.html` as the App Store Connect Support URL.
 - Use `https://fox3nova.github.io/FitRoster-Pro/privacy.html` as the App Store Connect Privacy Policy URL.
+- Use `https://fox3nova.github.io/FitRoster-Pro/feedback.html` as the exercise item feedback URL.
 
 Language behavior:
 
