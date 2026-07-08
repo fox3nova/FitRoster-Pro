@@ -124,6 +124,10 @@
       white-space: nowrap;
     }
 
+    .honeypot {
+      display: none;
+    }
+
     .shell {
       width: var(--shell);
       margin: 0 auto;
@@ -447,36 +451,43 @@
         <div class="intro-panel">
           <p class="kicker" data-i18n="kicker">Exercise feedback</p>
           <h1 data-i18n="title">Suggest a new exercise item.</h1>
-          <p class="lead" data-i18n="lead">Send an exercise name and a reference image by email so it can be reviewed for the FitRoster Pro exercise catalog.</p>
+          <p class="lead" data-i18n="lead">Submit an exercise name and reference image so it can be emailed to the FitRoster Pro exercise catalog review inbox.</p>
           <div class="meta-row" aria-label="Feedback details" data-i18n-attr="aria-label:metaAria">
-            <span class="pill" data-i18n="emailPill">Email delivery</span>
+            <span class="pill" data-i18n="emailPill">Email submission</span>
             <span class="pill" data-i18n="imagePill">Image reference</span>
-            <span class="pill" data-i18n="privacyPill">No server upload</span>
+            <span class="pill" data-i18n="privacyPill">Sent only on submit</span>
           </div>
         </div>
 
-        <form class="form-card" id="feedback-form" novalidate>
+        <form class="form-card" id="feedback-form" action="https://formsubmit.co/fox3nova@gmail.com" method="POST" enctype="multipart/form-data" novalidate>
+          <input type="hidden" name="_subject" id="form-subject" value="FitRoster Pro exercise item feedback">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://fox3nova.github.io/FitRoster-Pro/feedback.html?submitted=1">
+          <input type="hidden" name="source_page" value="https://fox3nova.github.io/FitRoster-Pro/feedback.html">
+          <input type="hidden" name="language" id="form-language" value="en">
+          <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="field">
             <label for="exercise-name" data-i18n="nameLabel">Exercise item name</label>
             <span data-i18n="nameHint">Use the name you expect to see in the app.</span>
-            <input id="exercise-name" name="exerciseName" type="text" autocomplete="off" required data-i18n-attr="placeholder:namePlaceholder" placeholder="Example: Incline chest press">
+            <input id="exercise-name" name="exercise_item_name" type="text" autocomplete="off" required data-i18n-attr="placeholder:namePlaceholder" placeholder="Example: Incline chest press">
           </div>
 
           <div class="field">
             <label for="exercise-note" data-i18n="noteLabel">Notes</label>
             <span data-i18n="noteHint">Optional equipment, muscle focus, or naming context.</span>
-            <textarea id="exercise-note" name="exerciseNote" data-i18n-attr="placeholder:notePlaceholder" placeholder="Optional details"></textarea>
+            <textarea id="exercise-note" name="notes" data-i18n-attr="placeholder:notePlaceholder" placeholder="Optional details"></textarea>
           </div>
 
           <div class="field">
             <label for="exercise-image" data-i18n="imageLabel">Reference image</label>
-            <span data-i18n="imageHint">Choose an image from your device. The page will preview it but will not upload it.</span>
+            <span data-i18n="imageHint">Choose a reference image to include in the email submission.</span>
             <div class="upload-box">
-              <input id="exercise-image" name="exerciseImage" type="file" accept="image/*">
+              <input id="exercise-image" name="attachment" type="file" accept="image/*" required>
               <div class="preview" id="image-preview" aria-live="polite">
                 <span data-i18n="previewEmpty">No image selected</span>
               </div>
-              <p class="helper" id="image-helper" data-i18n="imageHelper">After the email draft opens, attach the selected image manually before sending.</p>
+              <p class="helper" id="image-helper" data-i18n="imageHelper">The selected image is submitted as an email attachment to fox3nova@gmail.com. Total attachment size limit: 10MB.</p>
             </div>
           </div>
 
@@ -484,7 +495,7 @@
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 7.5 12 13l8-5.5M5 6h14a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span data-i18n="submitLabel">Open email draft</span>
+            <span data-i18n="submitLabel">Send feedback</span>
           </button>
           <p class="status" id="form-status" aria-live="polite"></p>
         </form>
@@ -494,16 +505,16 @@
     <section class="note-section">
       <div class="shell note-grid">
         <article class="note-card">
-          <h3 data-i18n="noteOneTitle">Email first</h3>
-          <p data-i18n="noteOneCopy">Submitting opens your email app with the exercise name already filled in.</p>
+          <h3 data-i18n="noteOneTitle">Form email delivery</h3>
+          <p data-i18n="noteOneCopy">The form sends the exercise item name, notes, and selected image to fox3nova@gmail.com.</p>
         </article>
         <article class="note-card">
-          <h3 data-i18n="noteTwoTitle">Attach the image</h3>
-          <p data-i18n="noteTwoCopy">Browsers do not allow static pages to attach local files automatically, so attach the selected image before sending.</p>
+          <h3 data-i18n="noteTwoTitle">Image attached</h3>
+          <p data-i18n="noteTwoCopy">The reference image is uploaded with the form as an email attachment instead of a separate manual step.</p>
         </article>
         <article class="note-card">
-          <h3 data-i18n="noteThreeTitle">Private by default</h3>
-          <p data-i18n="noteThreeCopy">The selected image stays on your device until you send it from your own email client.</p>
+          <h3 data-i18n="noteThreeTitle">Private until sent</h3>
+          <p data-i18n="noteThreeCopy">Nothing is uploaded while choosing or previewing. The image is sent only when you submit the form.</p>
         </article>
       </div>
     </section>
@@ -526,18 +537,18 @@
     const translations = {
       en: {
         metaTitle: "FitRoster Pro | Exercise Feedback",
-        metaDescription: "Send FitRoster Pro exercise item feedback by email, including an exercise name and optional reference image.",
+        metaDescription: "Submit FitRoster Pro exercise item feedback with an exercise name and reference image attachment.",
         navAria: "Feedback navigation",
         brandAria: "FitRoster Pro home",
         languageLabel: "Language",
         backToProduct: "Back to product page",
         kicker: "Exercise feedback",
         title: "Suggest a new exercise item.",
-        lead: "Send an exercise name and a reference image by email so it can be reviewed for the FitRoster Pro exercise catalog.",
+        lead: "Submit an exercise name and reference image so it can be emailed to the FitRoster Pro exercise catalog review inbox.",
         metaAria: "Feedback details",
-        emailPill: "Email delivery",
+        emailPill: "Email submission",
         imagePill: "Image reference",
-        privacyPill: "No server upload",
+        privacyPill: "Sent only on submit",
         nameLabel: "Exercise item name",
         nameHint: "Use the name you expect to see in the app.",
         namePlaceholder: "Example: Incline chest press",
@@ -545,49 +556,43 @@
         noteHint: "Optional equipment, muscle focus, or naming context.",
         notePlaceholder: "Optional details",
         imageLabel: "Reference image",
-        imageHint: "Choose an image from your device. The page will preview it but will not upload it.",
+        imageHint: "Choose a reference image to include in the email submission.",
         previewEmpty: "No image selected",
-        imageHelper: "Submitting opens an email draft addressed to fox3nova@gmail.com. Email links cannot attach local images automatically, so attach the selected image in the email before sending.",
-        submitLabel: "Open email draft",
-        statusNameRequired: "Enter an exercise item name before creating the email.",
-        statusEmailOpening: "Your email app should open.",
-        statusNoImage: "Your email app should open with fox3nova@gmail.com as the recipient.",
-        statusImageReminder: "Your email app should open with fox3nova@gmail.com as the recipient. Attach the selected image before sending.",
+        imageHelper: "The selected image is submitted as an email attachment to fox3nova@gmail.com. Total attachment size limit: 10MB.",
+        submitLabel: "Send feedback",
+        statusNameRequired: "Enter an exercise item name before sending.",
+        statusImageRequired: "Choose a reference image before sending.",
+        statusImageTooLarge: "Choose an image under 10MB before sending.",
+        statusSubmitting: "Sending to fox3nova@gmail.com...",
+        statusSubmitted: "Thanks. The feedback was submitted to fox3nova@gmail.com.",
         selectedPrefix: "Selected image",
-        noteOneTitle: "Direct email draft",
-        noteOneCopy: "Submitting opens the user's email app with fox3nova@gmail.com already set as the recipient.",
-        noteTwoTitle: "Image attachment limit",
-        noteTwoCopy: "Static email links cannot attach a local photo automatically, so add the selected image from the email compose screen.",
-        noteThreeTitle: "Private by default",
-        noteThreeCopy: "The selected image stays on your device until you attach and send it from your own email client.",
+        noteOneTitle: "Form email delivery",
+        noteOneCopy: "The form sends the exercise item name, notes, and selected image to fox3nova@gmail.com.",
+        noteTwoTitle: "Image attached",
+        noteTwoCopy: "The reference image is uploaded with the form as an email attachment instead of a separate manual step.",
+        noteThreeTitle: "Private until sent",
+        noteThreeCopy: "Nothing is uploaded while choosing or previewing. The image is sent only when you submit the form.",
         footerCopy: "FitRoster Pro exercise item feedback.",
         footerProduct: "Product page",
         footerSupport: "Support",
         footerPrivacy: "Privacy Policy",
         footerContact: "Contact",
-        mailSubjectPrefix: "FitRoster Pro exercise item feedback",
-        mailGreeting: "Hi, I would like to suggest a new exercise item for FitRoster Pro.",
-        mailNameLabel: "Exercise item name",
-        mailNoteLabel: "Notes",
-        mailImageLabel: "Reference image",
-        mailImageSelected: "A reference image was selected on the feedback page. Please attach it to this email before sending.",
-        mailImageNone: "No reference image selected yet.",
-        mailSourceLabel: "Source page"
+        mailSubjectPrefix: "FitRoster Pro exercise item feedback"
       },
       "zh-Hans": {
         metaTitle: "FitRoster Pro | 新增运动项目回馈",
-        metaDescription: "通过 email 发送 FitRoster Pro 新增运动项目回馈，包含运动项目名称与参考图片。",
+        metaDescription: "提交 FitRoster Pro 新增运动项目回馈，包含运动项目名称与参考图片附件。",
         navAria: "回馈页面导航",
         brandAria: "FitRoster Pro 首页",
         languageLabel: "语言",
         backToProduct: "返回产品页面",
         kicker: "运动项目回馈",
         title: "建议新增运动项目。",
-        lead: "通过 email 发送运动项目名称与参考图片，方便评估是否加入 FitRoster Pro 动作目录。",
+        lead: "提交运动项目名称与参考图片，并通过 email 寄到 FitRoster Pro 动作目录评估信箱。",
         metaAria: "回馈资讯",
-        emailPill: "Email 发送",
+        emailPill: "Email 表单送出",
         imagePill: "参考图片",
-        privacyPill: "不会上传到服务器",
+        privacyPill: "送出时才上传",
         nameLabel: "运动项目名称",
         nameHint: "填写你希望在 app 中看到的名称。",
         namePlaceholder: "例：上斜胸推",
@@ -595,49 +600,43 @@
         noteHint: "可填写器材、目标肌群或命名说明。",
         notePlaceholder: "选填说明",
         imageLabel: "参考图片",
-        imageHint: "从装置选择图片。页面只会预览，不会上传。",
+        imageHint: "选择要随回馈一起寄出的参考图片。",
         previewEmpty: "尚未选择图片",
-        imageHelper: "送出后会直接打开收件人为 fox3nova@gmail.com 的 email 草稿。Email 连结无法自动附加本机图片，请在 email 画面手动附上刚才选择的图片。",
-        submitLabel: "打开 email 草稿",
-        statusNameRequired: "请先输入运动项目名称。",
-        statusEmailOpening: "Email app 应该会打开。",
-        statusNoImage: "Email app 应该会打开，收件人会是 fox3nova@gmail.com。",
-        statusImageReminder: "Email app 应该会打开，收件人会是 fox3nova@gmail.com。寄出前请附上刚才选择的图片。",
+        imageHelper: "所选图片会作为 email 附件送到 fox3nova@gmail.com。附件总大小限制：10MB。",
+        submitLabel: "送出回馈",
+        statusNameRequired: "请先输入运动项目名称再送出。",
+        statusImageRequired: "请先选择参考图片再送出。",
+        statusImageTooLarge: "请选择 10MB 以下的图片再送出。",
+        statusSubmitting: "正在送到 fox3nova@gmail.com...",
+        statusSubmitted: "谢谢，回馈已送到 fox3nova@gmail.com。",
         selectedPrefix: "已选择图片",
-        noteOneTitle: "直接进入 email",
-        noteOneCopy: "送出后会打开使用者的 email app，并先把收件人设为 fox3nova@gmail.com。",
-        noteTwoTitle: "图片附件限制",
-        noteTwoCopy: "静态 email 连结不能自动附加本机照片，请在 email 编辑画面加入刚才选择的图片。",
-        noteThreeTitle: "预设保护隐私",
-        noteThreeCopy: "图片会留在你的装置上，直到你从自己的 email app 附加并寄出。",
+        noteOneTitle: "表单 email 送出",
+        noteOneCopy: "表单会把运动项目名称、备注与所选图片送到 fox3nova@gmail.com。",
+        noteTwoTitle: "图片会附上",
+        noteTwoCopy: "参考图片会随表单作为 email 附件上传，不需要另外手动附加。",
+        noteThreeTitle: "送出前不上传",
+        noteThreeCopy: "选择与预览图片时不会上传；只有按下送出后，图片才会随表单寄出。",
         footerCopy: "FitRoster Pro 新增运动项目回馈。",
         footerProduct: "产品页面",
         footerSupport: "支援",
         footerPrivacy: "隐私权政策",
         footerContact: "联系",
-        mailSubjectPrefix: "FitRoster Pro 新增运动项目回馈",
-        mailGreeting: "你好，我想建议 FitRoster Pro 新增一个运动项目。",
-        mailNameLabel: "运动项目名称",
-        mailNoteLabel: "备注",
-        mailImageLabel: "参考图片",
-        mailImageSelected: "我已在回馈页面选择参考图片。请在寄出前把图片附加到这封 email。",
-        mailImageNone: "尚未选择参考图片。",
-        mailSourceLabel: "来源页面"
+        mailSubjectPrefix: "FitRoster Pro 新增运动项目回馈"
       },
       "zh-Hant": {
         metaTitle: "FitRoster Pro | 新增運動項目回饋",
-        metaDescription: "透過 email 傳送 FitRoster Pro 新增運動項目回饋，包含運動項目名稱與參考圖片。",
+        metaDescription: "提交 FitRoster Pro 新增運動項目回饋，包含運動項目名稱與參考圖片附件。",
         navAria: "回饋頁面導覽",
         brandAria: "FitRoster Pro 首頁",
         languageLabel: "語言",
         backToProduct: "返回產品頁面",
         kicker: "運動項目回饋",
         title: "建議新增運動項目。",
-        lead: "透過 email 傳送運動項目名稱與參考圖片，方便評估是否加入 FitRoster Pro 動作目錄。",
+        lead: "提交運動項目名稱與參考圖片，並透過 email 寄到 FitRoster Pro 動作目錄評估信箱。",
         metaAria: "回饋資訊",
-        emailPill: "Email 傳送",
+        emailPill: "Email 表單送出",
         imagePill: "參考圖片",
-        privacyPill: "不會上傳到伺服器",
+        privacyPill: "送出時才上傳",
         nameLabel: "運動項目名稱",
         nameHint: "填寫你希望在 app 中看到的名稱。",
         namePlaceholder: "例：上斜胸推",
@@ -645,34 +644,28 @@
         noteHint: "可填寫器材、目標肌群或命名說明。",
         notePlaceholder: "選填說明",
         imageLabel: "參考圖片",
-        imageHint: "從裝置選擇圖片。頁面只會預覽，不會上傳。",
+        imageHint: "選擇要隨回饋一起寄出的參考圖片。",
         previewEmpty: "尚未選擇圖片",
-        imageHelper: "送出後會直接開啟收件人為 fox3nova@gmail.com 的 email 草稿。Email 連結無法自動附加本機圖片，請在 email 畫面手動附上剛才選擇的圖片。",
-        submitLabel: "開啟 email 草稿",
-        statusNameRequired: "請先輸入運動項目名稱。",
-        statusEmailOpening: "Email app 應該會開啟。",
-        statusNoImage: "Email app 應該會開啟，收件人會是 fox3nova@gmail.com。",
-        statusImageReminder: "Email app 應該會開啟，收件人會是 fox3nova@gmail.com。寄出前請附上剛才選擇的圖片。",
+        imageHelper: "所選圖片會作為 email 附件送到 fox3nova@gmail.com。附件總大小限制：10MB。",
+        submitLabel: "送出回饋",
+        statusNameRequired: "請先輸入運動項目名稱再送出。",
+        statusImageRequired: "請先選擇參考圖片再送出。",
+        statusImageTooLarge: "請選擇 10MB 以下的圖片再送出。",
+        statusSubmitting: "正在送到 fox3nova@gmail.com...",
+        statusSubmitted: "謝謝，回饋已送到 fox3nova@gmail.com。",
         selectedPrefix: "已選擇圖片",
-        noteOneTitle: "直接進入 email",
-        noteOneCopy: "送出後會開啟使用者的 email app，並先把收件人設為 fox3nova@gmail.com。",
-        noteTwoTitle: "圖片附件限制",
-        noteTwoCopy: "靜態 email 連結不能自動附加本機照片，請在 email 編輯畫面加入剛才選擇的圖片。",
-        noteThreeTitle: "預設保護隱私",
-        noteThreeCopy: "圖片會留在你的裝置上，直到你從自己的 email app 附加並寄出。",
+        noteOneTitle: "表單 email 送出",
+        noteOneCopy: "表單會把運動項目名稱、備註與所選圖片送到 fox3nova@gmail.com。",
+        noteTwoTitle: "圖片會附上",
+        noteTwoCopy: "參考圖片會隨表單作為 email 附件上傳，不需要另外手動附加。",
+        noteThreeTitle: "送出前不上傳",
+        noteThreeCopy: "選擇與預覽圖片時不會上傳；只有按下送出後，圖片才會隨表單寄出。",
         footerCopy: "FitRoster Pro 新增運動項目回饋。",
         footerProduct: "產品頁面",
         footerSupport: "支援",
         footerPrivacy: "隱私權政策",
         footerContact: "聯絡",
-        mailSubjectPrefix: "FitRoster Pro 新增運動項目回饋",
-        mailGreeting: "你好，我想建議 FitRoster Pro 新增一個運動項目。",
-        mailNameLabel: "運動項目名稱",
-        mailNoteLabel: "備註",
-        mailImageLabel: "參考圖片",
-        mailImageSelected: "我已在回饋頁面選擇參考圖片。請在寄出前把圖片附加到這封 email。",
-        mailImageNone: "尚未選擇參考圖片。",
-        mailSourceLabel: "來源頁面"
+        mailSubjectPrefix: "FitRoster Pro 新增運動項目回饋"
       }
     };
 
@@ -680,10 +673,12 @@
     const metaDescription = document.querySelector('meta[name="description"]');
     const form = document.getElementById("feedback-form");
     const nameInput = document.getElementById("exercise-name");
-    const noteInput = document.getElementById("exercise-note");
     const imageInput = document.getElementById("exercise-image");
     const preview = document.getElementById("image-preview");
     const status = document.getElementById("form-status");
+    const subjectInput = document.getElementById("form-subject");
+    const languageInput = document.getElementById("form-language");
+    const maxAttachmentBytes = 10 * 1024 * 1024;
     let previewUrl = "";
     let activeLanguage = "en";
 
@@ -745,6 +740,7 @@
       document.documentElement.lang = activeLanguage;
       document.title = valueFor(dictionary, "metaTitle");
       metaDescription.setAttribute("content", valueFor(dictionary, "metaDescription"));
+      languageInput.value = activeLanguage;
 
       document.querySelectorAll("[data-i18n]").forEach((element) => {
         element.textContent = valueFor(dictionary, element.dataset.i18n);
@@ -765,56 +761,45 @@
       if (!imageInput.files.length) {
         renderPreview(null);
       }
+
+      if (new URLSearchParams(window.location.search).get("submitted") === "1") {
+        setStatus(valueFor(dictionary, "statusSubmitted"), "success");
+      }
     }
 
     imageInput.addEventListener("change", () => {
       renderPreview(imageInput.files[0]);
     });
 
-    function feedbackLines(dictionary, exerciseName, note, file) {
-      return [
-        valueFor(dictionary, "mailGreeting"),
-        "",
-        `${valueFor(dictionary, "mailNameLabel")}:`,
-        exerciseName,
-        "",
-        `${valueFor(dictionary, "mailNoteLabel")}:`,
-        note || "-",
-        "",
-        `${valueFor(dictionary, "mailImageLabel")}:`,
-        file ? `${valueFor(dictionary, "mailImageSelected")} (${file.name}, ${formatSize(file.size)})` : valueFor(dictionary, "mailImageNone"),
-        "",
-        "Send to:",
-        "fox3nova@gmail.com",
-        "",
-        `${valueFor(dictionary, "mailSourceLabel")}:`,
-        "https://fox3nova.github.io/FitRoster-Pro/feedback.html"
-      ];
-    }
-
-    function openEmailDraft(subject, body) {
-      const mailto = `mailto:fox3nova@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
-    }
-
     form.addEventListener("submit", (event) => {
-      event.preventDefault();
       const dictionary = translations[activeLanguage] || translations.en;
       const exerciseName = nameInput.value.trim();
-      const note = noteInput.value.trim();
       const file = imageInput.files[0];
 
       if (!exerciseName) {
+        event.preventDefault();
         setStatus(valueFor(dictionary, "statusNameRequired"), "error");
         nameInput.focus();
         return;
       }
 
-      const body = feedbackLines(dictionary, exerciseName, note, file).join("\n");
-      const subject = `${valueFor(dictionary, "mailSubjectPrefix")}: ${exerciseName}`;
+      if (!file) {
+        event.preventDefault();
+        setStatus(valueFor(dictionary, "statusImageRequired"), "error");
+        imageInput.focus();
+        return;
+      }
 
-      openEmailDraft(subject, body);
-      setStatus(file ? valueFor(dictionary, "statusImageReminder") : valueFor(dictionary, "statusNoImage"), "success");
+      if (file.size > maxAttachmentBytes) {
+        event.preventDefault();
+        setStatus(valueFor(dictionary, "statusImageTooLarge"), "error");
+        imageInput.focus();
+        return;
+      }
+
+      subjectInput.value = `${valueFor(dictionary, "mailSubjectPrefix")}: ${exerciseName}`;
+      languageInput.value = activeLanguage;
+      setStatus(valueFor(dictionary, "statusSubmitting"), "success");
     });
 
     window.FITROSTER_SITE_I18N.mountLanguageSelect(supportedLanguages, setLanguage);
