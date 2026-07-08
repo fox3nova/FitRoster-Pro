@@ -303,6 +303,11 @@
       background: var(--blue-dark);
     }
 
+    .button:disabled {
+      cursor: wait;
+      opacity: 0.7;
+    }
+
     .button svg {
       width: 18px;
       height: 18px;
@@ -506,7 +511,7 @@
       <div class="shell note-grid">
         <article class="note-card">
           <h3 data-i18n="noteOneTitle">Form email delivery</h3>
-          <p data-i18n="noteOneCopy">The form sends the exercise item name, notes, and selected image to fox3nova@gmail.com.</p>
+          <p data-i18n="noteOneCopy">The form stays on this page while sending the exercise item name, notes, and selected image to fox3nova@gmail.com.</p>
         </article>
         <article class="note-card">
           <h3 data-i18n="noteTwoTitle">Image attached</h3>
@@ -565,9 +570,10 @@
         statusImageTooLarge: "Choose an image under 10MB before sending.",
         statusSubmitting: "Sending to fox3nova@gmail.com...",
         statusSubmitted: "Thanks. The feedback was submitted to fox3nova@gmail.com.",
+        statusSubmitFailed: "The form could not be submitted here. Please try again or contact fox3nova@gmail.com.",
         selectedPrefix: "Selected image",
         noteOneTitle: "Form email delivery",
-        noteOneCopy: "The form sends the exercise item name, notes, and selected image to fox3nova@gmail.com.",
+        noteOneCopy: "The form stays on this page while sending the exercise item name, notes, and selected image to fox3nova@gmail.com.",
         noteTwoTitle: "Image attached",
         noteTwoCopy: "The reference image is uploaded with the form as an email attachment instead of a separate manual step.",
         noteThreeTitle: "Private until sent",
@@ -609,9 +615,10 @@
         statusImageTooLarge: "请选择 10MB 以下的图片再送出。",
         statusSubmitting: "正在送到 fox3nova@gmail.com...",
         statusSubmitted: "谢谢，回馈已送到 fox3nova@gmail.com。",
+        statusSubmitFailed: "无法在此页面完成送出。请再试一次，或联系 fox3nova@gmail.com。",
         selectedPrefix: "已选择图片",
         noteOneTitle: "表单 email 送出",
-        noteOneCopy: "表单会把运动项目名称、备注与所选图片送到 fox3nova@gmail.com。",
+        noteOneCopy: "表单会留在这个页面，并把运动项目名称、备注与所选图片送到 fox3nova@gmail.com。",
         noteTwoTitle: "图片会附上",
         noteTwoCopy: "参考图片会随表单作为 email 附件上传，不需要另外手动附加。",
         noteThreeTitle: "送出前不上传",
@@ -653,9 +660,10 @@
         statusImageTooLarge: "請選擇 10MB 以下的圖片再送出。",
         statusSubmitting: "正在送到 fox3nova@gmail.com...",
         statusSubmitted: "謝謝，回饋已送到 fox3nova@gmail.com。",
+        statusSubmitFailed: "無法在此頁面完成送出。請再試一次，或聯絡 fox3nova@gmail.com。",
         selectedPrefix: "已選擇圖片",
         noteOneTitle: "表單 email 送出",
-        noteOneCopy: "表單會把運動項目名稱、備註與所選圖片送到 fox3nova@gmail.com。",
+        noteOneCopy: "表單會留在這個頁面，並把運動項目名稱、備註與所選圖片送到 fox3nova@gmail.com。",
         noteTwoTitle: "圖片會附上",
         noteTwoCopy: "參考圖片會隨表單作為 email 附件上傳，不需要另外手動附加。",
         noteThreeTitle: "送出前不上傳",
@@ -678,7 +686,9 @@
     const status = document.getElementById("form-status");
     const subjectInput = document.getElementById("form-subject");
     const languageInput = document.getElementById("form-language");
+    const submitButton = form.querySelector('button[type="submit"]');
     const maxAttachmentBytes = 10 * 1024 * 1024;
+    const ajaxEndpoint = form.action.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
     let previewUrl = "";
     let activeLanguage = "en";
 
@@ -771,27 +781,25 @@
       renderPreview(imageInput.files[0]);
     });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
       const dictionary = translations[activeLanguage] || translations.en;
       const exerciseName = nameInput.value.trim();
       const file = imageInput.files[0];
 
       if (!exerciseName) {
-        event.preventDefault();
         setStatus(valueFor(dictionary, "statusNameRequired"), "error");
         nameInput.focus();
         return;
       }
 
       if (!file) {
-        event.preventDefault();
         setStatus(valueFor(dictionary, "statusImageRequired"), "error");
         imageInput.focus();
         return;
       }
 
       if (file.size > maxAttachmentBytes) {
-        event.preventDefault();
         setStatus(valueFor(dictionary, "statusImageTooLarge"), "error");
         imageInput.focus();
         return;
@@ -800,6 +808,31 @@
       subjectInput.value = `${valueFor(dictionary, "mailSubjectPrefix")}: ${exerciseName}`;
       languageInput.value = activeLanguage;
       setStatus(valueFor(dictionary, "statusSubmitting"), "success");
+      submitButton.disabled = true;
+
+      try {
+        const response = await fetch(ajaxEndpoint, {
+          method: "POST",
+          headers: {
+            Accept: "application/json"
+          },
+          body: new FormData(form)
+        });
+        const payload = await response.json().catch(() => null);
+
+        if (!response.ok || payload?.success === false) {
+          throw new Error(payload?.message || `FormSubmit ${response.status}`);
+        }
+
+        form.reset();
+        renderPreview(null);
+        languageInput.value = activeLanguage;
+        setStatus(valueFor(dictionary, "statusSubmitted"), "success");
+      } catch (error) {
+        setStatus(valueFor(dictionary, "statusSubmitFailed"), "error");
+      } finally {
+        submitButton.disabled = false;
+      }
     });
 
     window.FITROSTER_SITE_I18N.mountLanguageSelect(supportedLanguages, setLanguage);
