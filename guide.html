@@ -1183,45 +1183,50 @@
     };
 
     const aiPricingRows = [
-      ["OpenAI", "gpt-5.5", "5.00 / 30.00", "US$0.2270", "US$0.0360", "US$0.2730", "US$0.0620"],
-      ["OpenAI", "gpt-5.5-pro", "30.00 / 180.00", "US$1.3620", "US$0.2160", "US$1.6380", "US$0.3720"],
-      ["OpenAI", "gpt-5.4", "2.50 / 15.00", "US$0.1135", "US$0.0180", "US$0.1365", "US$0.0310"],
-      ["OpenAI", "gpt-5.4-mini", "0.75 / 4.50", "US$0.0340", "US$0.0054", "US$0.0410", "US$0.0093"],
-      ["OpenAI", "gpt-5.4-nano", "0.20 / 1.25", "US$0.0091", "US$0.0015", "US$0.0110", "US$0.0026"],
-      ["Google Gemini", "gemini-3.5-flash", "1.50 / 9.00", "US$0.0681", "US$0.0108", "US$0.0819", "US$0.0186"],
-      ["Google Gemini", "gemini-3.1-pro-preview", "2.00 / 12.00", "US$0.0908", "US$0.0144", "US$0.1092", "US$0.0248"],
-      ["Google Gemini", "gemini-2.5-pro", "1.25 / 10.00", "US$0.0590", "US$0.0107", "US$0.0723", "US$0.0190"],
-      ["Google Gemini", "gemini-2.5-flash", "0.30 / 2.50", "US$0.0143", "US$0.0027", "US$0.0175", "US$0.0047"],
-      ["Google Gemini", "gemini-3.1-flash-lite", "0.25 / 1.50", "US$0.0114", "US$0.0018", "US$0.0136", "US$0.0031"],
-      ["Anthropic Claude", "claude-fable-5", "10.00 / 50.00", "US$0.4450", "US$0.0650", "US$0.5300", "US$0.1100"],
-      ["Anthropic Claude", "claude-opus-4-8", "5.00 / 25.00", "US$0.2225", "US$0.0325", "US$0.2650", "US$0.0550"],
-      ["Anthropic Claude", "claude-sonnet-5 intro", "2.00 / 10.00", "US$0.0890", "US$0.0130", "US$0.1060", "US$0.0220"],
-      ["Anthropic Claude", "claude-haiku-4-5", "1.00 / 5.00", "US$0.0445", "US$0.0065", "US$0.0530", "US$0.0110"],
-      ["xAI Grok", "grok-4.3", "1.25 / 2.50", "US$0.0523", "US$0.0055", "US$0.0602", "US$0.0085"]
+      ["OpenAI", "gpt-5.6-sol", "5.00 / 30.00", "US$0.2270", "US$0.0360", "US$0.2730"],
+      ["OpenAI", "gpt-5.6-terra", "2.50 / 15.00", "US$0.1135", "US$0.0180", "US$0.1365"],
+      ["OpenAI", "gpt-5.6-luna", "1.00 / 6.00", "US$0.0454", "US$0.0072", "US$0.0546"],
+      ["OpenAI", "gpt-5.5", "5.00 / 30.00", "US$0.2270", "US$0.0360", "US$0.2730"],
+      ["OpenAI", "gpt-5.5-pro", "30.00 / 180.00", "US$1.3620", "US$0.2160", "US$1.6380"],
+      ["OpenAI", "gpt-5.4", "2.50 / 15.00", "US$0.1135", "US$0.0180", "US$0.1365"],
+      ["OpenAI", "gpt-5.4-mini", "0.75 / 4.50", "US$0.0340", "US$0.0054", "US$0.0410"],
+      ["OpenAI", "gpt-5.4-nano", "0.20 / 1.25", "US$0.0091", "US$0.0015", "US$0.0110"],
+      ["Google Gemini", "gemini-3.5-flash", "1.50 / 9.00", "US$0.0681", "US$0.0108", "US$0.0819"],
+      ["Google Gemini", "gemini-3.1-pro-preview", "2.00 / 12.00", "US$0.0908", "US$0.0144", "US$0.1092"],
+      ["Google Gemini", "gemini-2.5-pro", "1.25 / 10.00", "US$0.0590", "US$0.0107", "US$0.0723"],
+      ["Google Gemini", "gemini-2.5-flash", "0.30 / 2.50", "US$0.0143", "US$0.0027", "US$0.0175"],
+      ["Google Gemini", "gemini-3.1-flash-lite", "0.25 / 1.50", "US$0.0114", "US$0.0018", "US$0.0136"],
+      ["Anthropic Claude", "claude-fable-5", "10.00 / 50.00", "US$0.4450", "US$0.0650", "US$0.5300"],
+      ["Anthropic Claude", "claude-opus-4-8", "5.00 / 25.00", "US$0.2225", "US$0.0325", "US$0.2650"],
+      ["Anthropic Claude", "claude-sonnet-5", "2.00 / 10.00", "US$0.0890", "US$0.0130", "US$0.1060"],
+      ["Anthropic Claude", "claude-haiku-4-5", "1.00 / 5.00", "US$0.0445", "US$0.0065", "US$0.0530"],
+      ["xAI Grok", "grok-4.3", "1.25 / 2.50", "US$0.0523", "US$0.0055", "US$0.0603"],
+      ["xAI Grok", "grok-4.5", "2.00 / 6.00", "US$0.0854", "US$0.0102", "US$0.0996"]
     ];
 
     const aiPricingSources = [
       ["OpenAI pricing", "https://developers.openai.com/api/docs/pricing"],
       ["Google Gemini pricing", "https://ai.google.dev/gemini-api/docs/pricing"],
       ["Anthropic Claude pricing", "https://platform.claude.com/docs/en/about-claude/pricing"],
-      ["xAI Grok pricing", "https://x.ai/api"]
+      ["xAI Grok pricing", "https://docs.x.ai/developers/pricing"]
     ];
 
     const aiPricingFaqEn = {
       question: "How much can AI API calls cost in FitRoster Pro?",
       paragraphs: [
-        "FitRoster Pro uses your own provider API key only when you start an AI action. This table estimates pay-as-you-go token cost per call in USD, evaluated on 2026-07-06.",
-        "The estimates use FitRoster Pro's supported AI actions and suggested model IDs. Actual invoices vary by image size, catalog size, recent-session context, selected provider billing mode, cache/batch/priority settings, taxes, exchange rates, free tiers, and provider model changes."
+        "FitRoster Pro uses your own provider API key only when you start an AI action. This table estimates pay-as-you-go token cost per call in USD, evaluated on 2026-07-19.",
+        "The estimates cover newly available provider models and FitRoster Pro's bundled suggestions. Actual invoices vary by image size, catalog size, the data scope approved for that request, provider billing mode, taxes, exchange rates, free tiers, and later price changes."
       ],
       assumptions: [
         "Exercise photo recognition: about 40,000 input tokens plus 900 output tokens. This is higher because the current built-in exercise catalog has 528 exercises and is sent for matching.",
         "InBody report recognition: about 3,000 input tokens plus 700 output tokens.",
-        "AI workout draft: about 45,000 input tokens plus 1,600 output tokens because the exercise catalog and recent training context are included.",
-        "AI coach feedback draft: about 4,000 input tokens plus 1,400 output tokens.",
+        "AI workout draft: up to about 45,000 input tokens plus 1,600 output tokens when the full exercise catalog and recent-training context are included. A narrower approved data scope can cost less.",
+        "Rows use standard short-context rates; cache, batch, flex, priority, and regional-processing adjustments are not included.",
+        "AI coach feedback drafts are currently unavailable, so this FAQ does not estimate that workflow.",
         "Claude Sonnet 5 uses the introductory API price available on the evaluation date through 2026-08-31; the provider lists a higher standard price from 2026-09-01."
       ],
       table: {
-        headers: ["Provider", "Model", "Input / output per 1M tokens", "Exercise photo", "InBody report", "Workout draft", "Coach feedback"],
+        headers: ["Provider", "Model", "Input / output per 1M tokens", "Exercise photo", "InBody report", "Workout draft"],
         rows: aiPricingRows
       },
       sourcesLabel: "Official pricing sources",
@@ -1231,18 +1236,19 @@
     const aiPricingFaqZhHant = {
       question: "FitRoster Pro 的 AI API 每次呼叫大約會花多少錢？",
       paragraphs: [
-        "FitRoster Pro 只會在你主動啟動 AI 功能時，使用你自己儲存的服務 API key。下表以美元估算每次 API 呼叫的 pay-as-you-go token 成本，評估日期為 2026-07-06。",
-        "估算採用 FitRoster Pro 目前支援的 AI 功能與 app 內建議模型 ID。實際帳單會因圖片大小、動作目錄數量、近期訓練脈絡、服務商計費模式、cache/batch/priority 設定、稅金、匯率、免費額度與模型價格調整而不同。"
+        "FitRoster Pro 只會在你主動啟動 AI 功能時，使用你自己儲存的服務 API key。下表以美元估算每次 API 呼叫的 pay-as-you-go token 成本，評估日期為 2026-07-19。",
+        "估算包含服務商最新可用模型與 FitRoster Pro 內建建議模型。實際帳單會因圖片大小、動作目錄數量、本次同意的資料範圍、服務商計費模式、稅金、匯率、免費額度及後續價格調整而不同。"
       ],
       assumptions: [
         "動作照片辨識：約 40,000 input tokens + 900 output tokens。這項較高，因為目前內建動作目錄有 528 筆，會一起送出做比對。",
         "InBody 報告辨識：約 3,000 input tokens + 700 output tokens。",
-        "AI 課表草稿：約 45,000 input tokens + 1,600 output tokens，因為會包含動作目錄與近期訓練脈絡。",
-        "AI 教練回饋草稿：約 4,000 input tokens + 1,400 output tokens。",
+        "AI 課表草稿：完整納入動作目錄與近期訓練脈絡時，最高約 45,000 input tokens + 1,600 output tokens；若本次同意的資料範圍較小，費用也會降低。",
+        "表格採用標準短脈絡價格，不含 cache、batch、flex、priority、區域處理等折扣或加價。",
+        "AI 教練回饋草稿目前未開放，因此不列入估算。",
         "Claude Sonnet 5 採用評估日適用、到 2026-08-31 的 API 入門價格；服務商公告 2026-09-01 起會改用較高的標準價格。"
       ],
       table: {
-        headers: ["服務商", "模型", "每 1M tokens input / output", "動作照片辨識", "InBody 報告辨識", "AI 課表草稿", "AI 教練回饋草稿"],
+        headers: ["服務商", "模型", "每 1M tokens input / output", "動作照片辨識", "InBody 報告辨識", "AI 課表草稿"],
         rows: aiPricingRows
       },
       sourcesLabel: "官方價格來源",
