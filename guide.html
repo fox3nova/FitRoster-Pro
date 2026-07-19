@@ -701,6 +701,23 @@
       font-variant-numeric: tabular-nums;
     }
 
+    .faq-fx-status {
+      margin: 14px 0;
+      padding: 11px 13px;
+      border: 1px solid #cfe3f7;
+      border-radius: 12px;
+      background: #f4f9ff;
+      color: #315b7d;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .faq-fx-status[data-state="stale"],
+    .faq-fx-status[data-state="error"] {
+      border-color: #efd7a4;
+      background: #fff9ed;
+      color: #7a5a1d;
+    }
+
     .faq-price-sources {
       display: flex;
       flex-wrap: wrap;
@@ -1182,42 +1199,310 @@
       }
     };
 
-    const aiPricingRows = [
-      ["OpenAI", "gpt-5.6-sol", "5.00 / 30.00", "US$0.2270", "US$0.0360", "US$0.2730"],
-      ["OpenAI", "gpt-5.6-terra", "2.50 / 15.00", "US$0.1135", "US$0.0180", "US$0.1365"],
-      ["OpenAI", "gpt-5.6-luna", "1.00 / 6.00", "US$0.0454", "US$0.0072", "US$0.0546"],
-      ["OpenAI", "gpt-5.5", "5.00 / 30.00", "US$0.2270", "US$0.0360", "US$0.2730"],
-      ["OpenAI", "gpt-5.5-pro", "30.00 / 180.00", "US$1.3620", "US$0.2160", "US$1.6380"],
-      ["OpenAI", "gpt-5.4", "2.50 / 15.00", "US$0.1135", "US$0.0180", "US$0.1365"],
-      ["OpenAI", "gpt-5.4-mini", "0.75 / 4.50", "US$0.0340", "US$0.0054", "US$0.0410"],
-      ["OpenAI", "gpt-5.4-nano", "0.20 / 1.25", "US$0.0091", "US$0.0015", "US$0.0110"],
-      ["Google Gemini", "gemini-3.5-flash", "1.50 / 9.00", "US$0.0681", "US$0.0108", "US$0.0819"],
-      ["Google Gemini", "gemini-3.1-pro-preview", "2.00 / 12.00", "US$0.0908", "US$0.0144", "US$0.1092"],
-      ["Google Gemini", "gemini-2.5-pro", "1.25 / 10.00", "US$0.0590", "US$0.0107", "US$0.0723"],
-      ["Google Gemini", "gemini-2.5-flash", "0.30 / 2.50", "US$0.0143", "US$0.0027", "US$0.0175"],
-      ["Google Gemini", "gemini-3.1-flash-lite", "0.25 / 1.50", "US$0.0114", "US$0.0018", "US$0.0136"],
-      ["Anthropic Claude", "claude-fable-5", "10.00 / 50.00", "US$0.4450", "US$0.0650", "US$0.5300"],
-      ["Anthropic Claude", "claude-opus-4-8", "5.00 / 25.00", "US$0.2225", "US$0.0325", "US$0.2650"],
-      ["Anthropic Claude", "claude-sonnet-5", "2.00 / 10.00", "US$0.0890", "US$0.0130", "US$0.1060"],
-      ["Anthropic Claude", "claude-haiku-4-5", "1.00 / 5.00", "US$0.0445", "US$0.0065", "US$0.0530"],
-      ["xAI Grok", "grok-4.3", "1.25 / 2.50", "US$0.0523", "US$0.0055", "US$0.0603"],
-      ["xAI Grok", "grok-4.5", "2.00 / 6.00", "US$0.0854", "US$0.0102", "US$0.0996"]
+    const aiPricingModelsUSD = [
+      ["OpenAI", "gpt-5.6-sol", 5.00, 30.00],
+      ["OpenAI", "gpt-5.6-terra", 2.50, 15.00],
+      ["OpenAI", "gpt-5.6-luna", 1.00, 6.00],
+      ["OpenAI", "gpt-5.5", 5.00, 30.00],
+      ["OpenAI", "gpt-5.5-pro", 30.00, 180.00],
+      ["OpenAI", "gpt-5.4", 2.50, 15.00],
+      ["OpenAI", "gpt-5.4-mini", 0.75, 4.50],
+      ["OpenAI", "gpt-5.4-nano", 0.20, 1.25],
+      ["Google Gemini", "gemini-3.5-flash", 1.50, 9.00],
+      ["Google Gemini", "gemini-3.1-pro-preview", 2.00, 12.00],
+      ["Google Gemini", "gemini-2.5-pro", 1.25, 10.00],
+      ["Google Gemini", "gemini-2.5-flash", 0.30, 2.50],
+      ["Google Gemini", "gemini-3.1-flash-lite", 0.25, 1.50],
+      ["Anthropic Claude", "claude-fable-5", 10.00, 50.00],
+      ["Anthropic Claude", "claude-opus-4-8", 5.00, 25.00],
+      ["Anthropic Claude", "claude-sonnet-5", 2.00, 10.00],
+      ["Anthropic Claude", "claude-haiku-4-5", 1.00, 5.00],
+      ["xAI Grok", "grok-4.3", 1.25, 2.50],
+      ["xAI Grok", "grok-4.5", 2.00, 6.00]
     ];
+
+    const aiPricingWorkloads = [
+      [40000, 900],
+      [3000, 700],
+      [45000, 1600]
+    ];
+
+    const aiPricingCurrencyByLanguage = {
+      en: { currency: "USD", locale: "en-US" },
+      "zh-Hans": { currency: "CNY", locale: "zh-CN" },
+      "zh-Hant": { currency: "TWD", locale: "zh-TW" },
+      ja: { currency: "JPY", locale: "ja-JP" },
+      ko: { currency: "KRW", locale: "ko-KR" },
+      th: { currency: "THB", locale: "th-TH" },
+      ms: { currency: "MYR", locale: "ms-MY" },
+      ru: { currency: "RUB", locale: "ru-RU" },
+      de: { currency: "EUR", locale: "de-DE" },
+      fr: { currency: "EUR", locale: "fr-FR" },
+      es: { currency: "EUR", locale: "es-ES" }
+    };
+
+    const aiPricingExchangeCopy = {
+      en: {
+        ready: "Prices are shown in {currency}; 1 USD = {rate}. Exchange rate updated {date}.",
+        stale: "Prices are shown in {currency} using the latest cached rate from {date}; the live refresh is temporarily unavailable.",
+        loading: "Updating the exchange rate; USD prices are shown until conversion is ready.",
+        error: "The exchange rate is unavailable, so USD prices are shown for now."
+      },
+      "zh-Hans": {
+        ready: "价格以 {currency} 显示；1 USD = {rate}。汇率更新时间：{date}。",
+        stale: "价格以 {currency} 显示，暂时使用 {date} 的最近缓存汇率；即时更新目前不可用。",
+        loading: "正在更新汇率；换算完成前暂时显示 USD 价格。",
+        error: "目前无法取得汇率，暂时显示 USD 价格。"
+      },
+      "zh-Hant": {
+        ready: "價格以 {currency} 顯示；1 USD = {rate}。匯率更新時間：{date}。",
+        stale: "價格以 {currency} 顯示，暫時使用 {date} 的最近快取匯率；即時更新目前無法使用。",
+        loading: "正在更新匯率；換算完成前暫時顯示 USD 價格。",
+        error: "目前無法取得匯率，暫時顯示 USD 價格。"
+      },
+      ja: {
+        ready: "価格は {currency} で表示しています。1 USD = {rate}。為替レート更新日時：{date}。",
+        stale: "価格は {currency} で表示しています。{date} の最新キャッシュレートを使用中で、現在オンライン更新は利用できません。",
+        loading: "為替レートを更新しています。換算が完了するまで USD 価格を表示します。",
+        error: "為替レートを取得できないため、現在は USD 価格を表示しています。"
+      },
+      ko: {
+        ready: "가격은 {currency}로 표시됩니다. 1 USD = {rate}. 환율 업데이트: {date}.",
+        stale: "가격은 {currency}로 표시되며 {date}의 최근 캐시 환율을 사용 중입니다. 현재 온라인 업데이트를 사용할 수 없습니다.",
+        loading: "환율을 업데이트하는 중입니다. 변환이 완료될 때까지 USD 가격을 표시합니다.",
+        error: "환율을 가져올 수 없어 현재 USD 가격을 표시합니다."
+      },
+      th: {
+        ready: "แสดงราคาเป็น {currency}; 1 USD = {rate} อัปเดตอัตราแลกเปลี่ยนเมื่อ {date}",
+        stale: "แสดงราคาเป็น {currency} โดยใช้อัตราที่แคชล่าสุดจาก {date}; ขณะนี้อัปเดตออนไลน์ไม่ได้",
+        loading: "กำลังอัปเดตอัตราแลกเปลี่ยน จะแสดงราคา USD จนกว่าการแปลงจะเสร็จ",
+        error: "ไม่สามารถดึงอัตราแลกเปลี่ยนได้ จึงแสดงราคา USD ชั่วคราว"
+      },
+      ms: {
+        ready: "Harga dipaparkan dalam {currency}; 1 USD = {rate}. Kadar pertukaran dikemas kini pada {date}.",
+        stale: "Harga dipaparkan dalam {currency} menggunakan kadar cache terkini dari {date}; kemas kini dalam talian tidak tersedia buat sementara waktu.",
+        loading: "Kadar pertukaran sedang dikemas kini; harga USD dipaparkan sehingga penukaran selesai.",
+        error: "Kadar pertukaran tidak tersedia, jadi harga USD dipaparkan buat sementara waktu."
+      },
+      ru: {
+        ready: "Цены показаны в {currency}; 1 USD = {rate}. Курс обновлён: {date}.",
+        stale: "Цены показаны в {currency} по последнему сохранённому курсу от {date}; онлайн-обновление временно недоступно.",
+        loading: "Курс обновляется; до завершения пересчёта цены показаны в USD.",
+        error: "Курс недоступен, поэтому временно показаны цены в USD."
+      },
+      de: {
+        ready: "Preise werden in {currency} angezeigt; 1 USD = {rate}. Wechselkurs aktualisiert: {date}.",
+        stale: "Preise werden in {currency} mit dem zuletzt gespeicherten Kurs vom {date} angezeigt; die Online-Aktualisierung ist vorübergehend nicht verfügbar.",
+        loading: "Der Wechselkurs wird aktualisiert; bis zur Umrechnung werden USD-Preise angezeigt.",
+        error: "Der Wechselkurs ist nicht verfügbar, daher werden vorübergehend USD-Preise angezeigt."
+      },
+      fr: {
+        ready: "Les prix sont affichés en {currency} ; 1 USD = {rate}. Taux de change mis à jour : {date}.",
+        stale: "Les prix sont affichés en {currency} avec le dernier taux enregistré du {date} ; l’actualisation en ligne est temporairement indisponible.",
+        loading: "Le taux de change est en cours d’actualisation ; les prix restent en USD jusqu’à la conversion.",
+        error: "Le taux de change est indisponible ; les prix sont temporairement affichés en USD."
+      },
+      es: {
+        ready: "Los precios se muestran en {currency}; 1 USD = {rate}. Tipo de cambio actualizado: {date}.",
+        stale: "Los precios se muestran en {currency} con el último tipo guardado del {date}; la actualización en línea no está disponible temporalmente.",
+        loading: "Se está actualizando el tipo de cambio; los precios se muestran en USD hasta completar la conversión.",
+        error: "El tipo de cambio no está disponible, por lo que los precios se muestran temporalmente en USD."
+      }
+    };
+
+    const aiPricingExchangeEndpoint = "https://open.er-api.com/v6/latest/USD";
+    const aiPricingExchangeCacheKey = "fitroster.aiPricingExchangeRates.v1";
+    const aiPricingRequiredCurrencies = [...new Set(Object.values(aiPricingCurrencyByLanguage).map((item) => item.currency))];
 
     const aiPricingSources = [
       ["OpenAI pricing", "https://developers.openai.com/api/docs/pricing"],
       ["Google Gemini pricing", "https://ai.google.dev/gemini-api/docs/pricing"],
       ["Anthropic Claude pricing", "https://platform.claude.com/docs/en/about-claude/pricing"],
-      ["xAI Grok pricing", "https://docs.x.ai/developers/pricing"]
+      ["xAI Grok pricing", "https://docs.x.ai/developers/pricing"],
+      ["Rates By Exchange Rate API", "https://www.exchangerate-api.com"]
     ];
 
+    function normalizedAiPricingExchangePayload(payload) {
+      if (!payload || payload.result !== "success" || payload.base_code !== "USD") {
+        throw new Error("Invalid exchange-rate response");
+      }
+
+      const rates = {};
+      aiPricingRequiredCurrencies.forEach((currency) => {
+        const rate = Number(payload.rates?.[currency]);
+        if (!Number.isFinite(rate) || rate <= 0) {
+          throw new Error(`Missing exchange rate for ${currency}`);
+        }
+        rates[currency] = rate;
+      });
+
+      const fetchedAtUnix = Math.floor(Date.now() / 1000);
+      const updatedAtUnix = Number(payload.time_last_update_unix) || fetchedAtUnix;
+      const nextUpdateUnix = Number(payload.time_next_update_unix) || (fetchedAtUnix + 3600);
+      return { baseCode: "USD", rates, updatedAtUnix, nextUpdateUnix, fetchedAtUnix };
+    }
+
+    function readAiPricingExchangeCache() {
+      try {
+        const cached = JSON.parse(localStorage.getItem(aiPricingExchangeCacheKey) || "null");
+        if (!cached || cached.baseCode !== "USD") {
+          return null;
+        }
+        const hasEveryCurrency = aiPricingRequiredCurrencies.every((currency) => {
+          const rate = Number(cached.rates?.[currency]);
+          return Number.isFinite(rate) && rate > 0;
+        });
+        return hasEveryCurrency ? cached : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function saveAiPricingExchangeCache(payload) {
+      try {
+        localStorage.setItem(aiPricingExchangeCacheKey, JSON.stringify(payload));
+      } catch (_) {
+        // Conversion still works for this page view when storage is unavailable.
+      }
+    }
+
+    function aiPricingExchangeCacheIsFresh(payload) {
+      return Boolean(payload && Date.now() < Number(payload.nextUpdateUnix) * 1000);
+    }
+
+    const aiPricingCachedExchange = readAiPricingExchangeCache();
+    let aiPricingExchangeState = aiPricingCachedExchange
+      ? { ...aiPricingCachedExchange, status: aiPricingExchangeCacheIsFresh(aiPricingCachedExchange) ? "ready" : "stale" }
+      : { status: "loading", baseCode: "USD", rates: { USD: 1 }, updatedAtUnix: 0, nextUpdateUnix: 0 };
+    let aiPricingExchangeRequest = null;
+    let aiPricingExchangeRetryAfter = 0;
+
+    function ensureAiPricingExchangeRates() {
+      const now = Date.now();
+      if (aiPricingExchangeState.status === "ready" && aiPricingExchangeCacheIsFresh(aiPricingExchangeState)) {
+        return Promise.resolve(aiPricingExchangeState);
+      }
+      if (now < aiPricingExchangeRetryAfter) {
+        return Promise.resolve(aiPricingExchangeState);
+      }
+      if (aiPricingExchangeRequest) {
+        return aiPricingExchangeRequest;
+      }
+
+      const hasCachedRates = aiPricingRequiredCurrencies.every((currency) => Number(aiPricingExchangeState.rates?.[currency]) > 0);
+      aiPricingExchangeState = { ...aiPricingExchangeState, status: hasCachedRates ? "stale" : "loading" };
+      const controller = new AbortController();
+      const timeoutID = window.setTimeout(() => controller.abort(), 8000);
+
+      aiPricingExchangeRequest = fetch(aiPricingExchangeEndpoint, { cache: "no-store", signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Exchange-rate request failed with ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((payload) => normalizedAiPricingExchangePayload(payload))
+        .then((payload) => {
+          aiPricingExchangeState = { ...payload, status: "ready" };
+          aiPricingExchangeRetryAfter = 0;
+          saveAiPricingExchangeCache(payload);
+          return aiPricingExchangeState;
+        })
+        .catch(() => {
+          aiPricingExchangeState = { ...aiPricingExchangeState, status: hasCachedRates ? "stale" : "error" };
+          aiPricingExchangeRetryAfter = Date.now() + (20 * 60 * 1000);
+          return aiPricingExchangeState;
+        })
+        .finally(() => {
+          window.clearTimeout(timeoutID);
+          aiPricingExchangeRequest = null;
+        });
+
+      return aiPricingExchangeRequest;
+    }
+
+    function formatAiPricingTemplate(template, values) {
+      return template.replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
+    }
+
+    function formatAiPricingCurrency(value, locale, currency, isUnitRate) {
+      return new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+        currencyDisplay: "code",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: isUnitRate ? 2 : 4
+      }).format(value);
+    }
+
+    function formatAiPricingRate(rate, locale) {
+      return new Intl.NumberFormat(locale, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 6
+      }).format(rate);
+    }
+
+    function formatAiPricingUpdatedAt(unixTime, locale) {
+      if (!unixTime) {
+        return "";
+      }
+      return new Intl.DateTimeFormat(locale, {
+        dateStyle: "medium",
+        timeStyle: "short"
+      }).format(new Date(unixTime * 1000));
+    }
+
+    function aiPricingExchangeStatus(language, currencyConfig) {
+      const copy = aiPricingExchangeCopy[language] || aiPricingExchangeCopy.en;
+      const targetRate = Number(aiPricingExchangeState.rates?.[currencyConfig.currency]);
+      const values = {
+        currency: currencyConfig.currency,
+        rate: Number.isFinite(targetRate) ? formatAiPricingRate(targetRate, currencyConfig.locale) : "",
+        date: formatAiPricingUpdatedAt(aiPricingExchangeState.updatedAtUnix, currencyConfig.locale)
+      };
+      const status = aiPricingExchangeState.status;
+      const template = copy[status] || copy.error;
+      return { state: status, text: formatAiPricingTemplate(template, values) };
+    }
+
+    function aiPricingItemForLanguage(item, language) {
+      if (!item.isAiPricing) {
+        return item;
+      }
+
+      const currencyConfig = aiPricingCurrencyByLanguage[language] || aiPricingCurrencyByLanguage.en;
+      const targetRate = Number(aiPricingExchangeState.rates?.[currencyConfig.currency]);
+      const canConvert = Number.isFinite(targetRate) && targetRate > 0;
+      const displayCurrency = canConvert ? currencyConfig.currency : "USD";
+      const displayRate = canConvert ? targetRate : 1;
+      const rows = aiPricingModelsUSD.map(([provider, model, inputUSD, outputUSD]) => {
+        const unitRates = `${formatAiPricingCurrency(inputUSD * displayRate, currencyConfig.locale, displayCurrency, true)} / ${formatAiPricingCurrency(outputUSD * displayRate, currencyConfig.locale, displayCurrency, true)}`;
+        const callEstimates = aiPricingWorkloads.map(([inputTokens, outputTokens]) => {
+          const costUSD = ((inputTokens * inputUSD) + (outputTokens * outputUSD)) / 1000000;
+          return formatAiPricingCurrency(costUSD * displayRate, currencyConfig.locale, displayCurrency, false);
+        });
+        return [provider, model, unitRates, ...callEstimates];
+      });
+      const headers = [...item.table.headers];
+      headers[2] = `${headers[2]} (${displayCurrency})`;
+
+      return {
+        ...item,
+        exchangeStatus: aiPricingExchangeStatus(language, currencyConfig),
+        table: { ...item.table, headers, rows }
+      };
+    }
+
     const aiPricingFaqEn = {
+      isAiPricing: true,
       question: "How much can AI API calls cost in FitRoster Pro?",
       paragraphs: [
-        "FitRoster Pro uses your own provider API key only when you start an AI action. This table estimates pay-as-you-go token cost per call in USD, evaluated on 2026-07-19.",
+        "FitRoster Pro uses your own provider API key only when you start an AI action. Provider token prices were checked in USD on 2026-07-19; whenever this guide is displayed, the table automatically applies the latest available exchange rate for the current website language.",
         "The estimates cover newly available provider models and FitRoster Pro's bundled suggestions. Actual invoices vary by image size, catalog size, the data scope approved for that request, provider billing mode, taxes, exchange rates, free tiers, and later price changes."
       ],
       assumptions: [
+        "Website currency mapping: English USD; Simplified Chinese CNY; Traditional Chinese TWD; Japanese JPY; Korean KRW; Thai THB; Malay MYR; Russian RUB; German, French, and Spanish EUR.",
+        "ExchangeRate-API open rates update once per day. Each display uses the current cached response until the provider's next update time, then refreshes automatically. Provider invoices and card-conversion charges may differ.",
         "Exercise photo recognition: about 40,000 input tokens plus 900 output tokens. This is higher because the current built-in exercise catalog has 528 exercises and is sent for matching.",
         "InBody report recognition: about 3,000 input tokens plus 700 output tokens.",
         "AI workout draft: up to about 45,000 input tokens plus 1,600 output tokens when the full exercise catalog and recent-training context are included. A narrower approved data scope can cost less.",
@@ -1227,19 +1512,22 @@
       ],
       table: {
         headers: ["Provider", "Model", "Input / output per 1M tokens", "Exercise photo", "InBody report", "Workout draft"],
-        rows: aiPricingRows
+        rows: []
       },
       sourcesLabel: "Official pricing sources",
       sources: aiPricingSources
     };
 
     const aiPricingFaqZhHant = {
+      isAiPricing: true,
       question: "FitRoster Pro 的 AI API 每次呼叫大約會花多少錢？",
       paragraphs: [
-        "FitRoster Pro 只會在你主動啟動 AI 功能時，使用你自己儲存的服務 API key。下表以美元估算每次 API 呼叫的 pay-as-you-go token 成本，評估日期為 2026-07-19。",
+        "FitRoster Pro 只會在你主動啟動 AI 功能時，使用你自己儲存的服務 API key。服務商 token 價格以美元為基準，查核日期為 2026-07-19；每次顯示本指南時，表格都會依目前網頁語系自動套用最新可用匯率。",
         "估算包含服務商最新可用模型與 FitRoster Pro 內建建議模型。實際帳單會因圖片大小、動作目錄數量、本次同意的資料範圍、服務商計費模式、稅金、匯率、免費額度及後續價格調整而不同。"
       ],
       assumptions: [
+        "語系幣別對應：英文 USD、簡體中文 CNY、繁體中文 TWD、日文 JPY、韓文 KRW、泰文 THB、馬來文 MYR、俄文 RUB；德文、法文及西班牙文使用 EUR。",
+        "ExchangeRate-API 公開匯率每日更新一次。每次顯示時會先使用仍在有效期內的最新快取；到服務商公告的下一次更新時間後便會自動重新取得。實際帳單及信用卡換匯費用可能不同。",
         "動作照片辨識：約 40,000 input tokens + 900 output tokens。這項較高，因為目前內建動作目錄有 528 筆，會一起送出做比對。",
         "InBody 報告辨識：約 3,000 input tokens + 700 output tokens。",
         "AI 課表草稿：完整納入動作目錄與近期訓練脈絡時，最高約 45,000 input tokens + 1,600 output tokens；若本次同意的資料範圍較小，費用也會降低。",
@@ -1249,7 +1537,7 @@
       ],
       table: {
         headers: ["服務商", "模型", "每 1M tokens input / output", "動作照片辨識", "InBody 報告辨識", "AI 課表草稿"],
-        rows: aiPricingRows
+        rows: []
       },
       sourcesLabel: "官方價格來源",
       sources: aiPricingSources
@@ -2288,16 +2576,21 @@
       return Array.isArray(item) ? item[0] : item.question;
     }
 
-    function faqBodyHTML(item) {
+    function faqBodyHTML(item, language) {
       if (Array.isArray(item)) {
         return `<p>${escapeHTML(item[1])}</p>`;
       }
+
+      item = aiPricingItemForLanguage(item, language);
 
       const paragraphs = (item.paragraphs || [])
         .map((paragraph) => `<p>${escapeHTML(paragraph)}</p>`)
         .join("");
       const assumptions = item.assumptions?.length
         ? `<ul>${item.assumptions.map((assumption) => `<li>${escapeHTML(assumption)}</li>`).join("")}</ul>`
+        : "";
+      const exchangeStatus = item.exchangeStatus
+        ? `<p class="faq-fx-status" data-state="${escapeHTML(item.exchangeStatus.state)}">${escapeHTML(item.exchangeStatus.text)}</p>`
         : "";
       const renderTable = (table) => `
           <div class="faq-table-wrap" role="region" aria-label="${escapeHTML(item.question)}">
@@ -2326,17 +2619,29 @@
         `
         : "";
 
-      return `<div class="faq-body">${paragraphs}${assumptions}${tables}${sources}</div>`;
+      return `<div class="faq-body">${paragraphs}${assumptions}${exchangeStatus}${tables}${sources}</div>`;
     }
 
-    function renderFaq(copy) {
+    function renderFaq(copy, language, preserveOpen = false) {
       const list = document.querySelector("[data-faq-list]");
+      const hadRenderedItems = list.childElementCount > 0;
+      const openQuestions = preserveOpen
+        ? new Set(Array.from(list.querySelectorAll("details[open] summary")).map((summary) => summary.textContent.trim()))
+        : new Set();
       list.innerHTML = copy.faq.map((item, index) => `
-        <details class="faq-item" ${index === 0 ? "open" : ""}>
+        <details class="faq-item" ${(preserveOpen && hadRenderedItems ? openQuestions.has(faqQuestion(item)) : index === 0) ? "open" : ""}>
           <summary>${escapeHTML(faqQuestion(item))}</summary>
-          ${faqBodyHTML(item)}
+          ${faqBodyHTML(item, language)}
         </details>
       `).join("");
+    }
+
+    function refreshAiPricingForLanguage(language) {
+      ensureAiPricingExchangeRates().then(() => {
+        if (document.documentElement.lang === language) {
+          renderFaq(activeCopy(language), language, true);
+        }
+      });
     }
 
     function setLocalizedImages(language) {
@@ -2376,10 +2681,11 @@
       });
       renderNav(copy);
       renderManual(copy, language);
-      renderFaq(copy);
+      renderFaq(copy, language);
       setLocalizedImages(language);
       window.FITROSTER_SITE_I18N.updateLanguageSelect(language);
       localStorage.setItem("fitroster.marketing.language", language);
+      refreshAiPricingForLanguage(language);
     }
 
     document.addEventListener("error", (event) => {
