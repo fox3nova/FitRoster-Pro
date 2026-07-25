@@ -1224,7 +1224,10 @@
     const aiPricingWorkloads = [
       [40000, 900],
       [3000, 700],
-      [45000, 1600]
+      [45000, 1600],
+      null,
+      [15000, 1200],
+      [2000, 400]
     ];
 
     const aiPricingCurrencyByLanguage = {
@@ -1477,7 +1480,11 @@
       const displayRate = canConvert ? targetRate : 1;
       const rows = aiPricingModelsUSD.map(([provider, model, inputUSD, outputUSD]) => {
         const unitRates = `${formatAiPricingCurrency(inputUSD * displayRate, currencyConfig.locale, displayCurrency, true)} / ${formatAiPricingCurrency(outputUSD * displayRate, currencyConfig.locale, displayCurrency, true)}`;
-        const callEstimates = aiPricingWorkloads.map(([inputTokens, outputTokens]) => {
+        const callEstimates = aiPricingWorkloads.map((workload) => {
+          if (!workload) {
+            return "—";
+          }
+          const [inputTokens, outputTokens] = workload;
           const costUSD = ((inputTokens * inputUSD) + (outputTokens * outputUSD)) / 1000000;
           return formatAiPricingCurrency(costUSD * displayRate, currencyConfig.locale, displayCurrency, false);
         });
@@ -1506,12 +1513,14 @@
         "Exercise photo recognition: about 40,000 input tokens plus 900 output tokens. This is higher because the current built-in exercise catalog has 528 exercises and is sent for matching.",
         "InBody report recognition: about 3,000 input tokens plus 700 output tokens.",
         "AI workout draft: up to about 45,000 input tokens plus 1,600 output tokens when the full exercise catalog and recent-training context are included. A narrower approved data scope can cost less.",
+        "Workout report: FitRoster Pro exports an AI-ready prompt and the workout records you select; it does not call the provider API inside the app. The table therefore shows “—”. Any cost comes from the external AI product or account where you use the export.",
+        "Insight analysis: about 15,000 input tokens plus 1,200 output tokens when the maximum recent-session and analysis context is approved. A smaller approved data scope can cost less.",
+        "Voice input: Apple speech recognition and the local parser do not use provider tokens. If you explicitly approve optional AI parsing, the estimate is about 2,000 input tokens plus 400 output tokens.",
         "Rows use standard short-context rates; cache, batch, flex, priority, and regional-processing adjustments are not included.",
-        "AI coach feedback drafts are currently unavailable, so this FAQ does not estimate that workflow.",
         "Claude Sonnet 5 uses the introductory API price available on the evaluation date through 2026-08-31; the provider lists a higher standard price from 2026-09-01."
       ],
       table: {
-        headers: ["Provider", "Model", "Input / output per 1M tokens", "Exercise photo", "InBody report", "Workout draft"],
+        headers: ["Provider", "Model", "Input / output per 1M tokens", "Exercise photo", "InBody report", "Workout draft", "Workout report", "Insight analysis", "Voice input"],
         rows: []
       },
       sourcesLabel: "Official pricing sources",
@@ -1531,12 +1540,14 @@
         "動作照片辨識：約 40,000 input tokens + 900 output tokens。這項較高，因為目前內建動作目錄有 528 筆，會一起送出做比對。",
         "InBody 報告辨識：約 3,000 input tokens + 700 output tokens。",
         "AI 課表草稿：完整納入動作目錄與近期訓練脈絡時，最高約 45,000 input tokens + 1,600 output tokens；若本次同意的資料範圍較小，費用也會降低。",
+        "運動報告：FitRoster Pro 只會匯出適合交給 AI 的提示詞與你選取的訓練紀錄，不會在 App 內呼叫服務商 API，因此表格顯示「—」。費用只會發生在你使用匯出內容的外部 AI 產品或帳號。",
+        "洞察分析：同意納入最多近期訓練紀錄與分析脈絡時，約 15,000 input tokens + 1,200 output tokens；若本次同意的資料範圍較小，費用也會降低。",
+        "語音輸入：Apple 語音辨識與本機解析不會使用服務商 tokens。只有你明確同意使用選定 AI 做選用解析時，才估算約 2,000 input tokens + 400 output tokens。",
         "表格採用標準短脈絡價格，不含 cache、batch、flex、priority、區域處理等折扣或加價。",
-        "AI 教練回饋草稿目前未開放，因此不列入估算。",
         "Claude Sonnet 5 採用評估日適用、到 2026-08-31 的 API 入門價格；服務商公告 2026-09-01 起會改用較高的標準價格。"
       ],
       table: {
-        headers: ["服務商", "模型", "每 1M tokens input / output", "動作照片辨識", "InBody 報告辨識", "AI 課表草稿"],
+        headers: ["服務商", "模型", "每 1M tokens input / output", "動作照片辨識", "InBody 報告辨識", "AI 課表草稿", "運動報告", "洞察分析", "語音輸入"],
         rows: []
       },
       sourcesLabel: "官方價格來源",
