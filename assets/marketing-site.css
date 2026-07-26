@@ -303,6 +303,23 @@ a {
   object-position: 48% 68%;
   opacity: 0.48;
   mask-image: linear-gradient(to bottom, black 0%, black 76%, transparent 100%);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+body[data-marketing-role="athlete"] .hero {
+  background:
+    radial-gradient(circle at 72% 28%, rgba(243, 179, 23, 0.16), transparent 24%),
+    radial-gradient(circle at 18% 72%, rgba(104, 123, 146, 0.17), transparent 30%),
+    linear-gradient(145deg, #111317 0%, #20242a 52%, #0d0f12 100%);
+}
+
+body[data-marketing-role="athlete"] .hero-instructor {
+  opacity: 0;
+  transform: translateX(42px);
+}
+
+[data-role-image] {
+  transition: opacity 180ms ease;
 }
 
 .device {

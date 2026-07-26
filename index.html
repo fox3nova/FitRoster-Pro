@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="assets/marketing-site.css">
   <script src="assets/marketing-site.js" defer></script>
 </head>
-<body>
+<body data-marketing-role="coach">
   <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
 
   <header class="site-header">
@@ -30,7 +30,7 @@
         <a href="#workflow" data-i18n="navWorkflow">Workflow</a>
         <a href="#analysis" data-i18n="navAnalysis">Analysis</a>
         <a href="#trust" data-i18n="navTrust">Privacy &amp; AI</a>
-        <a class="nav-guide" href="guide.html" data-i18n="navGuide">Guide</a>
+        <a class="nav-guide" href="guide.html?role=coach#manual" data-role-guide-link data-i18n="navGuide">Guide</a>
       </div>
       <label>
         <span class="skip-link" data-i18n="languageLabel">Language</span>
@@ -52,7 +52,7 @@
   </header>
 
   <main id="main">
-    <section id="top" class="hero" aria-labelledby="hero-title">
+    <section id="top" class="hero" aria-labelledby="hero-title" data-role-content>
       <div class="hero-shell">
         <div class="hero-copy-block">
           <p class="eyebrow" data-i18n="heroKicker">Coach-first training operations</p>
@@ -60,7 +60,7 @@
           <p class="hero-statement" data-i18n="heroStatement">Run your roster, deliver training, and make the next coaching decision in one workspace.</p>
           <p class="hero-copy" data-i18n="heroCopy">Built for the work around every session: client context, schedules, plan delivery, assisted logging, submission review, and progress analysis—without leaving the athlete experience behind.</p>
           <div class="button-row">
-            <a class="button primary" href="guide.html" data-i18n="heroPrimary">Explore the complete guide</a>
+            <a class="button primary" href="guide.html?role=coach#manual" data-role-guide-link data-i18n="heroPrimary">Explore the complete guide</a>
             <a class="button secondary" href="#roles" data-i18n="heroSecondary">Choose your view</a>
           </div>
           <ul class="hero-chips" aria-label="Product highlights" data-i18n-attr="aria-label:highlightsAria">
@@ -73,12 +73,12 @@
 
         <div class="hero-art" aria-label="FitRoster Pro coach screens" data-i18n-attr="aria-label:heroVisualAria">
           <img class="hero-emblem" src="assets/brand/fitroster-silver-emblem.webp" alt="">
-          <img class="hero-instructor" src="assets/brand/coach-instructor.webp" alt="">
+          <img class="hero-instructor" src="assets/brand/coach-instructor.webp" alt="" data-role-ornament="instructor">
           <figure class="device ipad">
-            <img src="assets/marketing/en/hero-ipad.jpg" alt="FitRoster Pro coach schedule on iPad" width="719" height="960" data-marketing-img="hero-ipad" data-i18n-attr="alt:heroIpadAlt">
+            <img src="assets/marketing/en/coach-ipad-current.webp" alt="FitRoster Pro coach schedule on iPad" width="600" height="800" data-role-image="hero-ipad" data-i18n-attr="alt:heroIpadAlt">
           </figure>
           <figure class="device phone">
-            <img src="assets/marketing/en/hero-phone.jpg" alt="FitRoster Pro coach dashboard on iPhone" width="368" height="800" data-marketing-img="coach-dashboard" data-i18n-attr="alt:heroPhoneAlt">
+            <img src="assets/marketing/en/coach-dashboard-current.webp" alt="FitRoster Pro coach dashboard on iPhone" width="368" height="800" data-role-image="hero-phone" data-i18n-attr="alt:heroPhoneAlt">
           </figure>
         </div>
       </div>
@@ -102,6 +102,7 @@
             <span data-i18n="roleAthleteTab">Athlete workspace</span>
           </button>
         </div>
+        <span class="skip-link" role="status" aria-live="polite" data-role-status></span>
 
         <div class="role-stage">
           <article id="role-panel-coach" class="role-panel" role="tabpanel" aria-labelledby="role-tab-coach" data-role-panel="coach">
@@ -151,7 +152,7 @@
       </div>
     </section>
 
-    <section id="coach" class="section" aria-labelledby="coach-title">
+    <section id="coach" class="section" aria-labelledby="coach-title" data-role-content>
       <div class="section-shell">
         <div class="section-heading">
           <p class="kicker" data-i18n="coachKicker">Coach control center</p>
@@ -190,17 +191,17 @@
           </div>
           <div class="screen-pair" aria-label="Current coach dashboard and smart record library" data-i18n-attr="aria-label:proofAria">
             <figure class="screen-card first">
-              <img src="assets/marketing/en/hero-phone.jpg" alt="Current coach dashboard" width="368" height="800" data-marketing-img="coach-dashboard" data-i18n-attr="alt:coachDashboardAlt">
+              <img src="assets/marketing/en/coach-dashboard-current.webp" alt="Current coach dashboard" width="368" height="800" data-role-image="proof-primary" data-i18n-attr="alt:coachDashboardAlt">
             </figure>
             <figure class="screen-card second">
-              <img src="assets/marketing/en/records-calendar.jpg" alt="Current smart record library" width="368" height="800" data-marketing-img="coach-records" data-i18n-attr="alt:coachRecordsAlt">
+              <img src="assets/marketing/en/coach-records-current.webp" alt="Current smart record library" width="368" height="800" data-role-image="proof-secondary" data-i18n-attr="alt:coachRecordsAlt">
             </figure>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="workflow" class="section dark" aria-labelledby="workflow-title">
+    <section id="workflow" class="section dark" aria-labelledby="workflow-title" data-role-content>
       <div class="section-shell">
         <div class="lifecycle">
           <div class="section-heading">
@@ -229,10 +230,10 @@
       </div>
     </section>
 
-    <section id="analysis" class="section white" aria-labelledby="analysis-title">
+    <section id="analysis" class="section white" aria-labelledby="analysis-title" data-role-content>
       <div class="section-shell split">
         <figure class="wide-screen">
-          <img src="assets/marketing/en/analysis-focus.jpg" alt="FitRoster Pro analysis dashboard" width="1100" height="824" data-marketing-img="analysis-focus" data-i18n-attr="alt:analysisAlt">
+          <img src="assets/marketing/en/analysis-focus.jpg" alt="FitRoster Pro analysis dashboard" width="1100" height="824" data-role-image="analysis" data-i18n-attr="alt:analysisAlt">
         </figure>
         <div class="split-copy">
           <p class="kicker" data-i18n="analysisKicker">Decisions, not decoration</p>
@@ -248,7 +249,7 @@
       </div>
     </section>
 
-    <section id="capabilities" class="section capabilities" aria-labelledby="capabilities-title">
+    <section id="capabilities" class="section capabilities" aria-labelledby="capabilities-title" data-role-content>
       <div class="section-shell">
         <div class="section-heading">
           <p class="kicker" data-i18n="capabilitiesKicker">Complete training system</p>
@@ -316,7 +317,7 @@
       </div>
     </section>
 
-    <section id="trust" class="section dark" aria-labelledby="trust-title">
+    <section id="trust" class="section dark" aria-labelledby="trust-title" data-role-content>
       <div class="section-shell">
         <div class="section-heading">
           <p class="kicker" data-i18n="trustKicker">AI and data boundaries</p>
@@ -344,13 +345,13 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" data-role-content>
       <div class="section-shell cta">
         <p class="kicker" data-i18n="ctaKicker">See how it works</p>
         <h2 data-i18n="ctaTitle">Follow the complete coach and athlete workflow.</h2>
         <p data-i18n="ctaCopy">The live guide covers setup, coach-managed clients, connection states, planning, session records, review, analysis, optional AI, backup, and privacy controls in every supported language.</p>
         <div class="button-row">
-          <a class="button primary" href="guide.html" data-i18n="ctaGuide">Open the usage guide</a>
+          <a class="button primary" href="guide.html?role=coach#manual" data-role-guide-link data-i18n="ctaGuide">Open the usage guide</a>
           <a class="button secondary" href="privacy.html" data-i18n="ctaPrivacy">Read the privacy policy</a>
           <a class="button secondary" href="support.html" data-i18n="ctaSupport">Get support</a>
         </div>
@@ -362,7 +363,7 @@
     <div class="footer-shell">
       <span data-i18n="footerCopy">FitRoster Pro for iPhone and iPad.</span>
       <div class="footer-links">
-        <a href="guide.html" data-i18n="footerGuide">Guide</a>
+        <a href="guide.html?role=coach#manual" data-role-guide-link data-i18n="footerGuide">Guide</a>
         <a href="feedback.html" data-i18n="footerFeedback">Feedback</a>
         <a href="support.html" data-i18n="footerSupport">Support</a>
         <a href="privacy.html" data-i18n="footerPrivacy">Privacy</a>

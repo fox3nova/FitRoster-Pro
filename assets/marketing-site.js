@@ -1541,6 +1541,90 @@
     return Object.assign({}, base, supplemental.en, translations[language] || {}, supplemental[language] || {});
   }
 
+  function roleCopyFor(language, role) {
+    const copy = copyFor(language);
+    if (role !== "athlete") {
+      return Object.assign({}, copy, {
+        chipRoles: copy.roleCoachTab,
+        rolesKicker: copy.roleCoachKicker,
+        rolesCopy: copy.roleCoachCopy,
+        capabilitiesKicker: copy.roleCoachKicker,
+        capabilitiesTitle: copy.roleCoachTitle,
+        capabilitiesCopy: copy.roleCoachCopy,
+        recordsTitle: copy.coachRosterTitle,
+        recordsCopy: copy.coachRosterCopy,
+        socialTitle: copy.socialBoundary,
+        socialCopy: copy.trustConsentCopy,
+        socialBoundary: copy.trustConsentTitle,
+        analysisFullTitle: copy.analysisTitle,
+        analysisFullCopy: copy.analysisCopy,
+        aiSuiteTitle: copy.trustAiTitle,
+        aiSuiteCopy: copy.trustAiCopy,
+        videoTitle: copy.coachReviewTitle,
+        ctaKicker: copy.roleCoachKicker,
+        ctaTitle: copy.roleCoachTitle,
+        ctaCopy: copy.roleCoachCopy
+      });
+    }
+
+    return Object.assign({}, copy, {
+      pageTitle: `${copy.roleAthleteTab} | FitRoster Pro`,
+      pageDescription: copy.roleAthleteCopy,
+      heroKicker: copy.roleAthleteKicker,
+      heroStatement: copy.roleAthleteTitle,
+      heroCopy: copy.roleAthleteCopy,
+      chipRoles: copy.roleAthleteTab,
+      heroVisualAria: copy.roleAthleteVisualAria,
+      heroIpadAlt: copy.roleAthleteIpadAlt,
+      heroPhoneAlt: copy.roleAthletePhoneAlt,
+      rolesKicker: copy.roleAthleteKicker,
+      rolesCopy: copy.roleAthleteCopy,
+      coachKicker: copy.athleteKicker,
+      coachTitle: copy.athleteTitle,
+      coachCopy: copy.athleteCopy,
+      coachRosterTitle: copy.athletePlanTitle,
+      coachRosterCopy: copy.athletePlanCopy,
+      coachScheduleTitle: copy.athleteCaptureTitle,
+      coachScheduleCopy: copy.athleteCaptureCopy,
+      coachManagedTitle: copy.athleteReturnTitle,
+      coachManagedCopy: copy.athleteReturnCopy,
+      coachReviewTitle: copy.athleteProgressTitle,
+      coachReviewCopy: copy.athleteProgressCopy,
+      proofKicker: copy.roleAthleteKicker,
+      proofTitle: copy.athleteProgressTitle,
+      proofCopy: copy.athleteProgressCopy,
+      proofAria: copy.roleAthleteVisualAria,
+      coachDashboardAlt: copy.roleAthletePhoneAlt,
+      coachRecordsAlt: copy.roleAthletePhoneAlt,
+      workflowKicker: copy.roleAthleteKicker,
+      workflowTitle: copy.roleAthleteTitle,
+      workflowCopy: copy.roleAthleteCopy,
+      managedStepTitle: copy.connectedStepTitle,
+      managedStepCopy: copy.pendingStepCopy,
+      pendingStepTitle: copy.athletePlanTitle,
+      pendingStepCopy: copy.athletePlanCopy,
+      connectedStepTitle: copy.athleteReturnTitle,
+      connectedStepCopy: copy.athleteReturnCopy,
+      analysisAlt: copy.analysisFullTitle,
+      analysisKicker: copy.analysisLabel,
+      analysisTitle: copy.athleteProgressTitle,
+      analysisCopy: copy.athleteProgressCopy,
+      analysisItem1: copy.roleAthletePoint3,
+      analysisItem2: copy.analysisFullCopy,
+      analysisItem3: copy.recordsCopy,
+      analysisItem4: copy.aiInsight,
+      capabilitiesKicker: copy.roleAthleteKicker,
+      capabilitiesTitle: copy.capabilitiesTitle,
+      capabilitiesCopy: copy.roleAthleteCopy,
+      socialBoundary: copy.trustConsentTitle,
+      trustCopy: copy.aiSuiteCopy,
+      trustConsentCopy: copy.aiSuiteCopy,
+      ctaKicker: copy.roleAthleteKicker,
+      ctaTitle: copy.roleAthleteTitle,
+      ctaCopy: copy.roleAthleteCopy
+    });
+  }
+
   function imageSource(_language, key) {
     if (key === "coach-dashboard") {
       return "assets/marketing/en/coach-dashboard-current.webp";
@@ -1551,15 +1635,52 @@
     return `assets/marketing/en/${key}.jpg`;
   }
 
-  function applyLanguage(language) {
-    const normalized = normalizeLanguage(language);
-    const copy = copyFor(normalized);
-    document.documentElement.lang = normalized;
+  const roleImageSources = {
+    coach: {
+      "hero-ipad": "assets/marketing/en/coach-ipad-current.webp",
+      "hero-phone": "assets/marketing/en/coach-dashboard-current.webp",
+      "proof-primary": "assets/marketing/en/coach-dashboard-current.webp",
+      "proof-secondary": "assets/marketing/en/coach-records-current.webp",
+      analysis: "assets/marketing/en/analysis-focus.jpg"
+    },
+    athlete: {
+      "hero-ipad": "assets/guide-tutorial/en/ipad-trainee-training.jpg",
+      "hero-phone": "assets/guide-tutorial/en/trainee-records.jpg",
+      "proof-primary": "assets/guide-tutorial/en/trainee-training.jpg",
+      "proof-secondary": "assets/guide-tutorial/en/trainee-records.jpg",
+      analysis: "assets/guide-tutorial/en/analysis-muscle.jpg"
+    }
+  };
+
+  let currentLanguage = "en";
+  let currentRole = "coach";
+
+  function applyRoleAssets(role) {
+    const sources = roleImageSources[role] || roleImageSources.coach;
+    document.querySelectorAll("[data-role-image]").forEach((image) => {
+      const source = sources[image.getAttribute("data-role-image")];
+      if (source) image.setAttribute("src", source);
+    });
+
+    const guideRole = role === "athlete" ? "trainee" : "coach";
+    document.querySelectorAll("[data-role-guide-link]").forEach((link) => {
+      link.setAttribute("href", `guide.html?role=${guideRole}#manual`);
+    });
+  }
+
+  function renderPage() {
+    const copy = roleCopyFor(currentLanguage, currentRole);
+    document.documentElement.lang = currentLanguage;
     document.documentElement.dir = "ltr";
+    document.body.dataset.marketingRole = currentRole;
     document.title = copy.pageTitle;
 
     const description = document.querySelector('meta[name="description"]');
     if (description) description.setAttribute("content", copy.pageDescription);
+    const openGraphTitle = document.querySelector('meta[property="og:title"]');
+    if (openGraphTitle) openGraphTitle.setAttribute("content", copy.pageTitle);
+    const openGraphDescription = document.querySelector('meta[property="og:description"]');
+    if (openGraphDescription) openGraphDescription.setAttribute("content", copy.pageDescription);
 
     document.querySelectorAll("[data-i18n]").forEach((element) => {
       const key = element.getAttribute("data-i18n");
@@ -1575,12 +1696,23 @@
     });
 
     document.querySelectorAll("[data-marketing-img]").forEach((image) => {
-      image.setAttribute("src", imageSource(normalized, image.getAttribute("data-marketing-img")));
+      image.setAttribute("src", imageSource(currentLanguage, image.getAttribute("data-marketing-img")));
     });
 
     const select = document.getElementById("language-select");
-    if (select) select.value = normalized;
-    localStorage.setItem("fitroster.pro.marketing.language", normalized);
+    if (select) select.value = currentLanguage;
+    applyRoleAssets(currentRole);
+
+    const status = document.querySelector("[data-role-status]");
+    if (status) {
+      status.textContent = currentRole === "athlete" ? copy.roleAthleteTitle : copy.roleCoachTitle;
+    }
+  }
+
+  function applyLanguage(language) {
+    currentLanguage = normalizeLanguage(language);
+    localStorage.setItem("fitroster.pro.marketing.language", currentLanguage);
+    renderPage();
   }
 
   const select = document.getElementById("language-select");
@@ -1593,6 +1725,7 @@
 
   function applyRole(role, shouldFocus = false) {
     const normalizedRole = role === "athlete" ? "athlete" : "coach";
+    currentRole = normalizedRole;
     roleTabs.forEach((tab) => {
       const isActive = tab.dataset.roleTab === normalizedRole;
       tab.classList.toggle("is-active", isActive);
@@ -1603,7 +1736,11 @@
     rolePanels.forEach((panel) => {
       panel.hidden = panel.dataset.rolePanel !== normalizedRole;
     });
+    renderPage();
     localStorage.setItem("fitroster.pro.marketing.role", normalizedRole);
+    const url = new URL(window.location.href);
+    url.searchParams.set("role", normalizedRole);
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
   }
 
   roleTabs.forEach((tab, index) => {
@@ -1621,6 +1758,14 @@
   });
 
   const stored = localStorage.getItem("fitroster.pro.marketing.language");
-  applyRole(localStorage.getItem("fitroster.pro.marketing.role") || "coach");
-  applyLanguage(stored || navigator.language || "en");
+  const requestedRole = new URLSearchParams(window.location.search).get("role");
+  currentLanguage = normalizeLanguage(stored || navigator.language || "en");
+  currentRole = requestedRole === "athlete" || requestedRole === "trainee"
+    ? "athlete"
+    : requestedRole === "coach"
+      ? "coach"
+      : localStorage.getItem("fitroster.pro.marketing.role") === "athlete"
+        ? "athlete"
+        : "coach";
+  applyRole(currentRole);
 })();

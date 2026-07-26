@@ -3508,8 +3508,15 @@
       return `assets/guide-tutorial/en/${imageName}.jpg`;
     }
 
+    const requestedGuideRole = new URLSearchParams(window.location.search).get("role");
     const savedGuideRole = localStorage.getItem("fitroster.guide.role");
-    let currentGuideRole = savedGuideRole === "trainee" ? "trainee" : "coach";
+    let currentGuideRole = requestedGuideRole === "trainee" || requestedGuideRole === "athlete"
+      ? "trainee"
+      : requestedGuideRole === "coach"
+        ? "coach"
+        : savedGuideRole === "trainee"
+          ? "trainee"
+          : "coach";
 
     function roleAdvancedCopy(language) {
       return roleGuideAdvanced[language] || roleGuideAdvanced.en;
@@ -3855,6 +3862,9 @@
       }
       currentGuideRole = role;
       localStorage.setItem("fitroster.guide.role", role);
+      const url = new URL(window.location.href);
+      url.searchParams.set("role", role);
+      window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
       const language = document.documentElement.lang || "en";
       const copy = activeCopy(language);
       renderRoleInterface(language);
