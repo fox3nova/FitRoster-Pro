@@ -316,12 +316,12 @@ a {
 .device img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .device.ipad {
   width: 540px;
-  aspect-ratio: 4 / 5.34;
+  aspect-ratio: 3 / 4;
   right: 58px;
   top: 12px;
   border-width: 10px;
@@ -386,6 +386,161 @@ a {
   color: var(--muted);
   font-size: 1.06rem;
   line-height: 1.75;
+}
+
+.role-explorer {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(243, 179, 23, 0.12), transparent 25%),
+    var(--surface-soft);
+}
+
+.role-heading {
+  max-width: 900px;
+}
+
+.role-tabs {
+  width: fit-content;
+  margin-bottom: 20px;
+  padding: 6px;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 14px 36px rgba(26, 22, 14, 0.08);
+}
+
+.role-tab {
+  min-height: 50px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 760;
+  cursor: pointer;
+}
+
+.role-tab.is-active {
+  background: var(--graphite);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(17, 18, 20, 0.2);
+}
+
+.role-tab-index {
+  color: var(--gold-deep);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+}
+
+.role-tab.is-active .role-tab-index {
+  color: var(--gold);
+}
+
+.role-stage {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 40px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 54%),
+    var(--graphite);
+  color: #fff;
+  box-shadow: 0 34px 90px rgba(22, 18, 10, 0.18);
+}
+
+.role-panel {
+  min-height: 720px;
+  padding: 52px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(520px, 1.22fr);
+  gap: 54px;
+  align-items: center;
+}
+
+.role-panel[hidden] {
+  display: none;
+}
+
+.role-copy h3 {
+  margin: 0;
+  max-width: 620px;
+  font-size: clamp(2.2rem, 4.5vw, 4.3rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.role-copy > p:not(.kicker) {
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.66);
+  line-height: 1.72;
+}
+
+.role-points {
+  margin: 30px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  list-style: none;
+}
+
+.role-points li {
+  position: relative;
+  padding-left: 26px;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.55;
+}
+
+.role-points li::before {
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  content: "";
+}
+
+.role-devices {
+  position: relative;
+  min-height: 620px;
+}
+
+.app-shot {
+  position: absolute;
+  overflow: hidden;
+  border: 8px solid #050607;
+  background: #08090a;
+  box-shadow: 0 32px 76px rgba(0, 0, 0, 0.48);
+}
+
+.app-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.app-shot.tablet {
+  width: min(520px, 82%);
+  aspect-ratio: 3 / 4;
+  right: 4%;
+  top: 0;
+  border-radius: 32px;
+  transform: rotate(1.5deg);
+}
+
+.app-shot.handset {
+  width: min(222px, 38%);
+  aspect-ratio: 368 / 800;
+  left: 0;
+  bottom: 0;
+  border-radius: 38px;
+  transform: rotate(-4deg);
 }
 
 .dark .section-copy,
@@ -481,7 +636,7 @@ a {
 .screen-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .screen-card.first {
@@ -585,6 +740,8 @@ a {
 
 .wide-screen img {
   width: 100%;
+  height: auto;
+  object-fit: contain;
   border-radius: 20px;
 }
 
@@ -672,6 +829,156 @@ a {
   margin: 0;
   color: var(--muted);
   line-height: 1.6;
+}
+
+.capabilities {
+  background: var(--paper);
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.capability-card {
+  min-height: 300px;
+  padding: 30px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.capability-card h3 {
+  margin: 28px 0 12px;
+  font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.capability-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.capability-label {
+  display: inline-flex;
+  min-height: 32px;
+  padding: 0 12px;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--graphite);
+  color: var(--gold);
+  font-size: 0.76rem;
+  font-weight: 820;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.records-card,
+.styles-card {
+  grid-column: span 7;
+}
+
+.social-card,
+.analysis-card {
+  grid-column: span 5;
+}
+
+.ai-card {
+  grid-column: 1 / -1;
+  min-height: 340px;
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 52px;
+  align-items: center;
+  background:
+    radial-gradient(circle at 84% 14%, rgba(243, 179, 23, 0.22), transparent 26%),
+    var(--graphite);
+  color: #fff;
+}
+
+.ai-card p {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.video-card {
+  grid-column: 1 / -1;
+  min-height: 270px;
+  background:
+    linear-gradient(120deg, rgba(240, 90, 19, 0.11), transparent 50%),
+    rgba(255, 255, 255, 0.82);
+}
+
+.detail-chips,
+.style-list,
+.ai-list {
+  margin: 28px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.detail-chips span,
+.style-list li {
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 720;
+}
+
+.boundary-note {
+  margin-top: 24px !important;
+  padding: 14px 16px;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 12px 12px 0;
+  background: rgba(243, 179, 23, 0.11);
+  color: var(--ink) !important;
+  font-size: 0.9rem;
+}
+
+.ai-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.ai-list li {
+  min-height: 66px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+}
+
+.ai-list li::before {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--gold);
+  content: "";
+}
+
+.style-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.style-list li {
+  border-radius: 14px;
 }
 
 .trust-grid {
@@ -788,8 +1095,19 @@ a {
 
   .coach-proof,
   .split,
-  .athlete-grid {
+  .athlete-grid,
+  .role-panel {
     grid-template-columns: 1fr;
+  }
+
+  .role-panel {
+    padding: 44px;
+  }
+
+  .role-devices {
+    width: min(100%, 720px);
+    min-height: 700px;
+    margin: 0 auto;
   }
 
   .screen-pair {
@@ -881,6 +1199,44 @@ a {
     font-size: 2.45rem;
   }
 
+  .role-tabs {
+    width: 100%;
+  }
+
+  .role-tab {
+    min-height: 54px;
+    padding: 0 14px;
+    justify-content: center;
+  }
+
+  .role-stage {
+    border-radius: 28px;
+  }
+
+  .role-panel {
+    min-height: auto;
+    padding: 32px 18px 24px;
+    gap: 34px;
+  }
+
+  .role-copy h3 {
+    font-size: 2.45rem;
+  }
+
+  .role-devices {
+    min-height: 520px;
+  }
+
+  .app-shot.tablet {
+    width: min(420px, 84%);
+    right: 0;
+  }
+
+  .app-shot.handset {
+    width: min(176px, 40%);
+    left: 0;
+  }
+
   .feature-card {
     grid-column: 1 / -1;
     min-height: auto;
@@ -931,6 +1287,30 @@ a {
 
   .athlete-cards,
   .trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .records-card,
+  .social-card,
+  .analysis-card,
+  .styles-card,
+  .ai-card,
+  .video-card {
+    grid-column: 1 / -1;
+  }
+
+  .capability-card {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .ai-card {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .ai-list,
+  .style-list {
     grid-template-columns: 1fr;
   }
 
