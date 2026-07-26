@@ -25,8 +25,16 @@
         <img class="brand-mark" src="assets/brand/fitroster-silver-emblem.webp" alt="" width="36" height="36">
         <span>FitRoster Pro</span>
       </a>
+      <div id="role-switch" class="header-role-switch" role="group" aria-label="Choose a FitRoster Pro role" data-i18n-attr="aria-label:rolesTabsAria">
+        <button class="header-role-button is-active" type="button" aria-pressed="true" data-role-switch="coach">
+          <span data-i18n="roleCoachShort">Coach</span>
+        </button>
+        <button class="header-role-button" type="button" aria-pressed="false" data-role-switch="athlete">
+          <span data-i18n="roleAthleteShort">Athlete</span>
+        </button>
+        <span class="skip-link" role="status" aria-live="polite" data-role-status></span>
+      </div>
       <div class="nav-links">
-        <a href="#roles" data-i18n="navRoles">Coach / athlete</a>
         <a href="#workflow" data-i18n="navWorkflow">Workflow</a>
         <a href="#analysis" data-i18n="navAnalysis">Analysis</a>
         <a href="#trust" data-i18n="navTrust">Privacy &amp; AI</a>
@@ -61,7 +69,6 @@
           <p class="hero-copy" data-i18n="heroCopy">Built for the work around every session: client context, schedules, plan delivery, assisted logging, submission review, and progress analysis—without leaving the athlete experience behind.</p>
           <div class="button-row">
             <a class="button primary" href="guide.html?role=coach#manual" data-role-guide-link data-i18n="heroPrimary">Explore the complete guide</a>
-            <a class="button secondary" href="#roles" data-i18n="heroSecondary">Choose your view</a>
           </div>
           <ul class="hero-chips" aria-label="Product highlights" data-i18n-attr="aria-label:highlightsAria">
             <li data-i18n="chipRoles">Coach + athlete roles</li>
@@ -80,74 +87,6 @@
           <figure class="device phone">
             <img src="assets/marketing/en/coach-dashboard-current.webp" alt="FitRoster Pro coach dashboard on iPhone" width="368" height="800" data-role-image="hero-phone" data-i18n-attr="alt:heroPhoneAlt">
           </figure>
-        </div>
-      </div>
-    </section>
-
-    <section id="roles" class="section role-explorer" aria-labelledby="roles-title">
-      <div class="section-shell">
-        <div class="section-heading role-heading">
-          <p class="kicker" data-i18n="rolesKicker">Two roles. One shared training history.</p>
-          <h2 id="roles-title" data-i18n="rolesTitle">Choose the workspace you want to explore.</h2>
-          <p class="section-copy" data-i18n="rolesCopy">Coach operations lead the product, while athletes keep a complete training, feedback, media, and progress experience of their own.</p>
-        </div>
-
-        <div class="role-tabs" role="tablist" aria-label="Choose a FitRoster Pro role" data-i18n-attr="aria-label:rolesTabsAria">
-          <button id="role-tab-coach" class="role-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="role-panel-coach" data-role-tab="coach">
-            <span class="role-tab-index">01</span>
-            <span data-i18n="roleCoachTab">Coach workspace</span>
-          </button>
-          <button id="role-tab-athlete" class="role-tab" type="button" role="tab" aria-selected="false" aria-controls="role-panel-athlete" tabindex="-1" data-role-tab="athlete">
-            <span class="role-tab-index">02</span>
-            <span data-i18n="roleAthleteTab">Athlete workspace</span>
-          </button>
-        </div>
-        <span class="skip-link" role="status" aria-live="polite" data-role-status></span>
-
-        <div class="role-stage">
-          <article id="role-panel-coach" class="role-panel" role="tabpanel" aria-labelledby="role-tab-coach" data-role-panel="coach">
-            <div class="role-copy">
-              <p class="kicker" data-i18n="roleCoachKicker">Coach operations</p>
-              <h3 data-i18n="roleCoachTitle">See the roster, the next session, and the work that needs a decision.</h3>
-              <p data-i18n="roleCoachCopy">Plan and deliver menus, manage connected and coach-managed clients, record coached sessions, review submissions, respond to video, and read team or individual progress without losing the client context.</p>
-              <ul class="role-points">
-                <li data-i18n="roleCoachPoint1">Roster, schedule, menus, goals, and relationship states</li>
-                <li data-i18n="roleCoachPoint2">Coach-entered sessions that stay with the correct client</li>
-                <li data-i18n="roleCoachPoint3">Pending submissions, discomfort signals, PRs, and time-linked video feedback</li>
-                <li data-i18n="roleCoachPoint4">Team analysis, cycle planning, reports, and consent-aware AI assistance</li>
-              </ul>
-            </div>
-            <div class="role-devices" aria-label="English coach interface on iPad and iPhone" data-i18n-attr="aria-label:roleCoachVisualAria">
-              <figure class="app-shot tablet">
-                <img src="assets/marketing/en/coach-ipad-current.webp" alt="Current English coach workspace on iPad" width="600" height="800" data-i18n-attr="alt:roleCoachIpadAlt">
-              </figure>
-              <figure class="app-shot handset">
-                <img src="assets/marketing/en/coach-dashboard-current.webp" alt="Current English coach dashboard on iPhone" width="368" height="800" data-i18n-attr="alt:roleCoachPhoneAlt">
-              </figure>
-            </div>
-          </article>
-
-          <article id="role-panel-athlete" class="role-panel" role="tabpanel" aria-labelledby="role-tab-athlete" data-role-panel="athlete" hidden>
-            <div class="role-copy">
-              <p class="kicker" data-i18n="roleAthleteKicker">Athlete training</p>
-              <h3 data-i18n="roleAthleteTitle">Train from the plan, record the reality, and send useful context back.</h3>
-              <p data-i18n="roleAthleteCopy">Athletes receive menus, log every set, attach video, report discomfort, review history and progress, and create their own training share cards from the same record their coach can review.</p>
-              <ul class="role-points">
-                <li data-i18n="roleAthletePoint1">Sets, reps, load, RPE/RIR, rest, notes, and zero-load movements</li>
-                <li data-i18n="roleAthletePoint2">Optional voice entry, exercise video upload, download, and coach feedback</li>
-                <li data-i18n="roleAthletePoint3">Calendar history, body records, goals, PRs, and muscle distribution</li>
-                <li data-i18n="roleAthletePoint4">Athlete-controlled social sharing and optional AI tools</li>
-              </ul>
-            </div>
-            <div class="role-devices" aria-label="English athlete interface on iPad and iPhone" data-i18n-attr="aria-label:roleAthleteVisualAria">
-              <figure class="app-shot tablet">
-                <img src="assets/guide-tutorial/en/ipad-trainee-training.jpg" alt="English athlete training workspace on iPad" width="734" height="980" data-i18n-attr="alt:roleAthleteIpadAlt">
-              </figure>
-              <figure class="app-shot handset">
-                <img src="assets/guide-tutorial/en/trainee-records.jpg" alt="English athlete records on iPhone" width="351" height="760" data-i18n-attr="alt:roleAthletePhoneAlt">
-              </figure>
-            </div>
-          </article>
         </div>
       </div>
     </section>
