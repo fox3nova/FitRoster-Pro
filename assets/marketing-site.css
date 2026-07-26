@@ -531,7 +531,8 @@ body[data-marketing-role="athlete"] .hero-instructor {
 
 .role-copy > p:not(.kicker) {
   margin: 22px 0 0;
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
   line-height: 1.72;
 }
 
@@ -600,7 +601,8 @@ body[data-marketing-role="athlete"] .hero-instructor {
 
 .dark .section-copy,
 .dark .split-copy > p {
-  color: rgba(255, 255, 255, 0.64);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
 }
 
 .coach-grid {
@@ -670,7 +672,8 @@ body[data-marketing-role="athlete"] .hero-instructor {
 
 .coach-proof p {
   margin: 20px 0 0;
-  color: rgba(255, 255, 255, 0.64);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 1rem;
   line-height: 1.7;
 }
 
@@ -956,7 +959,8 @@ body[data-marketing-role="athlete"] .hero-instructor {
 }
 
 .ai-card p {
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
 }
 
 .video-card {
@@ -965,6 +969,194 @@ body[data-marketing-role="athlete"] .hero-instructor {
   background:
     linear-gradient(120deg, rgba(240, 90, 19, 0.11), transparent 50%),
     rgba(255, 255, 255, 0.82);
+}
+
+.outcomes {
+  background:
+    radial-gradient(circle at 14% 8%, rgba(243, 179, 23, 0.12), transparent 28%),
+    #ece8df;
+}
+
+.outcome-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.outcome-card {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 44px rgba(30, 25, 17, 0.07);
+}
+
+.outcome-share {
+  grid-column: span 5;
+}
+
+.outcome-ai {
+  grid-column: span 7;
+}
+
+.outcome-video {
+  grid-column: 1 / -1;
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: minmax(250px, 0.66fr) minmax(480px, 1.34fr);
+  align-items: center;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(243, 179, 23, 0.16), transparent 30%),
+    var(--graphite);
+  color: #fff;
+}
+
+.outcome-copy {
+  padding: 18px 16px 0;
+}
+
+.outcome-copy h3 {
+  margin: 24px 0 12px;
+  font-size: clamp(1.6rem, 2.7vw, 2.7rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.outcome-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.outcome-video .outcome-copy p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
+}
+
+.outcome-label {
+  display: inline-flex;
+  min-height: 32px;
+  padding: 0 12px;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--graphite);
+  color: var(--gold);
+  font-size: 0.76rem;
+  font-weight: 820;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.outcome-video .outcome-label {
+  background: rgba(243, 179, 23, 0.15);
+}
+
+.outcome-media {
+  position: relative;
+  overflow: hidden;
+  border: 8px solid #090a0b;
+  border-radius: 26px;
+  background: #111;
+  box-shadow: 0 24px 54px rgba(27, 23, 17, 0.18);
+}
+
+.outcome-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.outcome-media.portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.outcome-media.landscape {
+  align-self: stretch;
+  min-height: 480px;
+}
+
+.before-after {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.before-after .outcome-media {
+  aspect-ratio: 3 / 4;
+  border-width: 6px;
+  border-radius: 22px;
+}
+
+.outcome-media figcaption {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 1;
+  min-height: 28px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(12, 13, 14, 0.84);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 760;
+  backdrop-filter: blur(10px);
+}
+
+.terms {
+  margin-top: 22px;
+  padding: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.terms-heading {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  gap: 30px;
+  align-items: end;
+}
+
+.terms-heading h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.5vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.term-grid {
+  margin: 30px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.term-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.term-card dt {
+  color: var(--gold-deep);
+  font-size: 1.2rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.term-card dd {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.62;
 }
 
 .detail-chips,
@@ -1068,7 +1260,8 @@ body[data-marketing-role="athlete"] .hero-instructor {
 
 .trust-card p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
   line-height: 1.68;
 }
 
@@ -1077,8 +1270,9 @@ body[data-marketing-role="athlete"] .hero-instructor {
   padding: 18px 20px;
   border-left: 3px solid var(--gold);
   background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.76);
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.68;
 }
 
 .cta {
@@ -1093,7 +1287,8 @@ body[data-marketing-role="athlete"] .hero-instructor {
 .cta p {
   max-width: 700px;
   margin: 20px 0 0;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
   line-height: 1.7;
 }
 
@@ -1151,8 +1346,23 @@ body[data-marketing-role="athlete"] .hero-instructor {
   .coach-proof,
   .split,
   .athlete-grid,
-  .role-panel {
+  .role-panel,
+  .outcome-video {
     grid-template-columns: 1fr;
+  }
+
+  .outcome-share,
+  .outcome-ai {
+    grid-column: 1 / -1;
+  }
+
+  .outcome-media.landscape {
+    min-height: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .term-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .role-panel {
@@ -1356,6 +1566,26 @@ body[data-marketing-role="athlete"] .hero-instructor {
   .athlete-cards,
   .trust-grid {
     grid-template-columns: 1fr;
+  }
+
+  .outcome-card {
+    grid-column: 1 / -1;
+    padding: 12px;
+    border-radius: 24px;
+  }
+
+  .outcome-copy {
+    padding: 18px 12px 0;
+  }
+
+  .before-after,
+  .term-grid,
+  .terms-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .terms {
+    padding: 28px 18px;
   }
 
   .records-card,
