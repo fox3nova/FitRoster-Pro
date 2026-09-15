@@ -866,7 +866,35 @@
         </div>
       </div>
     </section>
-  </main>
+
+<section id="health-ai-disclosure" class="shell" aria-label="Apple Health and AI data disclosure" style="padding:32px 20px;max-width:1080px;margin:0 auto">
+ <div style="background:var(--paper,#f6f5f1);color:var(--ink,#171717);padding:24px;border:1px solid #aaa;border-radius:16px;line-height:1.7;overflow-wrap:anywhere">
+ <h2 data-disclosure="settings.health.title">Apple Health (HealthKit)</h2>
+ <p data-disclosure="settings.health.disclosure" style="margin:16px 0">FitRoster Pro uses Apple Health (HealthKit) to read your latest body weight and, after authorization, save completed workouts (activity type, start/end time, duration, workout title and a sync identifier). It does not read heart rate or write body weight. These permissions are optional.</p>
+ <p data-disclosure="settings.health.footer" style="margin:16px 0">Disconnect stops future Apple Health (HealthKit) access from FitRoster; existing data remains. Manage system permissions or delete saved workouts in Apple Health. Imported body weight may be included in an AI request only after third-party AI consent and the applicable request controls. Manual logging remains available without HealthKit.</p>
+ <h2 data-disclosure="privacy.ai.title" style="margin-top:32px">AI Data Sharing</h2>
+ <p data-disclosure="settings.ai.footer" style="margin:16px 0">Optional AI uses your selected OpenAI (GPT), Google (Gemini), Anthropic (Claude) or xAI (Grok) service. Before the first connection, review the data disclosure and explicitly consent. Manage or withdraw consent in Settings → AI Data Sharing.</p>
+ <p data-disclosure="privacy.ai.intro" style="margin:16px 0">Optional third-party AI. Only the provider you select receives data when you request an AI action and consent. Saving an API key does not grant consent.</p>
+ <h3 data-disclosure="privacy.ai.data">Data and purpose</h3>
+ <ul style="padding-left:24px">
+  <li data-disclosure="privacy.ai.training" style="margin:12px 0">Plans, analysis and coach feedback: the relevant workout history (dates, exercises, sets, reps, weights, duration, distance, effort), goals, notes, feedback and entered requests; body weight and InBody measurements when included; names when included in the request. Body weight may originate from Apple Health. Used to generate the requested draft or interpretation. Existing per-request data controls still apply.</li>
+  <li data-disclosure="privacy.ai.photos" style="margin:12px 0">Recognition: the selected equipment photo or InBody report image, including any visible people, names or health measurements, plus exercise catalog context where needed. Used to identify equipment or extract report values. Crop or cover information you do not want to share before choosing the image.</li>
+  <li data-disclosure="privacy.ai.voice" style="margin:12px 0">Voice parsing: the current transcript and language, to extract set values. FitRoster does not send the audio recording to these AI providers.</li>
+  <li data-disclosure="privacy.ai.connection" style="margin:12px 0">Connections also send your API key for authentication and expose network information such as your IP address. Refreshing the model list sends credentials, not workout records or images.</li>
+ </ul>
+ <h3 data-disclosure="privacy.ai.choice">Your control</h3>
+ <p data-disclosure="privacy.ai.control" style="margin:16px 0">Consent is saved on this device for this provider and disclosure version. Other providers require separate consent. Cancel keeps manual logging, plans and local analysis available. Review or withdraw consent in Settings → AI Data Sharing. Withdrawal blocks new requests and cancels active AI requests; data already delivered cannot be recalled. Consent alone never starts an AI request.</p>
+ <p data-disclosure="privacy.ai.retention" style="margin:16px 0">The selected provider processes data under its API terms, retention rules and account settings. Review its privacy policy below. Share another person’s data only with their permission.</p>
+ <nav aria-label="Provider privacy policies" style="display:flex;flex-wrap:wrap;gap:16px;text-decoration:underline">
+  <a href="https://openai.com/policies/privacy-policy/">OpenAI (GPT)</a>
+  <a href="https://policies.google.com/privacy">Google (Gemini)</a>
+  <a href="https://www.anthropic.com/legal/privacy">Anthropic (Claude)</a>
+  <a href="https://x.ai/legal/privacy-policy">xAI (Grok)</a>
+ </nav>
+ </div>
+</section>
+
+</main>
 
   <footer>
     <div class="shell footer-row">
@@ -1106,5 +1134,6 @@
 
     setLanguage(preferredLanguage());
   </script>
+<script src="assets/health-ai-disclosure.js?v=20260915"></script>
 </body>
 </html>
