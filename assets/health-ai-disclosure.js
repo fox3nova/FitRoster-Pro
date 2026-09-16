@@ -274,7 +274,7 @@ function render() {
  ['healthCopy','appleHealthCopy'].forEach(k => replace(k,d['settings.health.disclosure']+' '+d['settings.health.footer']));
  ['aiCopy','trustAiCopy'].forEach(k => replace(k,d['settings.ai.footer']));
  replace('trustConsentCopy',d['privacy.ai.intro']+' '+d['privacy.ai.control']);
- replace('effectiveDate','2026-09-15');
+ replace('effectiveDate','2026-09-17');
 }
 const observer = new MutationObserver(render);
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['lang','data-language']});

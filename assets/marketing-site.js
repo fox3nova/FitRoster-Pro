@@ -2131,7 +2131,7 @@
 
   const stored = localStorage.getItem("fitroster.pro.marketing.language");
   const requestedRole = new URLSearchParams(window.location.search).get("role");
-  currentLanguage = normalizeLanguage(stored || navigator.language || "en");
+  currentLanguage = normalizeLanguage(new URLSearchParams(window.location.search).get("lang") || stored || navigator.language || "en");
   currentRole = requestedRole === "athlete" || requestedRole === "trainee"
     ? "athlete"
     : requestedRole === "coach"
