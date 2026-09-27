@@ -743,6 +743,18 @@
       padding-left: 18px;
     }
 
+    #ai-pricing { scroll-margin-top: 90px; }
+    .faq-pricing-shortcut { display: inline-block; margin-top: 10px; font-weight: 700; }
+    .faq-provider-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .faq-provider-filter button {
+      font: inherit; font-size: 13px; padding: 9px 12px; min-height: 44px;
+      border: 1px solid var(--line); border-radius: 10px; background: #fff;
+      color: var(--ink); cursor: pointer;
+    }
+    .faq-provider-filter button[aria-pressed="true"] { background: #eaf3ff; border-color: #176ad5; color: #1153ac; }
+    .faq-provider-filter button:focus-visible { outline: 3px solid #176ad5; outline-offset: 2px; }
+    .faq-table-wrap[hidden], .faq-price-table tr[hidden] { display: none; }
+
     .faq-table-wrap {
       margin: 14px 0;
       width: 100%;
@@ -1120,6 +1132,7 @@
         <h2 id="faq-title" data-i18n="faqTitle">Detailed support questions.</h2>
         <p data-i18n="faqIntro">Use these answers when something looks different from the screenshots or when sync, records, or custom exercise names need clarification.</p>
       </div>
+      <a class="faq-pricing-shortcut" href="#ai-pricing" data-ai-pricing-link>AI API prices · 10 providers, including Meta Muse</a>
       <div class="faq-list" data-faq-list></div>
     </section>
 
@@ -1706,6 +1719,13 @@
       }
     ];
 
+    let aiPricingSelectedProvider = "";
+    const aiPricingNavigationCopy = {
+      en: { all: "All 10 providers", label: "Choose a provider to see its prices", link: "AI API prices · 10 providers, including Meta Muse", empty: "This provider is a price reference and is not integrated into FitRoster Pro. Its API unit prices and text-request example are shown above; app-workflow estimates do not apply." },
+      "zh-Hant": { all: "全部 10 家", label: "點選服務商查看價格", link: "AI API 價格｜十家服務商，包含 Meta Muse", empty: "此服務商目前僅供價格比較，尚未整合到 FitRoster Pro。上方已列出 API 單價與文字請求試算，因此不另列 App 功能費用。" },
+      "zh-Hans": { all: "全部 10 家", label: "点击服务商查看价格", link: "AI API 价格｜十家服务商，包含 Meta Muse", empty: "此服务商目前仅供价格比较，尚未整合到 FitRoster Pro。上方已列出 API 单价与文字请求试算，因此不另列 App 功能费用。" }
+    };
+
     const aiPricingWorkloads = [
       [40000, 900],
       [3000, 700],
@@ -2049,7 +2069,7 @@
         "Example: 3K input + 1K output",
         "Rate conditions"
       ],
-      "workflowCaption": "Illustrative cost per workflow · check model availability in the app",
+      "workflowCaption": "App workflow estimates · 6 providers, including 2 pending release",
       "workflowHeaders": [
         "Provider",
         "Model",
@@ -2115,7 +2135,7 @@
         "單次試算：3K 輸入＋1K 輸出",
         "計價條件"
       ],
-      "workflowCaption": "各功能單次費用試算｜可用模型以 App 清單為準",
+      "workflowCaption": "App 功能費用試算｜6 家服務商，含 2 家待發佈",
       "workflowHeaders": [
         "服務商",
         "模型",
@@ -2182,7 +2202,7 @@
         "单次试算：3K 输入＋1K 输出",
         "计价条件"
       ],
-      "workflowCaption": "各功能单次费用试算｜可用模型以 App 清单为准",
+      "workflowCaption": "App 功能费用试算｜6 家服务商，含 2 家待发布",
       "workflowHeaders": [
         "服务商",
         "模型",
@@ -4335,7 +4355,7 @@
               </thead>
               <tbody>
                 ${table.rows.map((row) => `
-                  <tr>${row.map((cell, cellIndex) => `<td class="${(table.numberColumns ? table.numberColumns.includes(cellIndex) : cellIndex >= 3) ? "number" : ""}">${escapeHTML(cell)}</td>`).join("")}</tr>
+                  <tr ${item.isAiPricing ? `data-ai-provider-row="${escapeHTML(row[0])}"` : ""}>${row.map((cell, cellIndex) => `<td class="${(table.numberColumns ? table.numberColumns.includes(cellIndex) : cellIndex >= 3) ? "number" : ""}">${escapeHTML(cell)}</td>`).join("")}</tr>
                 `).join("")}
               </tbody>
             </table>
@@ -4353,9 +4373,35 @@
         `
         : "";
 
-      return item.isAiPricing
-        ? `<div class="faq-body">${paragraphs}${exchangeStatus}${tables}${assumptions}${sources}</div>`
-        : `<div class="faq-body">${paragraphs}${assumptions}${exchangeStatus}${tables}${sources}</div>`;
+      if (item.isAiPricing) {
+        const nav = aiPricingNavigationCopy[language] || aiPricingNavigationCopy.en;
+        const providers = [...new Set(aiPricingModelsUSD.map((row) => row.provider))];
+        const filters = `<div class="faq-provider-filter" role="group" aria-label="${escapeHTML(nav.label)}">
+          <button type="button" data-ai-provider-filter="" aria-pressed="true">${escapeHTML(nav.all)}</button>
+          ${providers.map((provider) => `<button type="button" data-ai-provider-filter="${escapeHTML(provider)}" aria-pressed="false">${escapeHTML(provider === "Alibaba Cloud Qwen" && language.startsWith("zh") ? (language === "zh-Hans" ? "千问 Qwen" : "千問 Qwen") : provider)}</button>`).join("")}
+        </div>`;
+        const pricingIntro = item.paragraphs?.[0] ? `<p>${escapeHTML(item.paragraphs[0])}</p>` : "";
+        const details = (item.paragraphs || []).slice(1).map((text) => `<p>${escapeHTML(text)}</p>`).join("");
+        return `<div class="faq-body">${pricingIntro}${filters}${exchangeStatus}${tables}<p data-ai-pricing-empty hidden>${escapeHTML(nav.empty)}</p>${details}${assumptions}${sources}</div>`;
+      }
+      return `<div class="faq-body">${paragraphs}${assumptions}${exchangeStatus}${tables}${sources}</div>`;
+    }
+
+    function applyAiPricingProviderFilter() {
+      const section = document.getElementById("ai-pricing");
+      if (!section) return;
+      section.querySelectorAll("[data-ai-provider-filter]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.aiProviderFilter === aiPricingSelectedProvider));
+      });
+      section.querySelectorAll("[data-ai-provider-row]").forEach((row) => {
+        row.hidden = Boolean(aiPricingSelectedProvider && row.dataset.aiProviderRow !== aiPricingSelectedProvider);
+      });
+      section.querySelectorAll(".faq-table-wrap").forEach((table) => {
+        table.hidden = !table.querySelector("tbody tr:not([hidden])");
+        table.scrollLeft = 0;
+      });
+      const workflowTable = section.querySelectorAll(".faq-table-wrap")[1];
+      section.querySelector("[data-ai-pricing-empty]").hidden = !workflowTable?.hidden;
     }
 
     function renderFaq(copy, language, preserveOpen = false) {
@@ -4365,11 +4411,20 @@
         ? new Set(Array.from(list.querySelectorAll("details[open] summary")).map((summary) => summary.textContent.trim()))
         : new Set();
       list.innerHTML = copy.faq.map((item, index) => `
-        <details class="faq-item" ${(preserveOpen && hadRenderedItems ? openQuestions.has(faqQuestion(item)) : index === 0) ? "open" : ""}>
+        <details class="faq-item" ${item.isAiPricing ? 'id="ai-pricing"' : ""} ${(preserveOpen && hadRenderedItems ? openQuestions.has(faqQuestion(item)) : index === 0 || (item.isAiPricing && window.location.hash === "#ai-pricing")) ? "open" : ""}>
           <summary>${escapeHTML(faqQuestion(item))}</summary>
           ${faqBodyHTML(item, language)}
         </details>
       `).join("");
+      const nav = aiPricingNavigationCopy[language] || aiPricingNavigationCopy.en;
+      document.querySelector("[data-ai-pricing-link]").textContent = nav.link;
+      list.querySelectorAll("[data-ai-provider-filter]").forEach((button) => {
+        button.addEventListener("click", () => {
+          aiPricingSelectedProvider = button.dataset.aiProviderFilter;
+          applyAiPricingProviderFilter();
+        });
+      });
+      applyAiPricingProviderFilter();
     }
 
     function refreshAiPricingForLanguage(language) {
@@ -4414,6 +4469,7 @@
         if (!target) {
           return;
         }
+        if (target instanceof HTMLDetailsElement) target.open = true;
         target.scrollIntoView({ block: "start", behavior: "auto" });
         if (focusHeading) {
           const heading = target.querySelector("[data-role-title], h2");
@@ -4495,9 +4551,14 @@
       }
     }, true);
 
+    document.querySelector("[data-ai-pricing-link]").addEventListener("click", () => {
+      document.getElementById("ai-pricing").open = true;
+    });
+
     const supportedLanguages = Object.keys(translations);
     window.FITROSTER_SITE_I18N.mountLanguageSelect(supportedLanguages, applyLanguage);
     applyLanguage(window.FITROSTER_SITE_I18N.preferredLanguage(supportedLanguages));
+    window.addEventListener("hashchange", () => alignCurrentHash(true));
     window.addEventListener("load", () => alignCurrentHash(true), { once: true });
   </script>
 <script src="assets/health-ai-disclosure.js?v=20260917"></script>

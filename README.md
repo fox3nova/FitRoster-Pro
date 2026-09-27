@@ -60,3 +60,9 @@ Usage-guide screenshots:
 - Currency conversion remains daily ExchangeRate-API data with valid cache reuse, labeled stale fallback and USD fallback. Model prices are a dated 2026-09-27 snapshot and do not update with FX. Small costs retain enough decimals to avoid rounding to zero.
 - Pricing copy is English, Traditional Chinese and explicit Simplified Chinese. The other eight guide languages retain the existing English technical-FAQ fallback with their own currency conversion; this change does not claim full translation of those FAQ entries.
 - Run `node Scripts/verify_ai_pricing.cjs` for offline syntax, sample billing arithmetic, FX fallback, table shape and integration-boundary checks. It never reads or transmits API keys.
+
+### Pricing visibility follow-up
+
+- Added a visible FAQ shortcut and an auto-opening `#ai-pricing` link. The ten provider names are now selectable above the tables, including Meta Muse and localized Qwen.
+- Filtering updates both tables, survives exchange-rate/language rerenders, and clearly explains why reference-only providers have no app-workflow table. The workflow caption explicitly states six providers, including two pending release.
+- Verified All (39 price / 31 workflow rows), DeepSeek (2 / 2), Meta (1 / no workflow table), English switching, Traditional Chinese, 320px layout without page overflow, and the existing offline pricing checks. Model rates and app integration status are unchanged.
