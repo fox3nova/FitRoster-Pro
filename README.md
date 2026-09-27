@@ -66,3 +66,10 @@ Usage-guide screenshots:
 - Added a visible FAQ shortcut and an auto-opening `#ai-pricing` link. The ten provider names are now selectable above the tables, including Meta Muse and localized Qwen.
 - Filtering updates both tables, survives exchange-rate/language rerenders, and clearly explains why reference-only providers have no app-workflow table. The workflow caption explicitly states six providers, including two pending release.
 - Verified All (39 price / 31 workflow rows), DeepSeek (2 / 2), Meta (1 / no workflow table), English switching, Traditional Chinese, 320px layout without page overflow, and the existing offline pricing checks. Model rates and app integration status are unchanged.
+
+## 2026-09-27 — Ten providers integrated in upcoming app code
+
+- Supersedes the earlier comparison-only status: Qwen (Singapore), Meta Muse (Standard), Mistral and MiniMax (International) now join DeepSeek/Kimi in the pending 1.2.0 implementation. Existing four provider statuses remain unchanged. The app is not released and real-account validation is still pending.
+- Both API unit-price and app-workflow tables now include all 39 rows / ten providers. Muse and MiniMax M3 include photo scenarios; MiniMax M2.7 remains text-only. Qwen and Mistral image use depends on returned model capabilities. Prices, exchange conversion, and calculation assumptions are unchanged.
+- Added the six upcoming providers and their policy links to shared multilingual disclosure, explicitly separate from currently installed app availability; bumped disclosure asset query version to avoid stale copies. No consent is granted by viewing the website.
+- Verified app Simulator build and full local release checks separately in the app workspace. Site verification: offline pricing test, JS syntax, all eleven disclosure locales, local browser Meta filter showing both tables, and explicit pending-release text. No genuine API key, personal training information, App Store change or billing operation was used.

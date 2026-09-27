@@ -266,15 +266,29 @@ const copy = {
     "settings.category.sync_backup.subtitle": "Apple Health (HealthKit), ซิงค์และสำรองข้อมูล"
   }
 };
+const upcomingProviders = {
+  "en": "Upcoming version 1.2.0 adds DeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMax. It is not released yet; availability depends on your installed version and account. Each service requires separate consent.",
+  "zh-Hant": "尚未發佈的 1.2.0 版新增 DeepSeek、Kimi、千問、Meta Muse、Mistral、MiniMax；實際可用服務依安裝版本與帳號而定，每家服務均須另行同意。",
+  "zh-Hans": "尚未发布的 1.2.0 版新增 DeepSeek、Kimi、千问、Meta Muse、Mistral、MiniMax；实际可用服务依安装版本与帐号而定，每家服务均须另行同意。",
+  "ja": "未公開のバージョン1.2.0でDeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMaxに対応します。利用可否はインストール済みのバージョンとアカウントによります。提供元ごとに同意が必要です。",
+  "ko": "아직 출시되지 않은 1.2.0 버전에서 DeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMax를 추가합니다. 사용 가능 여부는 설치된 버전과 계정에 따라 다르며 서비스별 동의가 필요합니다.",
+  "de": "Die noch nicht veröffentlichte Version 1.2.0 ergänzt DeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMax. Die Verfügbarkeit hängt von der installierten Version und dem Konto ab. Jeder Dienst erfordert eine eigene Einwilligung.",
+  "fr": "La version 1.2.0, pas encore publiée, ajoute DeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMax. La disponibilité dépend de la version installée et du compte. Chaque service nécessite un consentement distinct.",
+  "es": "La versión 1.2.0, aún no publicada, añade DeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMax. La disponibilidad depende de la versión instalada y de la cuenta. Cada servicio requiere un consentimiento independiente.",
+  "ms": "Versi 1.2.0 yang belum diterbitkan menambah DeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMax. Ketersediaan bergantung pada versi dipasang dan akaun. Setiap perkhidmatan memerlukan persetujuan berasingan.",
+  "ru": "Ещё не выпущенная версия 1.2.0 добавляет DeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMax. Доступность зависит от установленной версии и аккаунта. Для каждого сервиса требуется отдельное согласие.",
+  "th": "เวอร์ชัน 1.2.0 ที่ยังไม่เผยแพร่เพิ่ม DeepSeek, Kimi, Qwen, Meta Muse, Mistral, MiniMax การใช้งานขึ้นอยู่กับเวอร์ชันที่ติดตั้งและบัญชี แต่ละบริการต้องได้รับความยินยอมแยกกัน"
+};
 function render() {
  const d = copy[document.documentElement.lang] || copy.en;
  document.querySelectorAll('[data-disclosure]').forEach(el => { el.textContent = d[el.dataset.disclosure] || ''; });
+ document.querySelectorAll('[data-disclosure="settings.ai.footer"]').forEach(el => { el.textContent += ' ' + (upcomingProviders[document.documentElement.lang] || upcomingProviders.en); });
  const replace = (key, value) => document.querySelectorAll('[data-i18n="'+key+'"]').forEach(el => el.textContent = value);
  ['healthTitle','appleHealthTitle'].forEach(k => replace(k,d['settings.health.title']));
  ['healthCopy','appleHealthCopy'].forEach(k => replace(k,d['settings.health.disclosure']+' '+d['settings.health.footer']));
  ['aiCopy','trustAiCopy'].forEach(k => replace(k,d['settings.ai.footer']));
  replace('trustConsentCopy',d['privacy.ai.intro']+' '+d['privacy.ai.control']);
- replace('effectiveDate','2026-09-17');
+ replace('effectiveDate','2026-09-27');
 }
 const observer = new MutationObserver(render);
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['lang','data-language']});

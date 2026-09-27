@@ -25,10 +25,14 @@ const row = (table, model) => table.rows.find(item => item[1] === model);
 // 3K input + 1K output: DeepSeek peak $0.30/$1.20 -> $0.0021 -> TWD 0.0672.
 assert.equal(row(usd.tables[0], 'deepseek-flash')[4], 'USD\u00a00.0021');
 assert.equal(row(twd.tables[0], 'deepseek-flash')[4], 'TWD\u00a00.0672');
-// Muse standard $1.25/$4.25 -> $0.008, clearly separate from app integration.
+// Muse standard $1.25/$4.25 -> $0.008, with upcoming app integration.
 assert.equal(row(usd.tables[0], 'muse-spark-1.3')[4], 'USD\u00a00.008');
-assert.match(row(usd.tables[0], 'muse-spark-1.3')[2], /not integrated/);
-assert.ok(!row(usd.tables[1], 'muse-spark-1.3'));
+assert.match(row(usd.tables[0], 'muse-spark-1.3')[2], /pending release/);
+assert.ok(row(usd.tables[1], 'muse-spark-1.3'));
+assert.equal(usd.tables[1].rows.length, 39);
+assert.equal(new Set(usd.tables[1].rows.map(item => item[0])).size, 10);
+assert.equal(row(usd.tables[1], 'MiniMax-M2.7')[3], '—');
+assert.notEqual(row(usd.tables[1], 'MiniMax-M3')[3], '—');
 // Text-only models must not imply that image workflows can be called.
 assert.equal(row(usd.tables[1], 'deepseek-v4-pro')[3], '—');
 assert.equal(row(usd.tables[1], 'deepseek-v4-pro')[4], '—');

@@ -1172,6 +1172,12 @@
   <a href="https://policies.google.com/privacy">Google (Gemini)</a>
   <a href="https://www.anthropic.com/legal/privacy">Anthropic (Claude)</a>
   <a href="https://x.ai/legal/privacy-policy">xAI (Grok)</a>
+  <a href="https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html">DeepSeek</a>
+  <a href="https://platform.kimi.ai/docs/agreement/userprivacy">Kimi</a>
+  <a href="https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy">Alibaba Cloud Qwen</a>
+  <a href="https://www.facebook.com/privacy/policy/">Meta Muse</a>
+  <a href="https://legal.mistral.ai/terms/privacy-policy">Mistral AI</a>
+  <a href="https://platform.minimax.io/docs/guides/privacy-policy">MiniMax</a>
  </nav>
  </div>
 </section>
@@ -1650,70 +1656,70 @@
         "model": "qwen3.8-flash",
         "inputUSD": 0.15,
         "outputUSD": 0.47,
-        "status": "reference",
+        "status": "pending",
         "note": "qwenFlash",
-        "photo": false
+        "photo": true
       },
       {
         "provider": "Alibaba Cloud Qwen",
         "model": "qwen3.7-plus-2026-05-26",
         "inputUSD": 0.4,
         "outputUSD": 1.6,
-        "status": "reference",
+        "status": "pending",
         "note": "qwenPlus",
-        "photo": false
+        "photo": true
       },
       {
         "provider": "Meta Muse",
         "model": "muse-spark-1.3",
         "inputUSD": 1.25,
         "outputUSD": 4.25,
-        "status": "reference",
+        "status": "pending",
         "note": "meta",
-        "photo": false
+        "photo": true
       },
       {
         "provider": "Mistral AI",
         "model": "Mistral Medium 3.5",
         "inputUSD": 1.5,
         "outputUSD": 7.5,
-        "status": "reference",
+        "status": "pending",
         "note": "standard",
-        "photo": false
+        "photo": true
       },
       {
         "provider": "Mistral AI",
         "model": "Mistral Large 3",
         "inputUSD": 0.5,
         "outputUSD": 1.5,
-        "status": "reference",
+        "status": "pending",
         "note": "standard",
-        "photo": false
+        "photo": true
       },
       {
         "provider": "Mistral AI",
         "model": "Mistral Small 4",
         "inputUSD": 0.15,
         "outputUSD": 0.6,
-        "status": "reference",
+        "status": "pending",
         "note": "standard",
-        "photo": false
+        "photo": true
       },
       {
         "provider": "MiniMax",
         "model": "MiniMax-M3",
         "inputUSD": 0.3,
         "outputUSD": 1.2,
-        "status": "reference",
+        "status": "pending",
         "note": "minimax",
-        "photo": false
+        "photo": true
       },
       {
         "provider": "MiniMax",
         "model": "MiniMax-M2.7",
         "inputUSD": 0.3,
         "outputUSD": 1.2,
-        "status": "reference",
+        "status": "pending",
         "note": "standard",
         "photo": false
       }
@@ -2052,7 +2058,7 @@
       "question": "How much do AI API calls cost? Compare 10 providers.",
       "paragraphs": [
         "Official API token prices checked on 2026-09-27. This comparison covers 10 providers and the models previously listed in this guide, plus selected newer models. API charges are paid separately to the provider; a chat subscription does not normally include API credit. Prices are a dated snapshot, not a live model-price feed. Currency conversion still refreshes automatically.",
-        "FitRoster Pro integrates OpenAI, Gemini, Claude and Grok. DeepSeek and Kimi support is prepared for version 1.2.0 and is awaiting release and real-account validation. Qwen, Meta Muse, Mistral and MiniMax are price references only and are not integrated. A listed price or an OpenAI-compatible API does not make a model available in the app: use the models returned for your key in your installed version.",
+        "FitRoster Pro integrates OpenAI, Gemini, Claude and Grok. DeepSeek, Kimi, Qwen (Singapore), Meta Muse (Standard), Mistral and MiniMax (International) are integrated in the upcoming 1.2.0 code. Release and real-account validation remain pending. A listed price or an OpenAI-compatible API does not make a model available in the app: use the models returned for your key in your installed version.",
         "The first table compares uncached input / output prices per 1 million tokens and one hypothetical text request (3,000 input + 1,000 output tokens). The second estimates app workflows for integrated providers, including the pending release. These are calculation scenarios, not measured averages, guaranteed limits, or proof that every model supports every feature. Scroll tables horizontally on small screens."
       ],
       "statusLabels": {
@@ -2069,7 +2075,7 @@
         "Example: 3K input + 1K output",
         "Rate conditions"
       ],
-      "workflowCaption": "App workflow estimates · 6 providers, including 2 pending release",
+      "workflowCaption": "App workflow estimates · 10 providers, including 6 pending release",
       "workflowHeaders": [
         "Provider",
         "Model",
@@ -2098,7 +2104,7 @@
         "sonnet": "USD 2 / 10 is now the standard rate"
       },
       "assumptions": [
-        "* Provider integration does not guarantee account access or compatibility for each newly released model. Photo features also require image-input support. DeepSeek V4 Pro is text-only, so its photo cells show “—”. No API key or personal training data is sent when you view this page.",
+        "* Provider integration does not guarantee account access or compatibility for each newly released model. Photo features also require image-input support. DeepSeek V4 Pro and MiniMax M2.7 are text-only, so their photo cells show “—”. Qwen and Mistral photo access follows the capabilities returned by their model catalogs; the estimates assume an image-capable model. MiniMax output is validated locally because its Chat API does not advertise a JSON response-format field. No API key or personal training data is sent when you view this page.",
         "Calculation: (input tokens × input unit price + billed output tokens × output unit price) ÷ 1,000,000. Image tokenization, hidden reasoning tokens, retries and tool calls can increase usage. The sample text request contains no images.",
         "Workflow examples (input + output tokens): exercise photo 40,000 + 900; InBody 3,000 + 700; workout draft 45,000 + 1,600; insights 15,000 + 1,200; optional AI voice parsing 2,000 + 400. These are illustrative workloads, not actual usage measurements or maximum charges.",
         "Workout reports export your selected records and an AI-ready prompt without an in-app API call, so their cells show “—”. Apple speech recognition and local parsing use no provider tokens; only optional AI parsing approved by you can incur API charges.",
@@ -2118,7 +2124,7 @@
       "question": "AI API 每次呼叫多少錢？十家服務商價格比較",
       "paragraphs": [
         "官方 API token 價格查核日期：2026-09-27。本表整理十家服務商，更新原有模型價格並補入部分新模型。API 費用由服務商另外收取；聊天訂閱通常不含 API 額度。模型單價是查核當日的資料，並非即時報價；網頁仍會自動更新顯示幣別的匯率。",
-        "FitRoster Pro 已整合 OpenAI、Gemini、Claude 與 Grok；DeepSeek、Kimi 已完成 1.2.0 版的程式整合，尚待發佈及真實帳號驗證。千問、Meta Muse、Mistral、MiniMax 目前僅供價格比較，尚未整合。列出價格或相容 OpenAI API 不代表 App 已能使用，請以你安裝的版本及 API key 實際載入的模型清單為準。",
+        "FitRoster Pro 已整合 OpenAI、Gemini、Claude 與 Grok；DeepSeek、Kimi、千問（新加坡）、Meta Muse（Standard）、Mistral、MiniMax（國際站）已完成 1.2.0 版的程式整合，尚待發佈及真實帳號驗證。列出價格或相容 OpenAI API 不代表 App 已能使用，請以你安裝的版本及 API key 實際載入的模型清單為準。",
         "第一表列出每百萬 tokens 的未快取輸入／輸出單價，並用一次「3,000 輸入＋1,000 輸出 tokens」的文字請求比較費用。第二表估算已整合服務（含待發佈版本）的各項功能費用。這些是試算情境，不是實測平均、費用上限或所有模型皆支援每項功能的保證。手機上可左右捲動表格。"
       ],
       "statusLabels": {
@@ -2135,7 +2141,7 @@
         "單次試算：3K 輸入＋1K 輸出",
         "計價條件"
       ],
-      "workflowCaption": "App 功能費用試算｜6 家服務商，含 2 家待發佈",
+      "workflowCaption": "App 功能費用試算｜10 家服務商，含 6 家待發佈",
       "workflowHeaders": [
         "服務商",
         "模型",
@@ -2164,7 +2170,7 @@
         "sonnet": "USD 2／10 已成為標準價"
       },
       "assumptions": [
-        "＊服務已整合不表示每個新模型都已驗證相容或你的帳號皆有權限；照片功能還需支援圖片輸入。DeepSeek V4 Pro 僅支援文字，因此照片欄顯示「—」。瀏覽本頁不會傳送 API key 或個人訓練資料。",
+        "＊服務已整合不表示每個新模型都已驗證相容或你的帳號皆有權限；照片功能還需支援圖片輸入。DeepSeek V4 Pro、MiniMax M2.7 僅支援文字，因此照片欄顯示「—」。千問與 Mistral 依模型清單回傳的能力開放照片功能，照片費用以支援圖片的模型為試算前提。MiniMax 的 Chat API 未提供 JSON 輸出格式欄位，App 會檢查回傳內容是否符合所需格式。瀏覽本頁不會傳送 API key 或個人訓練資料。",
         "計算方式：（輸入 tokens × 輸入單價＋計費輸出 tokens × 輸出單價）÷ 1,000,000。圖片的 token 換算、隱藏推理 tokens、重試與工具呼叫都可能增加用量；第一表的文字試算不含圖片。",
         "功能試算用量（輸入＋輸出 tokens）：動作照片 40,000＋900；InBody 3,000＋700；課表草稿 45,000＋1,600；洞察 15,000＋1,200；選用 AI 語音解析 2,000＋400。這些是假設用量，並非實測紀錄或最高費用。",
         "運動報告只匯出你選取的紀錄與適合交給 AI 的提示詞，不在 App 內呼叫 API，因此顯示「—」。Apple 語音辨識與本機解析不使用服務商 tokens；只有你同意啟用的選用 AI 解析才可能產生 API 費用。",
@@ -2185,7 +2191,7 @@
       "question": "AI API 每次呼叫多少钱？十家服务商价格比较",
       "paragraphs": [
         "官方 API token 价格查核日期：2026-09-27。本表整理十家服务商，更新原有模型价格并补入部分新模型。API 费用由服务商另外收取；聊天订阅通常不含 API 额度。模型单价是查核当日的资料，并非即时报价；网页仍会自动更新显示币别的汇率。",
-        "FitRoster Pro 已整合 OpenAI、Gemini、Claude 与 Grok；DeepSeek、Kimi 已完成 1.2.0 版的程式整合，尚待发布及真实帐号验证。千问、Meta Muse、Mistral、MiniMax 目前仅供价格比较，尚未整合。列出价格或相容 OpenAI API 不代表 App 已能使用，请以你安装的版本及 API key 实际载入的模型清单为准。",
+        "FitRoster Pro 已整合 OpenAI、Gemini、Claude 与 Grok；DeepSeek、Kimi、千问（新加坡）、Meta Muse（Standard）、Mistral、MiniMax（国际站）已完成 1.2.0 版的程式整合，尚待发布及真实帐号验证。列出价格或相容 OpenAI API 不代表 App 已能使用，请以你安装的版本及 API key 实际载入的模型清单为准。",
         "第一表列出每百万 tokens 的未快取输入／输出单价，并用一次「3,000 输入＋1,000 输出 tokens」的文字请求比较费用。第二表估算已整合服务（含待发布版本）的各项功能费用。这些是试算情境，不是实测平均、费用上限或所有模型皆支援每项功能的保证。手机上可左右卷动表格。"
       ],
       "statusLabels": {
@@ -2202,7 +2208,7 @@
         "单次试算：3K 输入＋1K 输出",
         "计价条件"
       ],
-      "workflowCaption": "App 功能费用试算｜6 家服务商，含 2 家待发布",
+      "workflowCaption": "App 功能费用试算｜10 家服务商，含 6 家待发布",
       "workflowHeaders": [
         "服务商",
         "模型",
@@ -2231,7 +2237,7 @@
         "sonnet": "USD 2／10 已成为标准价"
       },
       "assumptions": [
-        "＊服务已整合不表示每个新模型都已验证相容或你的帐号皆有权限；照片功能还需支援图片输入。DeepSeek V4 Pro 仅支援文字，因此照片栏显示「—」。浏览本页不会传送 API key 或个人训练资料。",
+        "＊服务已整合不表示每个新模型都已验证相容或你的帐号皆有权限；照片功能还需支援图片输入。DeepSeek V4 Pro、MiniMax M2.7 仅支援文字，因此照片栏显示「—」。千问与 Mistral 依模型清单返回的能力开放照片功能，照片费用以支持图片的模型为试算前提。MiniMax 的 Chat API 未提供 JSON 输出格式字段，App 会检查返回内容是否符合所需格式。浏览本页不会传送 API key 或个人训练资料。",
         "计算方式：（输入 tokens × 输入单价＋计费输出 tokens × 输出单价）÷ 1,000,000。图片的 token 换算、隐藏推理 tokens、重试与工具呼叫都可能增加用量；第一表的文字试算不含图片。",
         "功能试算用量（输入＋输出 tokens）：动作照片 40,000＋900；InBody 3,000＋700；课表草稿 45,000＋1,600；洞察 15,000＋1,200；选用 AI 语音解析 2,000＋400。这些是假设用量，并非实测纪录或最高费用。",
         "运动报告只汇出你选取的纪录与适合交给 AI 的提示词，不在 App 内呼叫 API，因此显示「—」。Apple 语音辨识与本机解析不使用服务商 tokens；只有你同意启用的选用 AI 解析才可能产生 API 费用。",
@@ -4561,7 +4567,7 @@
     window.addEventListener("hashchange", () => alignCurrentHash(true));
     window.addEventListener("load", () => alignCurrentHash(true), { once: true });
   </script>
-<script src="assets/health-ai-disclosure.js?v=20260917"></script>
+<script src="assets/health-ai-disclosure.js?v=20260927-ten-providers"></script>
 <script src="assets/release-notice.js?v=20260917"></script>
 </body>
 </html>
