@@ -1351,26 +1351,359 @@
       }
     };
 
+    // Official USD rates checked 2026-09-27. See README for verification evidence.
     const aiPricingModelsUSD = [
-      ["OpenAI", "gpt-5.6-sol", 5.00, 30.00],
-      ["OpenAI", "gpt-5.6-terra", 2.50, 15.00],
-      ["OpenAI", "gpt-5.6-luna", 1.00, 6.00],
-      ["OpenAI", "gpt-5.5", 5.00, 30.00],
-      ["OpenAI", "gpt-5.5-pro", 30.00, 180.00],
-      ["OpenAI", "gpt-5.4", 2.50, 15.00],
-      ["OpenAI", "gpt-5.4-mini", 0.75, 4.50],
-      ["OpenAI", "gpt-5.4-nano", 0.20, 1.25],
-      ["Google Gemini", "gemini-3.5-flash", 1.50, 9.00],
-      ["Google Gemini", "gemini-3.1-pro-preview", 2.00, 12.00],
-      ["Google Gemini", "gemini-2.5-pro", 1.25, 10.00],
-      ["Google Gemini", "gemini-2.5-flash", 0.30, 2.50],
-      ["Google Gemini", "gemini-3.1-flash-lite", 0.25, 1.50],
-      ["Anthropic Claude", "claude-fable-5", 10.00, 50.00],
-      ["Anthropic Claude", "claude-opus-4-8", 5.00, 25.00],
-      ["Anthropic Claude", "claude-sonnet-5", 2.00, 10.00],
-      ["Anthropic Claude", "claude-haiku-4-5", 1.00, 5.00],
-      ["xAI Grok", "grok-4.3", 1.25, 2.50],
-      ["xAI Grok", "grok-4.5", 2.00, 6.00]
+      {
+        "provider": "OpenAI",
+        "model": "gpt-6-astra",
+        "inputUSD": 10,
+        "outputUSD": 50,
+        "status": "integrated",
+        "note": "short",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-6-sol",
+        "inputUSD": 2,
+        "outputUSD": 10,
+        "status": "integrated",
+        "note": "short",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-6-luna",
+        "inputUSD": 0.1,
+        "outputUSD": 0.5,
+        "status": "integrated",
+        "note": "short",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-5.6-sol",
+        "inputUSD": 4,
+        "outputUSD": 20,
+        "status": "integrated",
+        "note": "solPromo",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-5.6-terra",
+        "inputUSD": 2,
+        "outputUSD": 12,
+        "status": "integrated",
+        "note": "short",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-5.6-luna",
+        "inputUSD": 0.2,
+        "outputUSD": 1.2,
+        "status": "integrated",
+        "note": "short",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-5.5",
+        "inputUSD": 5,
+        "outputUSD": 30,
+        "status": "integrated",
+        "note": "short",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-5.5-pro",
+        "inputUSD": 30,
+        "outputUSD": 180,
+        "status": "integrated",
+        "note": "short",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-5.4",
+        "inputUSD": 2.5,
+        "outputUSD": 15,
+        "status": "integrated",
+        "note": "short",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-5.4-mini",
+        "inputUSD": 0.75,
+        "outputUSD": 4.5,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "OpenAI",
+        "model": "gpt-5.4-nano",
+        "inputUSD": 0.2,
+        "outputUSD": 1.25,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "Google Gemini",
+        "model": "gemini-3.8-flash",
+        "inputUSD": 0.75,
+        "outputUSD": 3.75,
+        "status": "integrated",
+        "note": "geminiPromo",
+        "photo": true
+      },
+      {
+        "provider": "Google Gemini",
+        "model": "gemini-3.5-flash",
+        "inputUSD": 1.5,
+        "outputUSD": 9,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "Google Gemini",
+        "model": "gemini-3.1-pro-preview",
+        "inputUSD": 2,
+        "outputUSD": 12,
+        "status": "integrated",
+        "note": "google200k",
+        "photo": true
+      },
+      {
+        "provider": "Google Gemini",
+        "model": "gemini-2.5-pro",
+        "inputUSD": 1.25,
+        "outputUSD": 10,
+        "status": "integrated",
+        "note": "google200k",
+        "photo": true
+      },
+      {
+        "provider": "Google Gemini",
+        "model": "gemini-2.5-flash",
+        "inputUSD": 0.3,
+        "outputUSD": 2.5,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "Google Gemini",
+        "model": "gemini-3.1-flash-lite",
+        "inputUSD": 0.25,
+        "outputUSD": 1.5,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "Anthropic Claude",
+        "model": "claude-fable-5-1",
+        "inputUSD": 10,
+        "outputUSD": 50,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "Anthropic Claude",
+        "model": "claude-opus-5-5",
+        "inputUSD": 4,
+        "outputUSD": 20,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "Anthropic Claude",
+        "model": "claude-fable-5",
+        "inputUSD": 10,
+        "outputUSD": 50,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "Anthropic Claude",
+        "model": "claude-opus-4-8",
+        "inputUSD": 5,
+        "outputUSD": 25,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "Anthropic Claude",
+        "model": "claude-sonnet-5",
+        "inputUSD": 2,
+        "outputUSD": 10,
+        "status": "integrated",
+        "note": "sonnet",
+        "photo": true
+      },
+      {
+        "provider": "Anthropic Claude",
+        "model": "claude-haiku-4-5",
+        "inputUSD": 1,
+        "outputUSD": 5,
+        "status": "integrated",
+        "note": "standard",
+        "photo": true
+      },
+      {
+        "provider": "xAI Grok",
+        "model": "grok-4.7",
+        "inputUSD": 2,
+        "outputUSD": 6,
+        "status": "integrated",
+        "note": "grok200k",
+        "photo": true
+      },
+      {
+        "provider": "xAI Grok",
+        "model": "grok-4.6",
+        "inputUSD": 2,
+        "outputUSD": 6,
+        "status": "integrated",
+        "note": "grok200k",
+        "photo": true
+      },
+      {
+        "provider": "xAI Grok",
+        "model": "grok-4.5",
+        "inputUSD": 2,
+        "outputUSD": 6,
+        "status": "integrated",
+        "note": "grok200k",
+        "photo": true
+      },
+      {
+        "provider": "xAI Grok",
+        "model": "grok-4.3",
+        "inputUSD": 1.25,
+        "outputUSD": 2.5,
+        "status": "integrated",
+        "note": "grok200k",
+        "photo": true
+      },
+      {
+        "provider": "DeepSeek",
+        "model": "deepseek-flash",
+        "inputUSD": 0.3,
+        "outputUSD": 1.2,
+        "status": "pending",
+        "note": "peak",
+        "photo": true
+      },
+      {
+        "provider": "DeepSeek",
+        "model": "deepseek-v4-pro",
+        "inputUSD": 1.32,
+        "outputUSD": 3.96,
+        "status": "pending",
+        "note": "peak",
+        "photo": false
+      },
+      {
+        "provider": "Kimi (Moonshot)",
+        "model": "kimi-k3",
+        "inputUSD": 3,
+        "outputUSD": 15,
+        "status": "pending",
+        "note": "kimiCache",
+        "photo": true
+      },
+      {
+        "provider": "Kimi (Moonshot)",
+        "model": "kimi-k2.6",
+        "inputUSD": 0.95,
+        "outputUSD": 4,
+        "status": "pending",
+        "note": "international",
+        "photo": true
+      },
+      {
+        "provider": "Alibaba Cloud Qwen",
+        "model": "qwen3.8-flash",
+        "inputUSD": 0.15,
+        "outputUSD": 0.47,
+        "status": "reference",
+        "note": "qwenFlash",
+        "photo": false
+      },
+      {
+        "provider": "Alibaba Cloud Qwen",
+        "model": "qwen3.7-plus-2026-05-26",
+        "inputUSD": 0.4,
+        "outputUSD": 1.6,
+        "status": "reference",
+        "note": "qwenPlus",
+        "photo": false
+      },
+      {
+        "provider": "Meta Muse",
+        "model": "muse-spark-1.3",
+        "inputUSD": 1.25,
+        "outputUSD": 4.25,
+        "status": "reference",
+        "note": "meta",
+        "photo": false
+      },
+      {
+        "provider": "Mistral AI",
+        "model": "Mistral Medium 3.5",
+        "inputUSD": 1.5,
+        "outputUSD": 7.5,
+        "status": "reference",
+        "note": "standard",
+        "photo": false
+      },
+      {
+        "provider": "Mistral AI",
+        "model": "Mistral Large 3",
+        "inputUSD": 0.5,
+        "outputUSD": 1.5,
+        "status": "reference",
+        "note": "standard",
+        "photo": false
+      },
+      {
+        "provider": "Mistral AI",
+        "model": "Mistral Small 4",
+        "inputUSD": 0.15,
+        "outputUSD": 0.6,
+        "status": "reference",
+        "note": "standard",
+        "photo": false
+      },
+      {
+        "provider": "MiniMax",
+        "model": "MiniMax-M3",
+        "inputUSD": 0.3,
+        "outputUSD": 1.2,
+        "status": "reference",
+        "note": "minimax",
+        "photo": false
+      },
+      {
+        "provider": "MiniMax",
+        "model": "MiniMax-M2.7",
+        "inputUSD": 0.3,
+        "outputUSD": 1.2,
+        "status": "reference",
+        "note": "standard",
+        "photo": false
+      }
     ];
 
     const aiPricingWorkloads = [
@@ -1470,11 +1803,54 @@
     const aiPricingRequiredCurrencies = [...new Set(Object.values(aiPricingCurrencyByLanguage).map((item) => item.currency))];
 
     const aiPricingSources = [
-      ["OpenAI pricing", "https://developers.openai.com/api/docs/pricing"],
-      ["Google Gemini pricing", "https://ai.google.dev/gemini-api/docs/pricing"],
-      ["Anthropic Claude pricing", "https://platform.claude.com/docs/en/about-claude/pricing"],
-      ["xAI Grok pricing", "https://docs.x.ai/developers/pricing"],
-      ["Rates By Exchange Rate API", "https://www.exchangerate-api.com"]
+      [
+        "OpenAI",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      [
+        "Google Gemini",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      [
+        "Anthropic Claude",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      [
+        "xAI Grok",
+        "https://docs.x.ai/developers/pricing"
+      ],
+      [
+        "DeepSeek",
+        "https://api-docs.deepseek.com/quick_start/pricing/"
+      ],
+      [
+        "Alibaba Cloud Qwen",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+      ],
+      [
+        "Kimi models & prices",
+        "https://platform.kimi.ai/"
+      ],
+      [
+        "Kimi billing & cache writes",
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ],
+      [
+        "Meta Muse",
+        "https://dev.meta.ai/docs/pricing-rate-limits"
+      ],
+      [
+        "Mistral AI",
+        "https://docs.mistral.ai/inference/pricing"
+      ],
+      [
+        "MiniMax",
+        "https://platform.minimax.io/docs/guides/pricing-paygo"
+      ],
+      [
+        "Rates By Exchange Rate API",
+        "https://www.exchangerate-api.com"
+      ]
     ];
 
     function normalizedAiPricingExchangePayload(payload) {
@@ -1586,7 +1962,7 @@
         currency,
         currencyDisplay: "code",
         minimumFractionDigits: 2,
-        maximumFractionDigits: isUnitRate ? 2 : 4
+        maximumFractionDigits: isUnitRate ? (value < 1 ? 4 : 2) : (value < 0.01 ? 6 : 4)
       }).format(value);
     }
 
@@ -1630,80 +2006,224 @@
       const canConvert = Number.isFinite(targetRate) && targetRate > 0;
       const displayCurrency = canConvert ? currencyConfig.currency : "USD";
       const displayRate = canConvert ? targetRate : 1;
-      const rows = aiPricingModelsUSD.map(([provider, model, inputUSD, outputUSD]) => {
-        const unitRates = `${formatAiPricingCurrency(inputUSD * displayRate, currencyConfig.locale, displayCurrency, true)} / ${formatAiPricingCurrency(outputUSD * displayRate, currencyConfig.locale, displayCurrency, true)}`;
-        const callEstimates = aiPricingWorkloads.map((workload) => {
-          if (!workload) {
-            return "—";
-          }
-          const [inputTokens, outputTokens] = workload;
-          const costUSD = ((inputTokens * inputUSD) + (outputTokens * outputUSD)) / 1000000;
-          return formatAiPricingCurrency(costUSD * displayRate, currencyConfig.locale, displayCurrency, false);
-        });
-        return [provider, model, unitRates, ...callEstimates];
-      });
-      const headers = [...item.table.headers];
-      headers[2] = `${headers[2]} (${displayCurrency})`;
-
+      const money = (usd, isUnitRate = false) => formatAiPricingCurrency(usd * displayRate, currencyConfig.locale, displayCurrency, isUnitRate);
+      const estimate = (row, workload) => money((workload[0] * row.inputUSD + workload[1] * row.outputUSD) / 1000000);
+      const rows = aiPricingModelsUSD.map((row) => [
+        row.provider, row.model, item.statusLabels[row.status],
+        `${money(row.inputUSD, true)} / ${money(row.outputUSD, true)}`,
+        estimate(row, [3000, 1000]), item.rateNotes[row.note]
+      ]);
+      const workflowRows = aiPricingModelsUSD.filter((row) => row.status !== "reference").map((row) => [
+        row.provider, row.model, item.statusLabels[row.status],
+        ...aiPricingWorkloads.map((workload, index) => !workload || (index < 2 && !row.photo) ? "—" : estimate(row, workload))
+      ]);
       return {
         ...item,
         exchangeStatus: aiPricingExchangeStatus(language, currencyConfig),
-        table: { ...item.table, headers, rows }
+        tables: [
+          { caption: `${item.priceCaption} (${displayCurrency})`, headers: item.priceHeaders, rows, numberColumns: [3, 4] },
+          { caption: `${item.workflowCaption} (${displayCurrency})`, headers: item.workflowHeaders, rows: workflowRows, numberColumns: [3, 4, 5, 6, 7, 8] }
+        ]
       };
     }
 
     const aiPricingFaqEn = {
-      isAiPricing: true,
-      question: "How much can AI API calls cost in FitRoster Pro?",
-      paragraphs: [
-        "FitRoster Pro uses your own provider API key only when you start an AI action. Provider token prices were checked in USD on 2026-07-19; whenever this guide is displayed, the table automatically applies the latest available exchange rate for the current website language.",
-        "The estimates cover newly available provider models and FitRoster Pro's bundled suggestions. Actual invoices vary by image size, catalog size, the data scope approved for that request, provider billing mode, taxes, exchange rates, free tiers, and later price changes."
+      "isAiPricing": true,
+      "question": "How much do AI API calls cost? Compare 10 providers.",
+      "paragraphs": [
+        "Official API token prices checked on 2026-09-27. This comparison covers 10 providers and the models previously listed in this guide, plus selected newer models. API charges are paid separately to the provider; a chat subscription does not normally include API credit. Prices are a dated snapshot, not a live model-price feed. Currency conversion still refreshes automatically.",
+        "FitRoster Pro integrates OpenAI, Gemini, Claude and Grok. DeepSeek and Kimi support is prepared for version 1.2.0 and is awaiting release and real-account validation. Qwen, Meta Muse, Mistral and MiniMax are price references only and are not integrated. A listed price or an OpenAI-compatible API does not make a model available in the app: use the models returned for your key in your installed version.",
+        "The first table compares uncached input / output prices per 1 million tokens and one hypothetical text request (3,000 input + 1,000 output tokens). The second estimates app workflows for integrated providers, including the pending release. These are calculation scenarios, not measured averages, guaranteed limits, or proof that every model supports every feature. Scroll tables horizontally on small screens."
       ],
-      assumptions: [
-        "Website currency mapping: English USD; Simplified Chinese CNY; Traditional Chinese TWD; Japanese JPY; Korean KRW; Thai THB; Malay MYR; Russian RUB; German, French, and Spanish EUR.",
-        "ExchangeRate-API open rates update once per day. Each display uses the current cached response until the provider's next update time, then refreshes automatically. Provider invoices and card-conversion charges may differ.",
-        "Exercise photo recognition: about 40,000 input tokens plus 900 output tokens. This is higher because the current built-in exercise catalog has 528 exercises and is sent for matching.",
-        "InBody report recognition: about 3,000 input tokens plus 700 output tokens.",
-        "AI workout draft: up to about 45,000 input tokens plus 1,600 output tokens when the full exercise catalog and recent-training context are included. A narrower approved data scope can cost less.",
-        "Workout report: FitRoster Pro exports an AI-ready prompt and the workout records you select; it does not call the provider API inside the app. The table therefore shows “—”. Any cost comes from the external AI product or account where you use the export.",
-        "Insight analysis: about 15,000 input tokens plus 1,200 output tokens when the maximum recent-session and analysis context is approved. A smaller approved data scope can cost less.",
-        "Voice input: Apple speech recognition and the local parser do not use provider tokens. If you explicitly approve optional AI parsing, the estimate is about 2,000 input tokens plus 400 output tokens.",
-        "Rows use standard short-context rates; cache, batch, flex, priority, and regional-processing adjustments are not included.",
-        "Claude Sonnet 5 uses the introductory API price available on the evaluation date through 2026-08-31; the provider lists a higher standard price from 2026-09-01."
-      ],
-      table: {
-        headers: ["Provider", "Model", "Input / output per 1M tokens", "Exercise photo", "InBody report", "Workout draft", "Workout report", "Insight analysis", "Voice input"],
-        rows: []
+      "statusLabels": {
+        "integrated": "Provider integrated*",
+        "pending": "1.2.0 · pending release",
+        "reference": "Price reference · not integrated"
       },
-      sourcesLabel: "Official pricing sources",
-      sources: aiPricingSources
+      "priceCaption": "10 providers · token prices and text-request comparison",
+      "priceHeaders": [
+        "Provider",
+        "Model",
+        "FitRoster Pro status",
+        "Input / output per 1M tokens",
+        "Example: 3K input + 1K output",
+        "Rate conditions"
+      ],
+      "workflowCaption": "Illustrative cost per workflow · check model availability in the app",
+      "workflowHeaders": [
+        "Provider",
+        "Model",
+        "FitRoster Pro status",
+        "Exercise photo",
+        "InBody report",
+        "Workout draft",
+        "Workout report",
+        "Insight analysis",
+        "Optional voice parsing"
+      ],
+      "rateNotes": {
+        "standard": "Standard, uncached",
+        "short": "Standard, short context",
+        "solPromo": "Promo at least through 2026-11-21",
+        "geminiPromo": "Promo through 2026-12-31",
+        "google200k": "Input ≤ 200K",
+        "grok200k": "Input < 200K",
+        "peak": "Peak rate; off-peak 50%",
+        "kimiCache": "International; cache writes extra",
+        "international": "International API (USD)",
+        "qwenFlash": "Singapore / International; ≤ 1M",
+        "qwenPlus": "Singapore / International; ≤ 256K; dated model",
+        "meta": "Standard tier; no training contribution",
+        "minimax": "Standard; input ≤ 512K; current 50% price",
+        "sonnet": "USD 2 / 10 is now the standard rate"
+      },
+      "assumptions": [
+        "* Provider integration does not guarantee account access or compatibility for each newly released model. Photo features also require image-input support. DeepSeek V4 Pro is text-only, so its photo cells show “—”. No API key or personal training data is sent when you view this page.",
+        "Calculation: (input tokens × input unit price + billed output tokens × output unit price) ÷ 1,000,000. Image tokenization, hidden reasoning tokens, retries and tool calls can increase usage. The sample text request contains no images.",
+        "Workflow examples (input + output tokens): exercise photo 40,000 + 900; InBody 3,000 + 700; workout draft 45,000 + 1,600; insights 15,000 + 1,200; optional AI voice parsing 2,000 + 400. These are illustrative workloads, not actual usage measurements or maximum charges.",
+        "Workout reports export your selected records and an AI-ready prompt without an in-app API call, so their cells show “—”. Apple speech recognition and local parsing use no provider tokens; only optional AI parsing approved by you can incur API charges.",
+        "Base estimates exclude cache writes/hits, batch, flex, priority, long-context surcharges, regional adjustments, tools, taxes and free credits. Kimi K3 automatically caches prefixes and charges cache writes separately; the simple input/output estimate is not a complete K3 bill.",
+        "DeepSeek rows use peak, uncached rates: Flash $0.30 / $1.20 and V4 Pro $1.32 / $3.96 per 1M input/output tokens. Off-peak rates are half. Peak periods are Monday–Friday 01:00–04:00 and 06:00–10:00 UTC.",
+        "Gemini 3.8 Flash is $0.75 / $3.75 through 2026-12-31; the announced price from 2027-01-01 is $1.50 / $7.50. GPT-5.6 Sol uses the current $4 / $20 promotional rate, available at least through 2026-11-21. Claude Sonnet 5 remains $2 / $10; its planned September price increase was cancelled.",
+        "Qwen prices use the Singapore International API: Flash 3.8 up to 1M input tokens; the dated Plus model up to 256K. Other regions, aliases and promotional offers can differ. Kimi uses the international API, not the China or Coding subscription service. MiniMax M3 uses the published standard price up to 512K input tokens.",
+        "Meta Muse Spark 1.3 uses the Standard tier ($1.25 / $4.25), also shared by 1.2 and 1.1. Contributor pricing is excluded because it permits training on submitted prompts and completions.",
+        "Currency follows the website language: en USD, zh-Hans CNY, zh-Hant TWD, ja JPY, ko KRW, th THB, ms MYR, ru RUB, de/fr/es EUR. ExchangeRate-API updates daily; a valid cached rate is reused until its next update. When rates are unavailable, the page clearly shows cached rates or USD. Provider invoices and card conversion fees may differ."
+      ],
+      "sourcesLabel": "Official pricing sources",
+      "sources": aiPricingSources
     };
 
     const aiPricingFaqZhHant = {
-      isAiPricing: true,
-      question: "FitRoster Pro 的 AI API 每次呼叫大約會花多少錢？",
-      paragraphs: [
-        "FitRoster Pro 只會在你主動啟動 AI 功能時，使用你自己儲存的服務 API key。服務商 token 價格以美元為基準，查核日期為 2026-07-19；每次顯示本指南時，表格都會依目前網頁語系自動套用最新可用匯率。",
-        "估算包含服務商最新可用模型與 FitRoster Pro 內建建議模型。實際帳單會因圖片大小、動作目錄數量、本次同意的資料範圍、服務商計費模式、稅金、匯率、免費額度及後續價格調整而不同。"
+      "isAiPricing": true,
+      "question": "AI API 每次呼叫多少錢？十家服務商價格比較",
+      "paragraphs": [
+        "官方 API token 價格查核日期：2026-09-27。本表整理十家服務商，更新原有模型價格並補入部分新模型。API 費用由服務商另外收取；聊天訂閱通常不含 API 額度。模型單價是查核當日的資料，並非即時報價；網頁仍會自動更新顯示幣別的匯率。",
+        "FitRoster Pro 已整合 OpenAI、Gemini、Claude 與 Grok；DeepSeek、Kimi 已完成 1.2.0 版的程式整合，尚待發佈及真實帳號驗證。千問、Meta Muse、Mistral、MiniMax 目前僅供價格比較，尚未整合。列出價格或相容 OpenAI API 不代表 App 已能使用，請以你安裝的版本及 API key 實際載入的模型清單為準。",
+        "第一表列出每百萬 tokens 的未快取輸入／輸出單價，並用一次「3,000 輸入＋1,000 輸出 tokens」的文字請求比較費用。第二表估算已整合服務（含待發佈版本）的各項功能費用。這些是試算情境，不是實測平均、費用上限或所有模型皆支援每項功能的保證。手機上可左右捲動表格。"
       ],
-      assumptions: [
-        "語系幣別對應：英文 USD、簡體中文 CNY、繁體中文 TWD、日文 JPY、韓文 KRW、泰文 THB、馬來文 MYR、俄文 RUB；德文、法文及西班牙文使用 EUR。",
-        "ExchangeRate-API 公開匯率每日更新一次。每次顯示時會先使用仍在有效期內的最新快取；到服務商公告的下一次更新時間後便會自動重新取得。實際帳單及信用卡換匯費用可能不同。",
-        "動作照片辨識：約 40,000 input tokens + 900 output tokens。這項較高，因為目前內建動作目錄有 528 筆，會一起送出做比對。",
-        "InBody 報告辨識：約 3,000 input tokens + 700 output tokens。",
-        "AI 課表草稿：完整納入動作目錄與近期訓練脈絡時，最高約 45,000 input tokens + 1,600 output tokens；若本次同意的資料範圍較小，費用也會降低。",
-        "運動報告：FitRoster Pro 只會匯出適合交給 AI 的提示詞與你選取的訓練紀錄，不會在 App 內呼叫服務商 API，因此表格顯示「—」。費用只會發生在你使用匯出內容的外部 AI 產品或帳號。",
-        "洞察分析：同意納入最多近期訓練紀錄與分析脈絡時，約 15,000 input tokens + 1,200 output tokens；若本次同意的資料範圍較小，費用也會降低。",
-        "語音輸入：Apple 語音辨識與本機解析不會使用服務商 tokens。只有你明確同意使用選定 AI 做選用解析時，才估算約 2,000 input tokens + 400 output tokens。",
-        "表格採用標準短脈絡價格，不含 cache、batch、flex、priority、區域處理等折扣或加價。",
-        "Claude Sonnet 5 採用評估日適用、到 2026-08-31 的 API 入門價格；服務商公告 2026-09-01 起會改用較高的標準價格。"
-      ],
-      table: {
-        headers: ["服務商", "模型", "每 1M tokens input / output", "動作照片辨識", "InBody 報告辨識", "AI 課表草稿", "運動報告", "洞察分析", "語音輸入"],
-        rows: []
+      "statusLabels": {
+        "integrated": "服務已整合＊",
+        "pending": "1.2.0 待發佈",
+        "reference": "價格參考・尚未整合"
       },
-      sourcesLabel: "官方價格來源",
-      sources: aiPricingSources
+      "priceCaption": "十家服務商｜模型單價與文字請求試算",
+      "priceHeaders": [
+        "服務商",
+        "模型",
+        "FitRoster Pro 支援狀態",
+        "每百萬 tokens 輸入／輸出",
+        "單次試算：3K 輸入＋1K 輸出",
+        "計價條件"
+      ],
+      "workflowCaption": "各功能單次費用試算｜可用模型以 App 清單為準",
+      "workflowHeaders": [
+        "服務商",
+        "模型",
+        "FitRoster Pro 支援狀態",
+        "動作照片辨識",
+        "InBody 報告辨識",
+        "AI 課表草稿",
+        "運動報告",
+        "洞察分析",
+        "選用 AI 語音解析"
+      ],
+      "rateNotes": {
+        "standard": "標準・未快取",
+        "short": "標準・短脈絡",
+        "solPromo": "優惠至少至 2026-11-21",
+        "geminiPromo": "優惠至 2026-12-31",
+        "google200k": "輸入 ≤ 200K",
+        "grok200k": "輸入 < 200K",
+        "peak": "尖峰價；離峰五折",
+        "kimiCache": "國際站；快取寫入另計",
+        "international": "國際 API（美元）",
+        "qwenFlash": "新加坡／國際；≤ 1M",
+        "qwenPlus": "新加坡／國際；≤ 256K；日期版",
+        "meta": "Standard；不採訓練回饋價",
+        "minimax": "標準；輸入 ≤ 512K；現行五折價",
+        "sonnet": "USD 2／10 已成為標準價"
+      },
+      "assumptions": [
+        "＊服務已整合不表示每個新模型都已驗證相容或你的帳號皆有權限；照片功能還需支援圖片輸入。DeepSeek V4 Pro 僅支援文字，因此照片欄顯示「—」。瀏覽本頁不會傳送 API key 或個人訓練資料。",
+        "計算方式：（輸入 tokens × 輸入單價＋計費輸出 tokens × 輸出單價）÷ 1,000,000。圖片的 token 換算、隱藏推理 tokens、重試與工具呼叫都可能增加用量；第一表的文字試算不含圖片。",
+        "功能試算用量（輸入＋輸出 tokens）：動作照片 40,000＋900；InBody 3,000＋700；課表草稿 45,000＋1,600；洞察 15,000＋1,200；選用 AI 語音解析 2,000＋400。這些是假設用量，並非實測紀錄或最高費用。",
+        "運動報告只匯出你選取的紀錄與適合交給 AI 的提示詞，不在 App 內呼叫 API，因此顯示「—」。Apple 語音辨識與本機解析不使用服務商 tokens；只有你同意啟用的選用 AI 解析才可能產生 API 費用。",
+        "基本試算不含快取寫入／命中、batch、flex、priority、長脈絡加價、區域調整、工具、稅金與免費額度。Kimi K3 會自動快取提示詞前綴，快取寫入另計，故單純輸入／輸出試算不是 K3 的完整帳單。",
+        "DeepSeek 採未快取尖峰價：Flash 每百萬輸入／輸出 $0.30／$1.20，V4 Pro 為 $1.32／$3.96；離峰均為五折。尖峰時間為週一至週五 UTC 01:00–04:00、06:00–10:00（台灣時間 09:00–12:00、14:00–18:00）。",
+        "Gemini 3.8 Flash 的 $0.75／$3.75 優惠至 2026-12-31，公告 2027-01-01 起為 $1.50／$7.50。GPT-5.6 Sol 採現行 $4／$20 優惠，至少持續至 2026-11-21。Claude Sonnet 5 的 $2／$10 已成為標準價，原訂九月漲價已取消。此段金額均為美元／百萬 tokens。",
+        "千問採新加坡國際 API 價格：Flash 3.8 輸入不超過 1M、日期版 Plus 不超過 256K；其他區域、別名模型及促銷可能不同。Kimi 採國際 API，不是中國站或 Coding 訂閱服務。MiniMax M3 採輸入不超過 512K 的現行標準價。",
+        "Meta Muse Spark 1.3 採 Standard 方案（美元 $1.25／$4.25），1.2 與 1.1 同價；未採 Contributor 低價方案，因為該方案允許使用提交的提示詞與回覆訓練模型。",
+        "語系幣別：英文 USD、簡中 CNY、繁中 TWD、日文 JPY、韓文 KRW、泰文 THB、馬來文 MYR、俄文 RUB；德文、法文、西文 EUR。ExchangeRate-API 每日更新，快取有效期內沿用既有匯率；取得失敗時會標示使用快取或美元。實際帳單與信用卡換匯費可能不同。"
+      ],
+      "sourcesLabel": "官方價格來源",
+      "sources": aiPricingSources
+    };
+
+
+    const aiPricingFaqZhHans = {
+      "isAiPricing": true,
+      "question": "AI API 每次呼叫多少钱？十家服务商价格比较",
+      "paragraphs": [
+        "官方 API token 价格查核日期：2026-09-27。本表整理十家服务商，更新原有模型价格并补入部分新模型。API 费用由服务商另外收取；聊天订阅通常不含 API 额度。模型单价是查核当日的资料，并非即时报价；网页仍会自动更新显示币别的汇率。",
+        "FitRoster Pro 已整合 OpenAI、Gemini、Claude 与 Grok；DeepSeek、Kimi 已完成 1.2.0 版的程式整合，尚待发布及真实帐号验证。千问、Meta Muse、Mistral、MiniMax 目前仅供价格比较，尚未整合。列出价格或相容 OpenAI API 不代表 App 已能使用，请以你安装的版本及 API key 实际载入的模型清单为准。",
+        "第一表列出每百万 tokens 的未快取输入／输出单价，并用一次「3,000 输入＋1,000 输出 tokens」的文字请求比较费用。第二表估算已整合服务（含待发布版本）的各项功能费用。这些是试算情境，不是实测平均、费用上限或所有模型皆支援每项功能的保证。手机上可左右卷动表格。"
+      ],
+      "statusLabels": {
+        "integrated": "服务已整合＊",
+        "pending": "1.2.0 待发布",
+        "reference": "价格参考・尚未整合"
+      },
+      "priceCaption": "十家服务商｜模型单价与文字请求试算",
+      "priceHeaders": [
+        "服务商",
+        "模型",
+        "FitRoster Pro 支援状态",
+        "每百万 tokens 输入／输出",
+        "单次试算：3K 输入＋1K 输出",
+        "计价条件"
+      ],
+      "workflowCaption": "各功能单次费用试算｜可用模型以 App 清单为准",
+      "workflowHeaders": [
+        "服务商",
+        "模型",
+        "FitRoster Pro 支援状态",
+        "动作照片辨识",
+        "InBody 报告辨识",
+        "AI 课表草稿",
+        "运动报告",
+        "洞察分析",
+        "选用 AI 语音解析"
+      ],
+      "rateNotes": {
+        "standard": "标准・未快取",
+        "short": "标准・短脉络",
+        "solPromo": "优惠至少至 2026-11-21",
+        "geminiPromo": "优惠至 2026-12-31",
+        "google200k": "输入 ≤ 200K",
+        "grok200k": "输入 < 200K",
+        "peak": "尖峰价；离峰五折",
+        "kimiCache": "国际站；快取写入另计",
+        "international": "国际 API（美元）",
+        "qwenFlash": "新加坡／国际；≤ 1M",
+        "qwenPlus": "新加坡／国际；≤ 256K；日期版",
+        "meta": "Standard；不采训练回馈价",
+        "minimax": "标准；输入 ≤ 512K；现行五折价",
+        "sonnet": "USD 2／10 已成为标准价"
+      },
+      "assumptions": [
+        "＊服务已整合不表示每个新模型都已验证相容或你的帐号皆有权限；照片功能还需支援图片输入。DeepSeek V4 Pro 仅支援文字，因此照片栏显示「—」。浏览本页不会传送 API key 或个人训练资料。",
+        "计算方式：（输入 tokens × 输入单价＋计费输出 tokens × 输出单价）÷ 1,000,000。图片的 token 换算、隐藏推理 tokens、重试与工具呼叫都可能增加用量；第一表的文字试算不含图片。",
+        "功能试算用量（输入＋输出 tokens）：动作照片 40,000＋900；InBody 3,000＋700；课表草稿 45,000＋1,600；洞察 15,000＋1,200；选用 AI 语音解析 2,000＋400。这些是假设用量，并非实测纪录或最高费用。",
+        "运动报告只汇出你选取的纪录与适合交给 AI 的提示词，不在 App 内呼叫 API，因此显示「—」。Apple 语音辨识与本机解析不使用服务商 tokens；只有你同意启用的选用 AI 解析才可能产生 API 费用。",
+        "基本试算不含快取写入／命中、batch、flex、priority、长脉络加价、区域调整、工具、税金与免费额度。Kimi K3 会自动快取提示词前缀，快取写入另计，故单纯输入／输出试算不是 K3 的完整帐单。",
+        "DeepSeek 采未快取尖峰价：Flash 每百万输入／输出 $0.30／$1.20，V4 Pro 为 $1.32／$3.96；离峰均为五折。尖峰时间为周一至周五 UTC 01:00–04:00、06:00–10:00（台湾时间 09:00–12:00、14:00–18:00）。",
+        "Gemini 3.8 Flash 的 $0.75／$3.75 优惠至 2026-12-31，公告 2027-01-01 起为 $1.50／$7.50。GPT-5.6 Sol 采现行 $4／$20 优惠，至少持续至 2026-11-21。Claude Sonnet 5 的 $2／$10 已成为标准价，原订九月涨价已取消。此段金额均为美元／百万 tokens。",
+        "千问采新加坡国际 API 价格：Flash 3.8 输入不超过 1M、日期版 Plus 不超过 256K；其他区域、别名模型及促销可能不同。Kimi 采国际 API，不是中国站或 Coding 订阅服务。MiniMax M3 采输入不超过 512K 的现行标准价。",
+        "Meta Muse Spark 1.3 采 Standard 方案（美元 $1.25／$4.25），1.2 与 1.1 同价；未采 Contributor 低价方案，因为该方案允许使用提交的提示词与回覆训练模型。",
+        "语系币别：英文 USD、简中 CNY、繁中 TWD、日文 JPY、韩文 KRW、泰文 THB、马来文 MYR、俄文 RUB；德文、法文、西文 EUR。ExchangeRate-API 每日更新，快取有效期内沿用既有汇率；取得失败时会标示使用快取或美元。实际帐单与信用卡换汇费可能不同。"
+      ],
+      "sourcesLabel": "官方价格来源",
+      "sources": aiPricingSources
     };
 
     const videoStorageFaqEn = {
@@ -2448,7 +2968,7 @@
       toHansValue(setRoleImpactFaqZhHant),
       toHansValue(muscleDistributionFaqZhHant),
       videoStorageFaqZhHans,
-      toHansValue(aiPricingFaqZhHant)
+      aiPricingFaqZhHans
     ];
 
     localizeFromEnglish("ja", {
@@ -3807,15 +4327,15 @@
         ? `<p class="faq-fx-status" data-state="${escapeHTML(item.exchangeStatus.state)}">${escapeHTML(item.exchangeStatus.text)}</p>`
         : "";
       const renderTable = (table) => `
-          <div class="faq-table-wrap" role="region" aria-label="${escapeHTML(item.question)}">
+          <div class="faq-table-wrap" role="region" tabindex="0" aria-label="${escapeHTML(table.caption || item.question)}">
             <table class="faq-price-table">
               ${table.caption ? `<caption>${escapeHTML(table.caption)}</caption>` : ""}
               <thead>
-                <tr>${table.headers.map((header) => `<th>${escapeHTML(header)}</th>`).join("")}</tr>
+                <tr>${table.headers.map((header) => `<th scope="col">${escapeHTML(header)}</th>`).join("")}</tr>
               </thead>
               <tbody>
                 ${table.rows.map((row) => `
-                  <tr>${row.map((cell, cellIndex) => `<td class="${cellIndex >= 3 ? "number" : ""}">${escapeHTML(cell)}</td>`).join("")}</tr>
+                  <tr>${row.map((cell, cellIndex) => `<td class="${(table.numberColumns ? table.numberColumns.includes(cellIndex) : cellIndex >= 3) ? "number" : ""}">${escapeHTML(cell)}</td>`).join("")}</tr>
                 `).join("")}
               </tbody>
             </table>
@@ -3833,7 +4353,9 @@
         `
         : "";
 
-      return `<div class="faq-body">${paragraphs}${assumptions}${exchangeStatus}${tables}${sources}</div>`;
+      return item.isAiPricing
+        ? `<div class="faq-body">${paragraphs}${exchangeStatus}${tables}${assumptions}${sources}</div>`
+        : `<div class="faq-body">${paragraphs}${assumptions}${exchangeStatus}${tables}${sources}</div>`;
     }
 
     function renderFaq(copy, language, preserveOpen = false) {
